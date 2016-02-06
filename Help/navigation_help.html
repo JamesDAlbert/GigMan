@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="../Content/css/metro.css" />
+    <link rel="stylesheet" href="../Content/css/metro-icons.min.css" />
+    <link id="gmStyle" rel="stylesheet" href="../css/gigman-neon.css" />
+    <script src="../Scripts/jquery.min.js"></script>
+</head>
+<body class="help">
+    <label>Site Navigation</label>
+    <p>
+        This panel contains links to all of the main pages on the Gigman web site.<br />
+        <h3>Pages</h3><br />
+        <span class="mif-list2 mif-2x fg-white" style="float:left"></span>&nbsp;<em><strong>Master song list</strong></em>: A listing of all of the songs you have defined and saved.<br /><br />
+        <span class="mif-clipboard mif-2x fg-white" style="font-style:normal"> </span> <strong><em>Unplayed songs list</em></strong>: A listing of all songs marked as never having been played.<br /><br />
+        <span class="mif-mic mif-2x fg-white" style="font-style:normal"> </span> <strong><em>Composers list</em></strong>:  A listing of all of the composers you have specified for your song data.<br /><br />
+        <span class="mif-music mif-2x fg-white" style="font-style:normal"> </span> <strong><em>Genres list</em></strong>: A listing of all the genres specified in your song data.<br /><br />
+        <span class="mif-tag mif-2x fg-white" style="font-style:normal"> </span> <strong><em>Categories list</em></strong>: A listing of all of the categories you have specified in your song data.<br /><br />
+        <span class="mif-list-numbered mif-2x fg-white" style="font-style:normal"> </span> <strong><em>Set lists</em></strong>: Any set lists you have defined and saved can be accessed here.  Set lists are also created and edited using the editor on this page.<br /><br />
+        <h3>Editors</h3><br />
+        <span class="mif-pencil mif-2x fg-white" style="font-style:normal"> </span> <strong><em>Song Editor</em></strong>: Add a song.  Clicking the pencil icon in any list will also open the editor.<br /><br />
+        <span class="mif-cogs mif-2x fg-white" style="font-style:normal"> </span> <strong><em>Site Settings Editor</em></strong>: Customize the appearance and behaviour of the Gigman site.<br /><br />
+        The setlist editor is available on the Setlist page.<br /><br />
+        <h3>Tools</h3><br />
+        <span class="icon mif-mic mif-2x fg-white" style="font-style:normal"></span>
+        <sub><span class="icon mif-dice fg-white" style="font-size:larger;margin-top:-30px;margin-left:-10px;font-style:normal"> </span></sub> <strong><em>Random Artist</em></strong>: Takes you to the Artist Song list page with a random artixt loaded.<br /><br />
+        <span class="mif-dice mif-2x fg-white" style="font-style:normal"> </span> <strong><em>Random Song</em></strong>: Takes you to the lyrics page with a random song loaded.<br /><br />
+        <span class="mif-redo mif-2x fg-white" style="font-style:normal"> </span> <strong><em>Resynch Data</em></strong>: If you are a subscriber, clicking this icon will ensure that your data is safely backed up in the Gigman database.<br /><br />
+        <span class="mif-question mif-2x fg-white" style="font-style:normal"> </span> <strong><em>FAQ</em></strong>: Frequently asked questions that are not answered in these help panels.<br /><br>
+        <span class="mif-users mif-2x fg-white" style="font-style:normal"> </span> <strong><em>Credits</em></strong>: Thanks to the people and products that have helped make this site a reality.<br /><br />
+    </p><br /><br />
+        <script>
+            var scheme = sessionStorage.getItem("colorscheme");
+
+            if (scheme == "hic") {
+                $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.css');
+            }
+            else if (scheme == "classic") {
+                $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.css');
+            }
+            else if (scheme == "neon") {
+                $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.css');
+            }
+    </script>
+</body>
+</html>

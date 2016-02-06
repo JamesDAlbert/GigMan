@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link id="gmStyle" rel="stylesheet" href="../css/gigman-neon.css" />
+    <link rel="stylesheet" href="../Content/css/metro.css" />
+    <script src="../Scripts/jquery-2.1.4.min.js"></script>
+</head>
+<body class="help">
+    <label class="charmLabelBold">GigMan Request - Artist Preferences</label>
+    <p>
+        The GigMan Request member artist can control several aspects of audience intereaction, which are settable in the Artist Profile editor, accessible in the Profiles area of the GigMan site.<br />
+        The settings are
+        <ul>
+            <li><label>GigMan Request URL Name</label> When an artist directs the audience to the GigMan Request site, this is the unique identifier at the end of the URL. </li>
+            <li><label>Show Members</label> Controls whether to show individual artist members on the GigMan Request Message page.  If this is turned off, only the 'Leader' and 'All' options are shown as possible recipients for messages.  When it is turned on, individual members can be messaged if their personal profiles allow it.</li>
+            <li><label>Show Categories</label> Controls whether to show the 'Categories' column in the public song list.  See the Song Editor help topic for an explanation of Category.</li>
+            <li><label>Show Composer</label> Controls wheter to show the Composer column in the public song list.  If an artist does all origial music, it might make sense to turn this off.</li>
+            <li><label>Enable Downvotes</label> Turning this option on allows audience members to vote songs off the island.  This can be useful to the artist to determine what songs in their lineup are not working.</li>
+            <li><label>Max. Messages</label> The maximum number of messages a single audience member can send in a 24 hour period.</li>
+            <li><label>Max. Requests</label> The maximum number of requests a single audience member can send in a 24 hour period.</li>
+        </ul>
+        Another aspect of control is in the calendar.<br />
+        Premium GigMan members can keep a calendar of upcoming events.  Each event created can be set to 3 levels of privacy, one of which is 'Public'.  Public events can be viewed by the public under 'Calendar' on the artists GigMan Request page.
+    </p><br/><br />
+    <script>
+        var scheme = sessionStorage.getItem("colorscheme");
+
+        if (scheme == "hic") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.css');
+        }
+        else if (scheme == "classic") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.css');
+        }
+        else if (scheme == "neon") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.css');
+        }
+    </script>
+</body>
+</html>

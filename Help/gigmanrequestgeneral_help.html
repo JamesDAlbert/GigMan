@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link id="gmStyle" rel="stylesheet" href="../css/gigman-neon.css" />
+    <link rel="stylesheet" href="../Content/css/metro.css" />
+    <link rel="stylesheet" href="../Content/css/metro-icons.min.css" />
+
+    <script src="../Scripts/jquery-2.1.4.min.js"></script>
+</head>
+<body class="help">
+    <label class="charmLabelBold">GigMan Request</label>
+    <p>
+        GigMan Request allows stage artists to receive requests and messages from their audience in near-real time, and view them on-stage over their wireless devices.<br /><br />
+        The performing artist can direct their audience members to use their smart phones to go to gigman.com/xxx, where xxx is an identifier the artidst can define.<br /><br />
+        Once there, the audience member can make requests based on a list of songs defined by the artist, and send messages to the individual stage artists, leader or entire band.<br />
+        Messages are limited to 160 characters, and can be prefaced with a number of menu selected topics.<br /><br />
+        Premium GigMan artists can also publish event dates to their GigMan Request page, so audience members can see where upcoming gigs are occurring.<br /><br />
+        See GigMan Request | Artist Preferences for a summary of how the artist can control audience input.<br /><br />
+        Messages and requests can be viewd in the navigation popout (<span class="mif-menu">).  An analytical view is also available in the Dashboard section of the site.
+</span>    </p><br/><br />
+    <script>
+        var scheme = sessionStorage.getItem("colorscheme");
+
+        if (scheme == "hic") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.css');
+        }
+        else if (scheme == "classic") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.css');
+        }
+        else if (scheme == "neon") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.css');
+        }
+    </script>
+</body>
+</html>

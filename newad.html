@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="content/css/metro.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="Content/css/metro-icons.min.css" />
+    <link rel="stylesheet" href="Content/css/jquery-ui.css" />
+    <link rel="stylesheet" href="css/ads.css" />
+    <script src="Scripts/jquery.min.js"></script>
+    <script src="Scripts/metro.js"></script>
+    <script src="Scripts/jquery-ui.min.js"></script>
+
+    <script src="Scripts/jlinq.js"></script>
+    <script runat="server"  src="js/utilities.js"></script>
+    <script runat="server"  src="js/dataRequest.js"></script>
+    <script src="js/newad.js"></script>        
+</head>
+<body>   
+    <span style="font-size:larger;font-weight:bold">Ad Editor</span><br /><br />
+    <span>Existing Ads</span><br />
+    <select id="usersAds" style="width:290px" data-placeholder="Select an Ad"></select>
+    <button id="newAd" class="button button-small-y" style="margin-left:10px"><span class="mif-plus"> New Ad</span></button>
+    <span id="StatusMessage" style="margin-left:77px;"></span><br /> <br />
+    <div class="adEdWrapper">
+        <div class="adEdDetails">
+            <span style="font-weight:bold">Ad Information</span><br /><br />
+            <input type="radio" name="adDirection" id="adDirectionSeek" checked/> Seeking&nbsp;
+            <input type="radio" name="adDirection" id="adDirectionOffer" /> Offering&nbsp;&nbsp;
+            <select id="adType" name="adType" style="width:200px" data-placeholder="* Ad Type"><option></option></select><br />
+            <div class="input-control modern text myModernInput" style="width:100%">
+                <input type="text" style="color:black;width:100%"  placeholder="Ad Title" id="Title"/>
+                <span class="label">* Ad Title</span>
+                <span class="informer">Title - required</span>
+            </div><br /><br />
+            <textarea id="Description" placeholder="Ad Description" rows="5" cols="40" style="width:100%"></textarea>
+            <div class="input-control modern text myModernInput" style="width:50%">
+                <input type="number" style="color:black;padding:5px" data-placeholder="Price" id="Price"/>
+                <span class="label">* Price</span>
+                <span class="informer">Price - required</span>
+            </div><br />
+            <div class="input-control modern text myModernInput" style="width:100%">
+                <input type="text" style="color:black" placeholder="Location" id="Location"/>
+                <span class="label">* Location</span>
+                <span class="informer">Location - required</span>
+            </div>
+            <div class="input-control modern text myModernInput" style="width:100%">
+                <input type="text" style="color:black" placeholder="Phone" id="Phone"/>
+                <span class="label">Phone</span>
+                <span class="informer">Phone</span>
+            </div>
+                <button id="Save" class="button small-y-button buttonColor"><span class="mif-floppy-disk"> Save</span></button><br /><br />
+            
+            <div>                
+                <b>Media</b><br />
+                You can add up to eight image files, 2 audio files and 3 video links to your ad.<br />
+                Acceptable audio files are MP3 and WAV.  Acceptable image files are PNG, GIF and JPG.<br />
+                Video links must be hosted on YouTube.
+                Image and audio files cannot exceed 4mb in size.<br />
+            </div><br />
+            <div id="uploadPanel" style="display:none;border-top:1px solid #dddddd;padding-top:5px">
+                <label style="font-weight:bold;">Add Media</label><br />
+                <iframe id="uploadFrame" style="width:100%;height:100%;border:0;overflow:visible;margin-top:5px"></iframe>
+            </div>
+        </div><br />
+        
+        <div class="adEdMediaPanel" style="border:1px solid transparent;padding:5px;padding-top:0">           
+            <div id="mediaPanel" style="border:0">
+                <div style="width:100%"><div class="wa-title-background">Images</div><br />
+                    <span>Click a thumbnail to make that image the main image for the ad. </span></div>                
+                <div id="mainImagePanel"><img id="mainImage" src="images/clear.png"/></div>   
+                      
+                <div id="thumbnailPanel" style="display:block;text-align:left;width:100%"></div><br />
+                  <div style="width:100%"><div class="wa-title-background">Audio</div><br />
+                      <span>Audio files of MP3 or WAV, up to 4mb in size.</span></div>        
+                <div id="audioPanel" style="display:block;text-align:left;width:100%"></div>
+                <div><div style="border-bottom:1px solid #dddddd;padding-bottom:3px;width:100%"><div class="wa-title-background">Video</div><br />
+                    <span>Specify the YouTube key (the end of the URL after '?v=') to your video.</span></div>
+                    <table style="width:100%;padding-bottom:5px">
+                        <tr>
+                            <td><input type="text" id="videoKey" placeholder="Video Key" style="margin-top:5px"/><br />
+                            <input id="videoTitle" type="text" maxlength="50" placeholder="Video Title" style="margin-top:5px" />
+                            </td>
+                            <td> <button id="submitVideo" class="button" style="margin:5px;height:100%"><span class="mif-video-camera"> Submit</span></button></td>
+                        </tr>
+                    </table>
+                </div><br />
+                <div id="videoPanel"></div>
+
+
+                </div> 
+            <div style="clear:both"></div>
+        </div>
+    </div>
+</body>
+</html>

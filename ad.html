@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="content/css/metro-icons.css" rel="stylesheet"/>
+    <link href="content/css/metro.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="Content/css/jquery-ui.css" />
+    <link rel="stylesheet" href="css/ads.css" />
+    <link rel="stylesheet" href="css/ad.css" />	
+    <script runat="server" src="scripts/jquery.js"></script>
+    <script runat="server" src="Scripts/jquery-ui-1.11.4.js"></script>
+    <script runat="server" src="Scripts/jquery.datatables.min.js"></script>
+    <script runat="server" src="scripts/metro.js"></script>
+    <script runat="server" src="js/datarequest.js"></script>
+    <script runat="server" src="scripts/jss.min.js"></script>    
+
+    <script runat="server" src="Scripts/jlinq.js"></script>
+    <script runat="server" src="js/ad.js"></script>
+    <script runat="server" src="js/wantads.js"></script>
+    <script runat="server" src="js/utilities.js"></script>
+    <style>
+        label {float: left; width: 6em; text-align: right;}
+        hr { background-color:gray;}
+        table {
+            border-collapse:collapse;
+            padding:0;
+            margin:0;
+        }
+        td {
+            vertical-align: top;
+            text-align:left;
+        }
+    </style>
+    
+</head>
+<body class="wa-bg">
+    <div id="body">
+        <div id="wantAdHeader">
+                <div id="header" class="wa-title-background">
+                    <table style="width:100%;">
+                        <tr>
+                            <td rowspan="2"><a href="index.html" title="GigMan Home"><img src="Images/logo.jpg" alt="GigMan" style="padding:0;position:absolute;margin-top:-1px;margin-left:-1px;" /></a></td>
+                            <td>
+                                <div id="leaderboard"></div>
+                                <label class="switch lightSwitch" style="text-align:left">             
+                                    <a href="#" id="waLoginLink"></a>
+                                    <a href="#" id="logoutLink">Log out</a>
+                                    <a href="#" class="createAdLink">Create/Edit an ad</a><br /><br />              
+                                </label>
+                            </td>
+                        </tr>
+                        <tr><td><label style="margin-left:105px;font-size:20px;margin-top:-5px">Marketplace</label></td><td></td></tr>
+                    </table>                    
+                </div>
+                <div id="searchBar">
+                    <span>Search</span>&nbsp;
+                    <input id="searchText" type="text" class="wantAdSearchText" /> &nbsp;
+                    <div id="adTypeContainer" style="display:inline"></div>
+                    <button id="search" class="waButton buttonColor"><span class="mif-search" ></span></button>
+                </div>
+
+        </div>
+        <div id="adTitle" class="wa-title-background"></div>
+        <div id="midBanner">
+            <span id="searchCategoryName"></span><br />
+            <div id="midBannerAd"></div>
+        </div>
+
+        <div id="main">
+            <div id="left">
+                <div id="mediaPanel">
+                    <div id="mainImagePanel"><img id="mainImage" src="images/clear.png"/></div>                            
+                    <div id="thumbnailPanel" style="display:block;"></div><br />
+                    <div class="wa-title-background">Audio</div>
+                    <div id="audioPanel" style="display:block;"></div>
+                    <div class="wa-title-background">Video</div>
+                    <div id="videoPanel" style="display:block;"></div>
+                    <div id="leftAds"></div>
+                </div> <div style="clear:both"></div>
+            </div>
+            <div id="adBody">
+                <div class="adAttributeTable" style="padding:10px">
+                    <div style="padding:5px">
+                        <div style="padding-right:10px;display:inline-block;width:15%">Listed on: </div><div style="display:inline"><span id="listDate"></span></div>
+                    </div>
+                    <div style="padding:5px">
+                        <div style="padding-right:10px;display:inline-block;width:15%">Price: </div><div style="display:inline"><span id="price"></span></div>
+                    </div>
+                    <div style="padding:5px">
+                        <div style="padding-right:10px;display:inline-block;width:15%">Location: </div><div style="display:inline"><span id="location"></span></div>
+                    </div>
+                </div>
+                <div id="adText"></div>
+            </div>                   
+        <!--</div>-->
+        <div id="sideBoard">
+                <div id="contactPanel">
+                    <table>
+                        <tr>
+                            <td class="contactTitle wa-title-background">Contact Ad Poster</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a class="mif-phone" id="phonePanel"></a> <a id="showPhone">Click to see #</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a class="mif-user"></a> <a href="#" id="otherAds">Other ads from this poster</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="contactTitle wa-title-background">Email Ad Poster</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="input-control modern text" style="width:100%">
+                                    <input id="contactEmail" type="text"/>
+                                    <span class="label">Email Address</span>
+                                    <span class="informer">Please enter your email address.</span>
+                                    <span class="placeholder">Email Address</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <textarea id="contactMessage" cols="30" rows="10" style="width:100%"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="contactCaptcha">
+                                <div id="captchaPanel">
+                                <span id="captchaText" style="font-size:larger"></span> = 
+                                <input type="text" id="captchaAnswer" style="width:40px;height:26px" />
+                                <button id="captchaSend" class="waButton buttonColor" style="margin-top:4px;"><span class="mif-checkmark" style="font-size:smaller"></span></button></div>
+                            </td>
+                        </tr>
+                        <tr><td><button id="sendMail" disabled class="button small-button buttonColor"><span class="mif-mail"></span> Send</button></td></tr>
+                    </table>
+                </div>
+                <div id="sideboardAds"></div>
+            </div>
+        </div>
+
+        <div id="reportAdCharm" class="wa-charm" data-role="charm" data-position="left" style="width:40%;max-width:300px;border-right:1px solid #dddddd;font-size:100%;">
+            <div>
+                <button class="square-button small-button buttonColor helpButton" data-topic="reportad" title="Help for Report Ad"><span class="mif-question"></span></button>
+                <button class="square-button small-button buttonColor" id="CloseReportPanel" title="Close ad editor."><span class="mif-cross"></span></button>
+            </div><br />
+            <span style="font-weight:bold">Report This Ad</span><br /><br />
+            <div style="-ms-word-wrap: break-word;word-wrap: break-word;white-space:pre-line">
+            If you believe this ad to be dishonest or misleading, or if the ad is miscategorized or a duplicate, you can report it and we will investigate.<br />
+            Please state, in 10 words or more, why you believe the ad should be removed.<br />
+                Please note that false reporting of ads or users will result in the reporter's account being suspended.
+            </div><br />
+            <span id="reportAdTitle"></span><br /><br />
+            <textarea id="reportReason" cols="40" rows="10" placeholder="Reason for reporting ad" style="font-size:larger"></textarea><br /><br />
+            <div id="Message" style="-ms-word-wrap: break-word;word-wrap: break-word;white-space:pre-line"></div><br />
+            <div class="contactCaptcha">
+                <div id="captchaPanel2">
+                <span id="captchaText2" style="font-size:larger"></span> = 
+                <input type="text" id="captchaAnswer2" style="width:40px;height:26px" />
+                <button id="captchaSend2" class="waButton buttonColor" style="margin-top:4px;"><span class="mif-checkmark" style="font-size:smaller"></span></button></div>
+            </div>
+
+            <button class="button small-y-button" id="submitAdReport" disabled><span class="mif-flag"> Send Report</span></button>
+        </div>
+
+        <div id="editorCharm" class="wa-charm" data-role="charm" data-position="left" style="width:100%;max-width:800px;border-right:1px solid #dddddd">
+            <div>
+                <button class="square-button small-button buttonColor helpButton" data-topic="songeditor" title="Help for Ad Editor"><span class="mif-question"></span></button>
+                <button class="square-button small-button buttonColor createAdLink" id="CloseEditorPanel" title="Close ad editor."><span class="mif-cross"></span></button>
+            </div>
+            <iframe id="editorContainer" class="panelContainer" src="newAd.html" style="overflow-y:auto"></iframe>
+        </div>
+
+
+        <div id="loginCharm" class="wa-charm" data-position="left" data-role="charm" style="width:40%;max-width:410px;">
+        <div style="float:right">            
+            <button class="square-button small-button buttonColor OpenEditorPanel" id="CloseLoginPanel" title="Close"><span class="mif-cross" style="font-size:smaller;"></span></button>
+        </div>
+        <div style="float:left;width:100%">
+            <br /><span class="charmLabelBold">Login</span><br />
+            <div class="input-control modern text myModernInput" style="width:49%">
+                <input type="text" style="color:#1d1d1d" placeholder="Username" id="Username"/>
+                <span class="label">Username</span>
+                <span class="informer">Username</span>
+            </div><br />
+            <div class="input-control modern password myModernInput iconic password" style="width:49%">
+                <span class="icon icon-right mif-lock"></span><input type="password" style="color:#1d1d1d" placeholder="Password" id="Password"/>
+                <span class="label">Password</span>
+                <span class="informer">Password</span>
+            </div><br /><br />
+            <button class="button buttonColor" style="margin-left:75px;width:150px" id="Login"><span class="mif-enter"></span> Login</button><br /><br />
+            <span class="charmLabel" id="loginError"></span>
+        </div>                
+    </div>
+        <div id="footer" class="wa-title-background">Copyright &copy; 2015 James Albert</div>
+    </div>
+    <div id="largeImagePanel" ></div>
+</body>
+</html>

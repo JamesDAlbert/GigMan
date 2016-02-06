@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link id="gmStyle" rel="stylesheet" href="../css/gigman-neon.css" />
+    <link rel="stylesheet" href="../Content/css/metro.css" />
+    <script src="../Scripts/jquery.js"></script>
+</head>
+<body class="help">
+    <label id="charmLabelBold">Calendar</label>
+    <p>
+        This panel allows you to create calendar events, with varying levels of visibility.<br />If you have a GigMan Request membership, and have specified that the calendar 
+        should be shown, events marked as public will be visible to your fan-base on your GigMan Request page.
+        There are three viewing levels:<br />
+        <ul>
+            <li>Private: Only the event creator can view or edit the event.</li>
+            <li>Members: Only members of the creating artist can view the event.</li>
+            <li>Public:  The event is viewable on the artists Request page, if the 'Show Calendar' option is specified.</li>
+        </ul><br />
+        <h3>Event Creation</h3>
+        Clicking any open space on a day block in the caledar will open the event editor.
+        <h3>Event Editing</h3>
+        Clicking any event title will open the event editor, with the event pre-loaded for editing.
+        Clicking the 'x' to the left of an event will delete the event permanently.
+        <h3>Moving Events</h3> An event can be dragged from one date to another.<br /><br />
+    </p><br /><br />
+    <script src="../Scripts/jquery.min.js"></script>
+     <script>
+         var scheme = sessionStorage.getItem("colorscheme");
+         if (parent.document.URL.indexOf("faq.html") > 0)
+             $(".charmLabelBold").first().hide();
+
+         if (scheme == "hic") {
+             $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.css');
+         }
+         else if (scheme == "classic") {
+             $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.css');
+         }
+         else if (scheme == "neon") {
+             $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.css');
+         }
+    </script>
+</body>
+</html>

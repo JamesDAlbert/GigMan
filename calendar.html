@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+    <title>GigMan Calendar</title>
+<link href='content/css/fullcalendar.css' rel='stylesheet' />
+
+<link rel="stylesheet" href="css/gmWidgets.css" />
+<!--<link href='content/css/fullcalendar.print.css' rel='stylesheet' media='print' />-->
+<link rel="stylesheet" href="Content/css/metro.css" />
+<link rel="stylesheet" href="Content/css/metro-icons.min.css"/>
+<link rel="stylesheet" href="content/css/jquery.timepicker.min.css" />
+	<link href="content/css/jquery-ui.css" rel="stylesheet">
+<link id="gmStyle" href='css/gigman-neon.css' rel='stylesheet' />
+	<script src="scripts/jquery.min.js"></script>
+	<script src="scripts/jquery-ui.min.js"></script>    
+<script src="scripts/jquery.timepicker.min.js"></script>
+
+<script src='scripts/moment.min.js'></script>
+<script src='scripts/fullcalendar.min.js'></script>
+<script src="scripts/metro.js"></script>
+<script runat="server" src="js/dataRequest.js"></script>
+<script runat="server" src="js/utilities.js"></script>
+<script src="scripts/jss.min.js"></script>
+<script runat="server" src="js/gigman.js"></script>
+<script runat="server" src="js/calendar.js"></script>
+    <script>
+        var art = JSON.parse(getSession("activeartist"));
+        if (!art.PremiumMember) {
+            //window.location.href = "index.html";
+        }
+    </script>
+    <style>
+        
+    </style>
+</head>
+<body style="position:relative">
+    <div class="pageHeader">
+        <button id="OpenSidePanel" style="margin-top:-3px" class="square-button small-button buttonColor" title="Open side navigation panel."><span class="icon mif-menu mif-2x"></span></button>&nbsp;
+        <button id="Logout"  style="margin-top:-3px" class="square-button small-button buttonColor" title="Log out."><span class="icon mif-exit mif-2x"></span></button>&nbsp;
+        <button id="Home"  style="margin-top:-3px" class="square-button small-button buttonColor" title="Home."><span class="icon mif-home mif-2x"></span></button>
+       
+        <span id="calendarTitle" style="font-weight:bold;font-size:larger">Calendar for </span>
+        <div style="float:right">
+        <button class="small-button square-button helpButton buttonColor" data-topic="calendar" style="float:right;margin-top:-3px" id="calendarHelp"><span class="icon mif-question mif-2x"></span></button>
+        &nbsp;
+        <div id="ColorScheme" class="slide-switch" title="Color Scheme" style="margin-top:5px">
+            <input type="radio" class="slide-switch-input" name="view" value="hic" id="hic" checked/>
+            <label for="hic" class="slide-switch-label slide-switch-label-left" title="Hi-Contrast"><span class="slide-switch-marker">H</span></label>
+            <input type="radio" class="slide-switch-input" name="view" value="neon" id="neon"/>
+            <label for="neon" class="slide-switch-label slide-switch-label-middle" title="Neon"><span class="slide-switch-marker">N</span></label>
+            <input type="radio" class="slide-switch-input" name="view" value="classic" id="classic"/>
+            <label for="classic" class="slide-switch-label slide-switch-label-right" title="Metro Classic"> <span class="slide-switch-marker">C</span></label>
+            <span class="slide-switch-selection"><div class="knurl"></div></span>
+        </div></div>
+    </div>
+	<div id='calendar' class="gm-bg" style="padding:5px;"></div>
+    <div id="eventCharm" class="gm-charm" data-position="right" data-role="charm">
+        <div style="float:right">
+             <button class="small-button square-button helpButton buttonColor" style="margin-top:-5px!important;" data-topic="eventeditor" id="eventEditorHelp" title="Close"><span class="icon mif-question"></span></button>
+             <button class="square-button small-button buttonColor closeCharm" style="margin-top:-5px!important;" id="closeCharm" title="Close"><span class="icon mif-cross mif-2x"></span></button>
+        </div>   
+        
+        <span class="charmLabelBold" style="margin-bottom:10px">Event Editor</span><br />
+        <div class="input-control text" data-role="datepicker" id="eventDatePicker">
+            <input type="text" id="eventDate" name="eventDate" placeholder="Event Date" style="height:40px"/>
+            <button class="button small-button square-button"><span class="icon mif-calendar mif-2x"></span></button>
+        </div>
+        <div class="input-control modern text myModernInput" style="width:100%">
+            <input type="text" style="color:white;width:100%" placeholder="Venue" id="Venue" title="Venue">
+            <span class="label">* Venue</span>
+            <span class="informer">Venue - required</span>
+        </div>
+        <div class="input-control modern text myModernInput" style="width:100%">
+            <input type="text" style="color:white;width:100%" placeholder="URL" id="URL" title="URL">
+            <span class="label">URL</span>
+            <span class="informer">URL</span>
+        </div><br />  
+        <label class="charmLabel">
+        <input id="setupTime" type="text" class="time ui-timepicker-input" autocomplete="off" placeholder="Setup time" value="12:00am" style="width:80px;margin-top:3px;"> Setup Time</label> 
+        <label class="charmLabel" style="float:right;margin-top:3px;"># Sets 
+        <input id="sets" type="number" min ="1" max="10" value="1" style="width:80px"/></label> <br />
+        <label class="charmLabel">
+        <input id="startTime" type="text" class="time ui-timepicker-input" autocomplete="off" placeholder="Start time" value="12:00am" style="width:80px"> Start Time</label>        
+        <label class="charmLabel" style="float:right;margin-top:-22px">End Time 
+        <input id="endTime" type="text" class="time ui-timepicker-input" autocomplete="off" placeholder="End time" value="12:00am" style="width:80px"> </label><br /><br />
+
+        <span class="charmLabelBold">Visibility</span><br />
+
+        <div id="EventVisibility" class="slide-switch" title="Event Visibility">
+            <input type="radio" class="slide-switch-input" name="vis" value="0" id="visibility0" checked/>
+            <label for="visibility0" class="slide-switch-label slide-switch-label-left" title="Everyone can see the event."><span class="slide-switch-marker">P</span></label>
+            <input type="radio" class="slide-switch-input" name="vis" value="1" id="visibility1"/>
+            <label for="visibility1" class="slide-switch-label slide-switch-label-middle" title="Only the artists members can see the event."><span class="slide-switch-marker">A</span></label>
+            <input type="radio" class="slide-switch-input" name="vis" value="2" id="visibility2"/>
+            <label for="visibility2" class="slide-switch-label slide-switch-label-right" title="Only the event creator can see the event."> <span class="slide-switch-marker">U</span></label>
+            <span class="slide-switch-selection"><div class="knurl"></div></span>
+        </div>
+
+        <div class="input-control textarea modern" style="width:100%;display:block" id="textAreaDiv">
+            <textarea id="description" class="text" cols="20" rows="5" placeholder="Event Description" style="width:100%;"></textarea>
+                <span class="label">Event Descriptionspan</span>
+                <span class="informer">Description</span>
+        </div>
+        <br /><br /><br />
+        <div class="input-control textarea modern" style="width:100%;display:block" id="textAreaDiv2">
+            <textarea id="notes" class="text" cols="20" rows="5" placeholder="Artist Notes (private)" style="width:100%;"></textarea>
+                <span class="label">Event Notes</span>
+                <span class="informer">Notes</span>
+        </div>
+        <br /><br /><br />
+        <span id="error" style="color:darkred;display:inline"></span><br /><br />
+        <button class="button buttonColor tile-small-y" id="Submit"><span class="icon mif-floppy-disk"></span> Save</button> 
+        <input type="hidden" id="calendarID" />   
+    </div>
+    <div id="navigationCharm" class="gm-charm" data-role="charm" data-position="left">
+        <div>
+            <button id="CloseSidePanel" class="square-button small-button buttonColor" title="Close side navigation panel."><span class="icon mif-cross mif-2x"></span></button>
+            <button style="margin-left:0" class="square-button small-button buttonColor helpButton" data-topic="navigation"><span class="icon mif-question mif-2x"></span></button>
+            <button id="CloseSettingsPanel" class="square-button small-button buttonColor CloseSettingsPanel" title="Open song tools panel."><span class="icon mif-tools mif-2x"></span></button>
+            <span class="charmTitle">Site Navigation</span>
+        </div>
+        <iframe src="navpanel.html" class="panelContainer" id="navigationContainer"></iframe>
+    </div>
+<div id="editorCharm" class="gm-charm" data-role="charm">
+        <span class="charmTitle" style="float:left">Song Editor</span>
+        <div style="float:right">
+             <button style="margin-top:-5px" class="square-button small-button buttonColor helpButton" data-topic="songeditor" title="Help for Song Editor"><span class="mif-question mif-2x"></span></button>
+             <button style="margin-top:-5px" class="square-button small-button buttonColor OpenEditorPanel" id="CloseEditorPanel" title="Close song editor."><span class="mif-cross mif-2x"></span></button>
+        </div>
+        <iframe id="editorContainer" class="panelContainer" src="SongEditor.html" style="overflow-y:auto"></iframe>
+    </div>
+    <div id="settingsCharm" class="gm-charm" data-position="left" data-role="charm">
+        <div>
+            <button class="CloseSettingsPanel square-button small-button buttonColor" style="margin-bottom:5px" title="Close settings editor."><span class="mif-cross mif-2x"></span></button>
+            <button class="square-button small-button buttonColor helpButton" data-topic="sitesettings" style="margin-bottom:5px" title="Help for Settings"><span class="mif-question mif-2x"></span></button>
+        </div>
+        <iframe id="settingsContainer" class="panelContainer" src="sitesettings.html" style="overflow-y:auto"></iframe>
+    </div>
+    <div id="helpCharm" class="gm-charm" data-position="left" data-role="charm">
+        <div>
+            <button id="CloseHelpPanel" class="square-button small-button buttonColor" style="margin-bottom:5px" title="Close help."><span class="icon mif-cross mif-2x"></span></button>
+        </div>
+        <iframe id="helpContainer" class="panelContainer" src="calendar_help.html" style="overflow-y:auto"></iframe>         
+    </div>
+</body>
+    <script>
+        function showCharm(id) {
+            $(id).data("charm").open();
+        }
+    </script>
+</html>

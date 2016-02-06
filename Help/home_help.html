@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link id="gmStyle" rel="stylesheet" href="" />
+    <link rel="stylesheet" href="../Content/css/metro.css" />
+    <link rel="stylesheet" href="../Content/css/metro-icons.min.css" />
+    <script src="../Scripts/jquery-2.1.4.min.js"></script>
+    <style>
+        span {
+            margin-right:10px;
+        }
+    </style>
+</head>
+<body class="help">
+    <label class="charmLabelBold">Navigation Help</label><br/><br/>
+    <span class="mif-list2"></span> The master song list.<br/><br/>
+    <span class="mif-redo"></span> If the current artist is a premium member, clicking this button persists the data to the GigMan database.<br/><br/>
+    <span class="mif-pencil"></span> Opens the song editor panel, allowing you to add a song, or edit the currently displayed song.<br/><br/>
+    <span class="mif-dice"></span> Picks a song from the artists song list at random.<br/><br/>
+    <span class="mif-mic mif-dice"></span> Selects a random composer from the song list and displays all songs by that conmposer in the list page. <br/><br/>
+    <span class="mif-clipboard"></span> In the list page, displays all songs that have a play count of zero.<br/><br/>
+    <span class="mif-mic"></span> In the list page, displays all of the composers available from the artists song list.<br/><br/>
+    <span class="mif-music"></span> In the list page, displays all of the genres represented in the artists song list.<br/><br/>
+    <span class="mif-tag"></span> In the list page, displays all of the categories represented in the artists song list.  If no categories have been defined, this will be an empty list.<br/><br/>
+    <span class="mif-list-numbered"></span> Opens the set list page, where previously created setlists can be browsed.<br/><br/>
+    <span class="mif-user"></span> Opens the profiles page, where user and artist profiles can be accessed.<br/><br/>
+    <span class="mif-cogs"></span> Opens the site settings panel.<br/><br/>
+    <span class="mif-calendar"></span> If the current artist is a premium member, opens the calendar page.<br/><br/>
+    <span class="mif-shop"></span> Navigate to the GigMan Want-Ads area.<br/><br/>
+    <span class="mif-question"></span> Navigate to the FAQ and help page.<br/><br/>
+    <span class="mif-heart"></span> Navigate to the credits and kudos page.<br/><br/>
+    <span class="mif-phone"></span> If the current artist is a GigMan Requests member, navigate to the GigMan Requests dashboard page.<br/><br/>
+    <span class="mif-exit"></span> Log out of GigMan.  All session data is abandoned.<br/><br/><br/><br/>
+    <br/><br/><br/><br/>
+    <script>
+        var scheme = sessionStorage.getItem("colorscheme");
+
+        if (scheme == "hic") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.css');
+        }
+        else if (scheme == "classic") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.css');
+        }
+        else if (scheme == "neon") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.css');
+        }
+    </script>
+</body>
+</html>

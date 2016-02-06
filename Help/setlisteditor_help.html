@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="../Content/css/metro.css" />
+    <link id="gmStyle" rel="stylesheet" href="" />
+    <script src="../Scripts/jquery-2.1.4.min.js"></script>
+</head>
+<body class="help">
+    <label>Set List Editor</label>
+    <p>
+        Setlists can be created and edited from this toolkit.  Songs can be dragged from the master song list onto a subset node in the treeview on the right.<br />
+        A setlist is comprised of three parts: The set, one or more subsets, and one or more songs in each subset.<br /><br />
+        <span>Show/Hide Genre/Category: </span> If screen real estate is at a premium on your device, these two fields can be hidden to reduce the width of the song list.<br />
+        <h4>Create a Setlist </h4>
+        <ul><li> Right click on the <b><i>All Sets</i></b> label, and select <b><i>Create a new set</i></b> from the context menu<br /></li>
+        <li>Right click on the newly created <i><b>'New Set'</b></i> label, and select <b><i>Rename set</i></b> from the menu; a text box will appear, allowing you to give the new set a name.></li> 
+        <li>Right click on the setlist name and select <b><i>Create a new set</i></b> from the context menu. </li>
+        <li>Right click on the newly created <i><b>New subset</b></i> label and give the subset a meaningful name. </li>
+        <li>Drag some songs from the master list onto the new subset.  To drag multiple songs, click the rows to select them, then drag onto the subset.</li>
+        <li>Drag the songs in the subset up or down to reorder them.  The songs can also be dragged into adjacent subsets.</li>
+            <li>Right click on the setlist name label and select <b><i>Save Setlist</i></b>.  It may take a few seconds to synchronize.</li>
+            </ul><br />Done!<br />
+        <br />Note that a subset must be open (click the open icon to the left of the subset name) to see all of the songs in the subset.
+    </p><br /><br />
+    <script>
+        var scheme = sessionStorage.getItem("colorscheme");
+
+        if (scheme == "hic") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.css');
+        }
+        else if (scheme == "classic") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.css');
+        }
+        else if (scheme == "neon") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.css');
+        }
+    </script>
+</body>
+</html>

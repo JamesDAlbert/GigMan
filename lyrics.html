@@ -1,0 +1,259 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" class="LyricsBackground">
+<head>
+    <title>GigMan</title>
+    <link href="content/css/metro.css" rel="stylesheet"/>    
+    <link href="content/css/metro-responsive.css" rel="stylesheet"/>
+
+
+    <link href="css/gmWidgets.css" rel="stylesheet" />
+    <link href="content/css/metro-icons.css" rel="stylesheet"/>
+
+    <link href="Content/css/jquery-ui.css" rel="stylesheet"/>
+    <link href="content/css/jtab-helper.css" rel="stylesheet"/>
+    <link id="gmStyle" href="css/gigman-hic.css" rel="stylesheet"/>
+
+    <script src="Scripts/jquery.js"></script>
+    <script src="Scripts/jquery-ui.min.js"></script>
+    <script src="Scripts/jquery-ui-touch-punch.js"></script>
+    <script src="scripts/metro.js"></script>
+
+    <script src="scripts/raphael.min.js"></script>
+    <script src="scripts/jtab.js"></script>
+
+    <script src="scripts/jss.min.js"></script>    
+    <script src="Scripts/jlinq.js"></script>
+    <script runat="server" src="js/dataRequest.js"></script>  
+    <script runat="server" src="js/gigman.js"></script>
+    <script runat="server" src="js/rgbcolor.js"></script>
+    <script runat="server" src="js/utilities.js"></script>
+    <script runat="server" src="js/lyrics.js"></script>    
+    <script runat="server" src="js/chordHints.js"></script>
+    <style>
+        
+    </style>  
+</head>
+<body class="LyricsBackground">
+    <!-- heading -->
+    <div id="lyricsHeader" class="pageHeader">
+        <button id="GoBack" style="margin-left:5px" class="square-button small-button buttonColor" title="Navigate back."><span class="icon mif-arrow-left mif-2x"></span></button>&nbsp;
+        <button id="OpenSidePanel" style="margin-left:0" class="square-button small-button buttonColor" title="Open side navigation panel."><span class="icon mif-menu mif-2x"></span></button>&nbsp;
+        <button id="Home"  style="margin-top:3px" class="square-button small-button buttonColor" title="Home."><span class="icon mif-home mif-2x"></span></button>
+        &nbsp;
+        <button class="square-button small-button buttonColor notesButton" title="Song notes."><span class="icon mif-file-text mif-2x"></span></button>
+        <button class="button small-button buttonColor scrollButton" data-direction="down" title="Page down"><span class="icon mif-file-download mif-2x"></span></button>
+        <button class="button small-button buttonColor scrollButton" data-direction="up"><span class="icon mif-file-upload mif-2x" title="Page up mif-2x"></span></button>
+        <a href="#" class="songInfo"><span class="icon mif-info mif-2x"></span></a>
+
+        <div style="display:inline">
+            <div id="ColorScheme" class="slide-switch" title="Color Scheme" style="margin-bottom:-15px;">
+                <input type="radio" class="slide-switch-input" name="view" value="hic" id="hic" checked/>
+                <label for="hic" class="slide-switch-label slide-switch-label-left" title="Hi-Contrast"><span class="slide-switch-marker">H</span></label>
+                <input type="radio" class="slide-switch-input" name="view" value="neon" id="neon"/>
+                <label for="neon" class="slide-switch-label slide-switch-label-middle" title="Neon"><span class="slide-switch-marker">N</span></label>
+                <input type="radio" class="slide-switch-input" name="view" value="classic" id="classic"/>
+                <label for="classic" class="slide-switch-label slide-switch-label-right" title="Metro Classic"> <span class="slide-switch-marker">C</span></label>
+                <span class="slide-switch-selection"></span>
+            </div>
+            <button id="LyricsHelp" class="square-button small-button buttonColor helpButton" title="Lyrics page help." data-topic="lyrics"><span class="icon mif-question mif-2x"></span></button>&nbsp;
+            <button id="OpenEditorPanel" class="square-button small-button buttonColor" title="Open song editor." style="background-image:url();"><span class="icon mif-pencil mif-2x"></span></button>&nbsp;
+        </div>
+    </div>
+        <div id="SongInfo"></div>   
+    
+    <!-- lyrics area -->  <br /><br />
+    <div id="lyricsWrapper" style="width:100%;display:block">     
+        <div id="RightSliders">       
+            <div style="width:34px;height:50vh;" class="toolSliders">
+                <div id="sTranspose" class="transpose largeSlider" title="Transpose"></div>
+                <div id="sChangeFontSize" class="fontSize largeSlider" title="Font size"></div>
+            </div>
+        </div> 
+        <div id="lyricsDiv" class="lyricsDiv LyricsBackground"></div> 
+        <div style="clear:both"></div> 
+    </div> 
+    <!-- end lrics area -->
+ <!-- palettte window -->
+    <div id="paletteWindow" class="ui-widget-content paletteWindow" >
+        <div id="paletteTitle" class="windowTitle">
+            <span>Available Colours</span>
+            <button id="closePaletteWindow" class="buttonCOlor closeNotesPanel" title="Close Palette Window"></button></div>
+        <table class="paletteTable" id="paletteTable"></table>
+    </div>
+    <!-- end palette window -->
+    <!-- end heading -->
+    <div id="notesPanel" class="ui-widget-content">
+        <div id="Div1" class="paletteTitle buttonColor" style="display:inline-block;overflow:visible;width:100%;padding:6px;">
+            <span class="icon mif-pencil" style="float:left;font-size:smaller;margin-left:3px;margin-top:1px;"></span>
+            <span style="margin-left:5px;margin-top:-2px;float:left;font-weight:bold;font-size:20px;">Song Notes</span>
+            <button id="closeNotesPanel" class="buttonColor closeNotesPanel" title="Close Notes Window"></button>
+        </div>
+        <textarea id="Notes" rows="20" style="width:100%;height:100%;z-index:2000"></textarea>
+    </div>
+
+    <div id="chordViewer" class="jtab chordonly chordViewer"></div>
+    <!-- tool chest -->
+    <div id="toolsCharm" class="gm-charm" data-role="charm" data-position="left">
+        <div>
+            <span class="charmTitle" style="float:left">Lyrics View Settings Editor</span>
+            <div style="text-align:right;">
+                <button id="CloseToolsPanel" class="square-button small-button buttonColor" title="Close tools panel." style="margin-top:-9px"><span class="icon mif-cross mif-2x"></span></button>
+                <button class="small-button square-button buttonColor helpButton" title="Help for Lyric Tools" data-topic="lyrics" style="margin-top:-9px;"><span class="icon mif-question mif-2x"></span></button>
+            </div>
+            <div style="margin-right:5px;margin-top:5px;text-align:left" class="settingsTable">
+                <label class="charmLabelBold" >Transpose</label> <br />
+                <div id="transposer" style="width:290px;">
+                    <div class="whitekeys" style="">
+                        <div class="keyPad white" data-key="0">A</div>
+                        <div class="keyPad black" data-key="1">B<sup>b</sup></div>
+                        <div class="keyPad white" data-key="2">B</div>            
+                        <div class="keyPad white" data-key="3">C</div>
+                        <div class="keyPad black" data-key="4">C<sup>#</sup></div>
+                        <div class="keyPad white" data-key="5">D</div>
+                        <div class="keyPad black" data-key="6">E<sup>b</sup></div>            
+                        <div class="keyPad white" data-key="7">E</div>           
+                        <div class="keyPad black" data-key="8">F<sup>#</sup></div>
+                        <div class="keyPad white" data-key="9">F</div>
+                        <div class="keyPad white" data-key="10">G</div>            
+                        <div class="keyPad black" data-key="11"">G<sup>#</sup></div>
+                    </div>        
+                </div>
+            </div> 
+            <div class="settingsTable">
+                <div style="display:table;width:100%">
+                    <div style="display:table-row"><div style="display:table-cell;"><label class="charmLabelBold">Text</label></div></div>
+                    <div style="display:table-row">
+                        <div style="width:48%;display:table-cell;"><span class="charmLabel" style="margin-bottom:2px">Font Size</span>
+                            <div class="spinBox">
+                                <button class="spinMinus buttonColor"><span class="icon mif-minus"></span></button>
+                                <input id="FontSize" type="text" class="spinInput" data-min="14" data-max="30" data-step="1" data-field="lyricFontSize" />
+                                <button class="spinPlus buttonColor"><span class="icon mif-plus"></span></button>
+                            </div>
+                        </div>
+                        <div style="width:48%;display:table-cell">                     
+                            <span class="charmLabel"> Font Face</span> <br />      
+                            <div id="LyricFontFace" class="slide-switch" title="Lyric view font" style="margin:5px;width:82px">
+                                <input type="radio" class="slide-switch-input" name="lfont" value="'Courier New', Courier, monospace" id="Courier" checked/>
+                                <label for="Courier" class="slide-switch-label slide-switch-label-left" title="Courier"><span class="slide-switch-marker">Cour.</span></label>
+                                <input type="radio" class="slide-switch-input" name="lfont" value="'Lucida Console', Monaco, monospace" id="Lucida"/>
+                                <label for="Lucida" class="slide-switch-label slide-switch-label-right" title="Lucida"> <span class="slide-switch-marker">Luci.</span></label>
+                                <span class="slide-switch-selection"></span>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="settingsTable">
+                <div class="switchTable" style="width:100%;display:table">
+                    <div style="display:table-row"><div style="display:table-cell"><span class="charmLabelBold">Display</span></div></div>
+                    <div style="display:table-row">
+                        <div style="display:table-cell">
+                            <span class="charmLabel">Chords</span><br />
+                                <label class="switch charmSwitch" style="margin-top:5px;">
+                                <input type="checkbox" id="ChordVisibility"/>
+                                <span class="check"></span>
+                            </label>
+                        </div>
+                        <div style="display:table-cell">
+                            <span class="charmLabel">Charts</span><br/>
+                            <label class="switch charmSwitch" style="margin-top:5px;">
+                                <input type="checkbox" id="PopupChordVisibility"/>
+                                <span class="check"></span>
+                            </label>
+                        </div>
+                        <div style="display:table-cell">
+                            <span class="charmLabel">Left Sliders</span><br />
+                            <label class="switch charmSwitch" style="margin-top:5px;">
+                                <input type="checkbox" id="RightSliderVisibility"/>
+                                <span class="check"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div style="display:table-row">
+                         <div style="display:table-cell"></div>
+                        <div style="display:table-cell;padding-top:3px;padding-bottom:3px">
+                            <span class="charmLabel">Hints</span><br />
+                            <label class="switch charmSwitch" style="margin-top:5px;">
+                                <input type="checkbox" id="PopupChordHints" />
+                                <span class="check"></span>
+                            </label>
+                        </div>
+                              <div style="display:table-cell"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="settingsTable" style="width:100%">    
+                <div style="display:table;width:100%">  
+                    <div style="display:table-row;width:100%">
+                        <div style="display:table-cell"><span class="charmLabelBold">Colors</span></div>
+                    </div>
+                    <div style="display:table-row;width:100%">
+                        <div style="vertical-align:top;display:table-cell">
+                            <div id="colorsDiv" style="float:left;display:inline-block;text-align:left;width:100%">                              
+                                <table id="colors" style="padding:0;margin:0;border-collapse:collapse;border-spacing:0;width:100%">
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+
+            </div> 
+            <div style="text-align:justify;width:100%; margin-top:5px">
+                <div style="width:33%;float:left;text-align:center"><button class="square-button large-button buttonColor command notesButton" id="NotesVisibility" title="Show song notes."><span class="mif-file-text"></span></button></div>
+                <div style="width:33%;float:left;text-align:center"><button class="square-button large-button buttonColor command" id="IncPlayCount" title="Increment play count."><span class="mif-plus"></span></button></div>
+                <div style="width:33%;float:left;text-align:center"><a class="square-button large-button buttonColor command" id="PlaySample" title="Play audio sample."><span class="mif-headphones" style="margin-top:-7px;color:black"></span></a></div>
+            </div>                    
+        </div>
+    </div>            
+ 
+    <!-- End tool chest -->
+    <!-- navigate chest -->
+    <div id="navigationCharm" class="gm-charm" data-role="charm" data-position="left">
+        <div>
+            <div style="float:right;margin-top:-12px">            
+                <button id="CloseSidePanel" class="square-button small-button buttonColor" title="Close side navigation panel."><span class="icon mif-cross mif-2x"></span></button>
+                <button style="margin-left:0" class="square-button small-button buttonColor helpButton" data-topic="navigation"><span class="icon mif-question mif-2x"></span></button>
+                <button id="OpenToolsPanel" class="square-button small-button buttonColor" title="Open song tools panel."><span class="icon mif-tools mif-2x"></span></button>
+            </div>
+            <span class="charmTitle" style="float:left">Site Navigation</span>
+        </div>
+        <iframe src="" class="panelContainer" id="navigationContainer"></iframe>
+    </div>
+    <!-- end navigate chest -->
+    <!-- song editor -->
+    <div id="editorCharm" class="gm-charm" data-role="charm" data-position="right">
+        <div style="float:left;width:100%;margin-top:-10px">
+            <div  style="float:right;">
+                <button style="margin-left:0" data-topic="songeditor" class="square-button small-button buttonColor helpButton"><span class="icon mif-question mif-2x"></span></button>
+                <button id="CloseEditorPanel"class="square-button small-button buttonColor" title="Close song editor."><span class="icon mif-cross mif-2x"></span></button>
+            </div> 
+            <span class="charmTitle" style="margin-bottom:-5px!important">Song Editor</span>
+        </div>
+        <iframe id="editorContainer" class="panelContainer" src="SongEditor.html" style="overflow-y:auto"></iframe>         
+    </div>
+    <div id="settingsCharm" class="gm-charm" data-position="right" data-role="charm">            <span class="charmTitle">Site Settings</span>
+        <div style="float:right">
+            <button class="CloseSettingsPanel OpenEditorPanel square-button small-button buttonColor" style="margin-bottom:5px" title="Close settings editor."><span class="icon mif-cross mif-2x"></span></button>
+            <button class="small-button square-button helpButton buttonColor" data-topic="sitesettings" style="margin-bottom:5px"><span class="icon mif-question mif-2x"></span></button>
+
+        </div>
+        <iframe id="settingsContainer" class="panelContainer" src="" style="overflow-y:auto"></iframe>         
+    </div>
+    <div id="helpCharm" class="gm-charm" data-position="left" data-role="charm">
+        <div>
+            <button id="CloseHelpPanel" class="square-button small-button buttonColor" style="margin-bottom:5px" title="Close help."><span class="icon mif-cross mif-2x"></span></button>
+        </div>
+        <iframe id="helpContainer" class="panelContainer" src="" style="overflow-y:auto"></iframe>         
+    </div>
+    <!-- end song editor -->
+
+</body>
+    <script>
+        function showCharm(id)
+        {
+            $(id).data("charm").open();
+        }
+    </script>
+</html>

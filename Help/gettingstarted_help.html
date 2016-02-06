@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link id="gmStyle" rel="stylesheet" href="../css/gigman-neon.css" /t
+    <link rel="stylesheet" href="../Content/css/metro.css" />
+    <script src="../Scripts/jquery-2.1.4.min.js"></script> 
+</head>
+<body class="help">
+    <label class="charmLabelBold">Getting Started With GigMan</label><br />
+    <p>
+    There are a few basic steps you must take to get the greatest benefit from GigMan.  These steps are outlined below.
+    <ol>
+        <li><b>Create a user account, or log into an existing account.</b><br />  Wheen you first arrive at the site, you are redirected to the landing page, where you can choose to create an account or log in.</li>
+        <li><b>Create a new Artist, or send a join request to an existing artist.</b><br /> Once you are logged in, you can choose to create a new artist or join an existing artist account.<br />
+            If you create an artist, you are automatically affiliated with the Artist accont, and can accept join requests from other GigMan members.<br />
+            Alternately, you can, in your profile editor, choose an existing Artist from the drop down at the bottom of the page and send a request to join it.
+        </li>
+        <li>
+            <b>Start creating a song list.</b><br />
+            From the navigation panel, or from the main page, click the 'Add Song' tile.  The song editor will open, and allow you to start adding songs to your library.<br />
+            When you create an artist, a sample song is added to your account.  This is simply to illustrate the song list and lyric page, and can be deleted.<br />
+            To get a sense of the song list dynamic, from the navigation panel or the main page, click the 'Song List' tile.  You should see one entry in the list - 'Sample Song'.  Click the title to go to the lyric view page.
+        </li>
+        <li>
+            <b>Become a premium artist.</b><br />  While in test mode, premium features are free, and testers who report valid bugs get a year of premium membership (for one artist account) free after launch.  All testers will get a year of GigMan Request for free after launch.<br />
+            To make your artist account a Premium account, or to make it a GigMan Request member, go through the payment process, accessible from the Artist Profile editor.  No payment need be made.<br />
+            Becoming a Premium member will allow you to save your song list to the database, and gives you access to a calendar.  If you are also a GigMan Request me mber, the calendar can be made public so your audience can see upcoming events.<br />
+            Becoming a GigMan Request member will allow your audience to make requests and message the artist in near real-time, and allow the audience to see public calendar events.
+        </li>
+
+    </ol>
+    </p><br /><br />
+    <script>
+        var scheme = sessionStorage.getItem("colorscheme");
+
+        if (scheme == "hic") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.css');
+        }
+        else if (scheme == "classic") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.css');
+        }
+        else if (scheme == "neon") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.css');
+        }
+    </script>
+</body>
+</html>

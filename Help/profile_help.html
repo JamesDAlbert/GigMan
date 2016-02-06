@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link id="gmStyle" rel="stylesheet" href="" />
+    <link rel="stylesheet" href="../Content/css/metro.css" />
+    <script src="../Scripts/jquery.js"></script>
+</head>
+<body class="help">
+    <label>Profile Editor</label>
+    <p>
+
+    </p>
+    <p>
+        Your GigMan profile editor allows you to change your basic information: Name, Address, Email address and password.</p>
+    <p>You can specify your instrument preferences here as well.
+        </p>
+    <p>
+        You can also make requests to join an artist on GigMan, and view your existing artist affiliations.
+    </p><br /><br />
+
+    <script>
+        var scheme = sessionStorage.getItem("colorscheme");
+
+        if (scheme == "hic") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.css');
+        }
+        else if (scheme == "classic") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.css');
+        }
+        else if (scheme == "neon") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.css');
+        }
+    </script>
+</body>
+</html>

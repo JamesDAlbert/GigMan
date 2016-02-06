@@ -1,0 +1,348 @@
+* {
+  max-width: 350px;
+}
+.button,
+button,
+input[type=button],
+input[type=submit] {
+  background-color: #aa00aa;
+  color: #ee00ee;
+  margin-left: 5px;
+  border: 1px solid #ee00ee;
+}
+input {
+  background-color: #000000 !important;
+  color: #ee00ee;
+  border-color: #ee00ee !important;
+  margin-right: 5px!important;
+}
+label {
+  color: #ee00ee;
+}
+input:focus {
+  border-color: #ee00ee !important;
+  -moz-box-shadow: 0 0 5px 3px rgba(238, 0, 238, 0.5) inset;
+  -webkit-box-shadow: 0 0 5px 3px rgba(238, 0, 238, 0.5) inset;
+  box-shadow: 0 0 5px 3px rgba(238, 0, 238, 0.5) inset;
+}
+input:hover {
+  -moz-box-shadow: 0 0 5px 3px rgba(238, 0, 238, 0.5);
+  -webkit-box-shadow: 0 0 5px 3px rgba(238, 0, 238, 0.5);
+  box-shadow: 0 0 5px 3px rgba(238, 0, 238, 0.5);
+}
+.button:hover,
+button:hover,
+input[type=button]:hover,
+input[type=submit]:hover {
+  border-color: #ee00ee;
+  -moz-box-shadow: 0 0 5px 3px rgba(238, 0, 238, 0.5);
+  -webkit-box-shadow: 0 0 5px 3px rgba(238, 0, 238, 0.5);
+  box-shadow: 0 0 5px 3px rgba(238, 0, 238, 0.5);
+  text-shadow: 2px 2px 3px #ee00ee;
+}
+body {
+  background-color: #000000;
+  font-size: 16px;
+}
+#submitButton {
+  margin-bottom: -30px;
+}
+#SongList .dataTables_scrollHeadInner {
+  padding: 0!important;
+}
+#SongList {
+  font-size: 16px;
+  overflow: auto;
+}
+.odd a {
+  color: #ee00ee;
+}
+.even a {
+  color: #ffffff;
+}
+#SongList thead tr:first-child {
+  display: none;
+}
+#SongList td {
+  cursor: pointer;
+  width: 33%!important;
+}
+.dataTable thead {
+  border-bottom: 0!important;
+}
+.dataTable {
+  margin: 0!important;
+  margin-top: 10px!important;
+}
+td {
+  padding: 3px!important;
+}
+th {
+  width: 33%!important;
+  font-size: 16px !important;
+  padding: 3px!important;
+  padding-top: 5px!important;
+  padding-bottom: 5px!important;
+  color: #ee00ee !important;
+  border-bottom: 1px solid #ee00ee !important;
+  border-top: 1px solid #ee00ee !important;
+}
+th.sorting_asc,
+th.sorting_desc {
+  color: #ee00ee !important;
+  background-color: transparent!important;
+}
+.odd TD {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+.even td {
+  background-color: #aa00aa !important;
+  color: #ffffff !important;
+}
+.dataTable .sorting_asc:after {
+  display: none;
+}
+.dataTable .sorting_desc:after {
+  display: none;
+}
+.request {
+  width: 100%;
+  border: 1px solid #ee00ee;
+  border-top-color: transparent;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+.request:hover {
+  -moz-box-shadow: rgba(238, 0, 238, 0.5) 0 0 5px 5px inset;
+  -webkit-box-shadow: rgba(238, 0, 238, 0.5) 0 0 5px 5px inset;
+  box-shadow: rgba(238, 0, 238, 0.5) 0 0 5px 5px inset;
+}
+.requestHeader {
+  height: 25px;
+  border-top: 0;
+  text-align: center;
+  line-height: 25px;
+  vertical-align: middle;
+  color: #ee00ee;
+  border-bottom: 1px solid #ee00ee;
+  border-collapse: collapse;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+}
+.selectedRequest .requestHeader {
+  height: 25px;
+  text-align: center;
+  line-height: 25px;
+  vertical-align: middle;
+  color: #ee00ee;
+}
+.request.upVoted .requestHeader {
+  color: #ee00ee;
+}
+.request.upVoted .requestHeader a {
+  color: #ee00ee;
+}
+.request.downVoted .requestHeader {
+  color: #ee00ee;
+}
+.request.downVoted .requestHeader a {
+  color: #ee00ee;
+}
+.selectedRequest.request {
+  border-width: 1px;
+  border-style: solid;
+  border-top-color: transparent;
+}
+.requestTitle {
+  display: inline-block;
+  height: 23px;
+  width: 112px;
+  background-color: transparent;
+  margin-top: -2px;
+  margin-right: 2px;
+}
+.selectedRequest .requestTitle {
+  color: #00eeee;
+  text-shadow: 0 0 5px #ee00ee;
+}
+.request.upVoted {
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-bottom: 1px solid #ee00ee;
+}
+.request.downVoted {
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-width: 1px;
+  border-bottom: 1px solid #ee00ee;
+}
+.requestBody {
+  line-height: 22px;
+  vertical-align: middle;
+  padding-left: 3px;
+  padding-right: 3px;
+  display: inline;
+}
+.requestText {
+  cursor: pointer;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  font-size: 16px;
+  width: 284px;
+  margin-top: -2px;
+  color: #ee00ee;
+}
+.selectedRequest .requestText {
+  color: #ee00ee;
+}
+.request.downVoted .requestText {
+  color: #ff0000;
+}
+.request.upVoted .requestText {
+  color: #00ff00;
+}
+.vote {
+  cursor: pointer;
+  display: inline-block;
+  color: #aaaaaa;
+  width: 88px;
+  background-color: #aa00aa;
+  height: 23px;
+  padding-top: 3px;
+  margin: 0;
+  border-bottom: 1px solid #aa00aa;
+}
+.vote.inactive {
+  color: #aaaaaa !important;
+}
+.vote:visited {
+  color: #e1e1e1;
+}
+.downVote {
+  float: right;
+  color: #aaaaaa;
+  text-align: right;
+  padding-right: 3px;
+  -webkit-border-top-left-radius: 25px;
+  border-top-left-radius: 25px;
+  border-left: 1px solid #ee00ee;
+  border-top: 1px solid #ee00ee;
+  -webkit-border-top-right-radius: 3px;
+  border-top-right-radius: 3px;
+}
+.upVote {
+  float: left;
+  color: #aaaaaa;
+  text-align: left;
+  padding-left: 3px;
+  -webkit-border-top-right-radius: 25px;
+  border-top-right-radius: 25px;
+  border-right: 1px solid #ee00ee;
+  border-top: 1px solid #ee00ee;
+  -webkit-border-top-left-radius: 3px;
+  border-top-left-radius: 3px;
+}
+.disabled {
+  color: #aaaaaa;
+}
+.upVote.active {
+  color: #00ff00 !important;
+}
+.downVote.active {
+  color: #ff0000 !important;
+}
+.removeRequest {
+  height: 14px;
+  width: 14px;
+  line-height: 10px;
+  font-size: 10px;
+  vertical-align: middle;
+  float: right;
+  color: #ee00ee;
+  text-align: center;
+  cursor: pointer;
+  margin-right: 2px;
+}
+.removeRequest:hover {
+  background-color: #ff0000;
+  text-decoration: none;
+  color: #000000;
+}
+.songLinkA {
+  width: 100%;
+  height: 100%;
+}
+#Message {
+  font-size: 16px;
+  color: #ee00ee;
+}
+/* Scrollbars */
+::-webkit-scrollbar {
+  margin-right: -10px;
+  width: 3px!important;
+}
+::-webkit-scrollbar-track:vertical {
+  background-image: linear-gradient(to right, #330066 0%, #ffffff 50%, #330066 100%) !important;
+}
+/* the new scrollbar will have a flat appearance with the set background color */
+::-webkit-scrollbar-track:horizontal {
+  background-image: linear-gradient(to bottom, #330066 0%, #ffffff 50%, #330066 100%) !important;
+}
+/* the new scrollbar will have a flat appearance with the set background color */
+/* this will style the thumb, ignoring the track */
+::-webkit-scrollbar-thumb:horizontal {
+  border: 1px solid transparent;
+  background-color: #330099;
+  background-image: linear-gradient(to bottom, #000000, rgba(255, 255, 255, 0.5) 50%, #000000);
+  background-size: 2px 100%;
+}
+::-webkit-scrollbar-thumb:vertical {
+  border: 1px solid transparent;
+  background-color: #330099 !important;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  background-image: linear-gradient(to left, #000000, rgba(255, 255, 255, 0.5) 50%, #000000) !important;
+  background-size: 100% 2px!important;
+}
+/* this will style the thumb, ignoring the track */
+::-webkit-scrollbar-button {
+  border: 1px solid #330099;
+  background-image: radial-gradient(circle, #6a6a6a, #000000);
+  color: white;
+}
+/* optionally, you can style the top and the bottom buttons (left and right for horizontal bars) */
+::-webkit-scrollbar-corner {
+  background-color: #000000;
+}
+.heading {
+  background-color: #000000 !important;
+  color: #ee00ee !important;
+  border: 0!important;
+}
+.accordion > .frame > .heading:before {
+  display: none;
+}
+.content {
+  background-color: #000000 !important;
+  color: #ee00ee !important;
+  font-size: 16px;
+}
+.question {
+  border: 0;
+  margin-left: -15px;
+}
+.outerTableWrapper {
+  width: 100%;
+  overflow: hidden;
+}

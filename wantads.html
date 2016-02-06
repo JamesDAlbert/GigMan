@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-GB">
+<head>
+    <title>GigMan - Want Ads</title>
+   
+    <link href="content/css/metro-icons.css" rel="stylesheet"/>
+    <link href="content/css/metro.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/ads.css" />
+
+    <script runat="server" src="scripts/jquery.js"></script>
+    <script runat="server" src="Scripts/jquery.datatables.min.js"></script>
+    <script runat="server" src="scripts/metro.js"></script>
+    <script runat="server" src="js/utilities.js"></script>
+    <script runat="server" src="js/datarequest.js"></script>
+    <script runat="server" src="scripts/jss.min.js"></script>    
+
+    <script runat="server" src="Scripts/jlinq.js"></script>
+    <script runat="server" src="js/WantAds.js"></script>
+    <style>
+        .charm-closer {
+            display:none;
+        }
+    </style>
+
+</head>
+<body class="wa-bg">
+<div id="body">
+    <div id="wantAdHeader">
+        <div id="impContent">
+        <div id="header" class="wa-title-background">
+            <a href="index.html" title="GigMan Home"><img src="Images/logo.jpg" alt="GigMan" style="padding:0;position:absolute;" /></a>
+            <div>
+            <div id="leaderboard"></div>
+            <label class="switch lightSwitch"> <span class="charmLabel"></span> 
+                <a href="#" id="waLoginLink"></a>
+                <a href="#" id="logoutLink">Log out</a>
+                <a href="#" class="createAdLink">Create/Edit an ad</a><br /><br />              
+            </label></div><span class="wantAdTitle">Want Ads</span>
+        </div>
+        <div id="searchBar">
+            <span>Search</span>&nbsp;
+            <input id="searchText" type="text" class="wantAdSearchText" /> &nbsp;
+            <div id="adTypeContainer" style="display:inline"></div>
+            <button id="search" class="waButton buttonColor"><span class="mif-search" style="font-size:smaller"></span></button>         
+        </div>
+    </div>
+    </div>
+    <div id="middleAds">
+        <div class="wa-title-background"><span style="font-weight:bold">Newest Ads</span></div>
+        <div id="recentAds">
+        </div>
+    </div>
+    <div id="main" style="position:absolute">
+        <div id="left">
+            <div id="navPanelAds"></div>
+        </div>
+        <!-<-div id="content-2">-->
+            <div id="middle" class="navContainer">
+                <table id="navTable">
+                    <thead>
+                        <tr><td colspan="2" class="navTitle wa-title-background">Wanted</td>
+                            <td colspan="2" class="navTitle wa-title-background">Available</td></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="wantedLeft" style="vertical-align:top"></td>
+                            <td id="wantedRight" style="vertical-align:top"></td>
+                            <td id="availableLeft" style="vertical-align:top"></td>
+                            <td id="availableRight" style="vertical-align:top"></td></tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div id="sideBoard">
+                <div id="sideboardAds"></div>
+            </div>
+        <!--</div> -->
+    </div>
+    <div id="footer" class="wa-title-background">Copyright &copy; 2015 James Albert</div>
+</div>
+
+    <div id="loginCharm" class="wa-charm" data-position="left" data-role="charm" style="width:40%;max-width:410px;">
+        <div style="float:right">            
+            <button class="square-button small-button buttonColor OpenEditorPanel" id="CloseLoginPanel" title="Close"><span class="mif-cross" style="font-size:smaller;"></span></button>
+        </div>
+        <div style="float:left;width:100%">
+            <br /><span class="charmLabelBold">Login</span><br />
+            <div class="input-control modern text myModernInput" style="width:49%">
+                <input type="text" style="color:black" placeholder="Username" id="Username"/>
+                <span class="label">Username</span>
+                <span class="informer">Username</span>
+            </div>
+            <div class="input-control modern password myModernInput iconic password" style="width:49%">
+                <span class="icon icon-right mif-lock"></span><input type="password" style="color:black" placeholder="Password" id="Password"/>
+                <span class="label">Password</span>
+                <span class="informer">Password</span>
+            </div><br /><br />
+            <button class="button buttonColor" style="margin-left:75px;width:150px" id="Login"><span class="mif-enter"></span> Login</button><br /><br />
+            <span class="charmLabel" id="loginError"></span>
+        </div>                
+    </div>
+    <div id="editorCharm" class="wa-charm" data-role="charm" data-position="left" style="width:100%;max-width:800px;border-right:1px solid #dddddd">
+        <div>
+             <button class="square-button small-button buttonColor helpButton" data-topic="songeditor" title="Help for Ad Editor"><span class="mif-question"></span></button>
+             <button class="square-button small-button buttonColor createAdLink" id="CloseEditorPanel" title="Close ad editor."><span class="mif-cross"></span></button>
+        </div>
+        <iframe id="editorContainer" class="panelContainer" src="newAd.html" style="overflow-y:auto"></iframe>
+    </div>
+</body>
+</html>

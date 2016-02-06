@@ -1,0 +1,430 @@
+@dark: #1d1d1d;
+@light: #f1f1f1;
+@midc: average(@dark,@light);
+@textColor: #4784B4;
+@requestBackground: #00acca;
+@requestSelectedBackground: #00cfcf;
+@requestColor: @dark;
+@buttonColor: @textColor;
+@border: 1px #cccccc solid;
+@border-radius: 3px;
+@max-width: 100%;
+@today-number-color:yellow;
+@danger:fade(red,75%);
+@calendar-header-background:fade(@light,75%);
+
+.buttonColor {
+    background-color: @requestSelectedBackground!important;
+    color: contrast(@requestSelectedBackground)!important;
+}
+
+input, select {
+    -moz-border-radius: @border-radius;
+    -webkit-border-radius: @border-radius;
+    border-radius: @border-radius;
+    border: @border;
+}
+
+button {
+    .buttonColor;
+    -moz-border-radius: @border-radius;
+    -webkit-border-radius: @border-radius;
+    border-radius: @border-radius;
+}
+
+body {
+    width: 100%!important;
+    height: 100%;
+    background-color: @light;
+    max-width:@max-width;
+    word-wrap:break-word!important;
+    word-break:normal;
+    overflow:hidden;
+}
+
+.reqheader {
+    width: @max-width;
+    max-width: @max-width;
+    display:inline-block;
+    font-size:20px;
+    height:45px;
+    background-color:@calendar-header-background;
+    margin-left:5px;
+}
+#eventCharm {
+    margin-top:-5px;
+    padding:5px!important;
+    background-color:@light;
+    color:@dark;
+}
+#eventTitle{
+    font-weight:bold;
+    font-size:larger;
+}
+.charm {
+    background-color: @light;
+    width: @max-width!important;
+    top:50px!important;
+    padding:0!important;
+    border-top:1px solid @textColor;
+}
+.charm-closer:hover {
+    color:@light;
+    background-color:@danger;
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    margin-top: 5px;
+    max-width:@max-width;
+}
+
+a {
+    color: @textColor;
+}
+
+    a:visited {
+        color: @textColor;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+.headerTitle {
+    color: @textColor;
+}
+.linkContainer a {
+    font-size:smaller;
+}
+
+.content {
+    width: @max-width!important;
+    max-width: @max-width!important;
+}
+
+.listData {
+    padding-top: 10px !important;
+    width: 100%;
+    max-width: @max-width;
+    overflow: auto;
+}
+
+.songVoteLink {
+    color: @dark !important;
+}
+
+    .songVoteLink :visited {
+        color: @dark;
+    }
+
+.songVote {
+    width: 25px;
+}
+
+.intro {
+    padding-left: 10px !important;
+    padding-top: 20px !important;
+}
+
+.selectedRequest {
+}
+
+.requestLabel {
+    color: @light;
+    font-weight: normal;
+    height: 19px;
+    width: 150px;
+    position: absolute;
+    background-color: @requestBackground;
+    padding-left: 5px;
+    margin-top: 0px;
+    border-left: 1px solid @requestSelectedBackground;
+    cursor: pointer;
+    -moz-border-radius: @border-radius;
+    -webkit-border-radius: @border-radius;
+    border-radius: @border-radius;
+}
+
+.requestLabelSelected {
+    color: @requestColor;
+    font-weight: bold;
+    background-color: @requestSelectedBackground!important;
+}
+
+.requestLabel:after {
+    -moz-border-radius: @border-radius;
+    -webkit-border-radius: @border-radius;
+    border-radius: @border-radius;
+    display: block;
+    content: " ";
+    width: 100px;
+    height: 22px;
+    top: 0;
+    position: absolute;
+    right: -29px;
+    -ms-transform: skewX(45deg);
+    -webkit-transform: skewX(45deg);
+    -moz-transform: skew(45deg);
+    -o-transform: skew(45deg);
+    transform: skewX(45deg);
+    background-color: @requestBackground;
+    z-index: -1;
+    cursor: pointer;
+}
+
+.requestLabelSelected:after {
+    display: block;
+    content: " ";
+    width: 100px;
+    height: 22px;
+    top: 0;
+    position: absolute;
+    right: -29px;
+    -ms-transform: skewX(45deg);
+    -webkit-transform: skewX(45deg);
+    -moz-transform: skew(45deg);
+    -o-transform: skew(45deg);
+    transform: skewX(45deg);
+    background-color: @requestSelectedBackground;
+    z-index: -1;
+    cursor: pointer;
+}
+
+.request {
+    color: @light;
+    padding: 3px;
+    margin-top: 0;
+    background-color: @requestBackground;
+    border: 1px solid @requestSelectedBackground;
+    border-top: 0;
+    border-right: 0;
+    width: 100%;
+    min-width: 400px;
+    cursor: pointer;
+    -moz-border-radius: @border-radius;
+    -webkit-border-radius: @border-radius;
+    border-radius: @border-radius;
+}
+
+.requestSelected {
+    background-color: @requestSelectedBackground;
+    color: @dark;
+}
+
+.requestSong {
+    background-color: @requestBackground;
+}
+
+.requestSongSelected {
+    background-color: @requestSelectedBackground;
+}
+
+.requestContainer {
+    width: 30%;
+    display: inline-block;
+    margin-top: 20px;
+    margin-right: 5px;
+}
+.SongList {
+    font-size:smaller;
+    width:@max-width!important
+}
+th {
+    background-color: @requestBackground!important;
+    color: @light!important;
+}
+.framed {
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
+    padding: 0;
+    margin: 0;
+    width: @max-width;
+}
+tbody tr:nth-child(odd) {
+    background-color: @requestBackground!important;
+    color: @light!important;
+}
+
+    tbody tr:nth-child(odd) a {
+        background-color: @requestBackground!important;
+        color: @light!important;
+    }
+
+tbody tr:nth-child(even) {
+    background-color: @light!important;
+    color: @dark!important;
+}
+
+    tbody tr:nth-child(even) a {
+        background-color: @light!important;
+        color: @dark!important;
+    }
+.eventLink{
+    color:@dark;
+}
+
+// calendar
+        .gmEvent {
+            border:1px solid @midc;
+            background-color:@dark;
+            color:@light;
+            padding:2px
+        }
+        .gmEventDisabled {
+            border:1px solid @midc;
+            background-color:@dark;
+            color:@light;
+            padding:2px
+        }
+        h2, h3 {
+            font-size:smaller;
+            color:@midc;
+        }
+
+        button span {
+            font-size:smaller!important;
+        }
+            button:hover {
+                border:1px solid @midc
+            }
+        
+        .fc-toolbar {
+            height:30px!important;
+            line-height:16px;
+            margin-bottom:0
+        }
+        #calendar {
+            background-color:transparent;
+
+        }
+        #calendar a:visited
+        {
+            color:@light;
+        }
+        #calendar a:hover
+        {
+            background-color:@requestSelectedBackground;
+            color:@dark;
+        }
+        #calendar table {
+            background-color:transparent;
+            border-collapse:collapse;
+        }
+        #calendar th{
+            background-color:@textColor!important;
+        }
+            #calendar .fc-header {
+                border:1px solid @midc;
+                color:@light
+            }
+            #calendar .fc-day-number {
+                border-left:1px solid @midc;
+                border-right:1px solid @midc;
+                color:@dark;
+            }
+            td .fc-day-number.fc-today{
+                color:@today-number-color!important;
+            }
+            .fc-close.fc-icon.fc-icon-x {
+                color:white!important;
+            }
+            .fc-close.fc-icon.fc-icon-x:hover {
+                background-color:@danger;
+            }
+            #calendar .fc-event-container {
+                border-left:1px solid @midc;
+                border-right:1px solid @midc;
+            }
+            #calendar TD {
+                border-left:1px solid @midc;
+                border-right:1px solid @midc;
+            }
+            #calendar .fc-widget-content {
+                border-top:1px solid @midc;
+
+            }
+        .fc-body TD.fc-today {
+            background-color:@textColor!important;
+            color:white
+        }
+        .fc-content-skeleton .fc-today {
+            color:red
+        }
+        .fc-state-highlight {
+            background-color:@dark!important;
+            color:red;
+        }
+       .fc-day-number.fc-other-month{
+           color:@dark!important;
+           opacity:.81
+       } 
+       .fc-widget-header {
+           background-color:@textColor!important;
+           color:white!important;
+           padding:2px!important;
+       }
+       .fc-event-container {
+           background-color:transparent;
+       }
+       .calendar-dropdown{
+           background-color:transparent;
+       }
+       .calendar-header{
+           background-color:transparent;
+       }
+       .week-days {
+           background-color:@textColor!important;
+           color:@dark;
+       }
+       .day-of-week{
+           margin:0!important;
+       }
+       .calendar-row {
+           margin:0!important;
+       }
+        .empty {
+            margin:0!important;
+        }
+       
+       .day {
+           border:1px solid red!important;                  
+           margin:0!important;
+       }
+       .day a {
+           color:@light
+       }
+       .fc-more {
+           color:white!important;
+       }
+       .fc-view-container {
+           height:700px;
+           margin-top:15px;
+       }
+       .fc-day-grid-container.fc-scroller
+       {
+           height:700px!important;
+           overflow:visible;
+       }
+       .fc-widget-content {
+           border:0;
+       }
+       .fc-center h2 {
+           margin-top:5px;
+           font-size:16px;
+       }
+
+* {
+    margin: 0;
+}
+
+.members {
+    overflow:auto;
+}
+
+.gm-charm
+{
+
+}

@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link id="gmStyle" href="css/irequest.css" rel="stylesheet"/>
+    <script src="scripts/jquery.min.js"></script>
+    
+</head>
+<body class="framed">
+    <div id="interface">
+        <p>
+            <span id="bandName" style="font-weight:bold;font-style:italic"></span>? Nobody here by that name!<br />
+            Maybe they don't know about GigMan Request yet.  <br />
+            You should let them know!<br />              
+        </p>
+    </div>
+    <script>
+        $("#bandName").text(sessionStorage.getItem("band"));
+    </script>
+    <script>
+        $("#gmStyle").prop("href",getSession("colorscheme"));
+    </script>
+</body>
+</html>

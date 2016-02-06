@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="content/css/metro.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="Content/css/metro-icons.min.css" />
+    <link id="gmStyle" href="css/gigman-neon.css" rel="stylesheet"/>
+    <script src="Scripts/jquery.min.js"></script>
+
+    <script runat="server" src="js/utilities.js"></script>
+    <script runat="server" src="js/dataRequest.js"></script>
+    
+    <script runat="server" src="js/newaccount.js"></script>
+    <style>
+        select {
+            border-radius:3px;
+        }
+    </style>
+</head>
+<body style="width:100%">
+    <span class="charmLabelBold">Create a GigMan account</span><br />
+    <br />
+    <div class="input-control modern text myModernInput" style="width:49%">
+        <input type="text" style="color:white" placeholder="* Username" id="Username"/>
+        <span class="label">* Username</span>
+        <span class="informer">Username - required</span>
+    </div>
+    <div class="input-control modern text myModernInput" style="width:49%">
+        <input type="text" style="color:white" placeholder="* First name" id="FirstName"/>
+        <span class="label">* First Name</span>
+        <span class="informer">First Name - required</span>
+    </div>
+    <div class="input-control modern text myModernInput" style="width:49%">
+        <input type="text" style="color:white" placeholder="* Last name" id="LastName">
+        <span class="label">* Last Name</span>
+        <span class="informer">Last Name - required</span>
+    </div>
+    <div class="input-control modern text myModernInput" style="width:49%">
+        <input type="text" style="color:white" placeholder="* Email address" id="Email"/>
+        <span class="label">* Email Address</span>
+        <span class="informer">Email Address - required</span>
+    </div>
+    <div class="input-control modern password iconic myModernInput" data-role="input">
+        <span class="icon icon-right mif-lock"></span><input type="password" placeholder="* Password" id="password" style="color:white"/>
+        <span class="label">* Password</span>
+        <span class="informer">Please enter your password</span>        
+    </div>
+    <div class="input-control modern password iconic myModernInput" data-role="input">
+        <span class="icon mif-lock"></span><input type="password" placeholder="* Re-nter Password" id="password2" style="color:white"/>
+        <span class="label">* Re-enter Password</span>
+        <span class="informer">Re-enter your password</span>        
+    </div>
+    <br />
+    <div id="instrumentPanel" style="min-width:49%;display:inline-block;">
+        Instruments (CTL-click to select more than one)
+        <div style="margin-top:5px;"><select multiple="multiple" id="Instruments" name="Instruments" style="width:100%;" data-placeholder="Your primary instrument(s) &#9660;"><option></option></select></div>
+    </div><br /> 
+    <hr />
+
+    <div id="address">
+        <div id="countryPanel" style="width:100%;">
+            <select id="country" style="width:49%;" data-placeholder="Country"></select>
+            <select id="state" style="width:49%;" data-placeholder="State"></select>
+        </div>
+ 
+        <div class="input-control modern iconic myModernInput" data-role="input">
+            <input type="text" style="color:white" id="city" placeholder="City"/>
+            <span class="label">City</span>
+            <span class="informer">City</span>        
+        </div>        
+        <div class="input-control modern iconic myModernInput" data-role="input">
+            <input type="text" style="color:white" id="postalCode" placeholder="Postal Code"/>
+            <span class="label">Postal Code</span>
+            <span class="informer">Postal Code</span>        
+        </div>
+    </div>
+
+
+    <div id="Error" style="background-color:maroon;color:white;padding:3px;display:none"></div>
+    <br />
+    <button type="submit" class="button buttonColor"><span class="mif-floppy-disk fg-black" style="float:left;margin-top:5px"></span>&nbsp;&nbsp;Save Changes</button>
+    <script>
+        var scheme = getSession("colorscheme");
+
+        if (scheme == "hic") {
+            $('link[id="gmStyle"]').attr('href', 'css/gigman-hic.css');
+        }
+        else if (scheme == "classic") {
+            $('link[id="gmStyle"]').attr('href', 'css/gigman-classic.css');
+        }
+        else if (scheme == "neon") {
+            $('link[id="gmStyle"]').attr('href', 'css/gigman-neon.css');
+        }
+    </script>
+</body>
+</html>

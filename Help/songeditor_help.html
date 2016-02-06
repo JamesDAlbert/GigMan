@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link id="gmStyle" rel="stylesheet" href="../css/gigman-neon.css" />
+    <link rel="stylesheet" href="../Content/css/metro.css" />
+    <script src="../Scripts/jquery.js"></script>
+ </head>
+<body class="help">
+    <label>Song Editor</label>
+    <p>
+        The song editor enables you to add to or edit a song in your song list.<br /><br />
+        <span>Genre: </span>A song can be categorized by genre by selecting a genre from the frop down.<br />
+        </p>
+        <p><span>Key: </span>The key of the song can be specified here. The key is used in the Lyrics view page as a baseline for transposing chords, and for this purpose is generally just the first chord of the song.<br />
+        </p><p><span>Familiarity: </span>The familiarity is just another way to categorize songs, with four selections.<br />
+        </p><p><span>Tempo: </span>The normal speed of the song; there are five selections<br /> 
+            </p><p><span>Public: </span>If the current artist has a GigMan Request membership, and the switch is set to <b><i>Public</i></b>, audience members will see the song in the artists song list on their GigMan Request page.<br />
+        </p><p><span>Title: </span>The title of the song. As you type, a dynamic hint list is displayed, showing possible duplicates.  This field is required.
+        </p><p><span>Artist: </span>The original artist for the song. As you type, a dynamic hint list is displayed, showing possible duplicates.  Multiple artists can be added by separating them with a '/' character.  This field is required.
+        </p><p><span>Category: </span>Another way to categorize your songs. Categories can be chained together by separating them with a '/' character.
+        </p><p><span>Sample URL: </span>Use this field to link to a recording of the song.  The URL must refer to a location on the web.
+        </p><p><span>Lyrics: </span>Lyrics and chords can be entered here.  Separate blocks of text with two carriage returns (hit enter twice at the end of the line).<br />
+            You can specify four types of lyric blocks: Verse, Alternate Verse, Bridge and Chorus.  To mark a chous, place 'Chorus' or 'Ch' on a line above the block.  Similarly, mark a bridge with a "Br' or 'Bridge'.<br />
+            All other blocks are considered verses - alternate verses are automatically identified.<br />
+        </p><p><span>Chords:</span> Chords can be entered here as well.  There are two types of chord formats:<br />
+            <span class="subTopic">Above Line: </span>Prefix the line with a '~' character and uses spaces to separate the chords.<br />
+            <span class="subTopic">In-line: </span>Prefix each chord with a '|' character, with a space after the chord.<br />
+    </p><br /><br />
+</body>
+    <script>
+        var scheme = sessionStorage.getItem("colorscheme");
+
+        if (scheme == "hic") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.css');
+        }
+        else if (scheme == "classic") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.css');
+        }
+        else if (scheme == "neon") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.css');
+        }
+    </script>
+</html>

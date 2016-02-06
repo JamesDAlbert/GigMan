@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="content/css/metro.css" rel="stylesheet"/>
+    <link href="content/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="content/css/metro-icons.css" rel="stylesheet"/>
+    <link id="gmWidgetStyle" href="css/messageWidget-neon.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="Content/css/fixedHeader.dataTables.min.css" />
+    <link id="gmStyle" href="css/messagewidget-neon.css" rel="stylesheet"/>
+
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/jquery.widget.min.js"></script>
+    <script src="scripts/metro.js"></script>
+    <script runat="server" src="js/utilities.js"></script>
+    <script src="scripts/jlinq.js"></script>
+    <script runat="server"  src="js/datarequest.js"></script>
+    <script runat="server"  src="js/irequest.js"></script>
+    <script runat="server"  src="js/gmrmessages.js"></script>
+    <script src="scripts/jquery.datatables.min.js"></script>
+    <script src="Scripts/dataTables.fixedHeader.min.js"></script>
+    <script src="scripts/jQuery.html5.file.upload.js"></script>
+    
+</head>
+
+<body>
+    <label id="message"></label>
+    <div id="interface">        
+        <label>Your Message Topic</label><br /><br />
+        <select id="messages">
+        </select><br /><br />
+        <input type="text" maxlength="160" id="messageBody" placeholder="Your message here (160 characters max)" style="width:100%" /> <br /><br />
+        <label>Add A Photo!</label>
+        <iframe id="uploadDiv" class="uploadDiv" src="" style="border:0!important;overflow:visible">
+            
+        </iframe>
+
+        <span id="messageMessage" style="color:red"></span>
+        <div class="ctls">
+            <button class="button" id="submitButton"><span class="mif-mail"> Send!</span></button>&nbsp;
+            <div id="photo" style="float:right"><img id="pImg" /></div>
+        </div><br class="br"/><br class="br" /><br class="br"/>
+
+        <label>Send To</label><br /><br />
+        <table id="members" class="members" style="font-size:16px">
+        </table>
+    </div>
+    <br /><br />
+    <script>
+        var t = getSession("colorscheme");
+        t = t.substring(t.lastIndexOf("-"));
+        $("#gmWidgetStyle").prop("href", "css/messageWidget-" + t + ".min.css");
+    </script>
+</body>
+</html>

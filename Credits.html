@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+
+    <link rel="stylesheet" href="Content/css/metro.css" />
+    <link rel="stylesheet" href="Content/css/metro-icons.min.css" />
+    <link id="gmStyle" rel="stylesheet" href="css/gigman-neon.css" />
+    <script src="Scripts/jquery.js"></script>
+    <script src="Scripts/metro.js"></script>
+    <script src="js/dataRequest.js"></script>
+    <script src="scripts/jss.min.js"></script>
+    <script runat="server" src="js/gigman.js"></script>
+
+    <style>
+     body { font-size:larger; }
+        
+        p { font-size:smaller;}
+        tr td:first-child{
+            font-style:italic;
+            font-weight:bold;
+            text-align:right
+        }
+        tr td + td{
+            padding-left:5px;
+        }
+    </style>
+</head>
+<body class="gm-bg" id="credits">
+    <div class="indexHeader" style="height:110px;line-height:110px;vertical-align:middle">
+    <div style="float:left">
+        <a href="index.html"><div id="logo"></div></a>
+    </div>
+    <button id="OpenSidePanel" style="margin-left:5px" class="square-button small-button buttonColor" title="Open side navigation panel."><span class="mif-menu mif-2x"></span></button>&nbsp;
+            <button id="Logout"  style="margin-top:3px" class="square-button small-button buttonColor" title="Log out."><span class="mif-exit mif-2x"></span></button>&nbsp;
+        <button id="Home"  style="margin-top:3px" class="square-button small-button buttonColor" title="Home."><span class="mif-home mif-2x"></span></button>
+</div>
+
+    <!-- song editor -->
+    <div id="editorCharm" class="gm-charm" data-role="charm">
+        <div><button id="CloseEditorPanel" class="square-button small-button buttonColor"  title="Close song editor."><span class="mif-cross" style="font-size:smaller"></span></button></div>
+        <iframe id="editorContainer" class="panelContainer" src="SongEditor.html" style="overflow-y:auto"></iframe>         
+    </div>
+    <div id="navigationCharm" class="gm-charm" data-position="left" data-role="charm">
+        <div><button id="CloseSidePanel" class="OpenEditorPanel small-button square-button buttonColor" style="margin-bottom:5px" title="Close settings editor."><span class="mif-cross"></span></button>
+            <button class="CloseSettingsPanel square-button small-button buttonColor" title="Open side navigation panel."><span class="mif-cogs"></span></button>&nbsp;
+            <button id="OpenEditorPanel" class="OpenEditorPanel square-button small-button buttonColor" title="Open side navigation panel."><span class="mif-pencil"></span></button>&nbsp;
+        </div>
+        <iframe id="settingsContainer" class="panelContainer" src="navpanel.html" style="overflow-y:auto"></iframe>         
+    </div>
+    <div id="settingsCharm" class="gm-charm" data-position="left" data-role="charm">
+        <div>
+            <button class="CloseSettingsPanel OpenEditorPanel small-button square-button buttonColor" style="margin-bottom:5px" title="Close settings editor."><span class="mif-cross"></span></button>
+            <span class="charmTitle">Site Settings</span>
+        </div>
+        <iframe id="Iframe1" class="panelContainer" src="sitesettings.html" style="overflow-y:auto"></iframe>         
+    </div>
+    <div class="credFrame" style="margin-left:80px;margin-top:100px;padding:10px;width:40%">
+        <table style="border-spacing:5px" class="credits">
+            <tr><td colspan="2" style="font-weight:normal;text-align:left;font-style:normal;">
+                <p>Gigman was created and is maintained by James Albert as a response to his evaporating memory.<br />  
+                Many thanks to the following folks and their products for making the creation of this site a whole lot less tedious:</p></td></tr>
+            <tr><td>Logo:</td><td><a href="http://www.pablopicasso.org/old-guitarist.jsp#prettyPhoto[image1]/0/" target="_blank">The Old Guitarist</a> by <a href="http://www.picasso.fr/us/picasso_page_index.php" target="_blank">Pablo Picasso</a></td></tr>
+            <tr><td>DOM Man:</td><td><a href="http://jquery.com/" target="_blank">jQuery</a>, <a href="https://www.datatables.net/" target="_blank">jQuery Datatables</a>, <a href="https://jqueryui.com/" target="_blank">jQuery UI</a></td></tr>
+
+            <tr><td>Inspiration:</td><td>My band, <a href="https://www.facebook.com/Ophmi.Rocker" target="_blank">Ophmi Rocker</a></td></tr>
+            <tr><td>Color Parsing</td><td><a href="http://www.phpied.com/rgb-color-parser-in-javascript/" target="_blank">Stoyan Stefanov RGB</a></td></tr>
+
+            <tr><td>Metro Styling:</td><td> <a href="https://metroui.org.ua/" target="_blank">Metro UI</a> Front-end CSS</td></tr>
+
+            <tr><td>Tree View Lists:</td><td><a href="https://www.jstree.com" target="_blank">jsTree</a> jQuery plugin</td></tr>
+            <tr><td>Calendar Styling</td><td><a href="http://fullcalendar.io/" target="_blank">Full Calendar</a></td></tr>
+            <tr><td>Idea Bounce Wall:</td><td><a href="https://www.youtube.com/user/myvlogable" target="_blank">James Munro</a></td></tr>
+            <tr><td>Tab Chart Display:</td><td><a href="http://jtab.tardate.com/" target="_blank">jTab Notation</a></td></tr>
+            <tr><td>Vector Graphics JS:</td><td><a href="http://raphaeljs.com/" target="_blank">Raphaël</a></td></tr>
+            <tr><td>Data List Manipulation</td><td><a href="http://hugoware.net/projects/jlinq" target="_blank">jLinq</a></td></tr>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link id="gmStyle" rel="stylesheet" href="../css/gigman-neon.css" />
+    <link rel="stylesheet" href="../Content/css/metro.css" />
+    <script src="../Scripts/jquery-2.1.4.min.js"></script>
+</head>
+<body class="help">
+    <label class="charmLabelBold">GigMan Request Messages</label>
+    <p>
+        Audience members can make requests of the artist in near-real time.<br /><br />
+
+        The artist makes a list of songs publically available (see the Song Editor help topic to understand the public option), from which an audience member can make selections for requests.<br /><br />
+        If downvotes is turned on (see the Artist Profile editor help topic), each request can be either an upvote or a downvote.  If downvotes is turned off, each request is always an upvote.  Downvotes can be useful for determining the popularity of songs with your audience.<br /><br />
+        The artist can choose to hide the Composer and Categories fields of hte public song list (see the Artist Profile editor help topic).<br /><br />
+        An aggregated view of the requests can be viewed in the navigation popout (<span class="mif-menu">) or the Dashboard area of the GigMan site.</span><br /><br />
+        The number of requests a single user can send in a 24-hour period can be set in the Artist Profile editor.
+    </p><br/><br />
+    <script>
+        var scheme = sessionStorage.getItem("colorscheme");
+
+        if (scheme == "hic") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.css');
+        }
+        else if (scheme == "classic") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.css');
+        }
+        else if (scheme == "neon") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.css');
+        }
+    </script>
+</body>
+</html>

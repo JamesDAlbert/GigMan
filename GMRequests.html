@@ -1,0 +1,346 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="content/css/metro.css" rel="stylesheet"/>    
+    <link href="content/css/metro-responsive.css" rel="stylesheet"/>
+    <link href="content/css/metro-icons.css" rel="stylesheet"/>
+    <link href="Content/css/jquery-ui.css" rel="stylesheet"/>
+    <link id="gmWidgetStyle" rel="stylesheet" href="css/requestWidget-neon.min.css" />
+    <link rel="stylesheet" href="Content/css/fixedHeader.dataTables.min.css" />
+    <link id="gmStyle" rel="stylesheet" href="css/requestWidget-neon.min.css" />
+
+    <script src="Scripts/jquery.min.js"></script>
+    <script src="Scripts/jquery-ui.min.js"></script>
+    <script src="scripts/jquery.datatables.min.js"></script>
+    <script src="Scripts/dataTables.fixedHeader.min.js"></script>
+    <script src="Scripts/jquery-ui-touch-punch.js"></script>
+    <script src="scripts/metro.js"></script>
+    <script src="Scripts/jlinq.js"></script>
+
+    <script runat="server" src="js/dataRequest.js"></script>  
+    <script runat="server" src="js/utilities.js"></script>
+
+    <style>
+        .request .disabled
+        {
+            opacity:.25;
+        }
+        body, html {
+            width:100%;
+            height:100%;
+            padding:0;
+            margin:0;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="accordion" data-role="accordion" data-close-any="false">
+        <div class="frame">
+            <div class="heading"><span id="helpOpener" class="mif-question mif-2x question"></span></div>
+            <div class="content" style="margin-top:-10px">
+                Tap a song from the list to add it to the request set.<br /><br />
+                Tap a request container to make it the current one - subsequent requests will go to that container.  Otherwise the next empty container becomes the target.<br /><br />
+                If available, tap the <span class="mif-thumbs-up"></span> the <span class="mif-thumbs-down"></span> buttons to change the request type.  The request type defaults to <span class="mif-thumbs-up">.</span><br /><br />
+                Tap the <b>Done!</b> button to send your request!<br /><br />
+                If you are returning, any previous requests you have made in this session are displayed.  Since they have already been sent, they cannot be removed or altered.
+            </div>
+        </div>
+    </div>
+    <div id="request1" class="request">
+        <div class="requestHeader"><div class="requestTitle">Request #1</div>
+                <a class="vote voteLink downVote mif-thumbs-down"></a>
+                <a class="vote voteLink  upVote mif-thumbs-up"></a>&nbsp;
+        </div>
+        <div class="requestBody">
+            <div class="requestText"></div>
+            <a class="removeRequest">X</a>
+        </div>
+    </div>
+    <div id="request2" class="request">
+        <div class="requestHeader"><div class="requestTitle">Request #2</div>
+                <a class="vote voteLink  downVote mif-thumbs-down"></a>
+                <a class="vote voteLink  upVote mif-thumbs-up"></a>&nbsp;
+        </div>
+        <div class="requestBody">
+            <div class="requestText"></div>
+            <a class="removeRequest">X</a>
+        </div>
+    </div>
+    <div id="request3" class="request">
+        <div class="requestHeader"><div class="requestTitle">Request #3</div>
+                <a class="vote voteLink  downVote mif-thumbs-down"></a>
+                <a class="vote voteLink  upVote mif-thumbs-up"></a>&nbsp;
+        </div>
+        <div class="requestBody">
+            <div class="requestText"></div>
+            <a class="removeRequest">X</a>
+        </div>
+    </div>
+    <div id="request4" class="request">
+        <div class="requestHeader"><div class="requestTitle">Request #4</div>
+                <a class="vote voteLink  downVote mif-thumbs-down"></a>
+                <a class="vote voteLink  upVote mif-thumbs-up"></a>&nbsp;
+        </div>
+        <div class="requestBody">
+            <div class="requestText"></div>
+            <a class="removeRequest">X</a>
+        </div>
+    </div>
+    <div id="request5" class="request">
+        <div class="requestHeader"><div class="requestTitle">Request #5</div>
+                <a class="vote voteLink downVote mif-thumbs-down"></a>
+                <a class="vote voteLink  upVote mif-thumbs-up"></a>&nbsp;
+        </div>
+        <div class="requestBody">
+            <div class="requestText"></div>
+            <a class="removeRequest">X</a>
+        </div>
+    </div>
+    <span id="Message">Tap a song below to add it to your requests.</span>
+    <div class="outerTableWrapper">
+        <table id="SongList" class="order_columns stripe pretty SongList" style="overflow:auto">
+            <thead>
+                <tr>
+                    <th class="songTitle">Title</th>
+                    <th class="songArtist">Composer</th>
+                    <th class="songCategory">Category</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot></tfoot>
+        </table>
+    </div>
+
+    <script>
+        var ipAddress = "";
+        ipAddress = getClientIP();
+        var counts;
+        var art = JSON.parse(getSession("artist"));
+
+        var sdta = songListPublic(art.ArtistID);
+        var counts = getCountFromIP(ipAddress, art.ArtistID+"");
+       
+        var curRequest = "";
+        
+            $("#gmStyle").prop("href", "css/request-" + getSession("colorscheme") + ".min.css");
+        
+        $(document).ready(function () {
+            var t = getSession("colorscheme");
+            t = t.substring(t.lastIndexOf("-"));
+            $("#gmWidgetStyle").prop("href", "css/requestWidget-" + t + ".min.css");
+
+            $(".request").click(function (e) {
+                e.stopPropagation();
+                $(".request").removeClass("selectedRequest");
+                curRequest = $(this)[0].id;
+                $(this).toggleClass("selectedRequest");
+            });
+            $(".voteLink").click(function (e) {
+                e.stopPropagation();
+                if ($(this).hasClass("disabled"))
+                    return;
+                if ($(this).hasClass("upVote")) {
+                    $(this).parent().parent().removeClass("downVoted");
+                    $(this).removeClass("inactive");
+                    $(this).addClass("active");
+                    $(this).parent().parent().addClass("upVoted");
+                    $(this).closest(".requestHeader").find(".downVote").addClass("inactive").removeClass("active");
+                    $(this).parent().parent().data("vote", "1");
+                }
+                else {
+                    $(this).parent().parent().removeClass("upVoted");
+                    $(this).removeClass("inactive");
+                    $(this).parent().parent().addClass("downVoted");
+                    $(this).addClass("active");
+                    $(this).closest(".requestHeader").find(".upVote").addClass("inactive").removeClass("active");
+                    $(this).parent().parent().data("vote", "-1");
+                }
+                $(this).parent().parent().removeClass("selectedRequest");
+            });
+            $(".removeRequest").click(function () {
+                $(this).parent().parent().removeClass("upVoted");
+                $(this).parent().parent().removeClass("downVoted");
+                $(this).parent().children(".requestText").text("");
+                
+                if ($(this).parent().parent().hasClass("selectedRequest"))
+                    curRequest = "";
+                $(".request").removeClass("selectedRequest");
+            });
+            $(document).on("click", ".songLinkA", function (e) {
+                e.preventDefault();
+                if ($(this).hasClass("disabled")) return;
+                setMessage("");
+                if (!selected($(this).data("songid")))
+                    addRequest(art, $(this).data("songid"), $(this).data("text"));
+                else setMessage("One request per song per 24-hour period.");
+            });
+
+            if (sdta.length == 0) {
+                $("#otherCharm").data("charm").open();
+                document.getElementById("contentContainer").src = "nodata.html";
+                disableRequests = true;
+                $("#requestLink").css("text-decoration", "none");
+            }
+
+            songList = $('#SongList').DataTable({
+                "aaData": sdta,
+                orderClasses: true,
+                "sDom": "f<'toolbar'>t",
+                paging: false,
+                responsive: true,
+                "bAutoWidth": true,
+                fixedHeader: true,
+                "sScrollX": "100%",
+                "sScrollY": "300px",
+                "bScrollAutoCss": false,
+                "oLanguage":
+                {
+                    "sSearch": "",
+                    searchPlaceholder: "Start typing..."
+                },
+                "columnDefs": [
+
+                {
+                    "orderable": true, "width": "33%", "targets": 0, "render": function (value, type, full) {
+                        return "<div class='songLinkA' data-text='" + escape(encodeURI(full.Title + ": " + full.Artist)) + "' data-songid='" + escape(full.ID) +"'>" + full.Title + "</div>";
+                    }
+                },
+                {
+                    "orderable": true, "width": "33%", "targets": 1, "render": function (value, type, full) {
+                        return "<div class='songLinkA' data-text='" + escape(encodeURI(full.Title + ": " + full.Artist)) + "' data-songid='" + escape(full.ID) + "'>" + full.Artist + "</div>";
+                    }
+                },
+                {
+                    "orderable": true, "width": "33%", "targets": 2, "render": function (value, type, full) {
+                        return "<div class='songLinkA' data-text='" + escape(encodeURI(full.Title + ": " + full.Artist)) + "' data-songid='" + escape(full.ID) + "'>" + full.Category + "</div>";
+                    }
+                },
+                ]
+            });
+            $('.dataTables_filter input').attr("placeholder", "Enter seach term here");
+            $('.dataTables_filter input').css({ "font-size": "16px", "width": "170px", "margin-right": "0", "margin-bottom": "-20px" });
+
+            $("div.toolbar").html('<button class="button small-button" id="submitButton"><span class="mif-checkmark"></span> Done!</button>').css({ "margin-top": "0", "width": "150px", "margin-bottom": "-66px" });
+            $(document).on("click", "#submitButton", function (e) {
+                e.stopPropagation();
+                counts = getCountFromIP(ipAddress, art.ArtistID + "");
+                if (counts.Songs.length >= art.MaxiRequests)
+                    $(this).addClass("disabled");
+                if ($(this).hasClass("disabled"))
+                    return;
+                var found = false, vFound = true;
+                $(".request").each(function (i, value) {
+                    var s = $(value).find(".requestText")[0].innerText;
+                    var weight = 1;
+                    if (!$(this).data("vote") && art.EnableDownvotes)
+                        vFound = false;
+                    else weight = $(this).data("vote");
+                    if (s.trim() != "" && !$(value).hasClass("disabled") && $(value).is(":visible")) {
+                        $(value).hide();
+                        iRequestCreate(art.ArtistID, $(this).data("songid"), weight, ipAddress);
+                        found = true;
+                    }
+                });
+                if (!found)
+                {
+                    $("#Message").text("No new requests to send!");
+                }
+                if (!vFound)
+                {
+                    $("#Message").text("You have made selections, but have not given the selections a vote.");
+                }
+            });
+
+            adjustView(art);
+        });
+        function selected(id) {
+            var i = 1;
+            for (i = 1; i < 6; i++) {
+                var r = $("#request" + i);
+                if (r.css("display") != "none") {
+                    if (r.data("songid") == id)
+                        return true;
+                }
+            }
+            return false;
+        }
+        function setMessage(msg) {
+            $("#Message").text(msg);
+        }
+
+        function adjustView(art) {
+            counts = getCountFromIP(ipAddress, art.ArtistID + "");
+            if (counts.Songs.length >= art.MaxiRequests)
+                $("#submitButton").hide();
+            if (!art.EnableDownvotes) {
+                $("a.vote").removeClass("mif-thumbs-up").removeClass("mif-thumbs-down").removeClass("voteLink");
+            }
+            var c = 0;
+            if (counts) {
+                if (counts.Songs.length >= art.MaxiRequests) {
+                    $("#submitButton").addClass("disabled").hide();
+                    $("#Message").text("You have made the maximum number of requests for the day.");
+                    $(".songLinkA").addClass("disabled");
+                }
+                for (var i = 0; i < counts.Songs.length; i++) {
+                    var s = jlinq.from(sdta).equals("ID", counts.Songs[i].SongID).select()[0];
+
+                    var reqID = addRequest(art, s.ID, s.Title + ": " + s.Artist, counts.Songs[i].Weight);
+                    $(reqID).find(".removeRequest").hide(); // don't let user remove previous requests
+                    $(reqID).find(".vote").addClass("disabled");
+                    $(reqID).addClass("disabled");
+                }
+            }
+
+            for (var i = (art.MaxiRequests+1)-c; i < 6; i++) {
+                $("#request" + i).hide();
+            }
+            if (!art.ShowCategories)
+                songList.column(2).visible(false);
+            if (!art.ShowArtist)
+                songList.column(1).visible(false);
+        }
+
+        function addRequest(art,songID, ttl, weight) {
+            if (!curRequest || curRequest == "") {
+                reqID = getFirstEmptyRequest();
+            }
+            else reqID = curRequest;
+            
+            $("#" + reqID).data("songid", songID);
+            $("#" + reqID + " .requestText").text(unescape(decodeURI(ttl)));
+            $("#" + reqID + " .requestText").prop("title",unescape(decodeURI(ttl)));
+
+            if (!art.EnableDownvotes || weight) {
+                var wgt = weight ? weight : 1;
+                $("#" + reqID).data("vote", wgt);
+                if (wgt > 0) {
+                    $("#" + reqID + " .upVote").addClass("upVoted").addClass("active");
+                    $("#" + reqID + " .downVote").removeClass("upVoted").removeClass("downVoted").addClass("inactive").removeClass("active");
+                }
+                else if (wgt < 0) {
+                    $("#" + reqID + " .downVote").addClass("downVoted").addClass("active");
+                    $("#" + reqID + " .upVote").removeClass("downVoted").removeClass("upVoted").addClass("inactive").removeClass("active");
+
+                }
+            }
+            return "#" + reqID;
+        }
+        function getFirstEmptyRequest() {
+            var i = 1;
+            for (i = 1; i < 6; i++) {
+                var r = $("#request" + i);
+                if (r.css("display") != "none" && !r.hasClass("disabled")) {
+                    if (r.find(".requestText").text().trim() == "")
+                        break;
+                }
+            }
+            if (i <= art.MaxiRequests)
+                return "request" + i;
+            else return "request" + art.MaxiRequests;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta content="utf-8" http-equiv="encoding" />
+    <title>GigMan</title>
+    <link href="content/css/metro.css" rel="stylesheet"/>
+    <link href="content/css/metro-icons.css" rel="stylesheet"/>    
+    <link rel="stylesheet" href="css/gmWidgets.css" />
+    <link id="gmStyle" href="css/gigman-neon.css" rel="stylesheet"/>
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/metro.js"></script>
+    <script runat="server" src="js/utilities.js"></script>
+    <script runat="server" src="js/datarequest.js"></script>
+    <script runat="server" src="js/gigman.js"></script>
+    <script runat="server" src="js/index.js"></script>
+    <style></style>
+</head>
+<body class="gm-bg" style="display:block !important">
+    <div class="indexHeader" style="display:block;width:100%;overflow:hidden;height:110px;line-height:110px;vertical-align:middle">
+        <div id="logo"></div>
+        <div id="greetings" class="greeting" style="display:inline-block;position:absolute;margin-top:-30px">Welcome <label id="userName"></label></div>
+        <div id="ColorScheme" class="slide-switch colorScheme" title="Color Scheme" style="display:inline-block;position:absolute;margin-top:40px">
+            <input type="radio" class="slide-switch-input" name="view" value="hic" id="hic" checked/>
+            <label for="hic" class="slide-switch-label slide-switch-label-left" title="Hi-Contrast"><span class="slide-switch-marker">H</span></label>
+            <input type="radio" class="slide-switch-input" name="view" value="neon" id="neon"/>
+            <label for="neon" class="slide-switch-label slide-switch-label-middle" title="Neon"><span class="slide-switch-marker">N</span></label>
+            <input type="radio" class="slide-switch-input" name="view" value="classic" id="classic"/>
+            <label for="classic" class="slide-switch-label slide-switch-label-right" title="Metro Classic"> <span class="slide-switch-marker">C</span></label>
+            <span class="slide-switch-selection"></span>
+        </div>
+    </div><br />
+    <!-- song editor -->
+    <div id="editorCharm" class="gm-charm" data-role="charm">
+        <span class="charmTitle" style="float:left">Song Editor</span>
+        <div style="float:right">
+             <button style="margin-top:-5px" class="square-button small-button buttonColor helpButton" data-topic="songeditor" title="Help for Song Editor"><span class="mif-question mif-2x"></span></button>
+             <button style="margin-top:-5px" class="square-button small-button buttonColor OpenEditorPanel" id="CloseEditorPanel" title="Close song editor."><span class="mif-cross mif-2x"></span></button>
+        </div>
+        <iframe id="editorContainer" class="panelContainer" src="" style="overflow-y:auto"></iframe>
+    </div>
+    <div id="settingsCharm" class="gm-charm" data-position="left" data-role="charm">
+        <div>
+            <button class="CloseSettingsPanel square-button small-button buttonColor" style="margin-bottom:5px" title="Close settings editor."><span class="mif-cross mif-2x"></span></button>
+            <button class="square-button small-button buttonColor helpButton" data-topic="sitesettings" style="margin-bottom:5px" title="Help for Settings"><span class="mif-question mif-2x"></span></button>
+        </div>
+        <iframe id="settingsContainer" class="panelContainer" src="" style="overflow-y:auto"></iframe>
+    </div>
+    <!-- end song editor -->
+    <div id="navigationCharm">
+        <div class="navigationPanel" style="margin-left:0">
+                <span class="charmLabelBold" style="margin-left:5px">Active Artist:&nbsp;</span>
+                <div class="input-control select" style="margin-left:5px">
+                    <select id="artistList"></select>    
+                </div>
+                <div style="overflow:visible;width:100%;margin-left:5px;">
+                    <div class="input-control text">
+                        <input type="text" style="width:260px;float:left" placeholder="Search text..." id="SearchTerm"/>
+                    </div>
+                    &nbsp;<button class="button square-button buttonColor" id="Search" style="float:left;margin-top:5px!important;height:40px!important" title="Search"><span class="mif-search mif-2x"></span></button>
+                </div>
+            <div class="tile-group" style="width:100%;padding:0;margin-left:0">
+                <div class="tile tile-square bg-song  mainNav" data-role="tile" data-click="transform">
+                    <div class="tile-content myTile " id="SongList">
+                        <span class="mif-list2 mif-2x"></span> <br /><br />
+                        <span class="tileLabel">Song List</span>&nbsp;<span class="tileLabel" id="SongCount"></span>
+                    </div>
+                </div>
+                <div class="tile-square bg-edit  mainNav" data-role="tile">
+                    <div class="tile-content myTile " id="SongEditor">
+                        <span class="icon mif-pencil mif-2x"></span><br /><br /><span class="tileLabel">Add Song</span>
+                    </div>
+                </div>
+                <div class="tile-square bg-random  mainNav" data-role="tile">
+                    <div class="tile-content myTile  " id="RandomSong">
+                        <span class="icon mif-dice mif-2x"></span><br /><br />
+                        <span class="tileLabel">Rand. Song</span>
+                    </div>
+                </div>
+                <div class="tile-square bg-random  mainNav" data-role="tile" title="Select a random artist, and view all of that artist's songs in the master list.">
+                    <div class="tile-content myTile " id="RandomArtist">
+                        <span class="icon mif-mic mif-2x"></span>
+                        <sub><span class="icon mif-dice" style="font-size:larger;margin-top:-30px;margin-left:-10px"></span></sub>
+                        <br /><br /><span class="tileLabel">Rand. Composer</span>
+                    </div>
+                </div>
+
+			    <div class="tile tile-square bg-user  mainNav" data-role="tile">
+				    <div class="tile-content myTile" id="Dashboard">
+					    <span class="icon mif-phone mif-2x"></span> <br /><br />
+					    <span class="tileLabel">Dashboard</span>
+				    </div>
+                </div>
+                <div class="tile-square bg-user mainNav" data-role="tile">
+                    <div class="tile-content myTile " id="Calendar">
+                        <span class="icon mif-calendar mif-2x"></span><br /><br /><span class="tileLabel">Calendar</span>
+                    </div>
+                </div>
+                <div class="tile-square bg-song  mainNav" data-role="tile">
+                    <div class="tile-content myTile" id="Setlists">
+                        <span class="icon mif-list-numbered mif-2x"></span><br /><br /><span class="tileLabel">Set Lists</span>
+                    </div>
+                </div>
+
+                
+                <div class="tile-square  mainNav bg-song" data-role="tile">
+                    <div class="tile-content myTile " id="Unplayed">
+                        <span class="icon mif-clipboard mif-2x"></span><br /><br /><span class="tileLabel">Unplayed</span>
+                    </div>
+                </div>
+
+                <div class="tile-square bg-lookup  mainNav" data-role="tile">
+                    <div class="tile-content myTile" id="Artists">
+                        <span class="icon mif-mic mif-2x"></span><br /><br /><span class="tileLabel">Composers</span>
+                    </div>
+                </div>
+
+                <div class="tile-square bg-lookup  mainNav" data-role="tile">
+                    <div class="tile-content myTile" id="Genres">
+                        <span class="icon mif-music mif-2x"></span><br /><br /><span class="tileLabel">Genres</span>
+                    </div>
+                </div>
+            
+                <div class="tile-square bg-lookup  mainNav" data-role="tile">
+                    <div class="tile-content myTile" id="Categories">
+                        <span class="icon mif-tag mif-2x"></span><br /><br /><span class="tileLabel">Categories</span>
+                    </div>
+                </div>
+
+                <div class="tile-square bg-user mainNav" data-role="tile">
+                    <div class="tile-content myTile " id="Profiles">
+                        <span class="icon mif-user mif-2x"></span><br /><br /><span class="tileLabel">Profiles</span>
+                    </div>
+                </div>			    
+                <div class="tile tile-square bg-logout  mainNav" data-role="tile">
+				    <div class="tile-content myTile " id="Logout">
+					    <span class="icon mif-exit mif-2x"></span> <br /><br />
+					    <span class="tileLabel">Log Out</span>
+				    </div>
+                </div>
+                <div class="tile-square bg-resynch  mainNav" data-role="tile" title="Resynchronize your data.">
+                    <div class="tile-content myTile " id="Resynch">
+                            <span class="icon mif-redo mif-2x"></span><br /><br /><span class="tileLabel">Resynchronize Data</span>
+                    </div>
+                </div>               
+                <div class="tile-square bg-settings mainNav" data-role="tile">
+                    <div class="tile-content myTile " id="Settings">
+                        <span class="icon mif-cogs mif-2x"></span><br /><br /><span class="tileLabel">Settings</span>
+                    </div>
+                </div>
+
+                <div class="tile-square bg-lookup mainNav" data-role="tile">
+                    <div class="tile-content myTile " id="WantAds">
+                        <span class="icon mif-shop mif-2x"></span><br /><br /><span class="tileLabel">Want Ads</span>
+                    </div>
+                </div>
+                <div class="tile-square bg-info mainNav" data-role="tile">
+                    <div class="tile-content myTile " id="FAQ">
+                        <span class="icon mif-question mif-2x"></span><br /><br /><span class="tileLabel">FAQ</span>
+                    </div>
+                </div>
+                <div class="tile-square bg-info mainNav" data-role="tile">
+                    <div class="tile-content myTile " id="Credits">
+                        <span class="icon mif-heart mif-2x"></span><br /><br /><span class="tileLabel">Credits</span>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+        <!-- help -->
+    <div id="helpCharm" class="gm-charm" data-position="bottom" data-role="charm">
+        <div style="float:right">
+             <button class="square-button small-button buttonColor" id="CloseHelpPanel" title="Close help"><span class="mif-cross"></span></button>
+        </div>
+        <iframe id="helpContainer" class="panelContainer" src="help/help.html" style="overflow-y:auto"></iframe>
+    </div>
+    <!-- end help -->
+
+</body>
+</html>

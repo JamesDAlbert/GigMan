@@ -1,0 +1,183 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="shortcut icon" type="image/png" href="favicon.ico"/>
+    <link href="content/css/metro.css" rel="stylesheet"/>    
+    <link href="content/css/metro-responsive.css" rel="stylesheet"/>
+    <link href="content/css/metro-icons.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/gmWidgets.css" />
+
+    <link href="Content/css/jquery-ui.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="Content/css/fixedHeader.dataTables.min.css" />
+    <link id="gmStyle" rel="stylesheet" href="css/Request-neon.css" />
+
+    <script src="Scripts/jquery.min.js"></script>
+    <script src="Scripts/jquery-ui.min.js"></script>
+    <script src="scripts/jquery.datatables.min.js"></script>
+    <script src="Scripts/dataTables.fixedHeader.min.js"></script>
+    <script src="Scripts/jquery-ui-touch-punch.js"></script>
+    <script src="scripts/metro.js"></script>
+    <script src="Scripts/jlinq.js"></script>
+
+    <script runat="server" src="js/dataRequest.js"></script>  
+    <script runat="server" src="js/utilities.js"></script>
+    <style>
+        .linkBar
+        {
+            padding-left:10px;
+            padding-right:10px;
+        }
+        body, html {
+            width:100%;
+            height:100%;
+            padding:0;
+            margin:0;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="outerContainer">
+        <div class="GMRheader">
+            <div class="title">
+                <span id="artistName"></span> 
+                <div id="ColorScheme" class="slide-switch" title="Color Scheme" style="margin-right:3px;margin-top:0px;">
+                    <input type="radio" class="slide-switch-input" name="view" value="hic" id="hic" checked/>
+                    <label for="hic" class="slide-switch-label slide-switch-label-left" title="Hi-Contrast"><span class="slide-switch-marker">H</span></label>
+                    <input type="radio" class="slide-switch-input" name="view" value="neon" id="neon"/>
+                    <label for="neon" class="slide-switch-label slide-switch-label-middle" title="Neon"><span class="slide-switch-marker">N</span></label>
+                    <input type="radio" class="slide-switch-input" name="view" value="classic" id="classic"/>
+                    <label for="classic" class="slide-switch-label slide-switch-label-right" title="Metro Classic"> <span class="slide-switch-marker">C</span></label>
+                    <span class="slide-switch-selection"></span>
+                </div>
+            </div>
+            <div class="linkBar">
+                <a id="tutorialLink" class="navLink" data-title="GigMan Request Tutorial" data-source="GMRequestTutorial.html"><span class="mif-school mif-2x" title="Tutorial"></span></a>
+                <a id="messagesLink" class="navLink" data-title="Send Messages" data-source="gmrmessages.html"><span class="mif-bubble mif-2x" title="Send Messages"></span></a>
+                <a id="requestsLink" class="navLink" data-title="Make Requests" data-source="GMRequests.html"><span class="mif-thumbs-up mif-2x" title="Make Requests"></span></a>
+                <a id="aboutLink" class="navLink" data-title="About GigMan Request" data-source="GMRequestAbout.html"><span class="mif-info mif-2x" title="About GigMan Request"></span></a>
+                <a id="calendarLink" class="navLink" data-title="Calendar" data-source="GMRCalendar.html"><span class="mif-calendar mif-2x"></span></a>
+            </div>
+        </div>
+        <div style="width:100%">
+            Welcome to GigMan Request!, where you can make song requests of, and send messages to the performing artist, all in real time!<br /><br />
+            The five links above will get you where you want to be.<br /><br />
+            Get started with the Tutorial (<span class="mif-school"></span>) or dive right into Requests (<span class="mif-thumbs-up"></span>) or Messages (<span class="mif-bubble"></span>).
+        </div>
+    </div>
+    <div id="contentCharm" class="gm-charm charm" data-role="charm" data-position="left">
+        <div>
+            <span id="charmTitle"></span>
+            <button style="float:right;margin-top:-2px;margin-right:2px;vertical-align:middle" class="square-button small-button buttonColor closeButton" title="Back"><span class="mif-cross"></span></button>
+        </div>
+        <iframe id="iframe" name="iframe" class="panelContainer" src="" style="overflow-y:auto"></iframe>         
+    </div>
+    <script>
+        var scheme = getSession("colorscheme");
+
+        if (scheme == "hic") {
+            $('link[id="gmStyle"]').attr('href', 'css/request-hic.css');
+        }
+        else if (scheme == "classic") {
+            $('link[id="gmStyle"]').attr('href', 'css/request-classic.css');
+        }
+        else if (scheme == "neon") {
+            $('link[id="gmStyle"]').attr('href', 'css/request-neon.css');
+        }
+        else {
+            $('link[id="gmStyle"]').attr('href', 'css/request-classic.css');
+        }
+        var band = getiRequestName();
+        band = artistByiRequestName(band);
+        setSession("artist", JSON.stringify( band));
+        $("#calendarLink").data("title", band.ArtistName + "'s Calendar");
+        $("#requestsLink").data("title", band.ArtistName + " - Requests");
+        $("#messagesLink").data("title", band.ArtistName + " - Messaging");
+        $(document).ready(function () {
+            setColorSchemeSwitch(scheme);
+
+            $("#artistName").text(band.ArtistName);
+            $("#calendarLink").prop("title", band.ArtistName + "'s Calendar");
+            $(".navLink").click(function () {
+                $("#charmTitle").text($(this).data("title"));
+                $(".navLink").removeClass("emphasis");
+                $(this).addClass("emphasis");
+                openCharm("#contentCharm",true,$(this).data("source"));
+            });
+            $(".closeButton").click(function () {
+                var evtCharm = $('#iframe').contents().find('.charm').data("charm");
+                if (evtCharm)
+                {                 
+                    if (evtCharm.element.data("opened") === true) 
+                    { 
+                        evtCharm.close(); return; 
+                    }
+                }
+                $(".navLink").removeClass("emphasis");
+                $("#contentCharm").data("charm").close();
+            });
+            $("#ColorScheme input").on("click", function (e) {
+                e.preventDefault();
+                var sch = $(this).val();
+                setColorSchemeSwitch(sch);
+            });
+        });
+
+        function setColorSchemeSwitch(sch) {
+            if (sch == null)
+                sch = "classic";
+            $("#ColorScheme .slide-switch-label").removeClass("switch-selected");
+            var ss = "css/request-";
+            $("#ColorScheme .slide-switch-marker").removeClass("slide-switch-marker-current");
+
+            switch (sch) {
+                case "hic":
+                    $("#ColorScheme .slide-switch-selection").removeClass("slide-switch-right");
+                    $("#ColorScheme .slide-switch-selection").removeClass("slide-switch-middle");
+                    $("#ColorScheme .slide-switch-selection").addClass("slide-switch-left");
+                    $("#ColorScheme .slide-switch-label-left span").addClass("slide-switch-marker-current");
+                    ss += "hic.css";
+                    $("#ColorScheme").data("scheme", "hic");
+                    break;
+                case "neon":
+                    $("#ColorScheme .slide-switch-selection").removeClass("slide-switch-left");
+                    $("#ColorScheme .slide-switch-selection").removeClass("slide-switch-right");
+                    $("#ColorScheme .slide-switch-selection").addClass("slide-switch-middle");
+                    $("#ColorScheme .slide-switch-label-left").addClass("switch-selected");
+                    $("#ColorScheme .slide-switch-label-middle span").addClass("slide-switch-marker-current");
+                    ss += "neon.css";
+                    $("#ColorScheme").data("scheme", "neon");
+                    break;
+                case "classic":
+                    $("#ColorScheme .slide-switch-selection").removeClass("slide-switch-middle");
+                    $("#ColorScheme .slide-switch-selection").removeClass("slide-switch-left");
+                    $("#ColorScheme .slide-switch-selection").addClass("slide-switch-right");
+                    $("#ColorScheme .slide-switch-label-left").addClass("switch-selected");
+                    $("#ColorScheme .slide-switch-label-middle").addClass("switch-selected");
+                    $("#ColorScheme .slide-switch-label-right span").addClass("slide-switch-marker-current");
+                    ss += "classic.css";
+                    $("#ColorScheme").data("scheme", "classic");
+                    break;
+            }
+            $('link[id="gmStyle"]').attr('href', ss);
+            $("#gmStyle", parent.document).attr("href", ss);
+
+            setSession("colorscheme", sch);
+        }
+
+        function openCharm(charmID, open, content) {
+            var ch = $(charmID).data("charm");
+            
+            if (open && !ch.element.data("opened") === true) {
+                ch.open();                
+            }
+            else if (ch.element.data("opened") === true && !open) {
+                ch.close();
+            }
+            $('#iframe').prop('src', content);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,238 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="content/css/metro.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="Content/css/metro-icons.min.css" />
+    <link id="gmStyle" href="css/gigman-hic.css" rel="stylesheet"/>
+    <script src="Scripts/jquery.js"></script>
+    <script runat="server"  src="js/utilities.js"></script>
+    <script runat="server"  src="js/dataRequest.js"></script>
+    <script runat="server"  src="js/account.js"></script>
+    <script runat="server"  src="js/artistprofile.js"></script>
+    <script runat="server" src="scripts/jss.min.js"></script>
+    <script runat="server" src="scripts/jlinq.js"></script>
+    <script runat="server" src="js/gigman.js"></script>
+    <script src="Scripts/metro.min.js"></script>
+    <style>
+        #paymentTable TD
+        {
+            vertical-align:middle;
+        }
+        .removeMember
+        {
+            color:white;
+        }
+        .removeMember:visited
+        {
+            color:white
+        }
+        .even {
+            background-color:#00e0e0;
+        }
+        .odd {
+            background-color:#00a0a0;
+        }
+        .odd:nth-child(even)
+        {
+            border-bottom:2px solid #006060;
+        }
+        .even:nth-child(even)
+        {
+            border-bottom:2px solid #006060;
+        }
+        .even TD
+        {
+            padding:3px;
+        }
+        .odd td {
+            padding:3px;
+        }
+        .error {
+            color:red;
+            font-weight:bold;
+        }
+
+    </style>
+</head>
+    
+<body>
+    <span class="charmLabelBold">Artist Profile for </span>
+    
+    <div style="width:100%;margin-bottom:5px">
+        <select id="Artists" style="width:100%;" title="Artists"></select>
+    </div>
+    <div class="border" style="width:100%;border:1px solid;padding:5px;margin-bottom:5px">
+    <label class="switch"> 
+        <input type="checkbox" id="PublicListing"/>
+        <span class="check"></span>
+    </label><span class="charmLabel">List Publicly </span><br />
+    <div class="input-control modern text myModernInput" style="width:49%">
+        <input type="text" style="color:white" placeholder="Artist name" id="ArtistName"/>
+        <span class="label">* Artist Name</span>
+        <span class="informer">Artist Name - required</span>
+    </div>
+    <div class="input-control modern text myModernInput" style="width:49%">
+        <input type="text" style="color:white" placeholder="Artist website" id="ArtistWebsite"/>
+        <span class="label">Artist Website</span>
+        <span class="informer">Artist website</span>
+    </div>
+    <br />    
+    <div id="genrePanel" class="border" style="text-align:center;margin-left:5px;position:relative">
+        <div style="text-align:left;overflow:hidden;width:100%">
+            <div style="width:100%;">
+                <div class="gm-bg-contrast" style="display:inline-block;width:40%;text-align:left;"><span class="charmLabel">Available Genres</span></div>
+                <div style="display:inline-block;width:20%">&nbsp;</div>
+                <div class="gm-bg-contrast" style="display:inline-block;width:40%;text-align:left;float:right;position:absolute;margin-left:-4px;"><span class="charmLabel">Selected Genres</span></div>
+            </div>
+            <div style="clear:both"></div>
+            <div id="GenreLists" style="width:100%;">
+                <div id="g1" style="float:left;width:40%;text-align:center">
+                    <select multiple id="Genres" name="Genres" size="8" style="width:100%;"></select>
+                </div>
+                <div style="float:left;width:20%;text-align:center">
+                    <button id="Move" class="small-button square-button buttonColor"><span class="mif-arrow-right"></span></button><br />
+                    <button id="Remove" class="small-button square-button buttonColor"><span class="mif-arrow-left"></span></button>
+                </div>
+                <div id="g2" style="float:left;width:40%;border-left:1px solid gray">
+                    <select multiple id="MyGenres" name="MyGenres" size="8" style="margin-left:2px;width:100%;border:0"></select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="accordion" data-role="accordion" style="width:100%;padding:5px;margin-bottom:5px">
+        <div class="frame">
+            <div class="charmLabelBold heading border"  style="background-color:transparent">Members</div>
+            <div class="content gm-bg" >
+                <div id="memberList" style="width:100%">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="iRequestPayment" style="width:100%;padding:5px;margin-bottom:5px" class="accordion" data-role="accordion">
+        <div class="frame">
+            <div class="charmLabelBold heading border" style="background-color:transparent">Payments</div>
+            <div class="content gm-bg">
+                <table id="paymentTable" style="width:100%">
+                    <tr>
+                        <td>
+                                <input type="radio" class="gm-checkbox payment" id="PremiumMonthPayButton" name="PremiumPayment" disabled="disabled"/>
+                                <label for="PremiumMonthPayButton"></label> GigMan Premium - Month 
+                        </td>
+                        <td style="text-align:left;min-width:60px">
+                            <span id="GMMonth"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <input type="radio" name="PremiumPayment" class="gm-checkbox payment" id="PremiumYearPayButton"/>
+                                <label for="PremiumYearPayButton"></label> GigMan Premium - Year 
+                        </td>
+                        <td style="text-align:left;min-width:60px">
+                            <span id="GMYear"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <input type="radio" name="RequestPayment" class="gm-checkbox payment" id="iRequestMonthPayButton" disabled="disabled"/>
+                                <label for="iRequestMonthPayButton"></label> GigMan Request - Month 
+                        </td>
+                        <td style="text-align:left;min-width:60px">
+                            <span id="IRMonth"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <input type="radio" name="RequestPayment" class="gm-checkbox payment" id="iRequestYearPayButton" disabled="disabled"/>
+                                <label for="iRequestYearPayButton"></label> GigMan Request - Year 
+                        </td>
+                        <td style="text-align:left;min-width:60px">
+                            <span id="IRYear"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">Total:&nbsp;</td>
+                        <td style="text-align:left;min-width:60px"><span id="paymentTotal"></span></td>
+                    </tr>
+                    <tr><td colspan="2"><hr class="charmDivider" /></td></tr>
+                    <tr><td colspan="2" style="text-align:right">
+                        <button class="button buttonColor" style="float:right" id="Checkout"><span class="mif-cart"></span> Check out</button></td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="iRequestSettings" class="accordion" style="width:100%;padding:5px;margin-bottom:5px"  data-role="accordion">
+        <div class="frame">
+            <div class="charmLabelBold heading border" style="background-color:transparent">GigMan Request Settings</div> 
+            <div class="content gm-bg">
+                <div>  
+                    <table>
+                        <tr>
+                            <td colspan="2">
+                                <span id="iRequestURL" class="charmLabel" style="width:49%"></span>
+                                <div class="input-control modern text myModernInput" style="width:49%;margin-top:0">
+                                    <input type="text" style="color:white" placeholder="GigMan Request URL Name" id="iRequestName"/>
+                                    <span class="label">GigMan Request URL Name</span>
+                                    <span class="informer" style="margin-bottom:5px;">GigMan Request URL Name</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label class="switch"> 
+                                <input type="checkbox" id="ShowMembers"/>
+                                <span class="check"></span>
+                            </label><span class="charmLabel">Show Members </span></td>
+                            <td><input type="number" max="5" min="1" style="width:30px" value="3" id="maxMessages"/> &nbsp;<span class="charmLabel">Max. Messages/user/24 hr</span></td>
+                        </tr>
+                        <tr>
+                            <td><label class="switch"> 
+                                <input type="checkbox" id="ShowCategories"/>
+                                <span class="check"></span>
+                            </label><span class="charmLabel">Show Categories </span></td>
+                            <td><input type="number" max="5" min="1" style="width:30px" value="3" id="maxRequests"/> &nbsp;<span class="charmLabel">Max. Requests/user/24 hr</span></td>
+                        </tr>
+                        <tr>
+                            <td><label class="switch"> 
+                                <input type="checkbox" id="ShowArtist"/>
+                                <span class="check"></span>
+                            </label><span class="charmLabel">Show Composer </span></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><label class="switch" style="margin-top:3px;"> 
+                                    <input type="checkbox" id="EnableDownvotes"/>
+                                    <span class="check"></span>
+                                </label><span class="charmLabel">Enable Downvotes </span></td>
+                            <td></td>
+                        </tr>
+                    </table>         
+                </div>
+            </div>
+        </div><br /><hr class="charmDivider" />
+        <button class="button buttonColor" id="SaveArtistProfile"><span class="icon mif-floppy-disk"></span> <span>Save</span></button><br />
+        <hr class="charmDivider"/>
+
+        <div class="accordion" data-role="accordion" style="width:100%;padding:5px;margin-bottom:5px">
+            <div class="frame">
+                <div class="charmLabelBold heading border" style="background-color:#008080">Pending Join Requests</div> 
+                <div class="content gm-bg">
+                    <table id="joinRequests" style="width:100%;">
+                        <thead>
+                            <tr><td colspan="3" id="header"></td></tr>
+                            <tr style="font-weight:bold;text-align:left"><th style="padding:3px">Username</th><th style="padding:3px">Name</th><th>Approve/Deny</th></tr>
+                        </thead>
+                        <tbody id="reqBdy">
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        <span class="error"></span><br /><br />
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link id="gmStyle" rel="stylesheet" href="../css/gigman-neon.css" />
+    <link rel="stylesheet" href="../Content/css/metro.css" />
+    <script src="../Scripts/jquery.min.js"></script>
+</head>
+<body class="help">
+
+     
+    <label class="charmLabelBold">New Artist</label>
+    <p>
+        Create a new artist.<br />
+        <h3>Fields</h3>
+        <strong><em>Artist Name</em></strong>: The name of your artist.<br /><br />
+        <strong><em>Artist Website</em></strong>: Any valid webste. Websites are checked periodically for appropriateness.<br /><br />
+        <strong><em>Your Primary Genres</em></strong>: The musical genre(s) your artist identifies most with. <CTRL> click genres to add multiple values.</CTRL><br /><br />
+        <strong><em>GigMan Request URL Tag</em></strong>: If the artist will be subscribing to the Request feature of GigMan, this value is the end of the url to which you will send your audience members.  Generally, the shorter this field is, the better.  GigMan will let you know if tha tag you choose is already taken.<br /><br />
+        <strong><em>GigMan Request Settings</em></strong>: If the artist will be subscribing to the Request feature of GigMan, these fields control what can be seen by the public on your Request page, and how many requests and messages a user can send in a single 24 hour period.<br />
+        
+    </p><br /><br />
+    <script>
+        var scheme = sessionStorage.getItem("colorscheme");
+
+        if (scheme == "hic") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.css');
+        }
+        else if (scheme == "classic") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.css');
+        }
+        else if (scheme == "neon") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.css');
+        }
+    </script>
+</body>
+</html>

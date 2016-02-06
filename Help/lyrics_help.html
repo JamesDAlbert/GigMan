@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="../Content/css/metro.css" />
+    <link rel="stylesheet" href="../Content/css/metro-icons.min.css" />
+    <link id="gmStyle" rel="stylesheet" href="../css/gigman-neon.css" />
+    <script src="Scripts/jquery.js"></script>
+</head>
+<body class="help">
+    <label>Lyrics Page Tools</label>
+    <p>
+        This page displays lyrics and chords for a song, if they have been saved.<br />
+        <h3>Toolbar</h3><br />
+        <span class="mif-arrow-left mif-2x fg-white" style="float:left"> </span> <em><strong>Previous Page</strong></em>: navigate to the last page viewed.<br /><br />
+        <span class="mif-menu mif-2x fg-white" style="font-style:normal"> </span> <strong><em>Navigation Panel</em></strong>: Opens the navigation panel.  A blinking Menu button indicates that there are Messages or Requests available.<br /><br />
+        <span class="mif-exit mif-2x fg-white"> </span> <strong><em>Log out</em></strong> Abandon your current session.<br /><br />
+        <span class="mif-home mif-2x fg-white"></span> <strong><em>Navigate to the home page.</em></strong><br /><br />
+        <span class="mif-file-text mif-2x fg-white" style="font-style:normal"> </span> <strong><em>Song Notes</em></strong>:  Opens the notes editor, where you can add notes about the song, and see previously saved notes.<br /><br />
+        <span class="mif-file-download mif-2x fg-white" style="font-style:normal"></span><span class="mif-file-upload mif-2x fg-white" style="font-style:normal"></span> <strong>
+            <em>Page Up/Down</em></strong>: Allows for a quick way to page up or down.<br /><br />
+        <span class="mif-info mif-2x fg-white" style="font-style:normal"> </span> <strong><em>Song Properties</em></strong>: Opens a window showing the properties of this song.<br /><br />
+        <strong><em>Chords</em></strong>: If chords are embedded in the lyrics, and your configuration allows them to be shown, clicking a chord will display the tab for it.  Clicking inside the tab window will show alternate voicings, and clicking outside the tab window will close it.<br /><br />
+        <strong><em>Lyric Blocks</em></strong>: Tapping inside a block of lyrics will collapse it so that only the first line is shown.  Tapping the line will expand the block. <br /><br />
+        <strong><em>Left Hand Sliders</em></strong>: The top slider controls transposition of chords, and the bottom slider controls font size.  The sliders can be shown or hidden from the Tools Panel.
+        <h3>Tools Panel</h3><br />
+        <strong><em>Transpose</em></strong>: If chords have been saved for the song, tapping one of the transpose buttons will transpose the chords to the key tapped.  Alternately, 
+            the top left-hand scrollbar on the lyrics page can be used to transpose.<br /><br />
+        <strong><em>Font Size</em></strong>: Increases/decreases thew size of the font in the lyrics view.  Alternately, the bottom left-hand scrollbar on the lyrics page can be used to change the font size.<br /><br />
+        <strong><em>Font Face</em></strong>: Changes the font used in the lyrics view.  In order to ensure that chords align with lyrics, onl mono-spaced fonts are available.<br /><br />
+        <strong><em>Display</em></strong>: Controls visibility of chords and left-hand sliders.<br />
+        &nbsp;&nbsp;<strong><em>Chords</em></strong>: Shows or hides the chords in the lyrics view.<br />
+        &nbsp;&nbsp;<strong><em>Charts</em></strong>: Determines if clicking a chord will show the tablature for it.<br />
+        &nbsp;&nbsp;<strong><em>Hints</em></strong>: Determines if mousing over a chord will show the tablature for it.<br />
+        &nbsp;&nbsp;<strong><em>Left Sliders</em></strong>: Show/Hide the transposition and font size sliders in the left of the window.<br />
+        <strong><em>Colors</em></strong>: Allows for changing the color of  the various 'parts' of a displayed song.  Clicking a button opens a color chooser. <br /><br />
+
+        
+        <span class="icon mif-file-text mif-2x fg-white" style="font-style:normal"></span> <strong><em>Song Notes</em></strong>: Opens the song notes editing window.<br /><br />
+        <sub><span class="icon mif-plus mif-2x fg-white" style="font-style:normal"> </span></sub> <strong><em>Increment Play Count</em></strong>: Updates the play count and last-played date for the current song.<br /><br />
+        <span class="mif-headphones mif-2x fg-white" style="font-style:normal"> </span> <strong><em>Play Song Sample</em></strong>: If a URL has been provided for a sample of the current song, clicking this button will open the browser's default media player..<br /><br />
+    </p><br /><br />
+
+    <script>
+        var scheme = sessionStorage.getItem("colorscheme");
+
+        if (scheme == "hic") {
+            $('link[id="gmStyle"]').attr('href', 'css/gigman-hic.css');
+        }
+        else if (scheme == "classic") {
+            $('link[id="gmStyle"]').attr('href', 'css/gigman-classic.css');
+        }
+        else if (scheme == "neon") {
+            $('link[id="gmStyle"]').attr('href', 'css/gigman-neon.css');
+        }
+    </script>
+</body>
+</html>

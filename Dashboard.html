@@ -1,0 +1,276 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>GigMan Communications</title>
+    <link href="content/css/metro.css" rel="stylesheet"/>
+    <link href="content/css/metro-icons.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/gmWidgets.css" /> 
+    <link id="gmStyle" href="css/gigman-hic.css" rel="stylesheet"/>
+    <script src="scripts/jquery.js"></script>
+    <script src="Scripts/jquery.dataTables.min.js"></script>
+    <script src="scripts/metro.js"></script>
+    <script src="scripts/jss.min.js"></script>
+    <script runat="server" src="js/datarequest.js"></script>    
+    <script src="Scripts/jlinq.js"></script>
+    <script runat="server" src="js/utilities.js"></script>
+    <script runat="server" src="js/gigman.js"></script>
+    <script src="js/Dashboard.js"></script>
+    <script src="Scripts/chart.min.js"></script>
+    <style>
+        .rqContent{
+            display:block;
+            position:relative;
+        }
+        .statsContainer div {
+            vertical-align:middle
+        }
+        .requestsContainer
+        {
+            display:block;
+            float:left;
+            margin-top:1px;
+            margin-bottom:10px;
+            margin-right:10px
+        }
+        .messagesContainer {
+            display:inline-block;
+            margin-right:10px
+        }
+        .messageData {
+            padding:7px;
+        }
+        .td {
+            display:table-cell;
+            vertical-align:middle;
+        }
+        .td span {
+            display:table-cell;
+            vertical-align:middle;
+        }
+        .data {
+            font-weight:normal!important;
+            font-size:16px;
+        }
+        .icn {
+            display:inline-block;
+            width:50px;
+        }
+        div.charmLabelBold
+        {
+            display:inline;
+        }
+    </style>
+</head>
+<body style="font-size:smaller">
+
+    <div class="pageHeader" style="vertical-align:middle;display:block">
+        <button id="GoBack" style="margin-left:5px" class="square-button small-button buttonColor" title="Go back one page."><span class="icon mif-arrow-left mif-2x"></span></button>&nbsp;
+        <button id="OpenSidePanel" class="square-button small-button buttonColor" title="Open side navigation panel." style=" z-index:200"><span class="icon mif-menu mif-2x"></span></button>
+        <!--<button id="Logout"  style="margin-top:4px;margin-left:5px" class="square-button small-button buttonColor" title="Log out."><span class="icon mif-exit"></span></button>&nbsp;-->
+        <button id="Home"  style="margin-top:4px;" class="square-button small-button buttonColor" title="Home."><span class="icon mif-home mif-2x"></span></button>
+        <button id="ListHelp" class="square-button small-button buttonColor helpButton" title="Dashboard page help." data-topic="dashboard"><span class="icon mif-question mif-2x"></span></button>
+            
+        <span id="Title" style="font-weight:bold;white-space:nowrap;margin-left:3px;margin-right:3px"> </span>         
+
+        <div id="ColorScheme" class="slide-switch" title="Color Scheme" style="margin-bottom:-15px">
+            <input type="radio" class="slide-switch-input" name="view" value="hic" id="hic" checked/>
+            <label for="hic" class="slide-switch-label slide-switch-label-left" title="Hi-Contrast"><span class="slide-switch-marker">H</span></label>
+            <input type="radio" class="slide-switch-input" name="view" value="neon" id="neon"/>
+            <label for="neon" class="slide-switch-label slide-switch-label-middle" title="Neon"><span class="slide-switch-marker">N</span></label>
+            <input type="radio" class="slide-switch-input" name="view" value="classic" id="classic"/>
+            <label for="classic" class="slide-switch-label slide-switch-label-right" title="Metro Classic"> <span class="slide-switch-marker">C</span></label>
+            <span class="slide-switch-selection"><div class="knurl"></div></span>
+        </div>
+    </div><br />
+
+    <div class="rqContent">
+        <div class="controlsContainer" style="display:block">
+            <span class="charmLabelBold">Active Artist:&nbsp;</span>
+            <div class="input-control select">
+                <select id="artistList"></select>    
+            </div>
+            <label class="switch" style="margin-left:5px;margin-top:5px;margin-bottom:3px" title="Enable/Disable Communications Polling">
+                <input type="checkbox" id="iRequestEnable"/>
+                <span class="check"></span> Enable Feeds
+            </label>
+        </div><br />
+        <div class="accordion" data-role="accordion" data-close-any="false">
+            <div class="frame active">
+                <div class="heading">Statistics</div>
+                <div class="content">
+                    <table class="statsContainer" style="width:100%">
+                        <tr class="tr" style="width:100%;display:table;margin-right:5px">
+                           <td class="td" style="width:50%">
+                               <div class="charmLabelBold">
+                                   <div class="icn">
+                                       <span class="mif-thumbs-up" title="Most voted"></span><span class="mif-thumbs-down" title="Most voted"></span><span>+</span>
+                                   </div>
+                                   <span class="data" id="mostReq"></span>
+                               </div> 
+                           </td>
+                           <td class="td"  style="width:50%">
+                               <div class="charmLabelBold">
+                                   <div class="icn"><span class="mif-thumbs-up" title="Least voted"></span><span class="mif-thumbs-down" title="Least voted"></span><span>-</span></div>
+                                   <span class="data" id="leastReq"></span>
+                               </div>
+                           </td>        
+                        </tr>
+                        <tr class="tr"  style="width:100%;display:table;margin-right:5px">
+                           <td class="td" style="width:50%">
+                               <div class="charmLabelBold">
+                                   <div class="icn">
+                                   <span class="mif-thumbs-down" title="Most downvotes"></span><span>+</span></div>
+                                   <span class="data" id="mostDV"></span></div>
+                           </td>
+                           <td class="td" style="right;width:50%"><div class="charmLabelBold"><span class="mif-thumbs-down" title="Least downvotes"></span><span>-</span> <span class="data" id="leastDV"></span></div></td>        
+                        </tr>
+                        <tr class="tr" style="width:100%;display:table;margin-right:5px">
+                           <td class="td" style="width:50%">
+                               <div class="charmLabelBold">
+                                   <div class="icn"><span class="mif-thumbs-up" title="Most Upvotes"></span><span>+</span></div> <span class="data" id="mostUV"></span>
+                               </div>
+                           </td>
+                           <td class="td" style="width:50%">
+                               <div class="charmLabelBold"><div class="icn"><span class="mif-thumbs-up charmLabelBold" title="Least Upvotes"></span><span>-</span></div> <span class="data" id="leastUV"></span></div>
+                           </td>        
+                        </tr>
+                        <tr class="tr" style="width:100%;display:table;margin-right:5px">
+                           <td class="td" style="width:50%">
+                               <div class="charmLabelBold">
+                               <div class="icn"><span class="mif-thumbs-up" title="Highest Request Traffic"></span><span class="mif-traff" title="Highest Request Traffic">+</span></div> <span class="data" id="trafficReqHi"></span></div></td>
+                           <td class="td" style="width:50%">
+                               <div class="charmLabelBold"><div class="icn"><span class="mif-thumbs-up" title="Lowest Request Traffic"></span><span class="mif-traff charmLabelBold" title="Lowest Request Traffic">-</span> </div>
+                               <span class="data" id="trafficReqLo"></span></div></td>        
+                        </tr>
+                        <tr class="tr"  style="width:100%;display:table;margin-right:5px">
+                           <td class="td" style="width:50%">
+                               <div class="charmLabelBold"><div class="icn"><span class="mif-bubble" title="Highest Message Traffic"></span><span class="mif-traff charmLabelBold" title="Highest Message Traffic">+</span></div> <span class="data" id="trafficMsgHi"></span></div></td>
+                           <td class="td"  style="width:50%">
+                               <div class="charmLabelBold">
+                                   <div class="icn">
+                                       <span class="mif-bubble" title="Lowest Message Traffic"></span><span class="mif-traff charmLabelBold" title="Lowest Message Traffic">-</span>
+                                   </div> 
+                                   <span class="data" id="trafficMsgLo"></span>
+                               </div>
+                           </td>        
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="chartAccordion" class="accordion" data-role="accordion" style="width:100%;">
+            <div class="frame" style="width:100%;">
+            <div class="heading">Graphs</div>
+                <div class="content" style="width:100%;">
+                    <canvas id="reqchart"></canvas>
+                    <div id="legend" class="legend">
+                        <ul style="list-style-type:none">
+                            <li style="line-height:16px;vertical-align:middle"><div style="background-color:red;height:16px;width:16px;display:inline-block">&nbsp;</div> <span style="font-size:16px;"> Messages</span></li>
+                            <li><div style="line-height:16px;background-color:lime;height:16px;width:16px;display:inline-block">&nbsp;</div> <span style="font-size:16px">Requests</span></li>
+                        </ul>
+                    </div>                 
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion" data-role="accordion">
+            <div class="frame">
+            <div class="heading">Data</div>
+                <div class="content">
+            <div class="requestsContainer">   
+                <div class="iRequestHeader" style="height:40px;line-height:40px;padding:0;vertical-align:bottom;margin:0;">  
+                    <div style="margin-bottom:-5px">             
+                        <span style="float:left;font-weight:bold;">
+                            <a href="#" class="fg-white" id="iRequestLink" target="_blank">Requests -</a> &nbsp;
+                        </span>
+                        <span class="charmLabelBold fg-white" style="float:left" id="requestCount">0</span>
+                    </div>    
+                    <div id="RequestLoadType" class="slide-switch" title="Requests load filter." style="float:right;">
+                        <input type="radio" class="slide-switch-input" name="req" value="all" id="all" checked/>
+                        <label for="all" class="slide-switch-label slide-switch-label-left" title="All requests on file."><span class="slide-switch-marker">All</span></label>
+                        <input type="radio" class="slide-switch-input" name="req" value="today" id="today"/>
+                        <label for="today" class="slide-switch-label slide-switch-label-middle" title="Todays requests."><span class="slide-switch-marker">Day</span></label>
+                        <input type="radio" class="slide-switch-input" name="req" value="live" id="live"/>
+                        <label for="live" class="slide-switch-label slide-switch-label-right" title="10 most recent requests today"> <span class="slide-switch-marker">Live</span></label>
+                        <span class="slide-switch-selection"></span>
+                    </div>
+
+                </div> 
+
+                <div style="width:100%;height:auto;">                                
+                    <table id="requestList" class="requestList" style="width:100%">
+                        <thead>
+                            <tr class="messageDate">
+                                <th class="requestHeader">Title</th>
+                                <th class="requestHeader">Artist</th>
+                                <th class="requestHeader"># Req.</th>
+                                <th class="requestHeader"><span class="mif-thumbs-up"></span></th>
+                                <th class="requestHeader"><span class="mif-thumbs-down"></span></th>
+                            </tr>                           
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot></tfoot>
+                    </table>
+                </div>  
+            </div>
+            <div class="messagesContainer">           
+                <div class="iRequestHeader" style="line-height:40px;height:40px;vertical-align:bottom">
+                    <span style="float:left;font-weight:bold"><a href="#" class="fg-white" id="iMessageLink" target="_blank" >Messages</a> -&nbsp;</span>
+                    <span class="charmLabelBold fg-white" style="float:left" id="messageCount">0</span>
+                    &nbsp;&nbsp;<a href="#" id="clearAllMessages" class="messageDelete" title="Delete all messages." data-userid="0"><span class="mif-cross"></span></a>
+                    <label class="switch" style="float:right;"> All/Today&nbsp;
+                        <input type="checkbox" id="messageDate"/>
+                        <span class="check"></span>
+                    </label>
+                </div>
+                <div style="clear:both"></div>                               
+                <table id="messageList" style="width:100%;min-width:100%;margin-top:6px">
+                    <thead>
+                        <tr role="row" class="messageDate">
+                            <th style="text-align:left">Message</th>
+                            <th style="text-align:left">&nbsp;</th>
+                            <th style="text-align:left">Time</th></tr>
+                    </thead>
+                    <tbody class="gm-bg"></tbody>
+                    <tfoot></tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+    <div id="helpCharm" class="gm-charm bottom" data-position="left" data-role="charm">
+        <div style="float:left">
+             <button class="square-button small-button buttonColor" id="CloseHelpPanel" title="Close help"><span class="icon mif-cross mif-2x"></span></button>
+        </div>
+        <iframe id="helpContainer" class="panelContainer" src="help/dashboard_help.html" style="overflow-y:auto"></iframe>         
+    </div>
+    <div id="navigationCharm" class="gm-charm left" data-position="left" data-role="charm">
+        <div style="float:right">
+             <button class="square-button small-button buttonColor" id="CloseSidePanel" title="Close navigation"><span class="icon mif-cross mif-2x"></span></button>
+        </div>
+        <iframe id="panelContainer" class="panelContainer" src="navpanel.html" style="overflow-y:auto"></iframe>         
+    </div>
+<div id="editorCharm" class="gm-charm" data-role="charm">
+        <span class="charmTitle" style="float:left">Song Editor</span>
+        <div style="float:right">
+             <button style="margin-top:-5px" class="square-button small-button buttonColor helpButton" data-topic="songeditor" title="Help for Song Editor"><span class="mif-question mif-2x"></span></button>
+             <button style="margin-top:-5px" class="square-button small-button buttonColor OpenEditorPanel" id="CloseEditorPanel" title="Close song editor."><span class="mif-cross mif-2x"></span></button>
+        </div>left
+        <iframe id="editorContainer" class="panelContainer" src="SongEditor.html" style="overflow-y:auto"></iframe>
+    </div>
+    <div id="settingsCharm" class="gm-charm" data-position="top" data-role="charm">
+        <div>
+            <button class="CloseSettingsPanel square-button small-button buttonColor" style="margin-bottom:5px" title="Close settings editor."><span class="mif-cross mif-2x"></span></button>
+            <button class="square-button small-button buttonColor helpButton" data-topic="sitesettings" style="margin-bottom:5px" title="Help for Settings"><span class="mif-question mif-2x"></span></button>
+        </div>
+        <iframe id="settingsContainer" class="panelContainer" src="sitesettings.html" style="overflow-y:auto"></iframe>
+    </div>
+    <script>
+        function showCharm(id) {
+            $(id).data("charm").open();
+        }
+    </script>
+</body>
+</html>

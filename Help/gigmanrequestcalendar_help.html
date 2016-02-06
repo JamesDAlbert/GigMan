@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link id="gmStyle" rel="stylesheet" href="../css/gigman-neon.css" />
+    <link rel="stylesheet" href="../Content/css/metro.css" />
+    <script src="../Scripts/jquery-2.1.4.min.js"></script>
+</head>
+<body class="help">
+    <label class="charmLabelBold">GigMan Request Calendar</label>
+    <p>
+        Premum GigMan members can keep a running calendar of events using the Calendar section of the site.<br /><br />
+        Any events created in the calendar can be marked as 'Public'.<br />  When an audience member lands on the Artists GigMan Request page, they can acccess the artists calendar to view upcoming gigs.
+    </p><br/><br />
+    <script>
+        var scheme = sessionStorage.getItem("colorscheme");
+
+        if (scheme == "hic") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.css');
+        }
+        else if (scheme == "classic") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.css');
+        }
+        else if (scheme == "neon") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.css');
+        }
+    </script>
+</body>
+</html>

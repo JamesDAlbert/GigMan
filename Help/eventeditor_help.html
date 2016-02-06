@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link id="gmStyle" rel="stylesheet" href="../css/gigman-neon.css" />
+    <link rel="stylesheet" href="../Content/css/metro.css" />
+    <script src="../Scripts/jquery.min.js"></script>
+</head>
+<body class="help">
+
+     
+    <label class="charmLabelBold">Event Editor</label>
+    <p>
+        The event editor allows you to specify and save calendar events.<br />
+        <h3>Fields</h3>
+        <strong><em>Event Date</em></strong>: Click the calendar icon to open a date picker for the event.  This field is required.<br /><br />
+        <strong><em>Venue</em></strong>: Where the event is taking place.  This serves as the event's title, and is a required field.<br /><br />
+        <strong><em>URL</em></strong>: You can add the (fully qualified) address of any website; if the event is public, clicking the title will take the user to the address specified.<br /><br />
+        <strong><em>Setup time, Start time, End time, # Sets</em></strong>: Only the start/end times are viewable by the public.<br /><br />
+        <strong><em>Visibility</em></strong>: Who can view the event.  Private events are only viewable by the event creator, while public events can be viewed by the general public, if the artist has a GigMan Request account and has specified that the calendar be visible.<br />
+        Members refers to members of the artist account active when the event was created.<br /><br />
+        <strong><em>Event Description</em></strong>: Details for the event.<br /><br />
+        <strong><em>Artist Notes</em></strong>: Any other details that should not be public.<br />
+    </p><br /><br />
+    <script>
+         var scheme = sessionStorage.getItem("colorscheme");
+
+         if (scheme == "hic") {
+             $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.css');
+         }
+         else if (scheme == "classic") {
+             $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.css');
+         }
+         else if (scheme == "neon") {
+             $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.css');
+         }
+    </script>
+</body>
+</html>

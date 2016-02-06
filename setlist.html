@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>GigMan</title>
+    <link href="content/css/metro.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="Content/css/metro-icons.css" />
+    <link rel="stylesheet" href="css/gmWidgets.css" />
+    <link rel="stylesheet" href="Content/css/jquery.dataTables.min.css" />
+    <link href="https://cdn.datatables.net/buttons/1.1.1/css/buttons.dataTables.min.css" rel="stylesheet" />
+    <link id="gmStyle" href="css/gigman-neon.css" rel="stylesheet"/>
+
+    <script runat="server" src="scripts/jquery-2.1.4.min.js"></script>
+    <script src="scripts/jquery.widget.min.js"></script>
+    <script runat="server" src="scripts/metro.min.js"></script>
+    <script src="scripts/jss.min.js"></script>
+    <script runat="server" src="js/datarequest.js"></script>
+    <script runat="server" src="js/gigman.js"></script>
+    <script runat="server" src="js/utilities.js"></script>
+    <script src="scripts/jlinq.js"></script>
+    <script runat="server" src="js/setlist.js"></script>
+    <script src="scripts/jquery.datatables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.1.1/js/dataTables.buttons.min.js"></script>
+    <script src="//cdn.datatables.net/buttons/1.1.1/js/buttons.html5.min.js"></script>
+    <script src="//cdn.datatables.net/buttons/1.1.1/js/buttons.print.min.js"></script>
+    <script src="//cdn.datatables.net/buttons/1.1.1/js/buttons.colVis.min.js"></script>
+    <style>
+
+    </style>
+</head>
+<body style="position:relative" class="gm-bg">
+    <!-- grid -->
+    <div id="wrapper" class="listWrapper" style="">
+        <div class="indexHeader" style="position:relative">
+            <button id="OpenSidePanel" class="square-button small-button buttonColor" title="Open side navigation panel."><span class="mif-menu mif-2x"></span></button>
+            <button id="Logout"  style="margin-left:24px" class="square-button small-button buttonColor" title="Log out."><span class="mif-exit mif-2x"></span></button>&nbsp;
+            <button id="Home" style="margin-left:1px"  class="square-button small-button buttonColor" title="Home."><span class="mif-home mif-2x"></span></button>
+            <button class="square-button small-button helpButton buttonColor" data-topic="setlist" style="margin-left:18px;" title="Setlist help"><span class="mif-question mif-2x"></span></button>
+            <span style="font-weight:bold;" id="Title"></span>
+            <span id="Setname" style="margin-left:5px;font-weight:bold;">Set</span> /
+            <span id="Subset" style="font-weight:bold;">Subset</span>
+            <button id="OpenSetEditorPanel" class="square-button small-button buttonColor" title="Close side navigation panel."><span class="mif-pencil mif-2x"></span></button>
+
+            <div id="ColorScheme" class="slide-switch" title="Color Scheme" style="position:absolute;top:5px">
+                <input type="radio" class="slide-switch-input" name="view" value="hic" id="hic" checked/>
+                <label for="hic" class="slide-switch-label slide-switch-label-left" title="Hi-Contrast"><span class="slide-switch-marker">H</span></label>
+                <input type="radio" class="slide-switch-input" name="view" value="neon" id="neon"/>
+                <label for="neon" class="slide-switch-label slide-switch-label-middle" title="Neon"><span class="slide-switch-marker">N</span></label>
+                <input type="radio" class="slide-switch-input" name="view" value="classic" id="classic"/>
+                <label for="classic" class="slide-switch-label slide-switch-label-right" title="Metro Classic"> <span class="slide-switch-marker">C</span></label>
+                <span class="slide-switch-selection"><div class="knurl"></div></span>
+            </div>                    
+        </div>
+        <table id="SongList" class="order_columns stripe pretty SongList" style="">
+            <thead>
+                <tr>
+                    <th class="songTitle">Title</th>
+                    <th class="songArtist">Artist</th>
+                    <th class="songGenre">Genre</th>
+                    <th class="songCategory">Category</th>
+                    <th class="songTempo">Tempo</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot></tfoot>
+        </table>
+        <table id="DataList" class="order_columns stripe pretty"></table>
+        <!-- end grid -->
+
+        <!-- tool chest -->
+    
+        <div id="navigationCharm" class="gm-charm border-right" data-role="charm" data-position="left">
+            <div>
+                <button id="CloseSidePanel" class="square-button small-button buttonColor" style="margin-top:-2px" title="Close side navigation panel."><span class="mif-cross mif-2x"></span></button>
+                <button class="square-button small-button buttonColor helpButton" data-topic="navigation" style="margin-top:-2px" title="Help for Navigation"><span class="mif-question mif-2x"></span></button>
+                <span class="charmTitle">Site Navigation</span>
+            </div>
+            <iframe class="panelContainer" src="navpanel.html"></iframe>
+        </div>
+        <!-- End tool chest -->
+        <!-- song editor -->
+        <div id="setEditorCharm" data-role="charm"  class="gm-charm border-left" data-position="right" style="width:100%;max-width:1150px;height:100%;border-right:1px solid gray">
+            <div><span class="charmTitle" style="float:left">Set Editor</span>
+                <button id="CloseSetEditorPanel" class="square-button small-button buttonColor" style="float:right;margin-top:-2px" title="Close song editor."><span class="mif-cross mif-2x"></span></button>
+                <button class="square-button small-button buttonColor helpButton" style="float:right;margin-top:-2px;margin-right:5px" data-topic="setlisteditor" title="Help for Setlist Editor"><span class="mif-question mif-2x"></span></button>
+            </div>
+            <iframe id="setEditorContainer" name="editorContainer" class="panelContainer" src="SetlistEditor.html" style="overflow-y:auto;"></iframe>         
+        </div>
+        <div id="editorCharm" class="gm-charm" data-role="charm">
+            <div style="float:left;overflow:auto;width:100%">                
+                <button id="CloseEditorPanel" style="float:right;" class="square-button small-button buttonColor" title="Close song editor."><span class="mif-cross mif-2x"></span></button>
+                <button data-topic="songeditor" style="float:right;margin-right:5px" class="square-button small-button buttonColor helpButton"><span class="mif-question mif-2x"></span></button>
+                <span class="charmTitle">Song Editor</span>
+            </div>
+            <iframe id="editorContainer" class="panelContainer" src="SongEditor.html" style="overflow-y:auto"></iframe>         
+        </div>
+        <div id="settingsCharm" class="gm-charm border-right" data-position="left" data-role="charm">
+            <div>
+                <span class="charmTitle" style="float:left">Settings Editor</span>
+                <div style="float:right">
+                <button class="CloseSettingsPanel OpenEditorPanel small-button square-button buttonColor" style="margin-bottom:5px" title="Close settings editor."><span class="mif-cross mif-2x"></span></button>
+                <button class="square-button small-button helpButton buttonColor" style="margin-bottom:5px" data-topic="sitesettings"><span class="mif-question mif-2x"></span></button>
+            </div></div>
+            <iframe id="settingsContainer" class="panelContainer" src="sitesettings.html" style="overflow-y:auto"></iframe>         
+        </div>
+        <div id="helpCharm" class="gm-charm border-right" data-position="left" data-role="charm">
+            <div><button id="CloseHelpPanel" class="small-button square-button buttonColor" style="margin-bottom:5px" title="Close help panel"><span class="mif-cross mif-2x"></span></button></div>
+            <iframe id="helpContainer" class="panelContainer" src="sitesettings.html" style="overflow-y:auto"></iframe>         
+        </div>
+        <!-- end song editor -->
+    </div>
+    <script>
+        function showCharm(id)
+        {
+            $(id).data("charm").open();
+        }
+    </script>
+</body>
+</html>

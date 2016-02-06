@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link id="gmStyle" rel="stylesheet" href="../css/gigman-neon.css" />
+    <link rel="stylesheet" href="../Content/css/metro.css" />
+    <script src="../Scripts/jquery.min.js"></script>
+</head>
+<body class="help">
+   <label>Site Settings</label>
+    <p><span class="subTopic">Local Storage:</span>
+        Your data is stored in your browsers data storage cache, which is limited in size.  If you change browsers, your data will not be available until you enter it again, or switch back to the original browser.<br />
+        Subscribers can offload their data to Gigman data servers, allowing the use of any browser.
+    </p>
+    <p>
+        <span>Text: </span>
+        The font, font size, color and style of text on the Gigman site can be specified here.<br />
+        Font face, size, color and bold or italic can be used in combination to make the Gigman site more readable at the gig and on smaller devices.
+    </p>
+    <p>
+        <span>Lists: </span>
+        When displaying data such as songs or artists in lists  the method of sorting and maximum items shown can be specified.<br />
+        The length of song/artist lists and the length of set lists can be specified individually.<br />
+        <i>Ignore Articles</i> will place any leading articles ('the', 'a' and 'an') at the end of the title or name.  For instance, 'The Beatles' would be listed as 'Beatles, The'.
+    </p><br /><br />
+            <script>
+                var scheme = sessionStorage.getItem("colorscheme");
+
+                if (scheme == "hic") {
+                    $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.css');
+                }
+                else if (scheme == "classic") {
+                    $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.css');
+                }
+                else if (scheme == "neon") {
+                    $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.css');
+                }
+    </script>
+</body>
+</html>

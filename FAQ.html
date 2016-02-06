@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>GigMan FAQ</title>
+
+    <link href="content/css/metro.css" rel="stylesheet"/>
+    <link href="content/css/metro-icons.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/gmWidgets.css" /> 
+    <link id="gmStyle" href="css/gigman-neon.css" rel="stylesheet"/>
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/metro.js"></script>
+    <script src="js/metro.min.js"></script>
+    <script runat="server" src="js/utilities.js"></script>
+    <script runat="server" src="js/datarequest.js"></script>    
+    <script runat="server" src="js/gigman.js"></script>
+    <style>        
+        body, html {
+            height:100%;
+        }
+        .content {
+            height:27px;
+        }
+
+        .charmLabelBold {
+            display:none;
+        }
+        .currentTopic {
+            text-decoration:underline;
+        }
+        .contentTitle {
+            cursor:pointer;
+            font-size:16px;
+            font-weight:bold;
+        }
+        .contentTitle:hover{
+            text-decoration:underline;
+        }
+        .helpContent {
+            padding-top:15px
+        }
+        #logo {
+            margin-top:-10px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+    <div class="indexHeader" style="display:block;width:100%;overflow:hidden;height:100px;line-height:110px;vertical-align:middle">
+        <a href="index.html"><div id="logo"></div></a>
+        <div id="ColorScheme" class="slide-switch colorScheme" title="Color Scheme" style="display:inline-block;position:absolute;margin-top:40px">
+            <input type="radio" class="slide-switch-input" name="view" value="hic" id="hic" checked/>
+            <label for="hic" class="slide-switch-label slide-switch-label-left" title="Hi-Contrast"><span class="slide-switch-marker">H</span></label>
+            <input type="radio" class="slide-switch-input" name="view" value="neon" id="neon"/>
+            <label for="neon" class="slide-switch-label slide-switch-label-middle" title="Neon"><span class="slide-switch-marker">N</span></label>
+            <input type="radio" class="slide-switch-input" name="view" value="classic" id="classic"/>
+            <label for="classic" class="slide-switch-label slide-switch-label-right" title="Metro Classic"> <span class="slide-switch-marker">C</span></label>
+            <span class="slide-switch-selection"></span>
+        </div>
+    </div><br />
+            
+
+        <div class="faqPanel" style="width:100%;overflow:visible;text-align:left">               
+            <div class="helpContainer1" style="float:left;display:inline-block;margin-left:25px">
+
+                <a href="index.html"><h4>GigMan</h4></a>
+                <div class="content">
+                    <span class="contentTitle" data-help="gettingstarted_help.html">Getting Started</span>
+                </div> 
+                <div class="content">
+                    <span class="contentTitle" data-help="general_help.html">General</span>
+                </div>          
+                <div class="content">
+                    <span class="contentTitle" data-help="artistprofile_help.html">Artist Profile</span>
+                </div>
+                <div class="content">
+                    <span class="contentTitle" data-help="calendar_help.html">Calendar</span>
+                </div>
+                <div class="content" style="margin-left:20px;margin-top:-5px">
+                    <span class="contentTitle" data-help="eventeditor_help.html">Event Editor</span>
+                </div>
+                <div class="content">
+                    <span class="contentTitle" data-help="dashboard_help.html">Dashboard</span>
+                </div>
+                <div class="content" style="margin-left:20px;margin-top:-5px">
+                    <span class="contentTitle" data-help="irequest_help.html">Requests and Messages</span>
+                </div>
+
+                <div class="content">
+                    <span class="contentTitle" data-help="List_help.html">List</span>
+                </div>
+                <div class="content">
+                    <span class="contentTitle" data-help="home_help.html">Navigation</span>
+                </div>
+                <div class="content">
+                    <span class="contentTitle" data-help="profile_help.html">Personal Profile</span>
+                </div>
+                <div class="content">
+                    <span class="contentTitle" data-help="setlist_help.html">Set List</span>
+                </div>
+                <div class="content" style="margin-left:20px;margin-top:-5px">
+                    <span class="contentTitle" data-help="setlisteditor_help.html">Set List Editor</span>
+                </div>
+                <div class="content">
+                    <span class="contentTitle" data-help="sitesettings_help.html">Site Settings</span>
+                </div>
+                <div class="content">
+                    <span class="contentTitle" data-help="Lyrics_help.html">Song Lyrics</span>
+                </div>
+                <div class="content" style="margin-left:20px;margin-top:-5px;">
+                    <span class="contentTitle" data-help="songeditor_help.html">Song Editor</span>
+                </div>
+            </div>
+        </div>
+        <div id="helpContainer2" style="float:left;display:inline-block;margin-left:25px">
+            <a href="./or"><h4>GigMan Request</h4></a>
+            <div class="content">
+                <span class="contentTitle" data-help="gigmanrequestgeneral_help.html">General</span>
+            </div>    
+            <div class="content"  >
+                <span class="contentTitle" data-help="gigmanrequestpreferences_help.html">Artist Preferences</span>
+            </div>   
+            <div class="content"  >
+                <span class="contentTitle" data-help="gigmanrequestcalendar_help.html">Calendar</span>
+            </div>     
+            <div class="content"  >
+                <span class="contentTitle" data-help="gigmanrequestmessages_help.html">Messages</span>
+            </div>  
+            <div class="content"  >
+                <span class="contentTitle" data-help="gigmanrequestrequests_help.html">Requests</span>
+            </div>                                                         
+        </div>
+        <div id="Div1" style="float:left;display:inline-block;margin-left:25px">
+            <h4>GigMan Want Ads</h4>
+            <div class="content">
+                <span class="contentTitle" data-help="gigmanwantadsgeneral_help.html">General</span>
+            </div>
+        </div>
+    </div>
+    <div id="helpCharm" class="gm-charm bottom" data-position="left" data-role="charm">
+        <div style="float:left">
+             <button class="square-button small-button buttonColor" id="CloseHelpPanel" title="Close help"><span class="icon mif-cross"></span></button>
+        </div>
+        <iframe id="helpContainer" class="panelContainer" style="overflow-y:auto"></iframe>         
+    </div>
+    <script>
+        $(document).ready(function () {
+            $(".contentTitle").click(function () {
+                $(helpCharm).data("charm").open();
+                $("#helpContainer").prop("src","help/" + $(this).data("help"));
+            });
+        });
+    </script>
+</body>
+</html>

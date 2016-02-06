@@ -1,0 +1,13 @@
+﻿{
+  "version": "2.0.3",
+  "ignore": [
+    "\\Scripts\\"
+  ],
+  "options": {
+    "browser": true,
+    "for": true,
+    "this": true,
+    "white": true
+  },
+  "globalVariables": []
+}

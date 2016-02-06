@@ -1,0 +1,1425 @@
+﻿body {
+    color:white;
+    background-color:black;
+}
+html{
+    color:white;
+       background-color:black;
+}
+td {
+    color:white;
+}
+
+#credits a {
+    color:lightgray!important;
+}
+#credits a:visited
+{
+    color:lightgray!important
+}
+#credits a:hover
+{
+    text-decoration:underline;
+}
+p {
+    color:white;
+}
+.songEditLink {
+    cursor:pointer;
+    color:white!important;
+}
+.frame
+{
+    background-color:gray!important;
+    color:white;
+}
+.frame .heading {
+    border:white!important
+}
+.listRow {
+    color:white ;
+    height:40px;
+}
+.listRow A
+{
+    color:white ;
+}
+.altListRow{
+    height: 40px;
+    background-color:#909090;
+}
+.pageHeader {
+    color:white;
+    position:fixed;
+    background-color:#000;
+    width:100%;
+    z-index:1000;
+}
+.gm-charm{
+    background:#000000!important;
+}
+.charmNav .tile-content{
+    font-size:12px!important;
+    text-align:center;
+    vertical-align:middle;
+    line-height:18px;
+}
+#SongList_wrapper {
+    margin-top:25px;
+}
+.altListRow A:visited
+{
+    color:white;
+}
+.bg-song {
+    background-color:gray!important;
+    color:white;
+    border:2px solid white;
+}
+.bg-resynch {
+    background:lightgray!important;
+    color:black;
+}
+.bg-info {
+    background:#808080!important;
+    color:white;
+}
+.bg-settings {
+    background:#606060!important;
+    color:white;
+}
+.bg-random {
+    background:white!important;
+    color:black;
+}
+.bg-lookup {
+    background:darkgray!important;
+    color:white;
+}
+.bg-edit {
+    background:#dddddd!important;
+    color:black;
+}
+.bg-user {
+    background:#303030!important;
+    color:white;
+}
+.bg-logout {
+    background:#cccccc!important;
+    color:black;
+}
+.accordion .frame  .content
+{
+    background:#808080;
+}
+.updateCountLink {
+    color:white;
+}
+.updateCountLink:visited {
+    color:white;
+}
+.songDeleteLink {
+    color:white;
+}
+.songDeleteLink:visited {
+    color:white;
+}
+.songEditLink:visited {
+    color:white!important;
+}
+input[type=checkbox]:checked + span {
+    background-color:#f0f0f0!important;
+}
+.check:before {
+    background-color:#c0c0c0;
+}
+
+.songLink {
+    color:white;
+    cursor:pointer;
+    display:block;
+    width:100%;
+}
+.songLink:visited {
+    color:white;
+}
+    .songLink:hover {
+        text-decoration:underline;
+    }
+
+.artistLink {
+    color:inherit;
+    cursor:pointer;
+    display:block;
+    width:100%;
+}
+    .artistLink:hover {
+        text-decoration:underline;
+    }
+.genreLink {
+    color:inherit;
+    cursor:pointer;
+    display:block;
+    width:100%;
+}
+    .genreLink:hover {
+        text-decoration:underline;
+    }
+.categoryLink {
+    color:inherit;
+    cursor:pointer;
+    display:block;
+    width:100%;
+}
+    .categoryLink:hover {
+        text-decoration:underline;
+    }
+.tileLabel
+{
+    width:100%;
+    text-align:left ;
+    left:0;
+}
+.editor {
+    position:relative;
+    margin-top:5px;
+    margin-bottom:-5px;
+    margin-left:5px;
+}
+.dataTables_wrapper {
+    color:white;
+}    
+.SongList {
+    clear:both;
+    font-size:100%;
+    border-collapse:collapse;
+    width:100%
+}
+.SongList td { /* HACK - wont change */
+border:1px solid darkgray;
+}
+.gm-bg{
+    background-color:black!important;
+}
+.gm-bg-contrast {
+    background-color:#606060
+}
+
+.SongList th {
+border:1px solid black;
+color:white!important;
+}
+    .SongList .odd {
+        background-color: #000000 !important;
+        border:0;
+    }
+    .SongList .odd:hover{
+        background-color:#303030!important;
+    }
+    .SongList .even {
+        background-color:#909090!important;
+        color:white;
+        border:0;
+    }
+    .SongList .even:hover
+    {
+        background-color:#c0c0c0!important;
+        color:black;
+    }
+.sorting_asc 
+ {
+     background-color:#606060!important;
+ }
+.SongList .sorting_asc:nth-of-type(1) {
+    background-color:transparent
+}
+.sorting_desc
+ {
+     background-color:#808080!important;
+     color:white ;
+ }
+ .SongList .sorting 
+ {
+     background-color:#a0a0a0!important;
+ }
+ .SongList .sorting_1
+ {
+     background-color:#000000;
+ }
+#SongList_filter {
+    color:white;
+}
+.artistTile
+{
+    text-align:center;
+    vertical-align:middle;
+    line-height:35px;
+}
+.categoryTile
+{
+    text-align:center;
+    vertical-align:middle;
+    line-height:35px;
+}
+.genreTile
+{
+    text-align:center;
+    vertical-align:middle;
+    line-height:35px;
+}
+.Verse {
+    color:white;
+}
+
+#SongInfo {
+    font-weight:bold;
+    margin-left:10px;
+    font-size:100%;
+}
+
+.songInfo {
+    color:white;
+    margin-left:20px;
+
+}
+.songInfo:visited{
+    color:white;
+}
+#SongKey {
+    font-weight:bold;
+    margin-left:20px;
+}
+.slide-switch
+{
+    background-color:#000000!important;
+    color:gray!important;
+    border:1px solid gray!important;
+}
+.slide-switch-marker 
+{
+    text-shadow: 0px 1px 2px darkgray;
+    position:absolute;
+    top:-1px;
+    color:gray!important;
+}
+#Transpose .slider-hint
+{
+    color:white;
+    background-color:black;
+    margin-bottom:-10px;
+}
+.lyricTools{
+    text-align:center;
+    vertical-align:middle;
+    line-height:18px;
+    font-size:75%;
+}
+.mainNav {
+    text-align:center;
+    vertical-align:middle;
+    line-height:18px;
+    font-size:75%;
+}
+#navigationCharm .tile-content {
+    padding-top:5px;
+    font-size:75%;
+    text-align:center;
+    vertical-align:middle;
+    line-height:15px;
+    padding:8px;
+}
+.charmTitle{
+    display:inline;
+    font-weight:bold
+}
+.slider.large .marker {
+    text-align:center;
+    padding-top:3px;
+}
+.slider .slider-hint
+{
+    color:white;
+    background-color:black;
+    margin-bottom:-10px;
+}
+#sTranspose .slider-hint {
+    margin-left:-40px
+}
+
+#PlayCountFilter .slider-hint
+{
+    color:white;
+    background-color:black;
+    margin-bottom:-10px;
+}
+.OpenSidePanel
+{
+    border:1px solid gray;
+    height:25px;
+    width:27px;
+    background-color:#fff
+}
+    .OpenSidePanel:hover {
+        border:1px solid white;
+    }
+
+.OpenToolsPanel{
+    border:1px solid gray;
+    background-repeat:no-repeat;
+    background-position:center;
+    height:25px;
+    width:27px;
+    background-color:#fff
+}
+.OpenToolsPanel:hover
+{
+border:1px solid white;
+}
+
+.panelContainer {
+    height:100%;
+    width:100%;
+    overflow:auto;
+    border:0;
+}
+.listWrapper {
+    width:100%;
+}
+
+.dialog {
+    position:absolute;
+    display:none;
+    background-color:#eee;
+    border:1px solid black;
+    text-align:center;
+}
+.info {
+    color:black;
+}
+.info .window-caption{
+    color:black;
+}
+
+.charmSwitch .check {
+    background-color:gray ;
+}
+/* chord charts */
+
+.clickableChord{
+    text-decoration:underline;
+    cursor:pointer;
+}
+.embeddedChord {
+    background:transparent;
+}
+.chordViewer {
+    color:black;
+    background-color:white;
+    width:150px;
+    position:absolute;
+    top:100px;
+    left:100px;
+    z-index:3999;
+    display:none;
+}
+/* lyrics blocks */
+.lyricsDiv{
+    float:left;
+    padding-top:5px;
+    padding-left:5px;
+    overflow:visible;
+    margin-top:5px;
+    position:static
+}
+
+.lyricsBlock
+{
+    font-family:inherit ;
+    font-size:inherit ;
+}
+.lyricsDiv details summary:focus
+{
+	outline:none;
+}
+
+.lyricsDiv summary::-webkit-details-marker {
+  color: #fff;
+  font-size: 0%;
+  float:right;
+}
+
+.command:hover
+{
+    background-color:lightgray;
+}
+.command:disabled:hover {
+    background-color:#ffffff ;
+}
+/* transposition keyboard */
+#Transposer {
+  background-color:#222;
+  width:130px;
+  float:left;
+  font-family:"Segoe UI Light","Helvetica Neue","Segoe UI","Segoe WP",sans-serif;
+}
+#Transposer ul,
+#Transposer li {
+  margin:0;
+  padding:0;
+  list-style:none;
+  position:relative;
+}
+
+        .bt {
+            cursor: pointer;
+        }
+        .wt {
+            cursor:pointer;
+        }
+.bt:hover
+{
+    color:white;
+}
+.wt:hover{
+    color:gray;
+    font-weight:bold;
+}
+
+
+        .keyPad {
+            width:40px;
+            height:40px;           
+            font-size:16px;
+            line-height:40px;
+            text-align:center;
+            vertical-align:middle;
+            overflow:hidden;
+            cursor:pointer;
+            display:inline-block;
+            margin-top:5px;
+        }
+        .keyPad.selected{
+            background: #ffffff linear-gradient(-45deg, rgba(0, 0, 0, 0.15) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, 0.15) 50%, rgba(0, 0, 0, 0.15) 75%, transparent 75%, transparent) ;
+            background-size: 20px 20px ;
+            color:black;
+            font-weight:bold
+        }
+        .keyPad.black
+        {
+            background-color:black;
+            color:white;
+            border:1px #808080 solid;
+        }
+        .keyPad.black:hover
+        {
+            
+            background-color:#606060;
+            color:#fff;
+        }
+        .keyPad.white
+        {
+            background-color:white;
+            color:black;
+            border:1px #606060 solid;
+        }
+        .keyPad.white:hover{
+            background-color:#a0a0a0;
+            color:#fff;
+        }
+.myTile{
+    padding:5px;   
+    overflow:hidden;
+    font-size:16px;
+}
+.icon {
+    padding:3px;
+    margin-bottom:-3px;
+    font-size:32px!important;
+}
+
+select {
+    color:black;
+    padding:5px;
+}
+select option {
+    color:black;
+    width:auto;
+}
+
+table .selected
+{
+    background-color:red
+} 
+        .dataTables_info {
+
+            color:white ;
+        }
+.paginate_button {
+    color:#000;
+    font-weight:bold;
+    font-size:75%;
+    background:0!important;
+    background-color:#fff!important;
+    padding:10px;
+    margin-left:5px;
+}
+.paginate_button:hover {
+    color:gray!important;
+    background-color:white;
+}
+
+.hideColumn {
+    color:white;
+}
+.hideColumn:hover{
+    text-decoration:underline;
+}
+.hideColumn:before {
+    content:"Hide ";
+}
+.showColumn{
+    color:white;
+}
+.showColumn:hover{
+    text-decoration:underline;
+}
+.showColumn:before {
+    content:"Show ";
+}
+.charmLabel
+{
+    font-size:18px;
+}
+.charmLabelBold {
+    font-size:18px ;
+    font-weight:bold;
+}
+
+.charmContent {
+    font-size:100%;
+
+}
+.charmContent input[type=text]{
+    font-size:100%;
+}
+.charmContent select {
+    font-size:100% ;
+}
+
+.myModernInput.modern .label
+        {
+            font-size:100% ;
+            color:white;
+        }
+    .myModernInput.modern .informer
+    {
+        font-size:100% ;
+        color:white ;
+    }
+.settingsTable {
+            padding:4px;
+            border-spacing:0;
+            border-collapse:collapse;
+            width:100%;
+            border:1px solid #fff;
+            margin-top:5px;
+        }
+        .settingsTable TD{
+            padding:5px;
+        }
+        .tableLabel{
+            width:10%
+        }
+        .sectionTitle {
+            font-weight:bold;
+        }
+            .spinBox{
+            font-size:100%;
+        }
+        .spinMinus
+        {
+            height:40px!important;
+            width:40px;
+            border:0;
+            margin:0;
+            padding:0;
+        }
+        .spinPlus
+        {
+            height:40px!important;
+            width:40px;
+            border:0;
+            padding:0;
+        }
+        .spinMinus:hover{border:1px solid gray}
+        .spinPlus:hover{border:1px solid gray}
+
+.spinInput {
+    height: 37px !important;
+    -moz-border-radius: 0 !important;
+    -webkit-border-radius: 0 !important;
+    border-radius: 0 !important;
+    border: 1px solid #fff;
+    margin: 0;
+    width: 50px;
+    text-align: center;
+}
+
+        .charm-closer{
+            display:none;
+        }
+        .scrollButton{
+            margin-left:20px;
+            height:30px;
+            width:70px
+        }
+        .small-button{
+            font-size:125%;
+            vertical-align:middle;
+            line-height:18px;
+        }
+        .closeWindowButton{
+            float:right;
+            font-size:75%;
+            width:20px; 
+            height:20px;
+            text-align:center;
+            vertical-align:middle;
+            line-height:12px;
+            cursor:default;
+            color:gray;
+            background-color:white;
+            border:1px solid gray;
+        }
+        .closeWindowButton:hover
+        {
+            border:1px solid gray;
+            color:black;
+        }
+        .windowTitle{
+            display:inline-block;
+            overflow:visible;
+            width:100%;
+            background-color:white;
+            color:black;
+            cursor:default;
+        }
+        .windowTitle span{
+            float:left;
+            font-weight:bold;
+            margin:2px
+        }
+        .paletteWindow {
+            position:absolute;
+            left:0!important;
+            top:200px;
+            display:none;
+            overflow:visible;
+            z-index:2000;
+            background-color:black;
+            padding:3px;
+            border:1px solid gray
+        }
+
+.paletteTable {
+    padding:0;
+    border-spacing:0;
+    border-collapse:collapse;
+    table-layout:fixed;
+}
+
+.paletteEntry {
+    width:30px;
+    height:30px;
+    border:1px solid black;
+    margin:0;
+    padding:0;
+}
+    .paletteEntry:hover {
+        border:1px solid white;
+        border-style:inset;
+    }
+.paletteButton {
+    width: 80px;
+    height: auto;
+    font-size: 18px;
+    border: 2px solid transparent;
+}
+.selectedPaletteButton {
+    width: 80px;
+    height: auto;
+    font-size: 10px;
+    border: 2px solid white;
+
+}
+.paletteButton:hover
+{
+    border:2px solid white;
+}
+.help{
+    font-size:14px;
+}
+.help label{
+    font-weight:bold;
+    color:white;
+}
+.help span{
+    font-style:italic;
+    margin-right:3px;
+    min-width:50px
+}
+.subTopic
+{
+    margin-left:5px;
+    color:white;
+    font-style:italic;
+}
+.help h3{
+
+    font-weight:bold ;
+
+}
+.lyricsHeader{
+    position:fixed;
+    background-color:black;
+    width:100%;
+    border-bottom:1px solid #808080;
+    font-size:125%;
+}
+.toggleColumn{
+
+    margin-right:25px;
+    padding:2px;
+    height:20px;
+    color:black ;
+    text-decoration:none ;
+    font-size:125%;
+}
+.SetList{
+    float:left;
+    font-size:125%;
+    margin-left:10px;
+    overflow:visible;
+    width:49%;
+    color:white;
+}
+    .jstree-anchor {
+        color:white;
+    }
+    .jstree-anchor:hover {
+        color:black;
+    }
+    .jstree-hovered {
+        background-color:white!important;
+        color:black!important;
+    }
+        a[id*="set_"] {
+            color:white;
+            font-style:normal;
+        }
+        a[id*="subset_"] {
+            color:white;
+            font-style:italic
+        }
+        [id="setsRoot"] {
+            font-weight:bold;
+            color:white;
+            font-style:italic;
+        }
+        [id*="song_"] 
+        {
+            color:white;
+            font-weight:normal;
+        }
+        .treeArtist {
+            color:#dddddd;
+        }
+
+        .toggleColumn:hover{
+            text-decoration:underline
+        }
+        .toggleColumn:visited{
+            color:white;
+        }
+
+
+       .requestList_wrapper { 
+           border:1px solid black;
+
+       }
+        .requestList {
+            background-color:gray;
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.5) 35px, rgba(255,255,255,.5) 70px);
+            color:black
+        }
+        #requestList TD {
+            border-bottom:1px solid black;
+            font-size:75%;
+        }
+        .requestList .sorting_asc
+        {
+            background-color:black;
+            color:white;
+        }
+        .requestList .sorting_desc
+        {
+            background-color:black;
+            color:white;
+        }
+        .requestList .sorting
+        {
+            background-color:black;
+            color:white;
+        }
+        .requestList th
+        {
+            background-color:black;
+            color:white;
+            border-top:white;
+        }
+        .requestList .content
+        {
+            background-color:transparent!important;
+        }
+        #messageList>tbody>tr:last-child>td { border-bottom:1px solid black; }
+        .greenRow TD{
+            background-color:#000;
+            color:white;
+        }
+        .greenRow a {
+            color:white;
+        }
+        .yellowRow TD{
+            color:white !important;
+            background-color:gray;
+        }
+        .yellowRow a{
+            color:white;
+        }
+        .redRow {
+            background-color:transparent!important;
+        }
+        .redRow td {
+            background-color:transparent!important;
+            color:black
+        }
+        .redRow a{
+            color:black!important;
+        }
+
+
+@-webkit-keyframes blinker {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes blinker {  
+  from { 
+      opacity: 0; 
+  }
+  to { 
+      opacity: 1; 
+  }
+}
+
+@-ms-keyframes blinker {  
+  from { 
+      opacity: 0; 
+  }
+  to { 
+      opacity: 1; 
+  }
+}
+
+@keyframes blinker {  
+  from { 
+      opacity: 0; 
+  }
+  to { 
+      opacity: 1; 
+  }
+}
+.blink {
+    -webkit-animation-name: blinker;
+    -moz-animation-name: blinker;
+    -o-animation-name: blinker;
+    animation-name: blinker;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    -o-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-timing-function: cubic-bezier(.5, 0, 1, 1);
+    -moz-animation-timing-function: cubic-bezier(.5, 0, 1, 1);
+    -o-animation-timing-function: cubic-bezier(.5, 0, 1, 1);
+    animation-timing-function: cubic-bezier(.5, 0, 1, 1);
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    -o-animation-duration: 1s;
+    animation-duration: 1s;
+}
+        
+
+/* Scrollbars */
+::-webkit-scrollbar {
+      width: 15px;
+      margin-right:-10px
+} 
+::-webkit-scrollbar-track {
+      background-color: #808080;
+} /* the new scrollbar will have a flat appearance with the set background color */
+ 
+::-webkit-scrollbar-thumb {
+      background-color:black;
+      background-image:linear-gradient(transparent 50%, rgba(255,255,255,.5) 50%);
+      background-size:100% 2px;
+} /* this will style the thumb, ignoring the track */
+ 
+::-webkit-scrollbar-button {
+      background-color: #fff;
+      color:white
+} /* optionally, you can style the top and the bottom buttons (left and right for horizontal bars) */
+ 
+::-webkit-scrollbar-corner {
+      background-color: white;
+
+      color:black;
+} 
+/* End Scrollbars*/
+.messageDate {
+    font-style:italic;
+}
+.messageHeading {
+    font-weight:bold;
+    padding-left:10px;
+}
+.messageData {
+    padding-left:20px;
+    width:75%;
+}
+.messageAttachment {
+    width:20px;
+}
+.attachment {
+
+    text-decoration:none;
+}
+
+    .messageDelete
+    {
+        color:white!important;
+        font-weight:lighter;
+        float:right;
+        margin-top:-2px;
+    }
+    .messageDelete:visited{
+        color:white!important;
+    }
+    #messageCount {
+        margin-top:5px;
+    }
+    .iRequestHeader
+    {
+        background-color:black!important;
+        padding:3px;
+    }
+    .messageList th{
+        background-color:black!important;
+    }
+    .messageList {
+        border-bottom:1px solid gray
+    }
+    #messageAccordion .content
+    {
+        background:black!important;        
+    }
+    #requestAccordion .content
+    {
+        background:black!important;        
+    }
+#clearAllMessages {
+    color:white;
+    margin-top:2px;
+}
+
+.mif-songlist {
+    background:url(../images/artist.png);
+    width:32px;
+    height:32px;
+    background-position:center;
+    background-repeat:no-repeat;
+}
+
+.switch .check {
+    background-color:gray
+}
+.switch .check  ::after{
+    background-color:black
+}
+
+.styleSelect select {
+    background: transparent;
+    width: 168px;
+    padding: 5px;
+    font-size: 100%;
+    line-height: 1;
+    border: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    height: 34px;
+    -webkit-appearance: none;
+    -moz-appearance:none;
+    color: #000;
+}
+
+.styleSelect {
+  width: 140px;
+  height: 34px;
+  overflow: hidden;
+  background: url("images/downArrow.png") no-repeat right #fff;
+  border: 2px solid #000;
+}
+.songInfo td:nth-of-type(odd) {
+    text-align:right;
+    padding-right:5px;
+}
+.songInfo td:nth-of-type(even){
+    text-align:left;
+    padding-left:5px;
+}
+#Logout {
+    color: black;
+}
+.eventTable{
+    width:100%;
+}
+.eventTable tr:hover
+{
+    background-color:#b0b0b0;
+}
+.eventTable td{
+    border:0 !important;
+    vertical-align:middle !important;
+}
+.eventTitleTD{
+    text-align:left;
+    padding-left:3px !important;
+    background-color:transparent;
+    width:94%;
+    padding-top:1px !important;
+    padding-bottom:1px !important; 
+}
+.eventDeleteTD {
+    text-align:left; 
+    padding-right:3px !important;
+}
+.eventDeleteButton{
+    height:1em !important;
+    line-height:1em;
+    color:White;
+    font-weight:bold;
+    display:block;
+}
+    .eventDeleteButton:visited {
+        color:White;
+    }
+    .square-button {
+        width:40px !important;
+        height:40px !important;
+    }
+    .button {
+        height:40px !important;
+    }
+.buttonColor{
+    background-color:white;
+    color:black;
+}
+.buttonColor span
+{
+    font-size: 18px;
+}
+.disabled{
+    background: #808080 linear-gradient(-45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent) !important;
+    background-size: 40px 40px !important;
+    opacity:.50;
+}
+th {
+    border-bottom:1px solid gray !important
+}
+#notesPanel{
+    position:absolute;
+    text-align:center;
+    z-index:2001;
+    padding:0;
+    background-color:black;
+    border:1px solid lightgray;
+    display:none;
+    width:400px
+}
+#notesPanel div {
+    background-color:#cccccc
+}
+#closeNotesPanel{
+    border:1px solid black;
+    font-family:'sans-serif';
+    float:right;
+    font-size:75%;
+    width:18px; 
+    height:18px;
+    text-align:center;
+    vertical-align:middle;
+    line-height:12px;
+    margin-top:1px;
+    margin-right:5px;
+    color:black;
+}
+#closeNotesPanel:before{
+    font-family:'sans-serif';
+    content:'x ';
+}
+#closeNotesPanel:hover{
+    border:2px solid black
+}
+
+#sTranspose {
+    background-color: #b0b0b0;
+    width: 36px;
+    text-align: center;
+    margin-top: 10px;
+    height: 240px;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+#sTranspose.ui-widget-content
+{
+    background:#808080;
+}
+#sTranspose.ui-slider-vertical .ui-slider-range {
+    -moz-border-radius: 0;
+    -webkit-border-radius:0;
+    border-radius:0;
+}
+#sTranspose.ui-slider-vertical .ui-widget-header
+{
+    background:#b0b0b0;
+}
+#sTranspose.ui-slider-vertical .ui-slider-handle {
+    background-color: white !important;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    width: 34px;
+    margin-left: 6px;
+    color: black;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 2px solid #606060;
+}
+#sTranspose .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default
+{
+    background:transparent!important;
+}
+#sChangeFontSize {
+    background-color: #b0b0b0;
+    width: 36px;
+    text-align: center;
+    height: 240px;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+#sChangeFontSize.ui-widget-content
+{
+    background:#808080;
+}
+#sChangeFontSize.ui-slider-vertical .ui-slider-range {
+    -moz-border-radius: 0;
+    -webkit-border-radius:0;
+     border-radius:0;
+}
+#sChangeFontSize.ui-slider-vertical .ui-widget-header
+{
+    background:#b0b0b0 !important;
+}
+#sChangeFontSize.ui-slider-vertical .ui-slider-handle {
+    background-color: white !important;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    width: 34px;
+    margin-left: 6px;
+    color: black;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 2px solid #606060;
+}
+#sChangeFontSize .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default
+{
+    background:black!important;
+}
+
+/* CALENDAR */ 
+.fc-button-prev .ui-icon{
+    background-color:blue;
+}
+.gmEvent {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    font-size:smaller;
+    display:block;
+}
+.gmEvent:visited {
+    color:inherit;
+}
+.gmEventDisabled {
+    border: 0;
+    background-color: transparent;
+    padding: 0;
+    margin:0;
+    font-size:smaller;
+}
+    .gmEventDisabled:hover {
+
+    }
+        
+h2, h3 {
+    font-size:smaller
+}
+button {
+    -moz-border-radius: 0!important;
+    -webkit-border-radius: 0!important;
+    border-radius: 0!important;
+    height: 26px!important;
+    -moz-box-shadow: 0!important;
+    -webkit-box-shadow: 0!important;
+    box-shadow: 0!important;
+    background-image: none;
+    background-repeat: no-repeat;
+}
+
+    button:hover {
+        border:1px solid white;
+    }
+        
+.fc-toolbar {
+    height:30px!important;
+    line-height:16px;
+    margin-bottom:0;
+    margin-top:55px;
+}
+.fc-center h2
+{
+    margin-top:-15px;
+}
+#calendar a:visited
+{
+            
+}
+#calendar a:hover
+{
+    color:white;
+    background-color:#b0b0b0 !important;
+}
+#calendar table {
+    border-collapse:collapse;
+}
+#calendar th{
+
+}
+.fc-body td.fc-today {
+    background-color: #606060!important;
+    border-bottom: 1px solid #000;
+    color:black!important;
+}
+#calendar .fc-header {
+    border:1px solid gray;
+
+}
+#calendar .fc-day-number {
+    border-left:1px solid gray;
+    border-right:1px solid gray;
+
+}
+td .fc-day-number.fc-today{
+}
+#calendar .fc-event-container {
+    border-left:1px solid gray;
+    border-right:1px solid gray;
+}
+#calendar TD {
+    border-left:1px solid gray;
+    border-right:1px solid gray;
+}
+#calendar .fc-widget-content {
+    border-top:1px solid gray;
+}
+.fc-body TD.fc-today {
+    font-weight:bold;
+    color:gray
+}
+.fc-content-skeleton .fc-today {
+    color:gray
+}
+.fc-state-highlight {
+    color:gray;
+}
+.fc-day-number.fc-other-month{
+    opacity:.81
+} 
+.fc-widget-header {
+    color:black;
+}
+.fc-event-container {
+
+}
+.week-days {
+    background-color:orange;
+    color:black;
+}
+.day-of-week{
+    margin:0!important;
+}
+.calendar-row {
+    margin:0!important;
+}
+.empty {
+    margin:0!important;
+}
+       
+.day {
+    border:1px solid gray!important;                  
+    margin:0!important;
+}
+.day a {
+    color:white
+}
+input[type=number] {
+    background-color:white!important;
+    color:black;
+    border:1px solid gray;
+}
+.fc-more {
+    color:white!important;
+}
+.fc-more:hover
+{
+    background-color:transparent!important
+}
+.fc-more-cell {
+}
+.fc .fc-button-group > *
+{
+    background-color:#dadada;
+}
+.fc .fc-button-group > *:hover{
+    background-color:white;
+}

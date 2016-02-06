@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+    <title>GigMan Calendar</title>
+
+<link rel="stylesheet" href="Content/css/metro.css" />
+<link rel="stylesheet" href="Content/css/metro-icons.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.8.1/jquery.timepicker.min.css" />
+	<link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/ui-darkness/jquery-ui.min.css" rel="stylesheet">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>    
+<script src='scripts/moment.min.js'></script>
+<script src="Scripts/metro.js"></script>
+
+<link id="gmStyle" href='css/irequest.css' rel='stylesheet' />
+
+<script runat="server" src="js/utilities.js"></script>
+<script runat="server" src="js/dataRequest.js"></script>
+<script runat="server" src="js/reqcalendar.js"></script>
+
+</head>
+<body>
+	<div id='calendar'></div>
+    <div id="eventCharm" class="gm-charm charm" data-position="left" data-role="charm">
+        <span class="charmLabelBold" style="margin-bottom:10px;" id="eventTitle"></span><br /><br />
+        <span class="charmLabelBold charmLabelEmph">When:</span><br />
+        <div class="charmText indent" id="eventTime">
+        <span id="date"></span><br /><br />
+        <span class="charmLabelEmph indent">Start Time</span>: <span id="startTime"></span><br />
+        <span class="charmLabelEmph indent">End Time</span>: <span id="endTime"></span><br />
+        </div><br />
+
+        <span class="charmLabelBold charmLabelEmph">Where:</span>
+        <div class="venue indent" style="width:100%" id="venue"></div>
+        <p class="eventDesc" id="description"></p>
+    </div>
+    <script>
+        var scheme = getSession("colorscheme");
+
+        if (scheme == "hic") {
+            $('link[id="gmStyle"]').attr('href', 'css/request-hic.css');
+        }
+        else if (scheme == "classic") {
+            $('link[id="gmStyle"]').attr('href', 'css/request-classic.css');
+        }
+        else if (scheme == "neon") {
+            $('link[id="gmStyle"]').attr('href', 'css/request-neon.css');
+        }
+        else {
+            $('link[id="gmStyle"]').attr('href', 'css/request-classic.css');
+        }
+    </script>
+</body>
+</html>

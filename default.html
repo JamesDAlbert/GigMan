@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>GigMan</title>
+    <link href="content/css/metro.css" rel="stylesheet"/>    
+    <link href="content/css/metro-icons.css" rel="stylesheet"/>
+    <link id="gmStyle" href="css/gigman-neon.css" rel="stylesheet"/>
+
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/metro.js"></script>
+    <script src="scripts/jss.min.js"></script>
+    <script runat="server" src="js/utilities.js"></script>
+    <script runat="server" src="js/datarequest.js"></script>
+    <script runat="server" src="js/gigman.js"></script>
+
+    <script runat="server" src="js/default.js"></script>
+
+    <style>
+
+    </style>
+</head>
+<body >
+    <div class="indexHeader" style="display:block;width:100%;overflow:hidden;height:110px;line-height:110px;vertical-align:middle">
+        <div id="logo"></div>
+    </div><br />
+
+    <p style="display:block;overflow:auto;padding:20px;width:100%">
+        <span class="charmLabelBold" style="font-size:larger">Welcome to GigMan</span><br />
+    </p>
+    <div id="navigationPanel">
+        <div class="tile-group" style="width:100%;margin:5px;padding:0">
+            <div class="tile tile-square mainNav fg-black bg-resynch" style="background-color:#bbbbbb" data-role="tile">
+                <div class="tile-content " id="loginLink">
+                    <span class="mif-user"></span> <br /><br />
+                    <span class="tileLabel">Log In</span>
+                </div>
+            </div>
+            <div class="tile tile-square mainNav fg-black"  style="background-color:#bbbbbb" data-role="tile">
+                <div class="tile-content bg-user" id="createAccount">
+                    <span class="mif-user-plus"></span> <br /><br />
+                    <span class="tileLabel">Create Account</span>
+                </div>
+            </div>
+            <div class="tile tile-square mainNav fg-black bg-info"  style="background-color:#bbbbbb" data-role="tile">
+                <div class="tile-content myTile" id="WantAds">
+                    <span class="mif-user-plus"></span> <br /><br />
+                    <span class="tileLabel">Want Ads</span>
+                </div>
+            </div>
+            <div class="tile tile-square mainNav bg-info" data-role="tile">
+                <div class="tile-content myTile" id="FAQ">
+                    <span class="icon mif-question mif-2x"></span><br /><br /><span class="tileLabel">FAQ</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="loginCharm" class="gm-charm" data-position="left" data-role="charm">
+        <div style="float:right">            
+            <button class="square-button small-button buttonColor OpenEditorPanel" id="CloseLoginPanel" title="Close"><span class="mif-cross mif-2x"></span></button>
+        </div>
+        <div style="float:left;width:100%">
+            <br /><span class="charmLabelBold">Login</span><br />
+            <div class="input-control modern text myModernInput" style="width:49%">
+                <input type="text" style="color:white" placeholder="Username" id="Username"/>
+                <span class="label">Username</span>
+                <span class="informer">Username</span>
+            </div>
+            <div class="input-control modern password myModernInput iconic password" style="width:49%">
+                <span class="icon icon-right mif-lock"></span><input type="password" style="color:white" placeholder="Password" id="Password"/>
+                <span class="label">Password</span>
+                <span class="informer">Password</span>
+            </div><br /><br />
+            <button class="button buttonColor" style="margin-left:75px;width:150px" id="Login"><span class="mif-enter"></span> Login</button><br /><br />
+            <span class="charmLabel" id="loginError"></span>
+        </div>                
+    </div>
+    <div id="createAccountCharm" class="gm-charm" data-position="left" data-role="charm">
+        <div style="float:right">
+             <button class="square-button small-button buttonColor OpenEditorPanel" id="CloseCreateAccountPanel" title="Close"><span class="mif-cross mif-2x"></span></button>
+        </div>   
+        <iframe id="newAccountContainer" class="panelContainer" src="newaccount.html" style="overflow-y:auto"></iframe>              
+    </div>
+    
+</body>
+</html>

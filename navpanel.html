@@ -1,0 +1,218 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="content/css/metro.css" rel="stylesheet"/>
+
+    <link href="content/css/metro-icons.css" rel="stylesheet"/>   
+    <link rel="stylesheet" href="Content/css/jquery.datatables.min.css" />
+    <link rel="stylesheet" href="Content/css/fixedHeader.dataTables.min.css"/>
+    <link id="gmStyle" href="css/gigman-hic.css" rel="stylesheet"/>  
+    <script runat="server" src="scripts/jquery.js"></script>
+    <script src="scripts/jquery.widget.min.js"></script>
+    <script src="Scripts/jquery.datatables.min.js"></script>
+    <script src="Scripts/dataTables.fixedHeader.min.js"></script>
+    <script src="scripts/metro.js"></script>
+    <script runat="server" src="scripts/jss.min.js"></script>
+    <script runat="server"  src="js/datarequest.js"></script>
+    <script runat="server" src="js/gigman.js"></script>
+    <script runat="server"  src="js/utilities.js"></script>
+
+
+    <script runat="server"  src="js/navpanel.js"></script>
+    <script src="Scripts/jlinq.js"></script>
+    <style>
+        .dataTables_empty
+        {
+            color:white!important;
+        }
+        th {
+            color:white!important;
+        }
+        .accordion > .frame > .heading { 
+            border:0!important;
+        }
+           
+        .accordion > .frame.active > .heading { 
+            border:0!important;
+        }
+    </style>
+</head>
+<body style="position:relative;width:100%;" class="gm-bg">
+    <div style="width:100%;margin:0" class="navigationPanel">
+        <span class="charmLabelBold">Active Artist:&nbsp;</span>
+        <div class="input-control select">
+            <select id="artistList"></select>    
+        </div>
+        <div class="accordion" data-role="accordion" data-close-any="false" style="margin-bottom:5px"> <!-- accordion tiles -->
+            <div class="frame active">
+                <div class="heading bg-transparent">Navigation</div> 
+                <div class="content gm-bg">
+                    <div class="tile-group" style="margin-left:0;padding-top:0;margin-top:-5px;">
+                    <div style="overflow:hidden;width:100%;">
+                        <div class="input-control text" style="display:inline">               
+                            <input type="text" style="width:232px;margin-left:5px" placeholder="Search text..." id="SearchTerm"/>
+                        </div>&nbsp;<button class="button square-button buttonColor" id="Search" style="margin-top:5px;height:32px"><span class="mif-search"></span></button>        
+                    </div>
+                    <div class="tile-container">
+                        <div class="tile-small bg-song  charmNav" data-role="tile" title="A list of all of your songs.">
+                            <div class="tile-content " id="SongList">
+                                <span class="icon mif-list2"></span><br />
+                                Songlist<br />                              
+                                <div id="SongCount" style="margin-top:-3px"></div>
+                            </div>
+                        </div>
+                        <div class="tile-small bg-edit  charmNav" data-role="tile" title="Add a new song.">
+                            <div class="tile-content " id="SongEditor">
+                                <span class="icon mif-pencil "></span><br /><br /><span class="tileLabel">Add Song</span>
+                            </div>
+                        </div>
+                
+                        <div class="tile-small bg-random  charmNav" data-role="tile" title="Select a random song from the master list.">
+                            <div class="tile-content  " id="RandomSong">                        
+                                <span class="icon mif-dice "></span><br /><br />
+                                <span class="tileLabel">Song</span> 
+                            </div>
+                        </div>                        
+                        <div class="tile-small bg-random  charmNav" data-role="tile" title="Select a random composer, and view all of that composer's songs in the master list.">
+                            <div class="tile-content " id="RandomArtist">
+                                <span class="icon mif-mic"></span>
+                                <span class="icon mif-dice" style="font-size:16px!important"></span>
+                                <br /><br /><span class="tileLabel">Composer</span>
+                            </div>
+                        </div>   
+                        <div class="tile-small bg-song  charmNav" data-role="tile" title="Songs played Seldomly.">
+                            <div class="tile-content " id="Unplayed">
+                                    <span class="icon mif-clipboard "></span><br /><br /><span class="tileLabel">Unplayed</span>
+                            </div>
+                        </div>                                            
+                        <div class="tile-small bg-lookup  charmNav" data-role="tile" title="View a list of all of the artists represented in your master song list.">
+                            <div class="tile-content " id="Artists">
+                                <span class="icon mif-mic"></span><br /><br /> Composers
+                            </div>
+                        </div>
+
+
+                        <div class="tile-small bg-lookup  charmNav" data-role="tile" title="View a list of genres.">
+                            <div class="tile-content " id="Genres">
+                                <span class="icon mif-music "></span><br /><br /><span class="tileLabel">Genres</span>
+                            </div>
+                        </div>
+                        <div class="tile-small bg-lookup  charmNav" data-role="tile" title="View a list of categories.">
+                            <div class="tile-content " id="Categories">
+                                <span class="icon mif-tag "></span><br /><br /><span class="tileLabel">Categories</span>
+                            </div>
+                        </div>
+                        <div class="tile-small bg-song  charmNav" data-role="tile" title="View and manage set lists.">
+                            <div class="tile-content " id="Setlists">
+                                <span class="icon mif-list-numbered "></span><br /><br /><span class="tileLabel">Set Lists</span>
+                            </div>
+                        </div>
+                        <div class="tile-container">
+      
+                            <div class="tile-small bg-user charmNav" data-role="tile" title="Calendar">
+                                <div class="tile-content " id="Calendar">
+                                    <span class="icon mif-calendar "></span><br /><br /> Calendar
+                                </div>
+                            </div> 
+                            <div class="tile-small bg-logout  charmNav" data-role="tile">
+				                <div class="tile-content myTile " id="Dashboard">
+					                <span class="icon mif-phone"></span> <br /><br />
+					                <span class="tileLabel">Dashboard</span>
+				                </div>
+                            </div>
+                            <div class="tile-small bg-user charmNav" data-role="tile">
+                                <div class="tile-content " id="Profiles">
+                                    <span class="icon mif-user "></span><br /><br /><span class="tileLabel">Profiles</span>
+                                </div>
+                            </div>                            
+                            <div class="tile-small bg-settings charmNav" data-role="tile" title="Edit site settings such as font and colors.">
+                                <div class="tile-content " id="Settings">
+                                    <span class="icon mif-cogs "></span><br /><br /><span class="tileLabel">Settings</span>
+                                </div>
+                            </div>  
+                            <div class="tile-small bg-resynch  charmNav" data-role="tile" title="Resynchronize your data.">
+                                <div class="tile-content " id="Resynch">
+                                        <span class="icon mif-redo "></span><br /><br /><span class="tileLabel">Re-Synch</span>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end accordion tiles -->    
+        <div>
+        <label class="switch" style="margin-left:5px;margin-top:5px;margin-bottom:3px" title="Enable/Disable Request Polling">
+            <input type="checkbox" id="iRequestEnable" checked="checked"/>
+            <span class="check"></span>
+        </label> Enable GigMan Request Feeds<br />
+        <div class="accordion" data-role="accordion" data-close-any="true" style="margin-top:5px" id="requestAccordion"> <!-- accordion iRequest -->
+            <div class="frame">
+                <div class="heading bg-transparent">GigMan Request</div>
+                <div class="content bg-transparent" style="background-color:black">            
+                  <div class="tile-container" style="margin-top:-13px">              
+                    <div class="" id="Div3" style="width:100%;">
+                        <div style="padding:3px;">
+                            <span style="float:left;font-weight:bold"><a href="#" class="fg-white" id="iRequestLink" target="_blank">Requests -</a> &nbsp;</span><span class="charmLabel fg-white" style="float:left" id="requestCount"></span>
+                            <label class="switch" style="float:right;"> All/Today&nbsp;
+                                <input type="checkbox" id="requestDate"/>
+                                <span class="check"></span>
+                            </label>
+                        </div><br />
+                        <div style="width:100%;height:auto;">                                
+                            <table id="requestList" class="requestList" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th class="requestHeader">Title</th>
+                                        <th class="requestHeader">Artist</th>
+                                        <th class="requestHeader"># Req.</th>
+                                        <th class="requestHeader"><span class="mif-thumbs-up"></span></th>
+                                        <th class="requestHeader"><span class="mif-thumbs-down"></span></th>
+                                    </tr>                           
+                                </thead>
+                                <tbody></tbody>
+                                <tfoot></tfoot>
+                            </table>
+                        </div>  
+                    </div>
+                </div> 
+                </div>
+                </div>
+            </div>
+        <hr style="background-color:gray"/>
+        <div class="accordion" data-role="accordion" data-close-any="true" style="margin-top:5px;" id="messageAccordion"> <!-- accordion iMessage -->
+            <div class="frame">
+                <div class="heading bg-transparent">iMessages</div>
+                <div class="content bg-transparent">            
+                  <div class="tile-container" style="margin-top:-10px;">              
+                    <div class="" id="Div4" style="width:100%;">
+                        <div class="iRequestHeader" style="padding-bottom:3px;">
+                            <span style="float:left;font-weight:bold"><a href="#" class="fg-white" id="iMessageLink" target="_blank" >iMessages</a> -&nbsp;</span>
+                            <span class="charmLabel fg-white" style="float:left" id="messageCount"></span>
+                            &nbsp;&nbsp;<a href="#" id="clearAllMessages" class="messageDelete" title="Delete all messages." data-userid="0"><span class="mif-cross"></span></a>
+                            <label class="switch" style="float:right;"> All/Today&nbsp;
+                                <input type="checkbox" id="messageDate"/>
+                                <span class="check"></span>
+                            </label>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div style="width:100%;height:auto">                                
+                            <table id="messageList" style="width:100%;border:1px solid gray">
+                                <thead>
+                                    <tr><th>Message</th><th>&nbsp;</th><th>Time</th></tr>
+                                </thead>
+                                <tbody class="gm-bg"></tbody>
+                                <tfoot></tfoot>
+                            </table>
+                        </div>  
+                    </div>
+                </div> 
+                </div>
+                </div>
+            </div>
+
+
+
+        </div>
+</body>
+</html>

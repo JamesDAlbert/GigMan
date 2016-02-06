@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>GigMan Request - About</title>
+    <link rel="stylesheet" href="Content/css/metro-icons.css" />
+    <link rel="stylesheet" href="Content/css/metro.css" />
+    <link id="gmStyle" rel="stylesheet" href="css/irequest.css" />
+    <script src="js/utilities.js"></script>
+    <script src="js/dataRequest.js"></script>
+    <script src="Scripts/jquery-2.1.4.min.js"></script>
+</head>
+<body class="framed">
+    GigMan Request lets fans and bands interact in real time while the performance is happening.<br /><br />
+    If you are an artist, you can create a song list that your audience can browse and upvote to make requests, which are made available to you in real time if you are using our free GigMan software.<br /><br />
+    If you are an audience member, GigMan Request allows you to ask those folks on the stage to play your favorite songs from their repertoire.<br /><br />
+    You can make requests, each of which can be an up-vote (<span class="mif-thumbs-up"></span>) or, if available, a down-vote (<span class="mif-thumbs-down"></span>). <br /><br />
+    Requests are tallied in real-time and delivered to the artists' wireless devices.
+    <script>
+        var scheme = getSession("colorscheme");
+
+        if (scheme == "hic") {
+            $('link[id="gmStyle"]').attr('href', 'css/request-hic.css');
+        }
+        else if (scheme == "classic") {
+            $('link[id="gmStyle"]').attr('href', 'css/request-classic.css');
+        }
+        else if (scheme == "neon") {
+            $('link[id="gmStyle"]').attr('href', 'css/request-neon.css');
+        }
+        else {
+            $('link[id="gmStyle"]').attr('href', 'css/request-classic.css');
+        }
+    </script>
+</body>
+</html>

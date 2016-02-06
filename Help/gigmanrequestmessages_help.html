@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link id="gmStyle" rel="stylesheet" href="../css/gigman-neon.css" />
+    <link rel="stylesheet" href="../Content/css/metro.css" />
+    <script src="../Scripts/jquery-2.1.4.min.js"></script>
+</head>
+<body class="help">
+    <label class="charmLabelBold">GigMan Request Messages</label>
+    <p>
+        Audience members can message the artist in near-real time.  A message consists of an optional topic, selectable from a drop down, an optional 160 character free-text message, and an optional file attachment.  Only image files are allowed as attachments.<br /><br />
+        These messages can be sent to individual artist members (if the artist and individual member profiles allow it), the leader only (the owner of the Artist Profile) or the entire band.<br /><br />
+        Messages can be viewed in the navigation popout (<span class="mif-menu">) or the Dashboard area of the GigMan site.</span><br /><br />
+        The number of messages a single user can send in a 24-hour period can be set in the Artist Profile editor.
+    </p><br/><br />
+    <script>
+        var scheme = sessionStorage.getItem("colorscheme");
+
+        if (scheme == "hic") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.css');
+        }
+        else if (scheme == "classic") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.css');
+        }
+        else if (scheme == "neon") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.css');
+        }
+    </script>
+</body>
+</html>

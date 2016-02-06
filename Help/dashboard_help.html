@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link id="gmStyle" rel="stylesheet" href="" />
+    <link rel="stylesheet" href="../Content/css/metro.css" />
+    <script src="../Scripts/jquery-2.1.4.min.js"></script>
+</head>
+<body class="help">
+    <label class="charmLabelBold">GigMan Request Dashboard</label><br />
+    <p>
+    GigMan Request members can use the dashboard to monitor and analyse the reach of the GigMan Request application.<br />
+    The dashboard consists of four panels: The first panel allows for selection of the current artist, and a switch to enable/disable the live feed. The others are:
+    <b><i>Statistics</i></b>, <b><i>Graphs</i></b> and <b><i>Data</i></b>.<br />
+    <h3>Statistics</h3>
+    Using all of the available data for the current artist, the following statistics are tracked:
+    <b>Most Requested</b> The song that has been most often requested.  This includes upvotes and, if usage is specified in the Artist Profile area, downvotes.<br />
+    <b>Least Requested</b> The song with the smallest non-zero request count.<br />
+    <b>Most Downvotes</b> The song with the highest number of downvotes.<br />
+    <b>Least Downvotes</b> The song with the smallest non-zero downvote count.<br />
+    <b>Most Upvotes</b> The song with the highest number of upvotes.<br />
+    <b>Least Upvotes</b> The song with the smallest non-zero upvote count.<br />
+    <b>Highest Request Traffic</b> The date with the highest request count.
+    <b>Lowest Request Traffic</b> The date with the lowest request count.
+    <b>Highest Message Traffic</b> The date with the highest message count.  A message addressed to more than one person is only counted once.<br />
+    <b>Lowest Message Traffic</b> The date with the lowest individual message count.<br />
+    <h3>Graphs</h3>
+    Shows a line graph of date vs. message and request traffic.
+    <h3>Data</h3>
+    The data panel consists of two displays: Requests and Messages.
+    <h4><i>Requests</i></h4>
+    What you see in the Messages list depends on how the context switch is set. If the switch is set to <b><i>All</i></b>, then all requests since the beginning of time are aggregated into a list which displays the song information, the number of requests in total, and the number of upvotes and (if specified in the Artist Profile) the number of downvotes for each song.<br />
+    When the switch is set to <b><i>Today</i></b>, the same fields are displayed, but only for todays data.<br />
+    When the switch is set to <b><i>Live</i></b>, a running window of the last 10 requests is displayed.<br />
+    <h4><i>Messages</i></h4>
+    There are two display options for Messages: <b><i>All</i></b> (all data since the big bang) and <b><i>Today</i></b>.<br />
+    Messages are grouped by the date they were sent, and include the message sent-time, the message text, the message type if one was selected, an attachment link if an attachement was included, and a delete button to permanently delete the message.
+</p><br /><br />
+    <script>
+        var scheme = sessionStorage.getItem("colorscheme");
+
+        if (scheme == "hic") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.css');
+        }
+        else if (scheme == "classic") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.css');
+        }
+        else if (scheme == "neon") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.css');
+        }
+    </script>
+</body>
+</html>

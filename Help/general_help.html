@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link id="gmStyle" rel="stylesheet" href="" />
+    <link rel="stylesheet" href="../Content/css/metro.css" />
+    <link rel="stylesheet" href="../Content/css/metro-icons.min.css" />
+    <script src="../Scripts/jquery-2.1.4.min.js"></script>
+</head>
+<body class="help">
+    <label class="charmLabelBold">GigMan General Help</label><br />
+    <p>
+        <h3>Browsers</h3> GigMan should run on most modern browsers, but is specifically targets Google Chrome.  The reasons for this are twofold:<br />
+        Google Chrome is the most used browser in the world, and Google Chrome supports many of the modern HTML features used in the site to enhance usability.<br />
+        Other browsers can be used, but Google Chrome is optimal.<br />
+        GigMan is written using HTML5, CSS3 and JavaScript.  JavaScript must be turned on in the browser.
+    </p>
+    <p>
+        <h3>Interface</h3> All of the pages in GigMan contain a header, which in turn contains some common elements for navigating the site and controlling GigMans visual presentation.<br /><br />
+        <b>Colors</b> There are three color schemes available:<br /><br />
+        &nbsp;&nbsp;<b><em>Hi-C</em></b> This is a high contrast, black and white presentation scheme.<br />
+        &nbsp;&nbsp;<b><em>Classic</em></b> This is a flat styled interface using low-saturation colors.<br />
+        &nbsp;&nbsp;<b><em>Neon</em></b> This is a flashy, high-saturaion interface with lots of eye-candy.<br /><br />
+        The color scheme can be selected from the three position scheme switch in the header.<br /><br />
+        <b>Navigation</b> <br />
+        &nbsp;&nbsp;<b><span class="icon mif-menu"></span></b> Opens the navigation panel.<br />
+        &nbsp;&nbsp;<b><span class="icon mif-home"></span></b> Navigates the browser to the home page.<br />
+        &nbsp;&nbsp;<b><span class="icon mif-arrow-left"></span></b> Navigates the browser to the previous page. This is just a more accessible 'Back' button.<br />
+        &nbsp;&nbsp;<b><span class="icon mif-question"></span></b> Opens the help panel for the current page or panel.<br /><br />
+        <b>List Page Presentation</b><br />
+        A two way switch on the right side of the header enebales switching between a standard list presentation or a tile presentation of the data being displayed.<br /><br />
+
+    </p>
+    <br /><br />
+    <script>
+        var scheme = sessionStorage.getItem("colorscheme");
+
+        if (scheme == "hic") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.css');
+        }
+        else if (scheme == "classic") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.css');
+        }
+        else if (scheme == "neon") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.css');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="content/css/metro.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/gmWidgets.css" />
+    <link href="content/css/metro-icons.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="Content/css/jquery-ui.css" />
+    <link id="gmStyle" href="css/gigman-neon.css" rel="stylesheet"/>
+
+    <script src="scripts/jquery.js"></script>
+    <script src="Scripts/jquery.widget.min.js"></script>
+    <script src="scripts/jquery-ui.min.js"></script>
+
+
+    <script src="scripts/metro.min.js"></script>
+    <script src="scripts/jss.min.js"></script>
+    <script runat="server" src="js/datarequest.js"></script>
+    <script runat="server" src="js/gigman.js"></script>
+    <script runat="server" src="js/rgbcolor.js"></script>
+    <script runat="server" src="js/utilities.js"></script>
+
+
+    <script runat="server" src="js/sitesettings.js"></script>
+    <style>
+        body, html {
+            height:455px;width:100%;padding:0;margin:0;background:none transparent
+        }   
+        
+
+    </style>
+</head>
+<body class="lyricsBackground">
+
+    <div style="height:455px;opacity:1">
+        <span class="charmLabel">Local Storage Used: </span><span id="StorageUsed" class="charmLabel"></span><br />
+        <span class="charmLabel">Local Storage Remaining: </span> <span id="StorageRemaining" class="charmLabel"></span>
+        <table class="settingsTable">
+            <tr>
+                <td colspan="2" class="charmLabelBold">Text</td>
+            </tr>
+            <tr>
+                <td class="charmLabel">Font:</td>
+                <td>
+                    <select id="SiteFonts" title="Select the font to use for for site text."></select>
+                </td>
+            </tr>
+            <tr>
+                <td class="charmLabel">
+                    Size:
+                </td>
+                <td>
+                   <div class="spinBox">
+                        <button class="spinMinus buttonColor" title="Decrease font size"><span class="mif-minus"></span></button>
+                        <input id="spChangeFontSize" type="text" class="spinInput" data-min="14" data-max="30" data-step="1" value="14" data-field="fontSize" />
+                        <button class="spinPlus buttonColor" title="Increase font size"><span class="mif-plus"></span></button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="charmLabel">Bold:</td><td>
+                    <label class="switch"> 
+                        <input type="checkbox" id="boldText"/>
+                        <span class="check"></span>
+                    </label>
+                    <span class="charmLabel"></span>
+                    <label class="switch"> 
+                        <input type="checkbox" id="italicText"/>
+                        <span class="check"></span><span class="charmLabel">&nbsp;Italic</span>
+                    </label></td>
+            </tr>
+            <tr>
+                <td class="charmLabel">Color Scheme:</td>
+                <td>
+                    <div id="ColorScheme" class="slide-switch" title="Color Scheme">
+                        <input type="radio" class="slide-switch-input" name="view" value="hic" id="hic" checked/>
+                        <label for="hic" class="slide-switch-label slide-switch-label-left" title="Hi-Contrast"><span class="slide-switch-marker">H</span></label>
+                        <input type="radio" class="slide-switch-input" name="view" value="neon" id="neon"/>
+                        <label for="neon" class="slide-switch-label slide-switch-label-middle" title="Neon"><span class="slide-switch-marker">N</span></label>
+                        <input type="radio" class="slide-switch-input" name="view" value="classic" id="classic"/>
+                        <label for="classic" class="slide-switch-label slide-switch-label-right" title="Metro Classic"> <span class="slide-switch-marker">C</span></label>
+                        <span class="slide-switch-selection"><div class="knurl"></div></span>
+                    </div>
+
+                </td>
+            </tr>
+        </table>
+        <table class="settingsTable">
+            <tr>
+                <td colspan="2" class="charmLabelBold">Lists</td>
+            </tr>
+            <tr>
+                <td class="charmLabel">Ignore Articles</td>
+                <td style="text-align:left"><label class="switch"> 
+                <input type="checkbox" id="ignoreArticles"/>
+                <span class="check"></span>
+            </label></td>
+            </tr>
+
+
+            <tr><td class="charmLabel">Song List Page Length</td>
+                <td>
+                    <div class="input-control select">
+                        <select id="SongListLength">
+                            <option value="-1">All</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>          
+                            <option value="15">15</option>
+                            <option value="25">25</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+
+            <tr><td class="charmLabel">Set List Page Length</td>
+                <td>
+                    <div class="input-control select">
+                        <select id="SetListLength">
+                            <option value="-1">All</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>          
+                            <option value="15">15</option>
+                            <option value="25">25</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+
+        </table>
+        <table class="settingsTable" style="visibility:hidden">
+            <tr><td>Lists</td></tr>
+            <tr><td><table id="listColors"></table></td></tr>
+        </table>
+    </div>
+        <script>
+            var scheme = getSession("colorscheme");
+
+            if (scheme == "hic") {
+                $('link[id="gmStyle"]').attr('href', 'css/gigman-hic.css');
+            }
+            else if (scheme == "classic") {
+                $('link[id="gmStyle"]').attr('href', 'css/gigman-classic.css');
+            }
+            else if (scheme == "neon") {
+                $('link[id="gmStyle"]').attr('href', 'css/gigman-neon.css');
+            }
+    </script>
+</body>
+</html>

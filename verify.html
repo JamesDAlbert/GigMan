@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="Content/css/metro.css" />
+    <link id="gmStyle" rel="stylesheet" href="css/gigman-neon.css" />
+    <script src="Scripts/jquery.js"></script>
+    <script runat="server" src="js/dataRequest.js"></script>
+    <script runat="server" src="js/utilities.js"></script>
+    <script src="scripts/jss.min.js"></script>
+    <script runat="server" src="js/gigman.js"></script>
+</head>
+    <style>
+        .loginLink {
+            color:white;
+            text-decoration:underline;
+        }
+        .loginLink:visited {
+            color:white;
+        }
+    </style>
+<body>
+    <h2>GigMan Email Verification</h2>
+    <p>
+        Thank you for your interest in GigMan!
+    </p>
+    <p class="Error">
+
+    </p>
+    <script>
+        $(document).ready(function () {
+            var parms = getQueryParameters(document.location.search);
+            var cd = parms.vc;
+            var em = parms.em;
+            if (cd && em) {
+                if (cd.trim() !== "" && em.trim() !== "") {
+                    var usr = userVerify(cd, em)
+                    if (usr != null) {
+                        $(".Error").html("Thank you for registering at GigMan.com!<br>You may now <a class='loginLink' href='default.html'>Log in</a>");
+                    }
+                    else $(".Error").html("There seems to be a problem verifying your registration.  If it has been more that 24 hours since you registered, the verification code sent you has expired, and you will have to go through the registration process again.");
+                }
+            }
+            else {
+                $(".Error").html("There seems to be a problem verifying your registration.  Please ensure that the URL you are using matches the verification URL which was emailed to you.");
+            }
+        });
+    </script>
+</body>
+</html>

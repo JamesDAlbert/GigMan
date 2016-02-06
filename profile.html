@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="content/css/metro.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="Content/css/metro-icons.min.css" />
+    <link id="gmStyle" runat="server" href="css/gigman-neon.css" rel="stylesheet"/>
+
+    <script src="Scripts/jquery.js"></script>
+    <script src="Scripts/metro.js"></script>
+    <script runat="server"  src="js/utilities.js"></script>
+    <script runat="server"  src="js/dataRequest.js"></script>
+    <script runat="server"  src="js/profile.js"></script>
+    <script runat="server"  src="js/gigman.js"></script>    
+    <script runat="server"  src="scripts/jss.min.js"></script>
+
+    <style>
+        li.search-choice{
+            background-color:#008080 !important;
+        }
+        .chosen-choices
+        {
+
+        }
+        .chosen-container-active {
+            background-color:#008080 !important;
+        }
+        .search-field{
+            width:99%;
+            background-color:inherit
+        }
+        .chosen-container.chosen-container-multi
+        {
+            width:100% !important;
+        }
+        option { padding-left:10px;}
+        optgroup { font-weight:bold;font-size:16px;}
+    </style>
+</head>
+<body style="width:100%">
+    <span class="charmLabelBold">Personal Profile for </span><span class="charmLabelBold" id="userName"></span><br />
+    <span class="charmLabelBold">Joined: </span><span class="charmLabel" id="joinDate"></span><br />
+    <span class="charmLabelBold">Status: </span> <span class="charmLabel" id="status"></span><br /><br />
+    <div style="width:100%;border:1px solid white;padding:5px">
+    <div class="input-control modern text myModernInput" style="width:49%">
+        <input type="text" style="color:white" placeholder="First name" id="FirstName"/>
+        <span class="label">* First Name</span>
+        <span class="informer">First Name - required</span>
+    </div>
+    <div class="input-control modern text myModernInput" style="width:49%">
+        <input type="text" style="color:white" placeholder="Last name" id="LastName"/>
+        <span class="label">* Last Name</span>
+        <span class="informer">Last Name - required</span>
+    </div>
+    <div class="input-control modern text myModernInput" style="width:49%">
+        <input type="text" style="color:white" placeholder="Email address" id="Email"/>
+        <span class="label">Email Address</span>
+        <span class="informer">Email Address - required</span>
+    </div>
+    <div id="instrumentPanel" style="width:49%;min-width:49%;display:inline-block;">
+        <div><select multiple="multiple" id="Instruments" name="Instruments" style="width:100%;height:100px" title="Your primary instrument(s)"><option></option></select></div>
+    </div><br /> 
+
+    <div id="address">
+        <div id="countryPanel" style="width:100%;">
+            <select id="country" style="width:48%;" data-placeholder="Country"></select>
+            <select id="state" style="width:48%;" data-placeholder="State"></select>
+        </div>
+ 
+        <div class="input-control modern iconic myModernInput" data-role="input" style="width:40%">
+            <input type="text" style="color:white" id="city" placeholder="City"/>
+            <span class="label">City</span>
+            <span class="informer">City</span>        
+        </div>        
+        <div class="input-control modern iconic myModernInput" data-role="input" style="width:40%">
+            <input type="text" style="color:white" id="postalCode" placeholder="Postal Code"/>
+            <span class="label">Postal Code</span>
+            <span class="informer">Postal Code</span>        
+        </div>
+    </div>
+    <div class="input-control modern password iconic myModernInput" data-role="input" style="width:37%">
+        <span class="icon icon-right mif-lock"></span><input type="password" placeholder="Password"/>
+        <span class="label">Password</span>
+        <span class="informer">Please enter your password</span>        
+    </div>
+    <div class="input-control modern password iconic myModernInput" data-role="input" style="width:37%;margin-left:48px">
+        <span class="icon mif-lock"></span><input type="password" placeholder="Re-enter Password"/>
+        <span class="label">Re-enter Password</span>
+        <span class="informer">Re-enter your password</span>        
+    </div>
+    <br /><br />
+    <button type="submit" class="button buttonColor"><span class="icon mif-floppy-disk"></span>&nbsp;&nbsp;<span>Save Changes</span></button>
+    </div><br />
+    <div style="width:100%;vertical-align:top;border:1px solid white;padding:5px;">
+        <table style="width:100%">
+            <tr>
+                <td colspan="2" style="vertical-align:middle;padding-bottom:3px;text-align:center" id="joinRequest">
+                    <span class="charmLabel" style="color:#c8c8c8">Artist Join Request</span>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:right;width:50%;vertical-align:middle">
+                    <div class="input-control select" style="line-height:35px;vertical-align:middle">
+                        <select id="joinArtistList"></select>    
+                    </div></td>
+                <td style="text-align:left"><button class="button buttonColor" id="joinRequestSend" style="display:inline"><span class="icon mif-mail">&nbsp;</span>&nbsp;Send</button></td>
+            </tr>
+            <tr><td colspan="2"><hr class="border" /></td></tr>
+            <tr>
+                <td colspan="2" style="width:49%;vertical-align:top;padding-bottom:3px">
+                    <div style="overflow:hidden;width:auto;height:auto">
+                        <span class="charmLabel" style="color:#c8c8c8">Artist Affiliations</span><br />
+                        <table id="RoleTable" style="width:99%;margin-top:5px">
+                            <thead>
+                                <tr style="font-weight:bold;text-align:left">
+                                    <th style="padding:3px">Artist</th>
+                                    <th style="padding:3px">Role</th>
+                                    <th style="padding:3px">Recieves Messages</th>
+                                </tr></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </td>              
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link id="gmStyle" rel="stylesheet" href="../css/gigman-neon.css" />
+    <link rel="stylesheet" href="../Content/css/metro.css" />
+    <script src="../Scripts/jquery.js"></script>
+ </head>
+<body class="help">
+    <label>GigMan Request</label>
+        <p>GigMan Request is a premium GigMan service which allows you to recieve near-real time requests and messages from your audience.</p>
+        <p>When you purchase a GigMan Request membership, you create a URL identifier for your artist name, and give the URL to your audience members.</p>
+        <p>For instance, if your band name is 'Joe and the Tones', you might select 'jett' as your URL identifier (GigMan will let you know at the time of purchase whether that identifier is still available).  The shorter and simpler the identifier is, the more likely your audience is to remember it</p>
+        <p>After purchase, and at your next gig, you could then announce that you are taking requests via your audiences smart phones, and instruct them to go to GigMan.com/jett to make requests or message the band.</p>
+        <p>Once they are at GigMan.com/jett, the audience can make one or more requests (upvotes) from your public song list.  </p>
+        A request can also be a downvote if you have enabled downvoting in your Artist Profile.  This can help you to determine how well your repertoire is working.</p>
+        <p>You can also choose how many requests one user can make in a 24 hour period, from 1 to 5, settable from your Artist Profile.</p>
+        <p>Audience members can also message the performer, in near real-time, by selecting canned messages from a menu, or by creating free-form text messages of 127 characters or less.  Further, the audience member can attach a file, such as a photo, to the message.</p>
+    <br /><br />
+</body>
+    <script>
+        var scheme = sessionStorage.getItem("colorscheme");
+
+        if (scheme == "hic") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.css');
+        }
+        else if (scheme == "classic") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.css');
+        }
+        else if (scheme == "neon") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.css');
+        }
+    </script>
+</html>

@@ -3,7 +3,7 @@ var artistList, art, isAdmin = false;
 $(document).ready(function () {
     getArtistList();
     var rates = getRates();
-    
+   
     if (rates)
     {
         $("#GMMonth").text("$" + jlinq.from(rates).equals("Name", "GigManMonthlyRate").select()[0].Value);
@@ -29,11 +29,13 @@ $(document).ready(function () {
         art.MaxiMessages = $("#maxMessages").val();
         art.Public = $("#PublicListing").prop("checked");
         art.iRequestName = $("#iRequestName").val();
+        art.RequestStatus = $("#requestStatus").prop("checked");
+        art.OffAirMessage = $("#offAirMessage").val();
         art.Genres = $("#MyGenres option").map(function () {
             return $(this).val();
         }).get().join();
         artistSave(art.ArtistID, art.ArtistName, art.Website, art.UserID, art.ShowCategories, art.ShowArtist, art.ShowMembers,
-            art.EnableDownvotes, art.MaxiMessages, art.MaxiRequests, art.Public,art.iRequestName, art.Genres);
+            art.EnableDownvotes, art.MaxiMessages, art.MaxiRequests, art.Public,art.iRequestName, art.Genres, art.OffAirMessage,art.RequestStatus);
     });
     $("#Artists").change(function () {
         populateForm();
@@ -132,6 +134,7 @@ function populateForm() {
     if (!$("#Artists").val())
         return;
     art = artistByID($("#Artists").val());
+    $("#iRequestURL").text(iRequestLocation + "/" + art.iRequestName);
     if (!art || art.Error)
         return;
     if (!art)
@@ -154,6 +157,8 @@ function populateForm() {
     else $("#Checkout").prop("disabled", false);
 
     $("#PublicListing").prop("disabled", getUserID() != art.UserID);
+    $("#offAirMessage").val(art.OffAirMessage);
+    $("#requestStatus").prop("checked", art.RequestStatus);
     $("#ShowArtist").prop("checked", art.ShowArtist);
     $("#ShowArtist").prop("disabled", bVal)
     $("#ShowCategories").prop("checked", art.ShowCategories);

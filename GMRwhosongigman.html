@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="Content/css/metro.min.css" rel="stylesheet"/>
+    <link href="content/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="Content/css/metro-icons.min.css" rel="stylesheet"/>
+    <link id="gmStyle" href="css/request-neon.min.css" rel="stylesheet"/>
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/jquery.widget.min.js"></script>
+    <script src="scripts/metro.min.js"></script>
+    <script src="js/utilities.min.js"></script>
+    <script src="scripts/jlinq.min.js"></script>
+    <script src="/gigman/js/dataRequest.min.js"></script>
+    <script src="scripts/jquery.datatables.min.js"></script>
+</head>
+<body>
+    <p>Here is a list of all of the bands currently on the GigMan Request site.  Tap a name to go to their page.</p>
+    <select id="allArtists" size="20"></select>
+    <script>
+        $(document).ready(function () {
+            var lst = iRequestArtistList();
+            var opts = "";
+            for (var i = 0; i < lst.length; i++)
+            {
+                opts += "<option value='" + lst[i].iRequestName + "'>" + lst[i].ArtistName + "</option>";
+            }
+            $("#allArtists").html(opts);
+
+            $("#allArtists").change(function (e) {
+                setSession("artist", JSON.stringify(artistByiRequestName($("#allArtists").val())));
+                parent.loadNew($("#allArtists").val());
+                //$(this,parent.document).load(iRequestURL + $("#allArtists").val());
+            });
+        });
+    </script>
+</body>
+</html>

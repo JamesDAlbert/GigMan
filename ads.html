@@ -3,32 +3,51 @@
 <head>
     <title>GigMan - Want Ads</title>
 
-    <link href="content/css/metro-icons.css" rel="stylesheet"/>
-    <link href="content/css/metro.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="css/ads.css" />
+    <link href="content/css/metro-icons.min.css" rel="stylesheet"/>
+    <link href="content/css/metro.min.css" rel="stylesheet"/>
+    <link id="gmStyle" rel="stylesheet" href="css/ads-neon.css" />
+    <link rel="stylesheet" href="css/gmWidgets.min.css" />
 
-    <script runat="server" src="scripts/jquery.js"></script>
+    <script runat="server" src="scripts/jquery.min.js"></script>
     <script runat="server" src="Scripts/jquery.datatables.min.js"></script>
-    <script runat="server" src="scripts/metro.js"></script>
-    <script runat="server" src="js/datarequest.js"></script>
+    <script runat="server" src="scripts/metro.min.js"></script>
+    <script runat="server" src="js/dataRequest.min.js"></script>
     <script runat="server" src="scripts/jss.min.js"></script>    
-    <script runat="server" src="Scripts/jlinq.js"></script>
-    <script runat="server" src="js/WantAds.js"></script>
-    <script runat="server" src="js/utilities.js"></script>
-    <script runat="server" src="js/ads.js"></script>
+    <script runat="server" src="Scripts/jlinq.min.js"></script>
+    <script runat="server" src="js/Wantads.min.js"></script>
+    <script runat="server" src="js/utilities.min.js"></script>
+    <script runat="server" src="js/ads.min.js"></script>
 </head>
 <body class="wa-bg">
 <div id="body">
     <div id="wantAdHeader">
         <div id="impContent">
         <div id="header" class="wa-title-background">
-            <a href="index.html" title="GigMan Home"><img src="Images/logo.jpg" alt="GigMan" style="padding:0;position:absolute;" /></a>
-            <div id="leaderboard"></div>
-            <label class="switch lightSwitch"> <span class="charmLabel"></span>             
-                <a href="#" id="waLoginLink"></a>
-                <a href="#" id="logoutLink">Log out</a>
-                 <a href="#" class="createAdLink">Create/Edit an ad</a><br /><br />              
-        </label>
+            <table style="width:100%;">
+                <tr>
+                    <td rowspan="2"><a href="wantads.html" title="GigMan Home"><div id="logo"></div></a></td>
+                    <td>
+                        <div id="leaderboard"></div>
+                        <label class="switch lightSwitch" style="text-align:left">             
+                            <a href="#" id="waLoginLink"></a>
+                            <a href="#" id="logoutLink">Log out</a>
+                            <a href="#" class="createAdLink">Create/Edit an ad</a><br /><br />              
+                        </label>
+                    </td>
+                    <td style="vertical-align:top">
+                        <div id="ColorScheme" class="slide-switch" title="Color Scheme" >
+                            <input type="radio" class="slide-switch-input" name="view" value="hic" id="hic" checked/>
+                            <label for="hic" class="slide-switch-label slide-switch-label-left" title="Hi-Contrast"><span class="slide-switch-marker">H</span></label>
+                            <input type="radio" class="slide-switch-input" name="view" value="neon" id="neon"/>
+                            <label for="neon" class="slide-switch-label slide-switch-label-middle" title="Neon"><span class="slide-switch-marker">N</span></label>
+                            <input type="radio" class="slide-switch-input" name="view" value="classic" id="classic"/>
+                            <label for="classic" class="slide-switch-label slide-switch-label-right" title="Metro Classic"> <span class="slide-switch-marker">C</span></label>
+                            <span class="slide-switch-selection"></span>
+                        </div>               
+                    </td>
+                </tr>
+                <tr><td style="padding-bottom:5px"><label id="headerLabel" style="font-size:20px;margin-top:-5px">Marketplace</label></td><td colspan="2"></td></tr>
+            </table> 
         </div>
         <div id="searchBar">
             <span>Search</span>&nbsp;
@@ -59,7 +78,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div id="sideBoard">
+                <div id="sideBoard" style="position:absolute">
                     <div id="sideboardAds"></div>
                 </div>
             </div>

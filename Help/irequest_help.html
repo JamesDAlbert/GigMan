@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
-    <link id="gmStyle" rel="stylesheet" href="../css/gigman-neon.css" />
-    <link rel="stylesheet" href="../Content/css/metro.css" />
-    <script src="../Scripts/jquery.js"></script>
+    <link id="gmStyle" rel="stylesheet" href="../css/gigman-neon.min.css" />
+    <link rel="stylesheet" href="../Content/css/metro.min.css" />
+    <script src="../Scripts/jquery.min.js"></script>
  </head>
 <body class="help">
     <label>GigMan Request</label>
@@ -15,20 +15,20 @@
         <p>Once they are at GigMan.com/jett, the audience can make one or more requests (upvotes) from your public song list.  </p>
         A request can also be a downvote if you have enabled downvoting in your Artist Profile.  This can help you to determine how well your repertoire is working.</p>
         <p>You can also choose how many requests one user can make in a 24 hour period, from 1 to 5, settable from your Artist Profile.</p>
-        <p>Audience members can also message the performer, in near real-time, by selecting canned messages from a menu, or by creating free-form text messages of 127 characters or less.  Further, the audience member can attach a file, such as a photo, to the message.</p>
+        <p>Audience members can also message the performer, in near real-time, by selecting canned messages from a menu, or by creating free-form text messages of 160 characters or less.  Further, the audience member can attach a file, such as a photo, to the message.</p>
     <br /><br />
 </body>
     <script>
         var scheme = sessionStorage.getItem("colorscheme");
 
         if (scheme == "hic") {
-            $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.css');
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.min.css');
         }
         else if (scheme == "classic") {
-            $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.css');
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.min.css');
         }
         else if (scheme == "neon") {
-            $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.css');
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.min.css');
         }
     </script>
 </html>

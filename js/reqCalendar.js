@@ -1,6 +1,9 @@
 ﻿var art;
 
 $(document).ready(function () {
+    var band = getiRequestName();
+
+    band = artistByiRequestName(band);
     art = JSON.parse(sessionStorage.getItem("artist"));
     var data = calendarList(-1, art.ArtistID);
     dta = mapEvents(data);
@@ -45,6 +48,8 @@ $(document).ready(function () {
 });
 function showEvents(dta) {
     var lst = "<ul>";
+    if (dta.length < 1)
+        lst += "No upcoming events.";
     for (var i = 0; i < dta.length; i++)
     {
         lst += "<li><a class='eventListing' data-id='" + dta[i].id + "'>" + formatDate(dta[i].start) + "&nbsp;<b>" + dta[i].title + "</b></a></li><br/>";
@@ -59,7 +64,7 @@ function formatDate(dt) {
     //var ds = df.split("/");
     //var d = new Date(parseInt(ds[2]), parseInt(ds[1]) - 1, parseInt(ds[0])).toString();
     var d = new Date(dt).toString();
-    return d.substring(0, d.indexOf("00:"));
+    return d.substring(0, d.indexOf(":")-2);
 }
 function formatTime(tt1) {
     var d1 = tt1.split(" ")[1].split(":");

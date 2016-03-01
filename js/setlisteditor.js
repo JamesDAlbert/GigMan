@@ -4,7 +4,7 @@ var setLists;
 var songs = [];
 $(function () {
     setLists = getAllSetlists();
-    var chHght = parseInt(getLocal("fontSize"));
+    var chHght = parseInt(getSession("fontSize"));
     var sicn = "images/note.png";
     var setIcn = "images/list.png";
     var ssIcn = "images/check.png";
@@ -112,23 +112,23 @@ $(function () {
 
     var sngTbl = $('#sSongList').dataTable({
             "aaData": songs,
-            "bPaginate": false,
-            "paging": false,
+            "bPaginate": true,
+            "paging": true,
             "bDestroy": false,
             "sPaginationType": "simple_numbers",
             orderClasses: false,
-            "sDom": 'fBt',
-            "bLengthChange": false,
+            "sDom": 'plfBt',
+            "bLengthChange": true,
             responsive: true,
-            fixedHeader: { header: true },
-            "offsetTop": 43,
+            fixedHeader: { header: false },
+            "offsetTop": 5,
             "oLanguage": {
                 "sEmptyTable": "There are no songs in the song list.",
                 "sSearch": ""
             },
             "aoColumnDefs": [
             {
-                "bVisible": false,"className":"songTitle", "aTargets": 0, className: "songTitle", "mRender": function (value, type, full) {
+                "bVisible": false,"className":"songTitle", "aTargets": 0, "mRender": function (value, type, full) {
                     return "<span class='ID'>" + full.ID + "</span>";
                 }, "visible": true, "searchable": true
             },
@@ -141,11 +141,15 @@ $(function () {
                 "aTargets": 2,"className":"songTitle", "mRender": function (value, type, full) {
                     return "<a class='artistLink' data-artist='" + escape(encodeURI(reverseArticle(full.Artist))) + "'>" + full.Artist + "</a>";
                 }
-            }
+            },
+            {
+                "aTargets": 3,"className":"songTitle", "mRender": function (value, type, full) {
+                    return "<a class='addRemove' data-id='" + escape(full.ID) + "'><span class='mif-arrow-right' title='Add to selected setlist.'></span></a>";
+                }
+            },
             ],
         });
-
-
+    
     $(sngTbl.fnGetNodes()).draggable({
         opacity: 0.7,
         helper: function (event, ui) {
@@ -190,8 +194,8 @@ $(function () {
 
     $('.songTitle')
     .on('mousedown', function (e) {
-        var ttl = e.target.parentElement.cells[0].innerText,
-            art = e.target.parentElement.cells[1].innerText;
+        var ttl = e.target.parentElement.parentElement.cells[0].innerText,
+            art = e.target.parentElement.parentElement.cells[1].innerText;
         var id = sngTbl.fnGetData(sngTbl.fnGetPosition(this)[0]).ID;
         var r = $.vakata.dnd.start(e,
             { 'jstree': true, 'obj': $(this), 'nodes': [{ id: "song_" + (id), text: ttl + ": <i class='treeArtist'>" + art + "</i>", type: "song" }], "type": "song" },
@@ -227,7 +231,30 @@ $(function () {
     $(".dataTables_filter input").css("float", "right").css("margin-right", "5px");
 
 
-
+    $(document).on("click",".addRemove",function() { 
+        var id = $(this).data("id")
+        var i = $("#sets [aria-labelledby*='song_" + id + "_anchor']");
+       ;
+        if (i  && i.length > 0)
+        {
+            var res = confirm("That song is already in the selected list. Add it anyway?");
+            if (res == true)
+            {
+                var dta = $("#sSongList").dataTable().fnGetData();
+                var sng = jlinq.from(dta).equals("ID",id).select()[0];
+                var node = { type: "song", id: "song_" + (id), class: "song", text: sng.Title + ": <i class='treeArtist'>" + sng.Artist + "</i>" };
+                $('#sets').jstree().create_node(parent, node, 'last');
+            }
+            else{
+            }         
+        }
+        else{
+            var dta = $("#sSongList").dataTable().fnGetData();
+            var sng = jlinq.from(dta).equals("ID",id).select()[0];
+            var node = { type: "song", id: "song_" + (id), class: "song", text: sng.Title + ": <i class='treeArtist'>" + sng.Artist + "</i>" };
+            $('#sets').jstree().create_node(parent, node, 'last');
+        }
+    });
 
 
 
@@ -354,8 +381,19 @@ function doRename(e, obj) {
 }
 
 function doDelete(e, obj) {
+    var p = getParentName(obj);
     $("#sets").jstree(true).delete_node(obj);
+    setlistDelete(p,obj.text,getActiveArtistID())
 }
+
+
+
+function getParentName(node)
+{
+    return $("#sets").jstree(true).get_node(node.parent).text
+}
+
+
 
 function doCopy(e, obj) {
     $("#sets").jstree(true).copy_node(obj);

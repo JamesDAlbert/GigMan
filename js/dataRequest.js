@@ -113,10 +113,10 @@ function getActiveArtistName() {
 }
 function isPremium()
 {
-    if (!checkLoginStatus())
+    /*if (!checkLoginStatus())
         return false;
     if (!getSession("activeartist"))
-        setActiveArtist();
+        setActiveArtist();*/
     var aa = getSession("activeartist");
     if (aa)
         aa = JSON.parse(aa);
@@ -259,7 +259,7 @@ function getCategoryList(art)
 function getGenreList(art)
 {
     var songs = JSON.parse(getLocal("songlist"));
-    var genres = JSON.parse(getLocal("genrelist"));
+    var genres = JSON.parse(getSession("genrelist"));
     for (var i = 0; i < genres.length; i++)
         genres[i].Count = 0;
     for (var i = 0; i < songs.length; i++)
@@ -369,9 +369,17 @@ function serviceRequest(reqType, dta) {
         case "MakePayment":
         case "GetPaymentHistory":
         case "ArtistsLoad":
-
-            dta.key = ck(reqType == "UserLogin" || reqType == "UserExists" || reqType == "UserCreate" || reqType == "UserVerify" || reqType == "GetCountFromIP" || 
-                reqType == "ArtistLoadByiRequestName" || reqType == "SongListPublicLoad"? "1000000000" : "");
+        case "iRequestArtistsList":
+        case "AddAnnouncement":
+        case "UpdateAnnouncement":
+        case "DeleteAnnouncement":
+        case "GetAnnouncements":
+        case "GetAnnouncements":
+        case "SaveSession":
+        case "GetSession":
+        case "UpdateSession":
+            dta.key = ck(reqType == "UserLogin" || reqType == "UserExists" || reqType == "UserCreate" || reqType == "UserVerify" || reqType == "GetCountFromIP" || reqType == "CalendarList" ||
+                reqType == "ArtistLoadByiRequestName" || reqType == "SongListPublicLoad" || reqType == "iRequestArtistsList" || reqType == "GetAnnouncements" ? "1000000000" : "");
     }
     switch (reqType) {
         case "SongArtistsLoad":
@@ -381,16 +389,16 @@ function serviceRequest(reqType, dta) {
                 
             break;
         case "ArtistListByUserIDGet":
-            if (getLocal("userartistlist") == null)
+            if (getSession("userartistlist") == null || !getSession("userartistlist"))
                 return makeRequest(reqType, dta);
-            if (useLocalStorage && (lst = getLocal("userartistlist")) != null)
+            if (useLocalStorage && (lst = getSession("userartistlist")) != null)
                 return JSON.parse(lst);
             break;
         case "ArtistAffiliationsGet":
-            if (getLocal("artistaffiliationslist") == null)
+            if (getSession("artistaffiliationslist") == null)
                 return makeRequest(reqType,dta);
             var lst = "";
-            if (useLocalStorage && (lst = getLocal("artistaffiliationslist")) != null)
+            if (useLocalStorage && (lst = getSession("artistaffiliationslist")) != null)
                 return JSON.parse(lst);
             break;
         case "UserLogin":
@@ -430,39 +438,39 @@ function serviceRequest(reqType, dta) {
             break;
         case "SongArtistsLoad":
             var lst = "";
-            if (useLocalStorage && (lst = getLocal("songartistlist")) != null)
+            if (useLocalStorage && (lst = getSession("songartistlist")) != null)
                 return JSON.parse(lst);
             break;
         case "GenresByArtistIDGet":
             return getGenreList(dta.username);
             break;
         case "GenresGet":
-            if (getLocal("genrelist") == null)
+            if (getSession("genrelist") == null)
                 return makeRequest(reqType, dta);
-            if (useLocalStorage && (lst = getLocal("genrelist")) != null)
+            if (useLocalStorage && (lst = getSession("genrelist")) != null)
                 return JSON.parse(lst);
             break;
         case "CategoriesGet":
             return getCategoryList(dta.username);
-            if (useLocalStorage && (lst = getLocal("categorieslist")) != null)
+            if (useLocalStorage && (lst = getSession("categorieslist")) != null)
                 return JSON.parse(lst);
             break;
         case "FamiliaritiesGet":
-            if (getLocal("familiaritieslist") == null)
+            if (getSession("familiaritieslist") == null)
                 return makeRequest(reqType, dta);
-            if (useLocalStorage && (lst = getLocal("familiaritieslist")) != null)
+            if (useLocalStorage && (lst = getSession("familiaritieslist")) != null)
                 return JSON.parse(lst);
             break;
         case "TemposGet":
-            if (getLocal("tempolist") == null)
+            if (getSession("tempolist") == null)
                 return makeRequest(reqType,dta)
-            if (useLocalStorage && (lst = getLocal("tempolist")) != null)
+            if (useLocalStorage && (lst = getSession("tempolist")) != null)
                 return JSON.parse(lst);
             break;
         case "KeysGet":
-            if (getLocal("keyslist") == null)
+            if (getSession("keyslist") == null)
                 return makeRequest(reqType, dta);
-            if (useLocalStorage && (lst = getLocal("keyslist")) != null)
+            if (useLocalStorage && (lst = getSession("keyslist")) != null)
                 return JSON.parse(lst);
             break;
         case "InstrumentLoad":
@@ -488,6 +496,11 @@ function serviceRequest(reqType, dta) {
         case "SongSave":
         case "iRequestStatsGet":
         case "iRequestMessageDelete":
+        case "AddAnnouncement":
+        case "UpdateAnnouncement":
+        case "DeleteAnnouncement":
+        case "GetAnnouncements":
+            case "CalendarDelete":
             if (!premiumMember())
                 return [];
             return makeRequest(reqType,dta);
@@ -515,11 +528,17 @@ function serviceRequest(reqType, dta) {
         case "UserVerify":
         case "JoinRequestCreate":
         case "UserInstrumentByUser":
+        case "UserUpdate":
         case "JoinRequestProcess":
         case "MakePayment":
         case "ArtistSave":
         case "WantAdSetMainImage":
         case "ReportAd":
+        case "iRequestArtistsList":
+        case "GetAnnouncements":
+        case "SaveSession":
+        case "UpdateSession":
+        case "GetSession":
             return makeRequest(reqType, dta);
             break;
         case "SetsLoad":
@@ -570,7 +589,7 @@ function userLogin(username, password) { // checked
     var usr = serviceRequest("UserLogin", { "username": username, "password": password });
     if (!usr.Error) {
         setSession("loggedinuser", JSON.stringify(usr));
-        if (usr.UserName == "jeez")
+        if (usr.Username == "jeez")
             setSession("isadmin", true);
         setActiveArtist();
     }
@@ -609,7 +628,8 @@ function artistListByUserID(userID) { // checked
 }
 function artistAffiliations(userID) { // checked
     var aff = serviceRequest("ArtistAffiliationsGet", { "username": userID, "password": "" });
-    setSession("artistaffiliationslist", JSON.stringify(aff));
+    if (aff.length > 0)
+        setSession("artistaffiliationslist", JSON.stringify(aff));
     return aff;
 }
 function makePayment(UserID, ArtistID, GigManPaymentPeriod, GigManPaymentAmount, RequestPaymentPeriod, RequestPaymentAmount, PaymentRecord)
@@ -624,17 +644,17 @@ function updateUserArtistMessaging(id, value)
 {
     return serviceRequest("UserArtistMessaging", { "username": id, "password": value });
 }
-function artistCreate(artistName, website, userid, showcategories, showartist, showmembers, ispublic,enableDownvotes,maxMessages,maxRequests,iRequestName,genres) { // checked
+function artistCreate(artistName, website, userid, showcategories, showartist, showmembers, ispublic,enableDownvotes,maxMessages,maxRequests,iRequestName,genres,offAirMessage) { // checked
     return serviceRequest("ArtistCreate", {
         "ArtistName": artistName, "Website": website, "UserID": userid, "ShowCategories": showcategories, "ShowArtist": showartist,
-        "ShowMenbers": showmembers, IsPublic: ispublic, "EnableDownvotes":enableDownvotes,"MaxiMessages":maxMessages,"MaxiRequests":maxRequests,"iRequestName":iRequestName, "Genres":genres
+        "ShowMenbers": showmembers, IsPublic: ispublic, "EnableDownvotes":enableDownvotes,"MaxiMessages":maxMessages,"MaxiRequests":maxRequests,"iRequestName":iRequestName, "Genres":genres, "OffAirMessage":offAirMessage
     });
 }
-function artistSave(artistID, artistName, website, userid, showcategories, showartist, showmembers,enableDownvotes,maxMessages,maxRequests, ispublic, iRequestName, genres) {
+function artistSave(artistID, artistName, website, userid, showcategories, showartist, showmembers,enableDownvotes,maxMessages,maxRequests, ispublic, iRequestName, genres,offAirMessage,requestStatus) {
     return serviceRequest("ArtistSave", {
         "ArtistName": artistName, "Website": website, "UserID": userid, "ShowCategories": showcategories, "ShowArtist": showartist,
         "ShowMenbers": showmembers, "ArtistID": artistID, "EnableDownvotes": enableDownvotes, "MaxiMessages": maxMessages, "MaxiRequests": maxRequests, "IsPublic": ispublic,
-        "iRequestName":iRequestName, "Genres":genres
+        "iRequestName":iRequestName, "Genres":genres, "OffAirMessage":offAirMessage,"RequestStatus":requestStatus
     });
 }
 function artistDelete(artistID, userID) { // checked
@@ -653,6 +673,10 @@ function artistByName(artistName) { // checked
 }
 function artistsAll() { // checked
     return serviceRequest("ArtistsLoad", ck());
+}
+function iRequestArtistList()
+{
+    return serviceRequest("iRequestArtistsList", ck());
 }
 function artistMemberDelete(artistID, userID) { // checked
     return serviceRequest("ArtistMemberDelete", { "username": artistID, "password": userID });
@@ -759,7 +783,7 @@ function songDelete(songID) { // checked
 function songArtists(artistID) { // checked
     if (getActiveArtistID() > 0) {
         var lst = serviceRequest("SongArtistsLoad", { "username": artistID, "password": "" });
-        setLocal("songartistlist", JSON.stringify(lst));
+        setSession("songartistlist", JSON.stringify(lst));
         return lst;
     }
     return [];
@@ -971,4 +995,49 @@ function countries() {
 }
 function states(country) {
     return serviceRequest("StateList", { "username": country, "password": "" });
+}
+
+// Announcement
+function addAnnouncement(usrID, artID, text, date, title)
+{
+    return serviceRequest("AddAnnouncement", {
+        ArtistID:artID,UserID:usrID,Text:text,AnnouncementDate:date,Title:title });
+}
+
+function updateAnnouncement(usrID, artID, text, date, title, id)
+{
+    return serviceRequest("UpdateAnnouncement", {
+        UserID:usrID,ArtistID:artID,Text:text,AnnouncementDate:date, Title:title,ID:id
+    });
+}
+
+function deleteAnnouncement(usrID, artID, id)
+{
+    return serviceRequest("DeleteAnnouncement", {
+        UserID:usrID,ArtistID:artID,Text:'',AnnouncementDate:'1791-01-01', ID:id
+    });
+}
+
+function getAnnouncements(usrID, artID)
+{
+    return serviceRequest("GetAnnouncements", { username:usrID,password:artID});
+}
+function getGMRAnnouncements(artID)
+{
+    return serviceRequest("GetAnnouncements", { username:1000000000,password:artID});
+}
+
+// Session
+function saveUserSession(userID, ip, data, userAgent)
+{
+    return serviceRequest("SaveSession", {UserID:userID,IP:ip,Data:data,UserAgent:userAgent,SessionID:"0"});
+}
+
+function updateUserSession(userID, ip, data, userAgent, sessionID)
+{
+    return serviceRequest("UpdateSession", {UserID:userID,IP:ip,Data:data,UserAgent:userAgent,SessionID:sessionID});
+}
+
+function getUserSession(userID) {
+    return serviceRequest("GetSession", { username: userID, password: "" });
 }

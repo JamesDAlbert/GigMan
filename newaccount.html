@@ -2,15 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
-    <link href="content/css/metro.css" rel="stylesheet"/>
+    <link href="Content/css/metro.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="Content/css/metro-icons.min.css" />
-    <link id="gmStyle" href="css/gigman-neon.css" rel="stylesheet"/>
+    <link id="gmStyle" href="css/gigman-neon.min.css" rel="stylesheet"/>
     <script src="Scripts/jquery.min.js"></script>
 
-    <script runat="server" src="js/utilities.js"></script>
-    <script runat="server" src="js/dataRequest.js"></script>
+    <script runat="server" src="js/utilities.min.js"></script>
+    <script runat="server" src="js/dataRequest.min.js"></script>
     
-    <script runat="server" src="js/newaccount.js"></script>
+    <script runat="server" src="js/newaccount.min.js"></script>
     <style>
         select {
             border-radius:3px;
@@ -83,13 +83,13 @@
         var scheme = getSession("colorscheme");
 
         if (scheme == "hic") {
-            $('link[id="gmStyle"]').attr('href', 'css/gigman-hic.css');
+            $('link[id="gmStyle"]').attr('href', 'css/gigman-hic.min.css');
         }
         else if (scheme == "classic") {
-            $('link[id="gmStyle"]').attr('href', 'css/gigman-classic.css');
+            $('link[id="gmStyle"]').attr('href', 'css/gigman-classic.min.css');
         }
         else if (scheme == "neon") {
-            $('link[id="gmStyle"]').attr('href', 'css/gigman-neon.css');
+            $('link[id="gmStyle"]').attr('href', 'css/gigman-neon.min.css');
         }
     </script>
 </body>

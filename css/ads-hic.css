@@ -1,0 +1,846 @@
+html {
+  font-size: 90%;
+}
+#ColorScheme {
+  margin-top: 5px;
+}
+#headerLabel {
+  margin-left: 105px;
+}
+#logo {
+  display: inline-block;
+  width: 98px !important;
+  height: 110px !important;
+  border: 0!important;
+  background-image: url(../images/logo-hic.jpg) !important;
+  background-repeat: no-repeat;
+  margin-left: -10px;
+}
+#body {
+  white-space: nowrap;
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  position: relative;
+  min-width: 1188px;
+  background: #000000;
+  color: #ffffff !important;
+}
+div {
+  color: #ffffff;
+}
+.myModernInput input[type="text"],
+input[type="number"] {
+  color: #ffffff !important;
+}
+.button {
+  border: 1px solid rgba(128, 128, 128, 0.25) !important;
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+.buttonColor {
+  border-color: #000000 !important;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+.submit {
+  border: 1px solid rgba(128, 128, 128, 0.25) !important;
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+p {
+  color: #ffffff;
+}
+span {
+  color: #ffffff;
+}
+.buttonColor span {
+  color: black;
+}
+select {
+  border: 1px solid rgba(128, 128, 128, 0.25) !important;
+  background: #ffffff !important;
+  color: #000000 !important;
+  height: 20px;
+}
+textarea {
+  border: 1px solid rgba(128, 128, 128, 0.25) !important;
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+#leaderboard {
+  width: 480px;
+  height: 80px;
+  display: inline-block;
+  margin-left: 110px;
+  margin-top: 5px;
+  padding: 0;
+  border: 0;
+}
+#sideboardAds {
+  width: 100%;
+  text-align: center;
+  float: right;
+}
+#midBannerAd {
+  width: 100%;
+  max-width: 1000px;
+}
+#midBanner {
+  width: 100%;
+  padding: 0;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.25);
+  border-right: 1px solid rgba(128, 128, 128, 0.25);
+  max-width: 1000px;
+  padding-bottom: 3px;
+  text-align: center;
+}
+#wantAdHeader {
+  max-width: 1000px;
+}
+#header {
+  vertical-align: top;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.25);
+  border-right: 1px solid rgba(128, 128, 128, 0.25);
+  height: 111px;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 1431px;
+}
+#searchBar {
+  border-bottom: 1px solid rgba(128, 128, 128, 0.25);
+  border-right: 1px solid rgba(128, 128, 128, 0.25);
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  max-width: 1431px;
+}
+#left {
+  width: 160px;
+  min-width: 160px;
+  display: inline-block;
+  position: absolute;
+}
+#middle {
+  width: 100%;
+  height: 100%;
+  min-height: 640px;
+  min-width: 540px;
+  max-width: 540px;
+  border-right: 1px solid rgba(128, 128, 128, 0.25);
+  display: inline-block;
+  position: absolute;
+  left: 161px;
+}
+#content-2 {
+  width: 79%;
+  padding: 0;
+  margin: 0;
+  margin-left: 160px;
+  height: 100%;
+  overflow: auto;
+}
+#main {
+  white-space: nowrap;
+  width: 100%;
+  max-width: 1000px;
+  display: inline-block;
+  height: 100%;
+}
+#footer {
+  clear: both;
+  padding: 5px;
+  border-top: 1px solid rgba(128, 128, 128, 0.25);
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+#adsTable {
+  position: absolute;
+  top: 0;
+  width: 540px;
+  min-width: 540px;
+  max-width: 540px;
+  border-collapse: collapse;
+}
+#adsTablePanel {
+  width: 50%;
+  min-width: 760px;
+  display: block;
+  margin-bottom: 10px;
+}
+/* END LAYOUT */
+.adLink {
+  color: inherit;
+}
+#sideBoard {
+  width: 300px;
+  height: 100%;
+  overflow: hidden;
+  float: right;
+  z-index: 100;
+  left: 540px;
+  display: inline-block;
+  vertical-align: top;
+}
+#sideboardFrame {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  overflow: visible;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+.adTypeParent {
+  text-decoration: underline;
+  display: block;
+  font-weight: bold;
+  margin-top: 5px;
+  margin-left: 15px;
+  width: 0;
+}
+.adTypeChild {
+  text-decoration: none;
+  display: block;
+  margin-left: 30px;
+  width: 0;
+}
+.waButton {
+  width: 28px;
+  height: 28px;
+  border: 1px solid #000000;
+}
+#adsTable .even {
+  background-color: transparent !important;
+  color: white;
+  border-bottom: 1px solid transparent;
+  opacity: .7;
+}
+#adsTable .odd {
+  background-color: transparent !important;
+  color: #ffffff;
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  opacity: 0.7;
+}
+#adsTable .even:hover {
+  opacity: 1;
+}
+#adsTable .odd:hover {
+  opacity: 1;
+}
+#adsTable .sorting_asc {
+  display: none;
+}
+#adsTable thead {
+  display: none;
+}
+.adPanel {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+#banner2frame {
+  border: 0;
+  width: 730px;
+  height: 92px;
+}
+#banner2 {
+  width: 100%;
+  height: 112px;
+  display: block;
+}
+.adListImgPanel {
+  width: 200px;
+  height: 167px;
+  line-height: 167px;
+  text-align: center;
+  opacity: .75;
+  margin-left: 10px;
+}
+.navTitle {
+  font-size: larger;
+  font-weight: bold;
+  font-style: italic;
+  width: 50%;
+  text-align: center;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.25);
+}
+.wa-bg {
+  background-color: #000000;
+  color: #ffffff;
+}
+#recentAds {
+  width: auto;
+  text-align: center;
+  height: 75px;
+  overflow: hidden;
+}
+#middleAdsTitle {
+  margin-top: -2px;
+  margin-bottom: 5px;
+  overflow: visible;
+  font-weight: bold;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.25);
+  border-right: 1px solid rgba(128, 128, 128, 0.25);
+  padding: 3px;
+}
+#middleAds {
+  border-bottom: 1px solid rgba(128, 128, 128, 0.25);
+  border-right: 1px solid rgba(128, 128, 128, 0.25);
+  width: 100%;
+  max-width: 1000px;
+  overflow: visible;
+  min-height: 110px;
+  text-align: center;
+}
+.recentAdLink {
+  display: inline-block;
+  width: 200px;
+  min-width: 200px;
+  max-width: 200px;
+  margin-left: 5px;
+  overflow: no-display;
+  padding: 5px;
+  border-collapse: collapse;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+  opacity: .8;
+  overflow: hidden;
+  white-space: nowrap;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+.recentAdLink:hover {
+  border-left: 1px solid rgba(128, 128, 128, 0.25);
+  border-right: 1px solid rgba(128, 128, 128, 0.25);
+  opacity: 1;
+  overflow: hidden;
+}
+.recentAdLink img {
+  max-width: 100px;
+  max-height: 50px;
+}
+.adTable {
+  color: #ffffff !important;
+  cursor: pointer;
+  margin-top: 5px;
+  white-space: normal;
+  width: 100%;
+  min-height: 192px;
+  height: 192px;
+}
+.adTable:hover {
+  border-top: 1px solid rgba(128, 128, 128, 0.25);
+  border-bottom: 1px solid rgba(128, 128, 128, 0.25);
+}
+.adListImagePanel {
+  margin-top: -20px;
+}
+#waLoginLink {
+  padding-top: 5px;
+  display: block;
+}
+#logoutLink {
+  padding-top: 5px;
+  display: block;
+  color: inherit;
+}
+a.createAdLink {
+  padding-top: 5px;
+  display: block;
+}
+[data-role="charm"][data-position*="left"] {
+  border-right: 1px rgba(128, 128, 128, 0.25) solid !important;
+}
+[data-role="charm"][data-position*="right"] {
+  border-left: 1px rgba(128, 128, 128, 0.25) solid !important;
+}
+[data-role="charm"] {
+  background-color: #000000;
+  -moz-box-shadow: 12px 0 15px -4px transparent, -12px 0 8px -4px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 12px 0 15px -4px transparent, -12px 0 8px -4px rgba(0, 0, 0, 0.5);
+  box-shadow: 12px 0 15px -4px transparent, -12px 0 8px -4px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  font-size: 16px!important;
+  min-width: 360px;
+}
+#welcome {
+  width: 50%;
+  border: 1px solid red;
+}
+#navTable {
+  width: 540px;
+}
+#navTable a {
+  font-size: smaller;
+}
+#navTable tbody tr td:nth-child(2) {
+  border-right: 1px solid rgba(128, 128, 128, 0.25);
+}
+#searchCategoryName {
+  padding-left: 5px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.25);
+  text-align: left;
+}
+#searchCategoryName a {
+  color: inherit;
+}
+.wantAdTitle {
+  font-size: larger;
+  font-weight: bold;
+  margin-left: -460px;
+}
+.panelContainer {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  border: 0;
+}
+a {
+  color: #ffffff !important;
+  font-size: 1rem;
+}
+a:visited {
+  color: #ffffff !important;
+}
+a:hover {
+  text-decoration: underline;
+}
+.wa-title-background {
+  background: #000000;
+  font-weight: bold;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.25);
+  padding-bottom: 2px;
+  padding-left: 2px;
+}
+.wa-title-background a {
+  font-weight: normal;
+}
+.adEdDetails {
+  border: 1px solid rgba(128, 128, 128, 0.25);
+  padding: 5px;
+  width: 35%;
+  overflow: auto;
+  max-width: 470px;
+  min-width: 400px;
+  display: inline-block;
+  float: left;
+}
+.adEdMediaPanel {
+  display: inline-block;
+  width: 35%;
+  min-width: 350px;
+  max-width: 350px;
+  margin-left: 5px;
+  position: absolute;
+  top: 0;
+}
+.adEdWrapper {
+  width: 100%;
+  position: relative;
+}
+.adPrice {
+  text-align: left;
+  font-size: larger;
+  font-weight: bold;
+}
+.audioLink {
+  color: #ffffff;
+}
+.audioLink:visited {
+  color: #ffffff;
+}
+.audioLink:hover {
+  text-decoration: underline;
+}
+.thumbnail {
+  max-width: 64px;
+  max-height: 64px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+}
+.deleteMediaLink {
+  color: red;
+  background-color: #000000;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  font-size: 90%;
+  line-height: 90%;
+  vertical-align: middle;
+  text-align: center;
+  border: 1px solid rgba(128, 128, 128, 0.25);
+  font-family: monospace;
+}
+.deleteMediaLink:visited {
+  color: #ff0000 !important;
+}
+.deleteMediaLink:visited:hover {
+  color: #000000 !important;
+}
+.deleteMediaLink:hover {
+  background-color: #ff0000;
+  color: #000000;
+}
+.deleteMediaLink:before {
+  content: "x";
+}
+.deleteAudioMediaLink {
+  line-height: 90%;
+  font-size: 90%;
+  padding: 1px 3px 2px 3px;
+  border: 1px solid rgba(128, 128, 128, 0.25);
+  vertical-align: middle;
+  margin-top: -2px;
+  color: #ffffff;
+  font-family: monospace;
+  display: inline-block;
+}
+.deleteAudioMediaLink:before {
+  content: "x";
+}
+.videoDiv {
+  width: 100%;
+}
+#videoPanel {
+  display: inline-block;
+  text-align: left;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.25);
+  border-top: 1px solid rgba(128, 128, 128, 0.25);
+  width: 100%;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  text-align: center;
+}
+.videoDiv .deleteAudioMediaLink {
+  font-size: 100%;
+  line-height: 100%;
+  height: 100%;
+  border: 1px solid rgba(128, 128, 128, 0.25);
+  vertical-align: middle;
+  text-align: center;
+  color: black;
+  font-family: monospace;
+  width: 20px;
+  padding-top: 50%;
+}
+.deleteAudioMediaLink:visited {
+  color: black;
+}
+.deleteAudioMediaLink:hover {
+  border: 1px solid rgba(128, 128, 128, 0.25);
+  background-color: red;
+  color: white !important;
+  text-decoration: none;
+}
+/* Scrollbars */
+::-webkit-scrollbar {
+  margin-right: -10px;
+  width: 15px;
+}
+::-webkit-scrollbar-track:vertical {
+  background-color: #808080;
+  background-image: none!important;
+}
+/* the new scrollbar will have a flat appearance with the set background color */
+::-webkit-scrollbar-track:horizontal {
+  background-color: #808080;
+  background-image: none!important;
+}
+/* the new scrollbar will have a flat appearance with the set background color */
+/* this will style the thumb, ignoring the track */
+::-webkit-scrollbar-thumb:horizontal {
+  border: 1px solid transparent;
+  background-color: #ffffff;
+  background-image: linear-gradient(to left, rgba(128, 128, 128, 0.5) 50%, rgba(255, 255, 255, 0.5) 50%);
+  background-size: 2px 100%;
+}
+::-webkit-scrollbar-thumb:vertical {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  background-color: #ffffff !important;
+  background-image: linear-gradient(#000000 33%, #808080 66%) !important;
+  background-size: 100% 3px!important;
+  color: #ffffff !important;
+  font-size: 16px;
+}
+/* this will style the thumb, ignoring the track */
+::-webkit-scrollbar-button {
+  border: 1px solid #404040;
+  color: white;
+}
+/* optionally, you can style the top and the bottom buttons (left and right for horizontal bars) */
+::-webkit-scrollbar-corner {
+  background-color: #000000;
+}
+.sideBoard {
+  width: 300px;
+  min-width: 300px;
+  overflow: visible;
+  height: 100%;
+  border: 1px solid rgba(128, 128, 128, 0.25);
+  left: 700px;
+  top: 0;
+  display: inline-block;
+}
+#adBody {
+  display: inline-block;
+  position: absolute;
+  left: 300px;
+  width: 400px;
+  min-width: 400px;
+  max-width: 400px;
+  height: 100%;
+  overflow: auto;
+}
+.adAttributeTable {
+  width: 100%;
+  min-height: 104px;
+  height: 100px;
+  line-height: 100%;
+  vertical-align: middle;
+}
+#dialogTitleBar {
+  background-color: #000000;
+  color: #ffffff;
+  font-weight: bold;
+  width: 100%;
+}
+#dialogTitle {
+  float: left;
+}
+.closeDialogButton {
+  float: right;
+  position: relative;
+  left: 0;
+  top: 0;
+  color: #ff0000;
+  background: #ffffff;
+}
+.closeDialogButton ::before {
+  content: "X";
+}
+.closeDialogButton:hover {
+  color: white;
+  background: #ff0000;
+}
+#adText {
+  width: 100%;
+  border-top: 1px solid rgba(128, 128, 128, 0.25);
+  padding: 5px;
+  white-space: normal;
+}
+.lightSwitch {
+  position: absolute;
+  margin-top: -5px;
+  margin-left: 5px;
+  top: 5px;
+}
+/* Ad Page */
+#mediaPanel {
+  width: 300px;
+  border-right: 1px solid rgba(128, 128, 128, 0.25);
+  padding-top: 5px;
+}
+#mainImagePanel {
+  width: 100%;
+  height: 180px;
+  text-align: center;
+}
+#mainImage {
+  max-width: 280px;
+  max-height: 170px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+#thumbnailPanel {
+  max-width: 100%;
+  display: inline-block;
+  overflow: visible;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.25);
+  padding-left: 5px;
+  padding-top: 5px;
+}
+#audioPanel {
+  width: 100%;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.25);
+  padding: 5px;
+}
+.waVideo {
+  width: 150px;
+  height: 140px;
+  overflow: hidden;
+  border: 0;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+.thumbnailPanel {
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+}
+.thumbnail {
+  max-width: 64px;
+  max-height: 64px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 2px solid transparent;
+}
+.selected {
+  border: 2px solid red;
+}
+#showPhone {
+  cursor: pointer;
+}
+#otherAds {
+  color: white;
+}
+#otherAds:visited {
+  color: white;
+}
+#otherAds:hover {
+  text-decoration: underline;
+}
+.contactTitle {
+  color: #ffffff;
+  border-bottom: 1 PX solid rgba(128, 128, 128, 0.25);
+}
+#contactPanel {
+  margin-bottom: 5px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.25);
+  border-top: 0;
+}
+#contactPanel table {
+  width: 100%;
+}
+#contactPanel table td {
+  padding: 5px;
+}
+#adTitle {
+  width: 100%;
+  height: 25px;
+  padding-bottom: 5px;
+  padding-top: 3px;
+  padding-left: 10px;
+  font-weight: bold;
+  font-size: larger;
+  max-width: 1000px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.25);
+  border-right: 1px solid rgba(128, 128, 128, 0.25);
+}
+.reportLink {
+  float: right;
+  color: white;
+  text-decoration: underline;
+  padding-right: 10px;
+}
+.reportLink:visited {
+  color: white;
+  margin-left: -10px;
+}
+#largeImagePanel {
+  background-color: transparent;
+}
+.ui-dialog.ui-widget-content {
+  background-color: #000000;
+}
+.ui-dialog-titlebar {
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  background: #000000;
+  font-weight: bold;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.25);
+  padding-bottom: 2px;
+  padding-left: 2px;
+}
+.ui-dialog {
+  border-radius: 0;
+  border-collapse: collapse;
+}
+.ui-dialog-titlebar-close {
+  border: 1px solid rgba(128, 128, 128, 0.25);
+  background: #ffffff !important;
+  color: #000000 !important;
+  border-radius: 0;
+  outline: 0;
+}
+.ui-dialog-titlebar-close:hover {
+  background-color: #ff0000 !important;
+  color: white;
+}
+.slide-switch.check {
+  background-color: #404040 !important;
+}
+.slide-switch-label {
+  top: 1px;
+  left: 1px;
+}
+.slide-switch-label-left {
+  -webkit-border-top-left-radius: 0;
+  border-top-left-radius: 0;
+}
+.slide-switch-label-right {
+  -webkit-border-top-right-radius: 0;
+  border-top-right-radius: 0;
+}
+.slide-switch-selection {
+  -moz-box-sizing: border-box !important;
+  -webkit-box-sizing: border-box !important;
+  box-sizing: border-box !important;
+  border: 1px solid #808080 !important;
+  border-right: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  background-color: #ffffff !important;
+}
+.slide-switch-selection:hover {
+  -moz-box-shadow: 0 0 5px 5px transparent !important;
+  -webkit-box-shadow: 0 0 5px 5px transparent !important;
+  box-shadow: 0 0 5px 5px transparent !important;
+}
+.slide-switch-label.switch-selected {
+  border: 0!important;
+}
+.slide-switch {
+  border-color: #4d4d4d !important;
+  background-color: #000000 !important;
+  -moz-box-shadow: 0 -2px 4px -4px #ffffff;
+  -webkit-box-shadow: 0 -2px 4px -4px #ffffff;
+  box-shadow: 0 -2px 4px -4px #ffffff;
+  border-radius: 4px;
+}
+.slide-switch-marker {
+  top: -2px;
+  margin-left: -3px;
+  width: 99%;
+  height: 99%;
+  color: #ffffff !important;
+  text-shadow: 0 0 3px transparent;
+  font-weight: normal;
+}
+.slide-switch-marker-current {
+  z-index: 100!important;
+  color: #000000 !important;
+  font-weight: bold;
+  z-index: 2000;
+}

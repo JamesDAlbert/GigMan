@@ -29,8 +29,17 @@ $(document).ready(function () {
         }
         else stopTimer();
     });
+    var art = getSession("activeartist");
+    if (art.RequestStatus)
+    {
+        $(".warning").hide();
+    }
+    else
+    {
+        $(".warning").show();
+    }
     $("#artistList").change(function () {
-        var art = artistByID($("#artistList").val());
+        art = artistByID($("#artistList").val());   
         setSession("activeartist", JSON.stringify(art));
         removeLocal("songlist");
         window.top.location.reload();

@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>    <link href="content/css/metro.min.css" rel="stylesheet"/>
+    <link href="content/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="content/css/metro-icons.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="Content/css/fixedHeader.dataTables.min.css" />
+    <link id="gmrStyle" href="css/request-classic.min.css" rel="stylesheet"/>
+    <!--<link id="gmWidgetStyle" href="css/request-neon.min.css" rel="stylesheet"/>-->
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/jquery.widget.min.js"></script>
+    <script src="scripts/metro.min.js"></script>
+    <script runat="server" src="js/utilities.min.js"></script>
+    <script src="scripts/jlinq.min.js"></script>
+    <script runat="server"  src="js/dataRequest.min.js"></script>
+    <script runat="server"  src="js/irequest.min.js"></script>
+    <style>
+        .AText {
+            margin-left:20px;
+            margin-bottom:20px;
+        }
+        .ATitle {
+            margin-left:10px;
+            font-weight:bold;
+        }
+        .ADate {
+            font-style:italic;
+        }
+    </style>
+</head>
+<body>
+    <div id="content" class="content" style="margin-left:5px">
+
+    </div>
+    <script>
+        $(document).ready(function () {
+            var band = getiRequestName();
+
+            band = artistByiRequestName(band);
+            art = JSON.parse(sessionStorage.getItem("artist"));
+            var data = getGMRAnnouncements(art.ArtistID);
+            var op = "<ul>";
+            if (data.length == 0)
+                op = "<ul>No announcements.";
+            for (var i = 0; i < data.length; i++)
+            {
+                op += "<li>";
+                var d = new Date(data[i].AnnouncementDate).toString();
+                d = d.substring(0, d.indexOf(":") - 2); 
+                op += "<label class='ADate'>" + d + "</label><br/>";
+                op += "<label class='ATitle'>" + data[i].Title + "</label>";
+                op += "<p class='AText'>" + data[i].Text + "</p>";
+                op += "</li>";
+            }
+            op += "</ul>";
+            $("#content").html(op);
+        });
+    </script>
+</body>
+</html>

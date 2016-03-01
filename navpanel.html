@@ -2,25 +2,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
-    <link href="content/css/metro.css" rel="stylesheet"/>
+    <link href="Content/css/metro.min.css" rel="stylesheet"/>
 
-    <link href="content/css/metro-icons.css" rel="stylesheet"/>   
+    <link href="Content/css/metro-icons.min.css" rel="stylesheet"/>   
     <link rel="stylesheet" href="Content/css/jquery.datatables.min.css" />
     <link rel="stylesheet" href="Content/css/fixedHeader.dataTables.min.css"/>
-    <link id="gmStyle" href="css/gigman-hic.css" rel="stylesheet"/>  
-    <script runat="server" src="scripts/jquery.js"></script>
+    <link id="gmStyle" href="css/gigman-hic.min.css" rel="stylesheet"/>  
+    <script runat="server" src="scripts/jquery.min.js"></script>
     <script src="scripts/jquery.widget.min.js"></script>
     <script src="Scripts/jquery.datatables.min.js"></script>
     <script src="Scripts/dataTables.fixedHeader.min.js"></script>
-    <script src="scripts/metro.js"></script>
+    <script src="scripts/metro.min.js"></script>
     <script runat="server" src="scripts/jss.min.js"></script>
-    <script runat="server"  src="js/datarequest.js"></script>
-    <script runat="server" src="js/gigman.js"></script>
-    <script runat="server"  src="js/utilities.js"></script>
+    <script runat="server"  src="js/dataRequest.min.js"></script>
+    <script runat="server" src="js/gigman.min.js"></script>
+    <script runat="server"  src="js/utilities.min.js"></script>
 
 
-    <script runat="server"  src="js/navpanel.js"></script>
-    <script src="Scripts/jlinq.js"></script>
+    <script runat="server"  src="js/navpanel.min.js"></script>
+    <script src="Scripts/jlinq.min.js"></script>
     <style>
         .dataTables_empty
         {
@@ -56,7 +56,7 @@
                     </div>
                     <div class="tile-container">
                         <div class="tile-small bg-song  charmNav" data-role="tile" title="A list of all of your songs.">
-                            <div class="tile-content " id="SongList">
+                            <div class="tile-content " id="songList">
                                 <span class="icon mif-list2"></span><br />
                                 Songlist<br />                              
                                 <div id="SongCount" style="margin-top:-3px"></div>
@@ -64,7 +64,7 @@
                         </div>
                         <div class="tile-small bg-edit  charmNav" data-role="tile" title="Add a new song.">
                             <div class="tile-content " id="SongEditor">
-                                <span class="icon mif-pencil "></span><br /><br /><span class="tileLabel">Add Song</span>
+                                <span class="icon mif-pencil"></span><br /><br /><span class="tileLabel">Add Song</span>
                             </div>
                         </div>
                 
@@ -115,6 +115,11 @@
                                     <span class="icon mif-calendar "></span><br /><br /> Calendar
                                 </div>
                             </div> 
+                            <div class="tile-small bg-user charmNav" data-role="tile" title="Announcements">
+                                <div class="tile-content " id="Announcements">
+                                    <span class="icon mif-broadcast"></span><br /><br /> Announce.
+                                </div>
+                            </div> 
                             <div class="tile-small bg-logout  charmNav" data-role="tile">
 				                <div class="tile-content myTile " id="Dashboard">
 					                <span class="icon mif-phone"></span> <br /><br />
@@ -145,10 +150,10 @@
         <label class="switch" style="margin-left:5px;margin-top:5px;margin-bottom:3px" title="Enable/Disable Request Polling">
             <input type="checkbox" id="iRequestEnable" checked="checked"/>
             <span class="check"></span>
-        </label> Enable GigMan Request Feeds<br />
+        </label> Enable GigMan Data Feeds<br />
         <div class="accordion" data-role="accordion" data-close-any="true" style="margin-top:5px" id="requestAccordion"> <!-- accordion iRequest -->
             <div class="frame">
-                <div class="heading bg-transparent">GigMan Request</div>
+                <div class="heading bg-transparent">GigMan Request <span id="warning" class="warning" style="display:none;color:red">Offline</span></div>
                 <div class="content bg-transparent" style="background-color:black">            
                   <div class="tile-container" style="margin-top:-13px">              
                     <div class="" id="Div3" style="width:100%;">
@@ -182,7 +187,7 @@
         <hr style="background-color:gray"/>
         <div class="accordion" data-role="accordion" data-close-any="true" style="margin-top:5px;" id="messageAccordion"> <!-- accordion iMessage -->
             <div class="frame">
-                <div class="heading bg-transparent">iMessages</div>
+                <div class="heading bg-transparent">GigMan Message <span id="Span1" class="warning" style="display:none;color:red">Offline</span></div>
                 <div class="content bg-transparent">            
                   <div class="tile-container" style="margin-top:-10px;">              
                     <div class="" id="Div4" style="width:100%;">
@@ -213,6 +218,6 @@
 
 
 
-        </div>
+        </div><br /><br />
 </body>
 </html>

@@ -77,6 +77,31 @@ var metroStandardColors = [[,"#F3B200",,],
 [,"#00A3A3",,],
 [,"#FE7C22",,]];
 
+function getScrollbarWidth() {
+    var outer = document.createElement("div");
+    outer.style.visibility = "hidden";
+    outer.style.width = "100px";
+    outer.style.msOverflowStyle = "scrollbar"; // needed for WinJS apps
+
+    document.body.appendChild(outer);
+
+    var widthNoScroll = outer.offsetWidth;
+    // force scrollbars
+    outer.style.overflow = "scroll";
+
+    // add innerdiv
+    var inner = document.createElement("div");
+    inner.style.width = "100%";
+    outer.appendChild(inner);
+
+    var widthWithScroll = inner.offsetWidth;
+
+    // remove divs
+    outer.parentNode.removeChild(outer);
+
+    return widthNoScroll - widthWithScroll;
+}
+
 function addSampleSong() {
     var sng = [{
         ID: 0, Title: "Sample Song", Lyrics: "~Em  Am     D7\n A lyrical line with chords above\n |Em A |Am lyrical |D7 line with embedded chords\n\nChorus:\nA chorus\n\nBridge:\nA bridge", Tempo: 1,
@@ -102,8 +127,16 @@ function getClientIP()
     });
     return ipAddress;
 }
+function getiRequestArtist()
+{
+    var band = getiRequestName();
+    var art = artistByiRequestName(band);
+    if (art == "")
+        return null;
+    return art;
+}
 function getiRequestName() {
-    var band = document.location.toString();
+    var band = parent.document.location.toString();
     band = band.replace("#", "");
     band = decodeURI(band.substring(band.lastIndexOf("/") + 1));
     return band;
@@ -111,7 +144,7 @@ function getiRequestName() {
 
 function getSongFromID(id)
 {
-    var sl = JSON.parse(localStorage.getItem("songlist"));
+    var sl = JSON.parse(getLocal("songlist"));
     return jlinq.from(sl).equals("ID", id).select()[0];
 }
 function localStorageSpace () {
@@ -212,7 +245,8 @@ function tempoNameFromID(id)
     if (!tt)
         tt = tempos();
     else tt = JSON.parse(tt);
-    return jlinq.from(tt).equals("ID", id).select()[0].Name;   
+    var t = jlinq.from(tt).equals("ID", id).select();
+    if (t.length > 0) return t[0].Name;
 }
 function familiarityNameFromID(id)
 {
@@ -220,7 +254,8 @@ function familiarityNameFromID(id)
     if (!fam)
         fam = familiarities();
     else fam = JSON.parse(fam);
-    return jlinq.from(fam).equals("ID", id).select()[0].Name;
+    var f = jlinq.from(fam).equals("ID", id).select();
+    if (f.length > 0) return f[0].Name;
 }
 function genreNameFromID(id) {
     var gnr;

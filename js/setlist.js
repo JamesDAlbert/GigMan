@@ -4,7 +4,7 @@ var setIdx = 0, subsetIdx = 0, maxSetIdx, maxSubsetIdx;
 var songs, masterList;
 var setTbl;
 $(document).ready(function () {
-    setListTypeSwitch(getLocal("setListStyle"));
+    setListTypeSwitch(getSession("setListStyle"));
     $("#colorScheme").prop("checked", getSession("colorscheme") == "highcontrast");
     var sl = setlists(getActiveArtistID()); // get all the setlist names
     maxSetIdx = sl.length - 1;
@@ -64,24 +64,29 @@ function initDataTables() {
     $("#SongTiles").hide();
     $('#SongList').parents('div.dataTables_wrapper').first().show();
     $('#SongList').show();
-    var plen = getLocal("setListLength");
-    if (!plen) plen = "-1";
+    var plen = parseInt(getSession("setListLength"));
+    var sDom = "BCtp";
+    if (plen == -1) sDom = "BCt";
     if (!setTbl) {
         jQuery('#SongList').dataTable().fnDestroy();
         setTbl = $('#SongList').dataTable({
             buttons: [{ text: '', className: "prevSet", action: function () { prevSetlist() } }, { text: '', className: "prevSubset", action: function () { prevSubset(); } },
                 { text: '', className: "nextSubset", action: function () { nextSubset(); } }, { text: '', className: "nextSet", action: function () { nextSetlist(); } },
-                { extend: "print", text: "" }, { extend: "csvHtml5", text: "" }, { extend: "colvis", text: "" }],
+                { extend: "print", text: "" }, { extend: "csvHtml5", text: "" }/*, { extend: "colvis", text: "" }*/],
+            "colVis" : {
+                "buttonText":"<span class='mif-more-horiz'></span>"
+            },
             "aaData": songs,
             "bPaginate": true,
             "pagingType": "simple_numbers",
             orderClasses: false,
             "bDestroy": false,
             "bLengthChange": false,
+            "lengthMenu":[[5,10,20,-1][5,10,20,'All']],
             "pageLength":plen,
             "bFilter": false,
             bServerSide: false,
-            "sDom": "Btp",
+            "sDom": sDom,
             "aaSorting": [],
             "oLanguage": {
                 "sEmptyTable":     "No setlists found.",
@@ -122,6 +127,7 @@ function initDataTables() {
         $('#SongList').DataTable().rows.add(songs);
         $('#SongList').DataTable().draw();
     }
+    $(".ColVis_Button.ColVis_MasterButton").prop("title", "Show/hide columns.");
 }
 function showTileData()
 {

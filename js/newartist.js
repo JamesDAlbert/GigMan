@@ -35,7 +35,7 @@ $(document).ready(function () {
                     gnr = gnr.replace(/,([^,]*)$/, '$1');
 
                 var v = artistCreate($("#ArtistName").val(), $("#ArtistWebsite").val(), getUserID(), $("#ShowCategories").prop("checked"), $("#ShowArtist").prop("checked"), $("#ShowMembers").prop("checked"),
-                    $("#Public").prop("checked"), $("#EnableDownvotes").prop("checked"), $("#maxMessages").val(), $("#maxRequests").val(), $("#iRequestName").val(), gnr);
+                    $("#Public").prop("checked"), $("#EnableDownvotes").prop("checked"), $("#maxMessages").val(), $("#maxRequests").val(), $("#iRequestName").val(), gnr, $("#offAirMessage").val());
                 if (v && !v.Error) {
                     $(".error").css("color", "lime");
                     $(".error").text("Artist " + $("#ArtistName").val() + " has been successfully created.");

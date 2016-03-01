@@ -8,8 +8,10 @@ $(document).ready(function () {
         var charm;
         switch ($(this).attr("id")) {
             case "Logout":
-                removeSession("loggedinuser");
-                window.location.href = "default.html";
+                var ip = getClientIP(), userID = getUserID(), data = getSessionData(), userAgent = navigator.userAgent;
+                saveUserSession(userID, ip, data, userAgent);
+                clearSession();
+                window.location.href = "default.html"
                 break;
             case "Profile":
                 charm = $("#profileCharm").data("charm");
@@ -44,6 +46,7 @@ $(document).ready(function () {
                 }
                 break;
         }
+
     });
 
     $("#CloseProfilePanel").click(function () {
@@ -64,7 +67,8 @@ $(document).ready(function () {
             charm.close();
         }
     });
-
+    var hh = $(".indexHeader").height();
+    $("#profilePage").css("margin-top", hh+"px");
 });
 
 

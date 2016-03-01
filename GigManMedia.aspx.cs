@@ -14,6 +14,10 @@ public partial class GigManMedia : System.Web.UI.Page
     {
         UploadStatusLabel.Text = "";
         string action = Request.QueryString.Get("Action");
+        string skin = Request.QueryString.Get("skin");
+        if (string.IsNullOrEmpty(skin))
+            skin = "neon";
+        gmStyle.Attributes.Add("href", "css/ads-" + skin + ".min.css");
         if (action == "Error")
         {
             switch (Request.QueryString.Get("type"))
@@ -23,6 +27,7 @@ public partial class GigManMedia : System.Web.UI.Page
                     break;
             }
         }
+        fakeText.Text = mediaFiles.FileName;
         if (action == "Upload")
         {
             UploadPanel.Visible = true;
@@ -64,10 +69,6 @@ public partial class GigManMedia : System.Web.UI.Page
     }
     protected void Submit_Click(object sender, EventArgs e)
     {
-        // Specify the path on the server to
-        // save the uploaded file to.
-        String savePath = @"c:\temp\uploads\";
-
         // Before attempting to perform operations
         // on the file, verify that the FileUpload 
         // control contains a file.
@@ -101,14 +102,20 @@ public partial class GigManMedia : System.Web.UI.Page
                 {
                     UploadStatusLabel.Text += "There has been an error adding your media.  Please try again in a few minutes.<br/>If the problem persists, please contact support.";
                 }
-                string savepath = "";
+                string savepath = "",savePathThumb = "", savePathList = "";
                 if (ext == "JPG" || ext == "JPEG" || ext == "PNG")
+                {
+                    savePathThumb = "uploads\\thumbs\\" + mid + "." + ext;
+                    savePathList = "uploads\\AdList\\" + mid + "." + ext;
                     savepath = "uploads\\" + mid + "." + ext;
+                }
                 else if (ext == "WAV" || ext == "MP3")
                     savepath = "uploads\\" + mid + "." + ext;
                 try
                 {
                     uploadedFile.SaveAs(Server.MapPath("~/uploads") + "/" + id + "." + ext);
+                    if (uploadedFile.ContentType.IndexOf("image") > -1)
+                        saveThumbs(id,ext);                    
                 }
                 catch (Exception ex)
                 {
@@ -121,6 +128,38 @@ public partial class GigManMedia : System.Web.UI.Page
             // Notify the user that a file was not uploaded.
             UploadStatusLabel.Text = "You did not specify a file to upload.";
         }
+    }
+    void saveThumbFile(int mH, int mW, string path,System.Drawing.Image img)
+    {
+        int nH, nW, oH = img.Height, oW = img.Width;
+        if (mH < img.Height || mW < img.Width)
+        {
+            nH = (oH * mW) / oW;
+            nW = mW;
+
+            if (oH > oW)
+            {
+                nW = (oW * mH) / oH;
+                nH = mH;
+            }
+        }
+        else
+        {
+            nW = img.Width;
+            nH = img.Height;
+        }
+        System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(img, nW, nH);
+        System.IO.MemoryStream stream = new System.IO.MemoryStream();
+        bmp.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
+        bmp.Save(path);
+    }
+    void saveThumbs(string id, string ext)
+    {
+        System.Drawing.Image img = System.Drawing.Image.FromFile(Server.MapPath("~/uploads") + "/" + id + "." + ext);
+        saveThumbFile(64,64,Server.MapPath("~/uploads/thumbs") + "/" + id + ".png",img);
+        saveThumbFile(170,280,Server.MapPath("~/uploads/adlist") + "/" + id + ".png",img);
+        saveThumbFile(750,750,Server.MapPath("~/uploads") + "/" + id + ".png",img);
+
     }
     string getNextID()
     {

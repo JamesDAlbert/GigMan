@@ -2,65 +2,429 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
-    <link href="content/css/metro.css" rel="stylesheet"/>    
-    <link href="content/css/metro-responsive.css" rel="stylesheet"/>
-    <link href="content/css/metro-icons.css" rel="stylesheet"/>
-
-    <link href="Content/css/jquery-ui.css" rel="stylesheet"/>
+    <link href="Content/css/metro.min.css" rel="stylesheet"/>    
+    <link href="content/css/metro-responsive.min.css" rel="stylesheet"/>
+    <link href="Content/css/metro-icons.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/gigman-neon.min.css" />
+    <link href="Content/css/jquery-ui.min.css" rel="stylesheet"/>
     <link rel="stylesheet/less" type="text/css" href="Content/Selectize/less/selectize.less" />
+    <link rel="stylesheet" href="css/gmWidgets.min.css" />
 
-      <script src="Scripts/jquery.min.js"></script>
-      <script src="Scripts/jquery-ui.min.js"></script>
-    <script src="scripts/metro.js"></script>
-    <script src="Scripts/less-1.5.1.min.js"></script>
-    <script src="Content/selectize/js/selectize.js"></script>
+
+
+        <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.1.1/css/rowReorder.dataTables.min.css" />
+
+
+
+
+    <script src="Scripts/jquery.min.js"></script>
+    <script src="scripts/metro.min.js"></script>
+    <script src="Scripts/jquery-ui.min.js"></script>
+
+    <script src="Scripts/jlinq.min.js"></script>
+
+    <script src="js/dataRequest.min.js"></script>
+    <script src="js/utilities.min.js"></script>
+    <script src="js/gigman.min.js"></script>
+
+    <script src="scripts/jquery.datatables.min.js"></script>
+    <script src="Scripts/dataTables.fixedHeader.min.js"></script>
+    <script src="Scripts/jquery.dataTables.rowReordering.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.1.1/js/dataTables.buttons.min.js"></script>
 
     <style>
-        .channel
+        #setEditWrapper
         {
-            border-radius:8px;
-            background-color:violet;
-            width:60px;
-            height:16px;
-            min-width:36px;
-            height:16px;
-            position:absolute;
+            width:100%;
+            height:100%;
         }
-        .bat {
-            height:22px;
-            width:22px;
-            border-radius:11px;
-            background-color:white;
-            position:absolute;
-            top:-1px;
-            left:0;
+        #sSongListWrapper
+        {
+            width:49%;
+            display:inline-block;
+            float:left;
         }
-        .gmSwitch {
-            height:22px;
-            vertical-align:middle;
-            position:relative;
-            border:1px solid red;
-            padding-top:2px;
+        #setlistWrapper {
+            width:49%;
+            display:inline-block;
+            float:right;
+        }
+
+        .leftControls {
+            width:100%;
+            display:inline-block;
+            float:left
+        }
+        .rightControls {
+            width:100%;
+            display:inline-block;
+        }
+        .addSong
+        {
+            cursor: pointer;
+        }
+        .removeSong {
+            cursor:pointer;
+        }
+        .dataTable tr.selected td
+        {
+            background-color:rgba(255,255,255,.3);
+        }
+        #sSongListWrapper .dataTables_filter:before {
+            content:"Master Songlist "
+        }
+        #setlistWrapper .dataTables_filter:before {
+            content:"Setlist "
+        }
+        .dirty {
+            color:red!important;
+        }
+        .dt-button
+        {
+            padding-left: 5px;
+            padding-right: 5px;
+            line-height: 16pt!important;
+            vertical-align: middle;
+            -moz-border-radius: 0!important;
+            -webkit-border-radius: 0!important;
+            border-radius: 0!important;
+        }
+        .dt-buttons {
+            margin-bottom:-45px;
+            margin-top:18px;
+        }
+        #setName {
+            width:150px;
+        }
+        #subsetName {
+            width:150px
+        }
+        .square-button {
+            margin:0!important
+        }
+        select {
+            width:150px;
         }
     </style>
 
 </head>
-<body style="padding:10px;">
-    <!--<div class="gmSwitch">
-        <div class="channel"> </div>
-        <div class="bat"></div>
-    </div>-->
-    <select id="myselect" multiple="multiple">
-        <option>Hello</option>
-        <option>Goodbye</option>
-    </select>
+<body>
+    <br /><br />
+    <div id="setEditWrapper">
+        <div id="sSongListWrapper">
+            <div class="leftControls">
+                <select id="sets" title="Sets."></select>&nbsp;
+                <button id="deleteSet" class="small-button square-button buttonColor" title="Delete Current Set."><span class="mif-cross"></span></button>&nbsp;&nbsp;
+                <select id="subsets" title="Subsets."></select>&nbsp;
+                <button id="deleteSubset" class="small-button square-button buttonColor" title="Delete Current Subset."><span class="mif-cross"></span></button>
+            </div>
+            <table id="sSongList" class="order_columns stripe pretty SongList display nowrap" style="max-width:100%;width:100%;overflow:auto">
+                <thead>
+                    <tr>
+                        <th class="songCategory">ID</th>
+                        <th class="songTitle">Title</th>
+                        <th class="songArtist">Artist</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot></tfoot>
+            </table>
+        </div>
+        <div id="setlistWrapper">
+            <div class="rightControls">
+                <button class="small-button square-button buttonColor" id="newSet" title="New Set."><span class="mif-plus"></span></button>&nbsp;&nbsp;
+                <input type="text" id="setName" placeholder="Set Name" />&nbsp;
+                <button class="small-button square-button buttonColor" id="newSubset" title="New Subset."><span class="mif-plus"></span></button>&nbsp;&nbsp;
+                <input type="text" id="subsetName" placeholder="Subset Name" />&nbsp;&nbsp;
+                <button id="saveSet" class="small-button square-button buttonColor" title="Save Set"><span class="mif-floppy-disk"></span></button>
+            </div>
+            <table id="setList" class="order_columns stripe pretty SongList display nowrap">
+                <thead>
+                    <tr>
+                        <th class="songCategory">ID</th>
+                        <th class="songTitle">Title</th>
+                        <th class="songArtist">Artist</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot></tfoot>
+            </table>
+        </div>
+    </div>
     <script>
-        
+        var dirty = false;
+        var oSetname = '', oSubsetname = '';
         $(document).ready(function () {
-           
-            
+            var selIdx = -1;
+            getSets();
+            getSubsets();
+            populateSongList();
+            initSetList();
+            $('#setList').dataTable().rowReordering();
+            $("#setName").val($("#sets").val());
+            $("#subsetName").val($("#subsets").val());
+            oSetname = $("#sets").val();
+            oSubsetname = $("#subsets").val();
+            getSetSongs();
+
+            $('#setList tbody').on('click', 'tr', function () {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                }
+                else {
+                    $("#setList").DataTable.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                }
+                var tr = $(this).closest("tr");
+                var rowindex = tr.index();
+
+                //alert(rowindex);
+            });
+
+            $(document).on("click",".addSong",function () {
+                var id = $(this).data("id");
+                addSongToSetlist(id);
+                dirty = true;
+                $("#setlistWrapper .dataTables_filter").addClass("dirty");
+            });
+
+            $(document).on("click",".removeSong",function () {
+                $('#setList').dataTable().fnDeleteRow($(this).closest('tr')[0]);
+                dirty = true;
+                $("#setlistWrapper .dataTables_filter").addClass("dirty");
+            });
+
+            $("#newSet").click(function () {
+                $("#setName").val("New Set");
+                if (dirty)
+                {
+                    if (confirm("Save " + getSetName() + "/" + getSubsetName() + "first?"))
+                        saveSet();                   
+                }
+                clearSetlist();
+            });
+
+            $("#newSubset").click(function () {
+                $("#subsetName").val($("#setName").val() + "-" + "New Subset");
+                if (dirty)
+                {
+                    if (confirm("Save " + getSetName() + "/" + getSubsetName() + "first?"))
+                        saveSet();                    
+                }
+                clearSetlist();
+            });
+
+            $("#sets").change(function () {
+                getSubsets();
+            });
+
+            $("#subsets").change(function () {
+                getSetSongs();
+            });
+
+            $("#saveSet").click(function () {
+                saveSet(false);
+                $("#setlistWrapper .dataTables_filter").removeClass("dirty");
+            });
+
+            $("#deleteSet").click(function () {
+                if (confirm("Delete " + getSetName() + "?"))
+                    setlistDelete(getSetName(), '', getActiveArtistID());
+                getSets();
+                getSubsets();
+                getSetSongs();
+            });
+
+            $("#deleteSubset").click(function () {
+                if (confirm("Delete " + getSetName() + "/" + getSubsetName() + "?"))
+                    setlistDelete(getSetName(), getSubsetName(), getActiveArtistID());
+                getSubsets();
+                getSetSongs();
+            });
+
+            $("input[type='search']").prop("placeholder", "Enter Search Term");
+            $(".clearButton").prop("title", "Clear Setlist.");
+
+            $(".clearButton span").css({ "padding-left": "5px", "padding-right": "5px", "margin-top":"-5px" });
         });
-        
+        var songs, sngTbl, setTbl;
+        function saveSet(old) {
+            var songs = [];
+            //var dta = $("#setList").DataTable().data().toArray();
+            var dta = $("#setList")[0].rows;
+            for (var j = 0; j < dta.length-1; j++) // for each song
+            {
+                //var id = parseInt(dta[j].ID);
+                var id = parseInt($(dta[j+1].cells[0].innerHTML).data("songid"));
+                songs.push({ SongID: id, Ordinal: j });
+            }
+            setlistSave(getSetName(old), getSubsetName(old), songs, getActiveArtistID());
+            dirty = false;
+            getSets();
+            getSubsets();
+        }
+        function getSetName(old) {
+            if ($("#setName").val().trim() != "" && !old)
+                return $("#setName").val();
+            else return $("#sets").val();
+        }
+        function getSubsetName(old) {
+            if ($("#subsetName").val().trim() != "" && !old)
+                return $("#subsetName").val();
+            else return $("#subsets").val();
+        }
+        function initSetList() {
+            setTbl = $("#setList").dataTable({
+                buttons: [{ text: "<span class='mif-cross'></span>", action: function () { clearSetlist(); },className:"clearButton" }],
+                "bPaginate": false,
+                "paging": false,
+                "bSort":false,
+                "bDestroy": false,
+                //"sPaginationType": "simple_numbers",
+                orderClasses: false,
+                "sDom": 'Bft',
+                "bLengthChange": false,
+                responsive: true,
+                fixedHeader: { header: false },
+                "offsetTop": 5,
+                "oLanguage": {
+                    "sEmptyTable": "There are no songs in the set list.",
+                    "sSearch": "",
+                    "sLengthMenu": "<span class='lengthLabel'>Songs/Page </span>_MENU_",
+                },
+                "aoColumnDefs": [
+                {
+                    "aTargets":0,"bVisible": false, "className": "Title", "aTargets": 0, "mRender": function (value, type, full) {
+                        return full.ID;
+                    }, "visible": true, "searchable": true
+                },
+                {
+                    "aTargets": 1, "className": "Title", "mRender": function (value, type, full) {
+                        return "<span class='Title' data-songid='" + full.ID + "' title='" + full.Artist + "'>" + full.Title + "</span>";
+                    }
+                },
+                {
+                    "aTargets": 2, "className": "Title", "mRender": function (value, type, full) {
+                        return "<span class='Title' data-artist='" + escape(encodeURI(reverseArticle(full.Artist))) + "'>" + full.Artist + "</span>";
+                    }
+                },
+                {
+                    "aTargets": 3, "className": "Title", "mRender": function (value, type, full) {
+                        return "<a class='removeSong' data-id='" + escape(full.ID) + "'><span class='mif-cross' title='Remove from setlist.'></span></a>";
+                    }
+                },
+                ],
+            });
+        }
+        function populateSongList() {
+            songs = getMasterSongList();
+            sngTbl = $('#sSongList').dataTable({
+                "aaData": songs,
+                "bDestroy": false,
+                orderClasses: false,
+                "sDom": 'ft',
+                "bLengthChange": false,
+                responsive: true,
+                fixedHeader: { header: false },
+                "offsetTop": 5,
+                "bPaginate": false,
+                "paging": false,
+                "oLanguage": {
+                    "sEmptyTable": "There are no songs in the song list.",
+                    "sSearch": "",
+                    "sLengthMenu":"<span class='lengthLabel'>Songs/Page </span>_MENU_",
+                },
+                "aoColumnDefs": [
+                {
+                    "bVisible": false, "className": "songTitle", "aTargets": 0, className: "songTitle", "mRender": function (value, type, full) {
+                        return "<span class='ID'>" + full.ID + "</span>";
+                    }, "visible": true, "searchable": true
+                },
+                {
+                    "aTargets": 1, "className": "songTitle", "mRender": function (value, type, full) {
+                        return "<a class='songLink' data-songid='" + full.ID + "' title='" + full.Artist + "'>" + full.Title + "</a>";
+                    }
+                },
+                {
+                    "aTargets": 2, "className": "songTitle", "mRender": function (value, type, full) {
+                        return "<a class='artistLink' data-artist='" + escape(encodeURI(reverseArticle(full.Artist))) + "'>" + full.Artist + "</a>";
+                    }
+                },
+                {
+                    "aTargets": 3, "className": "songTitle", "mRender": function (value, type, full) {
+                        return "<a class='addSong' data-id='" + escape(full.ID) + "'><span class='mif-plus' title='Add to selected setlist.'></span></a>";
+                    }
+                },
+                ],
+            });
+            $(".buttons-colvis").prop("title", "Hide/Show songlist columns.").css("margin-top","10px");
+        }
+        function getSubsets()
+        {
+            var dta = subsets($("#sets").val(), getActiveArtistID());
+            var html = "";
+            $("#subsets").html("");
+            for (var i = 0; i < dta.length; i++)
+            {
+                html += "<option value='" + dta[i] + "'>" + dta[i] + "</option>";
+            }
+            $("#subsets").html(html);
+        }
+        function getSets() {
+            var dta = setlists(getActiveArtistID());
+            var html = "";
+            for (var i = 0; i < dta.length; i++)
+            {
+                html += "<option value='" + dta[i] + "'>" + dta[i] + "</option>";
+            }
+            $("#sets").html(html);
+        }
+        function clearSetlist(dta) {
+            $("#setList").dataTable().fnClearTable();
+            if (dta && dta.length > 0) $("#setList").dataTable().fnAddData(dta);
+            $("#setList").dataTable().fnDraw();
+        }
+        function getSetSongs() {
+            var dta = setlist($("#sets").val(), $("#subsets").val(), getActiveArtistID());
+            var dta2 = [];
+            for (var i = 0; i < dta.Songs.length; i++)
+            {
+                var sng = jlinq.from(songs).equals("ID", dta.Songs[i].SongID).select()[0];
+                dta2.push(sng);
+            }
+           
+            clearSetlist(dta2);
+        }
+        function songInSet(sng) {
+            var curDat = $("#setList").DataTable().data().toArray();
+            var tsng = jlinq.from(curDat).equals("ID", sng.ID).select();
+            if (tsng.length > 0)
+                return true;
+            return false;
+        }
+        function addSongToSetlist(id) {
+            var sng = jlinq.from(songs).equals("ID", id).select()[0];
+            if (songInSet(sng))
+            {
+                if (!confirm("That song has already been added.  Add anyway?"))
+                    return;
+            }
+
+            //$("#setList").DataTable().row.add(sng).draw();
+            var curDat = $("#setList").DataTable().data().toArray();
+            var newRow = [sng];
+            //$("#setList").DataTable().fnDestroy();
+            var tr = $("#setList").find(".selected"); 
+            var index = tr.index();
+            curDat.splice(index, 0, sng);
+            $("#setList").DataTable().clear();
+            $("#setList").DataTable().rows.add(curDat);
+            $("#setList").DataTable().draw();
+        }
+        function deleteSongFromSetlist(id) {
+        }
     </script>
 </body>
 </html>

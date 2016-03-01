@@ -2,8 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
-    <link id="gmStyle" rel="stylesheet" href="../css/gigman-neon.css" />
-    <link rel="stylesheet" href="../Content/css/metro.css" />
+    <link id="gmStyle" rel="stylesheet" href="../css/gigman-neon.min.css" />
+    <link rel="stylesheet" href="../Content/css/metro.min.css" />
     <script src="../Scripts/jquery-2.1.4.min.js"></script>
 </head>
 <body class="help">
@@ -15,22 +15,24 @@
         <h3>Artist name</h3> Yep - the artists name.<br />
         <h3>Web Page</h3> An optional web page for the artist.<br />
         <h3>Available/Selected Genres</h3>
-        You can specify what kinds of music your artists produces.  Not currently used for much, but will be in the future.<br />
+        You can specify what kinds of music your artists produce.  Not currently used for much, but will be in the future.<br />
         <h3>Members</h3>
         The members section displays the members and their roles registered to the selected artist profile. 
         If you are the prime user for the artist, you can delete members by clicking the 'X' to the right in the members row.
-        <h3>Payments</h3> Premium GigMan membership and GigMan Request membership can be paid for by the month or by the year.  Only PayPal is currently accepted.<br />
+        <h3>Payments</h3> Premium GigMan membership and GigMan Request membership can be paid for by the month or by the year.  Only PayPal will be accepted at launch.<br />
         <h3>GigMan Request Settings</h3>
-        If the currently selected artist has a membership to GigMan Request, this section shows the settable properties for that account on the GigMan Request website.<br />
+        If the currently selected artist has a membership to GigMan Request, this section shows the settable properties for that account on the GigMan Request website.<br /><br />
+        <b>GigMan Request State</b> You can disable your GigMan request and GigMan Message pages using this switch.  This is useful if you don't want fans to message or request outside of performances.  The Announcements and Calendar pages are still available to your fans.<br />
+        <b>Off-air Message</b> If you take your GigMan Request pages offline using the request state switch, you can specify a message to leave for users who try to leave messages or requests.<br />
         <b>GigMan Request URL Name</b> If the currently artist has a GigMan Request account, this is the identifier used when giving your fans the GigMan Request URL.<br />
         The identifier can be changed at any time, but cannot be a duplicate of an existing identifier.  The GigMan app will let you know if the identifier you have entered is a duplicate, and allow you to edit it.
-        If you are the primary user for the artist, you can also edit these attributes.<br />
-        <b>Show Members</b> Show the artist members in the Message target area of the GigMan Request website.<br />
-        <b>Show Categories</b> Show/Hide the Categories column in the sample song list on the GigMan Request page.<br />
-        <b>Show Composer</b>  Show/Hide the Artist column in the public song list on artists GigMan Request page.<br />
-        <b>Enable Downvotes</b> Allow users to downvote songs in your sample list.  This can be useful for determining which songs are working for your audiences.<br />
-        <b>Max. Messages/user/24 hr</b> Specify how many iMessages a user can send to this artist in one 24 hour period.<br />
-        <b>Max. Requests/user/24 hr</b> Specify how many requests a user can send to this artist in one 24 hour period.<br />
+        If you are the primary user for the artist, you can also edit these attributes.<br /><br />
+        <b>Show Members</b> Show the artist members in the Message target area of the GigMan Request website.<br /><br />
+        <b>Show Categories</b> Show/Hide the Categories column in the sample song list on the GigMan Request page.<br /><br />
+        <b>Show Composer</b>  Show/Hide the Artist column in the public song list on artists GigMan Request page.<br /><br />
+        <b>Enable Downvotes</b> Allow users to downvote songs in your sample list.  This can be useful for determining which songs are working for your audiences.<br /><br />
+        <b>Max. Messages/user/24 hr</b> Specify how many iMessages a user can send to this artist in one 24 hour period.<br /><br />
+        <b>Max. Requests/user/24 hr</b> Specify how many requests a user can send to this artist in one 24 hour period.<br /><br />
         <h3>Pending Join Requests</h3> Approve or deny requests from other GigMan users to join the currently selected artist.<br/><br />
         
     </p><br/><br />
@@ -38,13 +40,13 @@
         var scheme = sessionStorage.getItem("colorscheme");
 
         if (scheme == "hic") {
-            $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.css');
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.min.css');
         }
         else if (scheme == "classic") {
-            $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.css');
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.min.css');
         }
         else if (scheme == "neon") {
-            $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.css');
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.min.css');
         }
     </script>
 </body>

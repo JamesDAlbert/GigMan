@@ -5,23 +5,28 @@
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
     <meta content="utf-8" http-equiv="encoding" />
     <title>GigMan</title>
-    <link href="content/css/metro.css" rel="stylesheet"/>
-    <link href="content/css/metro-icons.css" rel="stylesheet"/>    
-    <link rel="stylesheet" href="css/gmWidgets.css" />
-    <link id="gmStyle" href="css/gigman-neon.css" rel="stylesheet"/>
-    <script src="scripts/jquery.js"></script>
-    <script src="scripts/metro.js"></script>
-    <script runat="server" src="js/utilities.js"></script>
-    <script runat="server" src="js/datarequest.js"></script>
-    <script runat="server" src="js/gigman.js"></script>
-    <script runat="server" src="js/index.js"></script>
-    <style></style>
+    <link href="Content/css/metro.min.css" rel="stylesheet"/>
+    <link href="Content/css/metro-icons.min.css" rel="stylesheet"/>    
+    <link rel="stylesheet" href="css/gmWidgets.min.css" />
+    <link id="gmStyle" href="css/gigman-neon.min.css" rel="stylesheet"/>
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/metro.min.js"></script>
+    <script runat="server" src="js/utilities.min.js"></script>
+    <script runat="server" src="js/dataRequest.min.js"></script>
+    <script runat="server" src="js/gigman.min.js"></script>
+    <script runat="server" src="js/index.min.js"></script>
+    <style>
+        .navigationPanel {
+            margin-left:0;
+            margin-top:90px;
+        }
+    </style>
 </head>
 <body class="gm-bg" style="display:block !important">
-    <div class="indexHeader" style="display:block;width:100%;overflow:hidden;height:110px;line-height:110px;vertical-align:middle">
+    <div class="indexHeader" style="display:block;width:100%;overflow:hidden;height:110px;line-height:110px;vertical-align:middle;z-index:2000">
         <div id="logo"></div>
-        <div id="greetings" class="greeting" style="display:inline-block;position:absolute;margin-top:-30px">Welcome <label id="userName"></label></div>
-        <div id="ColorScheme" class="slide-switch colorScheme" title="Color Scheme" style="display:inline-block;position:absolute;margin-top:40px">
+        <div id="greetings" class="greeting" style="display:inline-block;position:absolute;margin-top:-40px;margin-left:5px">Welcome <label id="userName"></label></div>
+        <div id="ColorScheme" class="slide-switch colorScheme" title="Color Scheme" style="display:inline-block;position:absolute;margin-top:35px;margin-left:5px">
             <input type="radio" class="slide-switch-input" name="view" value="hic" id="hic" checked/>
             <label for="hic" class="slide-switch-label slide-switch-label-left" title="Hi-Contrast"><span class="slide-switch-marker">H</span></label>
             <input type="radio" class="slide-switch-input" name="view" value="neon" id="neon"/>
@@ -30,6 +35,7 @@
             <label for="classic" class="slide-switch-label slide-switch-label-right" title="Metro Classic"> <span class="slide-switch-marker">C</span></label>
             <span class="slide-switch-selection"></span>
         </div>
+        <label id="iRequestURL" style="position:absolute;top:40px;margin-left:5px;font-size:16px"></label>
     </div><br />
     <!-- song editor -->
     <div id="editorCharm" class="gm-charm" data-role="charm">
@@ -49,20 +55,20 @@
     </div>
     <!-- end song editor -->
     <div id="navigationCharm">
-        <div class="navigationPanel" style="margin-left:0">
+        <div class="navigationPanel">
                 <span class="charmLabelBold" style="margin-left:5px">Active Artist:&nbsp;</span>
                 <div class="input-control select" style="margin-left:5px">
                     <select id="artistList"></select>    
                 </div>
-                <div style="overflow:visible;width:100%;margin-left:5px;">
+                <div style="overflow:visible;width:100%;margin-left:5px;margin-bottom:1px;height:50px;vertical-align:middle;display:inline-block;">
                     <div class="input-control text">
-                        <input type="text" style="width:260px;float:left" placeholder="Search text..." id="SearchTerm"/>
+                        <input type="text" style="width:260px;margin-top:0"placeholder="Search text..." id="SearchTerm"/>
                     </div>
-                    &nbsp;<button class="button square-button buttonColor" id="Search" style="float:left;margin-top:5px!important;height:40px!important" title="Search"><span class="mif-search mif-2x"></span></button>
+                    &nbsp;<button class="button square-button buttonColor" id="Search" style="float:left;margin-top:8px!important;" title="Search"><span class="mif-search mif-2x"></span></button>
                 </div>
-            <div class="tile-group" style="width:100%;padding:0;margin-left:0">
+            <div class="tile-group" style="width:100%;padding:0;margin-left:5px;margin-top:5px">
                 <div class="tile tile-square bg-song  mainNav" data-role="tile" data-click="transform">
-                    <div class="tile-content myTile " id="SongList">
+                    <div class="tile-content myTile " id="songList">
                         <span class="mif-list2 mif-2x"></span> <br /><br />
                         <span class="tileLabel">Song List</span>&nbsp;<span class="tileLabel" id="SongCount"></span>
                     </div>
@@ -95,6 +101,11 @@
                 <div class="tile-square bg-user mainNav" data-role="tile">
                     <div class="tile-content myTile " id="Calendar">
                         <span class="icon mif-calendar mif-2x"></span><br /><br /><span class="tileLabel">Calendar</span>
+                    </div>
+                </div>
+                <div class="tile-square bg-user mainNav" data-role="tile">
+                    <div class="tile-content myTile " id="Announcements">
+                        <span class="icon mif-broadcast mif-2x"></span><br /><br /><span class="tileLabel">Announcements</span>
                     </div>
                 </div>
                 <div class="tile-square bg-song  mainNav" data-role="tile">

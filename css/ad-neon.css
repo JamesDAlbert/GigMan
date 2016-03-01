@@ -1,0 +1,239 @@
+#headerLabel {
+  margin-left: 0;
+}
+/* LAYOUT */
+a.createAdLink {
+  padding-top: 5px;
+  display: block;
+}
+#sideBoard {
+  width: 300px;
+  min-width: 300px;
+  overflow: visible;
+  height: 100%;
+  border: 1px solid #8000ff;
+  left: 700px;
+  top: 0;
+  display: inline-block;
+}
+#sideboardFrame {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  overflow: visible;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+#adBody {
+  display: inline-block;
+  position: absolute;
+  left: 300px;
+  width: 400px;
+  min-width: 400px;
+  max-width: 400px;
+  height: 100%;
+  overflow: auto;
+}
+.adAttributeTable {
+  width: 100%;
+  min-height: 104px;
+  height: 100px;
+  line-height: 100%;
+  vertical-align: middle;
+}
+#dialogTitleBar {
+  background-color: #1d1d1d;
+  color: #33ccff;
+  font-weight: bold;
+  width: 100%;
+}
+#dialogTitle {
+  float: left;
+}
+.closeDialogButton {
+  float: right;
+  position: relative;
+  left: 0;
+  top: 0;
+  color: #ff0000;
+  background: #330099;
+}
+.closeDialogButton ::before {
+  content: "X";
+}
+.closeDialogButton:hover {
+  color: white;
+  background: #ff0000;
+}
+#adText {
+  width: 100%;
+  border-top: 1px solid #8000ff;
+  padding: 5px;
+  white-space: normal;
+}
+.lightSwitch {
+  position: absolute;
+  margin-top: -5px;
+  top: 5px;
+}
+/* Ad Page */
+.waButton {
+  width: 28px;
+  height: 28px;
+  border: 1px solid black;
+  margin-bottom: 5px;
+}
+#mediaPanel {
+  width: 300px;
+  border-right: 1px solid #8000ff;
+  padding-top: 5px;
+}
+#mainImagePanel {
+  width: 100%;
+  height: 180px;
+  text-align: center;
+}
+#mainImage {
+  max-width: 280px;
+  max-height: 170px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+#thumbnailPanel {
+  max-width: 100%;
+  display: inline-block;
+  overflow: visible;
+  border-bottom: 1px solid #8000ff;
+  padding-left: 5px;
+  padding-top: 5px;
+}
+#audioPanel {
+  width: 100%;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #8000ff;
+  padding: 5px;
+}
+.waVideo {
+  width: 150px;
+  height: 140px;
+  overflow: hidden;
+  border: 0;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+.audioLink {
+  color: white;
+}
+.audioLink:visited {
+  color: white;
+}
+.audioLink:hover {
+  text-decoration: underline;
+}
+.thumbnailPanel {
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+}
+.thumbnail {
+  max-width: 64px;
+  max-height: 64px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 2px solid transparent;
+}
+.selected {
+  border: 2px solid red;
+}
+#showPhone {
+  cursor: pointer;
+}
+#otherAds {
+  color: white;
+}
+#otherAds:visited {
+  color: white;
+}
+#otherAds:hover {
+  text-decoration: underline;
+}
+.contactTitle {
+  color: #33ccff;
+  border-bottom: 1 PX solid #8000ff;
+}
+#contactPanel {
+  margin-bottom: 5px;
+  border-bottom: 1px solid #8000ff;
+  border-top: 0;
+}
+#contactPanel table {
+  width: 100%;
+}
+#contactPanel table td {
+  padding: 5px;
+}
+#adTitle {
+  width: 100%;
+  height: 25px;
+  padding-bottom: 5px;
+  padding-top: 3px;
+  padding-left: 10px;
+  font-weight: bold;
+  font-size: larger;
+  max-width: 1000px;
+  border-bottom: 1px solid #8000ff;
+  border-right: 1px solid #8000ff;
+}
+.reportLink {
+  float: right;
+  color: white;
+  text-decoration: underline;
+  padding-right: 10px;
+}
+.reportLink:visited {
+  color: white;
+  margin-left: -10px;
+}
+#largeImagePanel {
+  background-color: transparent;
+}
+.ui-dialog.ui-widget-content {
+  background-color: #1d1d1d;
+}
+.wa-title-background {
+  background: linear-gradient(to bottom, #1d1d1d, #330099) !important;
+  /* Standard syntax */
+  font-weight: bold;
+  border-bottom: 1px solid #8000ff;
+  padding-bottom: 2px;
+  padding-left: 2px;
+}
+.ui-dialog-titlebar {
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  background: linear-gradient(to bottom, #1d1d1d, #330099) !important;
+  /* Standard syntax */
+  font-weight: bold;
+  border-bottom: 1px solid #8000ff;
+  padding-bottom: 2px;
+  padding-left: 2px;
+}
+.ui-dialog {
+  border-radius: 0;
+  border-collapse: collapse;
+}
+.ui-dialog-titlebar-close {
+  border: 1px solid #8000ff;
+  background: #330099 !important;
+  color: #33ccff !important;
+  border-radius: 0;
+  outline: 0;
+}
+.ui-dialog-titlebar-close:hover {
+  background-color: #ff0000 !important;
+  color: white;
+}

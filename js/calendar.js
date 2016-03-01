@@ -124,6 +124,15 @@ $(document).ready(function () {
     if (art.Artist)
         $("#calendarTitle").text("Calendar for " + art.Artist.ArtistName + "/" + usr.Username);
     else $("#calendarTitle").text("Calendar for " + art.ArtistName + "/" + usr.Username);
+
+    var hh = $(".indexHeader").height()-50;
+
+    var style = document.createElement('style');
+    style.type = 'text/css';
+    style.innerHTML = '.listOffset { margin-top: ' + hh + 'px!important; }';
+    document.getElementsByTagName('head')[0].appendChild(style);
+    if ($(".indexHeader").height() > 55)
+        $("#calendar").addClass('listOffset');
 });
 function eventElement(e) {
     var el = "<table class='eventTable'><tr><td class='eventTitleTD'>";

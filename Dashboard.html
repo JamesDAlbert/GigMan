@@ -2,19 +2,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>GigMan Communications</title>
-    <link href="content/css/metro.css" rel="stylesheet"/>
-    <link href="content/css/metro-icons.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="css/gmWidgets.css" /> 
-    <link id="gmStyle" href="css/gigman-hic.css" rel="stylesheet"/>
-    <script src="scripts/jquery.js"></script>
+    <link href="content/css/metro.min.css" rel="stylesheet"/>
+    <link href="content/css/metro-icons.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/gmWidgets.min.css" /> 
+    <link id="gmStyle" href="css/gigman-hic.min.css" rel="stylesheet"/>
+    <script src="scripts/jquery.min.js"></script>
     <script src="Scripts/jquery.dataTables.min.js"></script>
-    <script src="scripts/metro.js"></script>
+    <script src="scripts/metro.min.js"></script>
     <script src="scripts/jss.min.js"></script>
-    <script runat="server" src="js/datarequest.js"></script>    
-    <script src="Scripts/jlinq.js"></script>
-    <script runat="server" src="js/utilities.js"></script>
-    <script runat="server" src="js/gigman.js"></script>
-    <script src="js/Dashboard.js"></script>
+    <script runat="server" src="js/dataRequest.min.js"></script>    
+    <script src="Scripts/jlinq.min.js"></script>
+    <script runat="server" src="js/utilities.min.js"></script>
+    <script runat="server" src="js/gigman.min.js"></script>
+    <script src="js/dashboard.min.js"></script>
     <script src="Scripts/chart.min.js"></script>
     <style>
         .rqContent{
@@ -52,7 +52,7 @@
             font-size:16px;
         }
         .icn {
-            display:inline-block;
+            display:block;
             width:50px;
         }
         div.charmLabelBold
@@ -84,18 +84,18 @@
     </div><br />
 
     <div class="rqContent">
-        <div class="controlsContainer" style="display:block">
+        <div class="controlsContainer" style="display:inline-block">
             <span class="charmLabelBold">Active Artist:&nbsp;</span>
-            <div class="input-control select">
+            <!--<div class="input-control select">-->
                 <select id="artistList"></select>    
-            </div>
+            <!--</div>-->
             <label class="switch" style="margin-left:5px;margin-top:5px;margin-bottom:3px" title="Enable/Disable Communications Polling">
                 <input type="checkbox" id="iRequestEnable"/>
                 <span class="check"></span> Enable Feeds
             </label>
         </div><br />
-        <div class="accordion" data-role="accordion" data-close-any="false">
-            <div class="frame active">
+        <div class="accordion" data-role="accordion">
+            <div class="frame">
                 <div class="heading">Statistics</div>
                 <div class="content">
                     <table class="statsContainer" style="width:100%">
@@ -103,14 +103,14 @@
                            <td class="td" style="width:50%">
                                <div class="charmLabelBold">
                                    <div class="icn">
-                                       <span class="mif-thumbs-up" title="Most voted"></span><span class="mif-thumbs-down" title="Most voted"></span><span>+</span>
+                                       <span class="mif-arrow-up"></span><span class="mif-thumbs-up" title="Most voted"></span><span class="mif-thumbs-down" title="Most voted"></span>
                                    </div>
                                    <span class="data" id="mostReq"></span>
                                </div> 
                            </td>
                            <td class="td"  style="width:50%">
                                <div class="charmLabelBold">
-                                   <div class="icn"><span class="mif-thumbs-up" title="Least voted"></span><span class="mif-thumbs-down" title="Least voted"></span><span>-</span></div>
+                                   <div class="icn"><span class="mif-arrow-down"></span><span class="mif-thumbs-up" title="Least voted"></span><span class="mif-thumbs-down" title="Least voted"></span></div>
                                    <span class="data" id="leastReq"></span>
                                </div>
                            </td>        
@@ -119,36 +119,36 @@
                            <td class="td" style="width:50%">
                                <div class="charmLabelBold">
                                    <div class="icn">
-                                   <span class="mif-thumbs-down" title="Most downvotes"></span><span>+</span></div>
+                                   <span class="mif-arrow-up"></span><span class="mif-thumbs-down" title="Most downvotes"></span></div>
                                    <span class="data" id="mostDV"></span></div>
                            </td>
-                           <td class="td" style="right;width:50%"><div class="charmLabelBold"><span class="mif-thumbs-down" title="Least downvotes"></span><span>-</span> <span class="data" id="leastDV"></span></div></td>        
+                           <td class="td" style="right;width:50%"><div class="charmLabelBold"><span class="mif-arrow-down"></span><span class="mif-thumbs-down" title="Least downvotes"></span> <span class="data" id="leastDV"></span></div></td>        
                         </tr>
                         <tr class="tr" style="width:100%;display:table;margin-right:5px">
                            <td class="td" style="width:50%">
                                <div class="charmLabelBold">
-                                   <div class="icn"><span class="mif-thumbs-up" title="Most Upvotes"></span><span>+</span></div> <span class="data" id="mostUV"></span>
+                                   <div class="icn"><span class="mif-arrow-up"></span><span class="mif-thumbs-up" title="Most Upvotes"></span> </div> <span class="data" id="mostUV"></span>
                                </div>
                            </td>
                            <td class="td" style="width:50%">
-                               <div class="charmLabelBold"><div class="icn"><span class="mif-thumbs-up charmLabelBold" title="Least Upvotes"></span><span>-</span></div> <span class="data" id="leastUV"></span></div>
+                               <div class="charmLabelBold"><div class="icn"><span class="mif-arrow-down"></span><span class="mif-thumbs-up charmLabelBold" title="Least Upvotes"></span></div> <span class="data" id="leastUV"></span></div>
                            </td>        
                         </tr>
                         <tr class="tr" style="width:100%;display:table;margin-right:5px">
                            <td class="td" style="width:50%">
                                <div class="charmLabelBold">
-                               <div class="icn"><span class="mif-thumbs-up" title="Highest Request Traffic"></span><span class="mif-traff" title="Highest Request Traffic">+</span></div> <span class="data" id="trafficReqHi"></span></div></td>
+                               <div class="icn"><span class="mif-arrow-up"></span><span class="mif-thumbs-up" title="Highest Request Traffic"></span><span class="mif-traff" title="Highest Request Traffic"></span></div> <span class="data" id="trafficReqHi"></span></div></td>
                            <td class="td" style="width:50%">
-                               <div class="charmLabelBold"><div class="icn"><span class="mif-thumbs-up" title="Lowest Request Traffic"></span><span class="mif-traff charmLabelBold" title="Lowest Request Traffic">-</span> </div>
+                               <div class="charmLabelBold"><div class="icn"><span class="mif-arrow-down"></span><span class="mif-thumbs-up" title="Lowest Request Traffic"></span><span class="mif-traff charmLabelBold" title="Lowest Request Traffic"></span> </div>
                                <span class="data" id="trafficReqLo"></span></div></td>        
                         </tr>
                         <tr class="tr"  style="width:100%;display:table;margin-right:5px">
                            <td class="td" style="width:50%">
-                               <div class="charmLabelBold"><div class="icn"><span class="mif-bubble" title="Highest Message Traffic"></span><span class="mif-traff charmLabelBold" title="Highest Message Traffic">+</span></div> <span class="data" id="trafficMsgHi"></span></div></td>
+                               <div class="charmLabelBold"><div class="icn"><span class="mif-arrow-up"></span><span class="mif-bubble" title="Highest Message Traffic"></span><span class="mif-traff charmLabelBold" title="Highest Message Traffic"></span></div> <span class="data" id="trafficMsgHi"></span></div></td>
                            <td class="td"  style="width:50%">
                                <div class="charmLabelBold">
                                    <div class="icn">
-                                       <span class="mif-bubble" title="Lowest Message Traffic"></span><span class="mif-traff charmLabelBold" title="Lowest Message Traffic">-</span>
+                                       <span class="mif-arrow-down"></span><span class="mif-bubble" title="Lowest Message Traffic"></span><span class="mif-traff charmLabelBold" title="Lowest Message Traffic"></span>
                                    </div> 
                                    <span class="data" id="trafficMsgLo"></span>
                                </div>
@@ -202,11 +202,11 @@
                     <table id="requestList" class="requestList" style="width:100%">
                         <thead>
                             <tr class="messageDate">
-                                <th class="requestHeader">Title</th>
-                                <th class="requestHeader">Artist</th>
-                                <th class="requestHeader"># Req.</th>
-                                <th class="requestHeader"><span class="mif-thumbs-up"></span></th>
-                                <th class="requestHeader"><span class="mif-thumbs-down"></span></th>
+                                <th>Title</th>
+                                <th>Artist</th>
+                                <th># Req.</th>
+                                <th><span class="mif-thumbs-up"></span></th>
+                                <th><span class="mif-thumbs-down"></span></th>
                             </tr>                           
                         </thead>
                         <tbody></tbody>
@@ -225,9 +225,9 @@
                     </label>
                 </div>
                 <div style="clear:both"></div>                               
-                <table id="messageList" style="width:100%;min-width:100%;margin-top:6px">
+                <table id="messageList" style="width:100%;min-width:100%;margin-top:1px">
                     <thead>
-                        <tr role="row" class="messageDate">
+                        <tr class="messageDate">
                             <th style="text-align:left">Message</th>
                             <th style="text-align:left">&nbsp;</th>
                             <th style="text-align:left">Time</th></tr>

@@ -7,7 +7,7 @@ $(document).ready(function () {
     var ttls = jLinq.from(ml).distinct("Title");
     var arts = jLinq.from(ml).distinct("Artist");
     var cats = jLinq.from(ml).distinct("Category");
-    $("#SongEditorLyrics").each(function () { this.style.setProperty('font-face', getLocal("lyricFont"), 'important'); });
+    $("#SongEditorLyrics").each(function () { this.style.setProperty('font-face', getSession("lyricFont"), 'important'); });
 
     $("#SongEditorLyrics").css({"wrap":"soft","white-space":"pre","font-size":"16px"});
 
@@ -134,7 +134,7 @@ $(document).ready(function () {
             $("#EditorMessage").css("color:red");
             $("#EditorMessage").text("There was an error saving your song to the database. It has been saved locally.")
         }
-        if ($("#SongList"))
+        if ($("#SongList").length > 0)
         {
             if ($("#SongList", window.parent.document).length > 0) {
                 var tbl = $("#SongList", window.parent.document).dataTable();

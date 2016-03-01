@@ -1,12 +1,33 @@
 ﻿var table;
 var mediaTypes = [];
-$(document).ready(function () {
+var scheme = getSession("colorscheme");
 
+if (scheme == "hic") {
+    $('link[id="gmStyle"]').attr('href', 'css/ads-hic.css');
+}
+else if (scheme == "classic") {
+    $('link[id="gmStyle"]').attr('href', 'css/ads-classic.css');
+}
+else if (scheme == "neon") {
+    $('link[id="gmStyle"]').attr('href', 'css/ads-neon.css');
+}
+else {
+    $('link[id="gmStyle"]').attr('href', 'css/ads-neon.css');
+    setSession("colorscheme", "neon");
+}
+$(document).ready(function () {
+    setColorSchemeSwitch(scheme);
     updateLoginLinks();
 
-    var scheme = getSession("colorscheme");
+    scheme = getSession("colorscheme");
     if (scheme == "highcontrast")
-        $("#colorScheme").prop("checked", true);
+        $("#hic").prop("checked", true);
+    if (scheme == "classic")
+        $("#classic").prop("checked", true);
+    if (scheme == "neon")
+        $("#neon").prop("checked", true);
+
+
     mediaTypes = allowedMediaTypes();
     if (document.getElementById("navTable"))
         loadNavMenu();
@@ -67,8 +88,8 @@ $(document).ready(function () {
     });
     $("#colorScheme").on("click", function () {
         if (this.checked)
-            setLocal("colorscheme", "highcontrast");
-        else setLocal("colorscheme", "classic");
+            setSession("colorscheme", "highcontrast");
+        else setSession("colorscheme", "classic");
         parent.location.reload();
     });
     $(document).on("click", "#search", function () {
@@ -89,7 +110,11 @@ $(document).ready(function () {
     $(document).on("click", ".adTypeParent", function () {
         window.location.href = "ads.html?st=" + $(this).data("dir") + "&at=" + $(this).data("adtype");
     });
-
+    $("#ColorScheme input").on("click", function (e) {
+        e.preventDefault();
+        var sch = $(this).val();
+        setColorSchemeSwitch(sch);
+    });
     var imports = $("link[rel='import'");
     for (var i = 0; i < imports.length; i++)
         loadContent(imports[i].id,imports[i])
@@ -143,6 +168,53 @@ function loadSearchAdTypes() {
     document.getElementById("adTypeContainer").appendChild(sel);
     return adTypes;
 }
+function setColorSchemeSwitch(sch) {
+    if (sch == null)
+        sch = "classic";
+    $("#ColorScheme .slide-switch-label").removeClass("switch-selected");
+    var ss = "css/ads-";
+    $("#ColorScheme .slide-switch-marker").removeClass("slide-switch-marker-current");
+
+    switch (sch) {
+        case "hic":
+            $("#ColorScheme .slide-switch-selection").removeClass("slide-switch-right");
+            $("#ColorScheme .slide-switch-selection").removeClass("slide-switch-middle");
+            $("#ColorScheme .slide-switch-selection").addClass("slide-switch-left");
+            $("#ColorScheme .slide-switch-label-left span").addClass("slide-switch-marker-current");
+            ss += "hic.css";
+            $("#ColorScheme").data("scheme", "hic");
+            break;
+        case "neon":
+            $("#ColorScheme .slide-switch-selection").removeClass("slide-switch-left");
+            $("#ColorScheme .slide-switch-selection").removeClass("slide-switch-right");
+            $("#ColorScheme .slide-switch-selection").addClass("slide-switch-middle");
+            $("#ColorScheme .slide-switch-label-left").addClass("switch-selected");
+            $("#ColorScheme .slide-switch-label-middle span").addClass("slide-switch-marker-current");
+            ss += "neon.css";
+            $("#ColorScheme").data("scheme", "neon");
+            break;
+        case "classic":
+            $("#ColorScheme .slide-switch-selection").removeClass("slide-switch-middle");
+            $("#ColorScheme .slide-switch-selection").removeClass("slide-switch-left");
+            $("#ColorScheme .slide-switch-selection").addClass("slide-switch-right");
+            $("#ColorScheme .slide-switch-label-left").addClass("switch-selected");
+            $("#ColorScheme .slide-switch-label-middle").addClass("switch-selected");
+            $("#ColorScheme .slide-switch-label-right span").addClass("slide-switch-marker-current");
+            ss += "classic.css";
+            $("#ColorScheme").data("scheme", "classic");
+            break;
+    }
+    $('link[id="gmStyle"]').attr('href', ss);
+    var ifr = $(".panelContainer");
+    $(ifr).each(function (i, f) {
+        var idoc = (f.contentDocument) ? f.contentDocument : f.contentWindow.document;
+        if (idoc.getElementById("gmStyle"))
+            idoc.getElementById("gmStyle").href = ss;
+    });
+    if (getSession("loggedinuser"))
+        setSession("colorscheme", sch);
+    return ss;
+}
 function loadContent(id,link)
 {
     if ($("#sideboardAds")[0])
@@ -193,10 +265,10 @@ function assembleAdListing(value, type, full) {
     var t = "<table class='adTable' data-adid='" + full.AdID  + "'>";
     var imgName = getMainImage(full), fldr = "";
     
-    var adDate = eval(full.DateCreated.replace(/\//g, ''));
+    var adDate = full.DateCreated;
     var ii = adDate.lastIndexOf(":");
     adDate = adDate.substring(0,ii);
-    t += "<tr><td><div class='adListImgPanel'><img src='" + imgName + "' alt='" + full.Title + "'/></div></td>";
+    t += "<tr><td><div class='adListImgPanel'><img class='adListImage' src='" + imgName + "' alt='" + full.Title + "'/></div></td>";
     t += "<td><table style='width:100%;border-collapse:collapse'><tr><td class='adPrice'>$" + full.Price.toFixed(2) + "</td></tr>";
     t += "<tr><td><a class='adLink' href='#' data-adid='" + full.AdID + "' title='" + full.Title +"'><b>" + full.Title + "</b><span class='mif-go'></span></a></td></tr>";
     t += "<tr><td><a class='adLink' href='#' data-adid='" + full.AdID + "' title='" + full.Title + "'>" + full.Location + "<span class='mif-go'></span></a> | " + adDate + "</td></tr>";
@@ -262,10 +334,10 @@ function getMainImage(ad)
         img = imgs[0];
     if (img) {
         if (img.Type < 5)
-            fldr = "uploads/";
-        else fldr = "uploads/";
+            fldr = "uploads/adlist/";
+        else fldr = "uploads/adlist/";
         var nm = jlinq.from(mediaTypes).contains("MediaTypeID", Number(img.Type)).select()[0].Extension;
-        imgName = fldr + img.WantAdMediaDiskID + "." + nm;
+        imgName = fldr + img.WantAdMediaDiskID + "." + "png"; //nm;
     }
     else imgName = "Media/WantAdImages/NoImage.png";
     return imgName;

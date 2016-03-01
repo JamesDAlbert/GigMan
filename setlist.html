@@ -2,27 +2,29 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>GigMan</title>
-    <link href="content/css/metro.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="Content/css/metro-icons.css" />
-    <link rel="stylesheet" href="css/gmWidgets.css" />
+    <link href="Content/css/metro.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="Content/css/metro-icons.min.css" />
+    <link rel="stylesheet" href="Content/css/datatables.colvis.css" />
+    <link rel="stylesheet" href="css/gmWidgets.min.css" />
     <link rel="stylesheet" href="Content/css/jquery.dataTables.min.css" />
     <link href="https://cdn.datatables.net/buttons/1.1.1/css/buttons.dataTables.min.css" rel="stylesheet" />
-    <link id="gmStyle" href="css/gigman-neon.css" rel="stylesheet"/>
+
+    <link id="gmStyle" href="css/gigman-neon.min.css" rel="stylesheet"/>
 
     <script runat="server" src="scripts/jquery-2.1.4.min.js"></script>
     <script src="scripts/jquery.widget.min.js"></script>
     <script runat="server" src="scripts/metro.min.js"></script>
     <script src="scripts/jss.min.js"></script>
-    <script runat="server" src="js/datarequest.js"></script>
-    <script runat="server" src="js/gigman.js"></script>
-    <script runat="server" src="js/utilities.js"></script>
-    <script src="scripts/jlinq.js"></script>
-    <script runat="server" src="js/setlist.js"></script>
+    <script runat="server" src="js/dataRequest.min.js"></script>
+    <script runat="server" src="js/gigman.min.js"></script>
+    <script runat="server" src="js/utilities.min.js"></script>
+    <script src="scripts/jlinq.min.js"></script>
+    <script runat="server" src="js/setlist.min.js"></script>
     <script src="scripts/jquery.datatables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.1.1/js/dataTables.buttons.min.js"></script>
     <script src="//cdn.datatables.net/buttons/1.1.1/js/buttons.html5.min.js"></script>
     <script src="//cdn.datatables.net/buttons/1.1.1/js/buttons.print.min.js"></script>
-    <script src="//cdn.datatables.net/buttons/1.1.1/js/buttons.colVis.min.js"></script>
+    <script src="Scripts/datatables.colvis.js"></script>
     <style>
 
     </style>
@@ -38,9 +40,9 @@
             <span style="font-weight:bold;" id="Title"></span>
             <span id="Setname" style="margin-left:5px;font-weight:bold;">Set</span> /
             <span id="Subset" style="font-weight:bold;">Subset</span>
-            <button id="OpenSetEditorPanel" class="square-button small-button buttonColor" title="Close side navigation panel."><span class="mif-pencil mif-2x"></span></button>
+            <button id="OpenSetEditorPanel" class="square-button small-button buttonColor" title="Edit setlists."><span class="mif-pencil mif-2x"></span></button>
 
-            <div id="ColorScheme" class="slide-switch" title="Color Scheme" style="position:absolute;top:5px">
+            <div id="ColorScheme" class="slide-switch" title="Color Scheme" style="position:absolute;top:5px;display:inline-block">
                 <input type="radio" class="slide-switch-input" name="view" value="hic" id="hic" checked/>
                 <label for="hic" class="slide-switch-label slide-switch-label-left" title="Hi-Contrast"><span class="slide-switch-marker">H</span></label>
                 <input type="radio" class="slide-switch-input" name="view" value="neon" id="neon"/>
@@ -48,7 +50,8 @@
                 <input type="radio" class="slide-switch-input" name="view" value="classic" id="classic"/>
                 <label for="classic" class="slide-switch-label slide-switch-label-right" title="Metro Classic"> <span class="slide-switch-marker">C</span></label>
                 <span class="slide-switch-selection"><div class="knurl"></div></span>
-            </div>                    
+            </div>  
+                             
         </div>
         <table id="SongList" class="order_columns stripe pretty SongList" style="">
             <thead>
@@ -78,12 +81,12 @@
         </div>
         <!-- End tool chest -->
         <!-- song editor -->
-        <div id="setEditorCharm" data-role="charm"  class="gm-charm border-left" data-position="right" style="width:100%;max-width:1150px;height:100%;border-right:1px solid gray">
+        <div id="setEditorCharm" data-role="charm"  class="gm-charm border-left" data-position="right" style="width:100%;max-width:100%!important;height:100%;border-right:1px solid gray">
             <div><span class="charmTitle" style="float:left">Set Editor</span>
                 <button id="CloseSetEditorPanel" class="square-button small-button buttonColor" style="float:right;margin-top:-2px" title="Close song editor."><span class="mif-cross mif-2x"></span></button>
                 <button class="square-button small-button buttonColor helpButton" style="float:right;margin-top:-2px;margin-right:5px" data-topic="setlisteditor" title="Help for Setlist Editor"><span class="mif-question mif-2x"></span></button>
             </div>
-            <iframe id="setEditorContainer" name="editorContainer" class="panelContainer" src="SetlistEditor.html" style="overflow-y:auto;"></iframe>         
+            <iframe id="setEditorContainer" name="editorContainer" class="panelContainer" src="" style="overflow-y:auto;"></iframe>         
         </div>
         <div id="editorCharm" class="gm-charm" data-role="charm">
             <div style="float:left;overflow:auto;width:100%">                
@@ -104,7 +107,7 @@
         </div>
         <div id="helpCharm" class="gm-charm border-right" data-position="left" data-role="charm">
             <div><button id="CloseHelpPanel" class="small-button square-button buttonColor" style="margin-bottom:5px" title="Close help panel"><span class="mif-cross mif-2x"></span></button></div>
-            <iframe id="helpContainer" class="panelContainer" src="sitesettings.html" style="overflow-y:auto"></iframe>         
+            <iframe id="helpContainer" class="panelContainer" src="sitesettings_help.html" style="overflow-y:auto"></iframe>         
         </div>
         <!-- end song editor -->
     </div>

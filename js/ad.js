@@ -1,5 +1,6 @@
 ﻿var ad;
 var captchaAnswer, captchaAnswer2;
+var lgImgDlg;
 $(document).ready(function () {
     showCaptcha();
     
@@ -31,7 +32,8 @@ $(document).ready(function () {
                     cls = "thumbnail selected";
                 }
                 else cls = "thumbnail";
-                img += "<div class='thumbnailPanel'><img title='" + ad.Media[i].Name + "' data-diskid='" + ad.Media[i].WantAdMediaDiskID + "' data-name='" + ad.Media.Name + "' class='" + cls + "' data-mediatype='" + ext + "' data-mediaid='" + ad.Media[i].WantAdMediaID + "' src='uploads/" + ad.Media[i].Name + "' alt='" + ad.Media[i].Name + "'/></div>";
+                var nm = ad.Media[i].Name.substring(0, ad.Media[i].Name.lastIndexOf(".")+1) + "png";
+                img += "<div class='thumbnailPanel'><img style='cursor:pointer' title='" + ad.Media[i].Name + "' data-diskid='" + ad.Media[i].WantAdMediaDiskID + "' data-name='" + nm + "' class='" + cls + "' data-mediatype='" + ext + "' data-mediaid='" + ad.Media[i].WantAdMediaID + "' src='uploads/thumbs/" + nm + "' alt='" + ad.Media[i].Name + "'/></div>";
                 nImg++;
                 if ((nImg % 4) == 0)
                     img += "<br/>";
@@ -66,21 +68,12 @@ $(document).ready(function () {
     if (!mainFilled)
         $("#mainImagePanel").hide();
 
-    var adDate = eval(ad.DateCreated.replace(/\//g, ''));
-    var ii = adDate.lastIndexOf(":");
-    adDate = adDate.substring(0, ii);
+    var d = new Date(ad.DateCreated).toString();
+    d = d.substring(0, d.indexOf(":") - 2);
     $("#adText").append(ad.Text.replace(/\n/g,"<br/>"));
-    $("#listDate").text(adDate);
+    $("#listDate").text(d);
     $("#price").text(ad.Price.formatMoney(2,".",","));
     $("#location").text(ad.Location);
-
-    var d = $("#largeImagePanel").dialog({
-        modal: true,
-        autoOPen:false,
-        overlay: { backgroundColor: "#000", opacity: 0.5 },
-        buttons: { "Close": function () { $(this).dialog('**destroy**'); } },
-        close: function (ev, ui) { $(this).close(); },
-    });
 
     $(document).on("click",".thumbnail",function() {
         setMainImage($(this).data("mediaid"), $(this).data("mediatype"), $(this).data("diskid"));
@@ -104,12 +97,44 @@ $(document).ready(function () {
         else showCaptcha();
     });
     $("#mainImage").click(function () {
-        var img = document.createElement("img");
-        img.src = "uploads/" + $("#mainImage").data("diskid") + "." + $("#mainImage").data("ext");
-        if (document.getElementById("largeImagePanel").firstChild)
-            document.getElementById("largeImagePanel").removeChild(document.getElementById("largeImagePanel").firstChild);
-        document.getElementById("largeImagePanel").appendChild(img);       
-        $("#largeImagePanel").dialog("open");
+        try {
+            $("#largeImagePanel").dialog("close");
+        }
+        catch (err){};
+        var img = document.getElementById("lgImg");
+        img.src = "uploads/" + $("#mainImage").data("diskid") + "." + "png";
+        var iW, iH;
+        $("#lgImg").attr("src", $(img).attr("src"))
+        .load(function () {
+            $(".ui-widget-content").css("width", this.width);
+            $(".ui-widget-content").css("height", this.height)
+        });
+
+        lgimgdlg = $("#largeImagePanel").dialog({
+            height: window.innerHeight,
+            width: iW,
+            autoOpen: false,
+            modal: true,
+            resizable: true,
+            position: {
+                my: "center",
+                at: "center",
+                of: "#body",
+                collision: "none"
+            },
+            show: {
+                effect: "blind",
+                duration: 250
+            },
+            hide: {
+                effect: "blind",
+                duration: 250
+            },
+            create: function (event, ui) {
+                //$(event.target).parent().css('position', 'fixed');
+            }
+        });
+        $(lgimgdlg).dialog("open");
     });
     $("#largeImagePanel").click(function () {
         $("#largeImagePanel").dialog("close");
@@ -147,7 +172,7 @@ $(document).ready(function () {
 });
 
 function setMainImage(id,ext,diskid) {
-    $("#mainImage").attr("src", "uploads/" + diskid + "." + ext);
+    $("#mainImage").attr("src", "uploads/adlist/" + diskid + ".png");
     $("#mainImage").data("id",id);
     $("#mainImage").data("ext", ext);
     $("#mainImage").data("diskid",diskid);

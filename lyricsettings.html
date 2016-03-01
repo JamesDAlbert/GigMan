@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="Content/css/metro.min.css" rel="stylesheet"/>    
+    <link href="content/css/metro-responsive.min.css" rel="stylesheet"/>
+    <link href="Content/css/metro-icons.min.css" rel="stylesheet"/>
+    <link id="gmStyle" rel="stylesheet" href="css/gigman-neon.min.css" />
+    <link href="Content/css/jquery-ui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/gmWidgets.min.css" />
+
+    <script src="Scripts/jquery.min.js"></script>
+    <script src="scripts/metro.min.js"></script>
+    <script src="Scripts/jquery-ui.min.js"></script>
+    <script src="Scripts/jlinq.min.js"></script>
+    <script src="js/dataRequest.min.js"></script>
+        <script src="scripts/jss.min.js"></script>  
+    <script runat="server" src="js/rgbcolor.min.js"></script>
+    <script src="js/utilities.min.js"></script>
+    <script src="js/gigman.min.js"></script>
+    <script src="js/lyricsettings.min.js"></script>
+</head>
+<body style="position:relative">
+    <div style="margin-right:5px;margin-top:5px;text-align:left" class="settingsTable">
+                <label class="charmLabelBold" >Transpose</label> <br />
+                <div id="transposer">
+                    <div class="whitekeys" style="">
+                        <div class="keyPad white" data-key="0">A</div>
+                        <div class="keyPad black" data-key="1">B<sup>b</sup></div>
+                        <div class="keyPad white" data-key="2">B</div>            
+                        <div class="keyPad white" data-key="3">C</div>
+                        <div class="keyPad black" data-key="4">C<sup>#</sup></div>
+                        <div class="keyPad white" data-key="5">D</div>
+                        <div class="keyPad black" data-key="6">E<sup>b</sup></div>            
+                        <div class="keyPad white" data-key="7">E</div>           
+                        <div class="keyPad black" data-key="8">F</div>
+                        <div class="keyPad white" data-key="9">F<sup>#</sup></div>
+                        <div class="keyPad white" data-key="10">G</div>            
+                        <div class="keyPad black" data-key="11"">G<sup>#</sup></div>
+                    </div>        
+                </div>
+            </div> 
+            <div class="settingsTable">
+                <div style="display:table;width:100%">
+                    <div style="display:table-row"><div style="display:table-cell;"><label class="charmLabelBold">Text</label></div></div>
+                    <div style="display:table-row">
+                        <div style="width:48%;display:table-cell;"><span class="charmLabel" style="margin-bottom:2px">Font Size</span>
+                            <div class="spinBox">
+                                <button class="spinMinus buttonColor"><span class="icon mif-minus"></span></button>
+                                <input id="FontSize" type="text" class="spinInput" data-min="14" data-max="30" data-step="1" data-field="lyricFontSize" />
+                                <button class="spinPlus buttonColor"><span class="icon mif-plus"></span></button>
+                            </div>
+                        </div>
+                        <div style="width:48%;display:table-cell">                     
+                            <span class="charmLabel"> Font Face</span> <br />      
+                            <div id="LyricFontFace" class="slide-switch" title="Lyric view font" style="margin:5px;width:89px" data-positions="2">
+                                <input type="radio" class="slide-switch-input" name="lfont" value="'Courier New', Courier, monospace" id="Courier" checked/>
+                                <label for="Courier" class="slide-switch-label slide-switch-label-left" title="Courier"><span class="slide-switch-marker">Cour.</span></label>
+                                <input type="radio" class="slide-switch-input" name="lfont" value="'Lucida Console', Monaco, monospace" id="Lucida"/>
+                                <label for="Lucida" class="slide-switch-label slide-switch-label-right" title="Lucida"> <span class="slide-switch-marker">Luci.</span></label>
+                                <span class="slide-switch-selection"></span>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="settingsTable">
+                <div class="switchTable" style="width:100%;display:table">
+                    <div style="display:table-row"><div style="display:table-cell"><span class="charmLabelBold">Display</span></div></div>
+                    <div style="display:table-row">
+                        <div style="display:table-cell">
+                            <span class="charmLabel">Chords</span><br />
+                                <label class="switch charmSwitch" style="margin-top:5px;">
+                                <input type="checkbox" id="ChordVisibility"/>
+                                <span class="check"></span>
+                            </label>
+                        </div>
+                        <div style="display:table-cell">
+                            <span class="charmLabel">Charts</span><br/>
+                            <label class="switch charmSwitch" style="margin-top:5px;">
+                                <input type="checkbox" id="PopupChordVisibility"/>
+                                <span class="check"></span>
+                            </label>
+                        </div>
+                        <div style="display:table-cell">
+                            <span class="charmLabel">Left Sliders</span><br />
+                            <label class="switch charmSwitch" style="margin-top:5px;">
+                                <input type="checkbox" id="RightSliderVisibility"/>
+                                <span class="check"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div style="display:table-row">
+                         <div style="display:table-cell"></div>
+                        <div style="display:table-cell;padding-top:3px;padding-bottom:3px">
+                            <span class="charmLabel">Hints</span><br />
+                            <label class="switch charmSwitch" style="margin-top:5px;">
+                                <input type="checkbox" id="PopupChordHints" />
+                                <span class="check"></span>
+                            </label>
+                        </div>
+                              <div style="display:table-cell"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="settingsTable" style="width:100%">    
+                <div style="display:table;width:100%">  
+                    <div style="display:table-row;width:100%">
+                        <div style="display:table-cell"><span class="charmLabelBold">Colors</span></div>
+                    </div>
+                    <div style="display:table-row;width:100%">
+                        <div style="vertical-align:top;display:table-cell">
+                            <div id="colorsDiv" style="float:left;display:inline-block;text-align:left;width:100%">                              
+                                <table id="colors" style="padding:0;margin:0;border-collapse:collapse;border-spacing:0;width:100%">
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+
+            </div> 
+            <div style="text-align:justify;width:100%; margin-top:5px">
+                <div style="width:33%;float:left;text-align:center"><button class="square-button large-button buttonColor command notesButton" id="NotesVisibility" title="Show song notes."><span class="mif-file-text"></span></button></div>
+                <div style="width:33%;float:left;text-align:center"><button class="square-button large-button buttonColor command" id="IncPlayCount" title="Increment play count."><span class="mif-plus"></span></button></div>
+                <div style="width:33%;float:left;text-align:center"><a class="square-button large-button buttonColor command" id="PlaySample" title="Play audio sample."><span class="mif-headphones" style="margin-top:-7px;color:black"></span></a></div>
+            </div><br /><br /> 
+     <!-- palettte window -->
+    <div id="paletteWindow" class="ui-widget-content paletteWindow" style="position:absolute;left:0;top:0">
+        <div id="paletteTitle" class="windowTitle" style="cursor:move">
+            <span>Available Colours</span>
+            <button id="closePaletteWindow" class="buttonColor closeNotesPanel" title="Close Palette Window"></button></div>
+        <table class="paletteTable" id="paletteTable"></table>
+    </div> <br /><br />
+    <!-- end palette window -->                  
+</body>
+</html>

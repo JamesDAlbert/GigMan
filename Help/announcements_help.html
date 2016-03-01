@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link id="gmStyle" rel="stylesheet" href="../css/gigman-neon.min.css" />
+    <link rel="stylesheet" href="../Content/css/metro.min.css" />
+    <script src="../Scripts/jquery.min.js"></script>
+</head> 
+<body class="help">
+    <label id="charmLabelBold">Announcements</label>
+    <p>
+        This page allows premium artists to create blog style announcements. <br />If you have a GigMan Request membership, these announcements can be displayed to your audience in your GigMan Request page.<br /><br />
+        There are three fields for each announcement:
+        <h3>Date:</h3>The date the announcement should be released on.  Only announcements on or prior the current date are displayed to the public.<br />
+        <h3>Title</h3>A short description of the announcement topic.<br />
+        <h3>Announcement Text</h3>The body of the announcement.  Anchor tags (links) are allowed.  Innapropriate links will result in user suspension.<br /><br />
+        Once an announcement has been saved, it will appear in the <b><i>Existing Announcements</i></b> list.<br /><br />
+        Each element in the list can be edited and resaved, or deleted.<br /><br />
+        Selecting an announcement from the list displays it in the <b><i>Preview</i></b> pane as it will be seen by the public in the GigMan Request Announcements window.
+    </p><br /><br />
+    <script src="../Scripts/jquery.min.js"></script>
+     <script>
+         var scheme = sessionStorage.getItem("colorscheme");
+         if (parent.document.URL.indexOf("faq.html") > 0)
+             $(".charmLabelBold").first().hide();
+
+         if (scheme == "hic") {
+             $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.min.css');
+         }
+         else if (scheme == "classic") {
+             $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.min.css');
+         }
+         else if (scheme == "neon") {
+             $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.min.css');
+         }
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link id="gmStyle" rel="stylesheet" href="" />
+    <link rel="stylesheet" href="../Content/css/metro.min.css" />
+    <link rel="stylesheet" href="../Content/css/metro-icons.min.css" />
+    <script src="../Scripts/jquery-2.1.4.min.js"></script>
+    <style>
+        span {
+            margin-right:10px;
+            font-weight:bold
+        }
+    </style>
+</head>
+<body class="help">
+    <label class="charmLabelBold">WantAds Help</label><br/><br/>
+    GigMan Want Ads is an industry-specific tool for advertising goods and services.  It is currently under construction, but is fully functional.<br />
+    There are seven main categories under which to create advertisements:
+    <p><span>Business: </span>Business related services, such as accounting.</p>
+    <p><span>Management: </span>Management services, such as tour or stage management.</p>
+    <p><span>Musicians: </span>Musicians for hire or seeking work,. </p>
+    <p><span>Technicians: </span>Technicians for hire or seeking work.</p>
+    <p><span>Gigs: </span>Venus seeking artists, or artists seeking gigs.</p>
+    <p><span>Instruments: </span>Musical instruments</p>
+    <p><span>Gear: </span>Musical or production gear not covered under Instruments</p>
+    <br/><br/>
+    <p>
+    Ads can be created by anyone with a GigMan account.  Media, such as audio, images or YouTube video can be added to enhance an ads appeal.
+
+    </p>
+    <br/><br/>
+    <script>
+        var scheme = sessionStorage.getItem("colorscheme");
+
+        if (scheme == "hic") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.min.css');
+        }
+        else if (scheme == "classic") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.min.css');
+        }
+        else if (scheme == "neon") {
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.min.css');
+        }
+    </script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <title></title>
     <link id="gmStyle" rel="stylesheet" href="" />
-    <link rel="stylesheet" href="../Content/css/metro.css" />
+    <link rel="stylesheet" href="../Content/css/metro.min.css" />
     <script src="../Scripts/jquery-2.1.4.min.js"></script>
 </head>
 <body class="help">
@@ -40,13 +40,13 @@
         var scheme = sessionStorage.getItem("colorscheme");
 
         if (scheme == "hic") {
-            $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.css');
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.min.css');
         }
         else if (scheme == "classic") {
-            $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.css');
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.min.css');
         }
         else if (scheme == "neon") {
-            $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.css');
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.min.css');
         }
     </script>
 </body>

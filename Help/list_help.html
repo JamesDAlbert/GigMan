@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
-    <link rel="stylesheet" href="../Content/css/metro.css" />
+    <link rel="stylesheet" href="../Content/css/metro.min.css" />
     <link rel="stylesheet" href="../Content/css/metro-icons.min.css" />
-    <link id="gmStyle" rel="stylesheet" href="../css/gigman-neon.css" />
+    <link id="gmStyle" rel="stylesheet" href="../css/gigman-neon.min.css" />
     <script src="../Scripts/jquery.min.js"></script>
 </head>
 <body class="help">
@@ -12,11 +12,15 @@
     <p>
         This page displays songs by artist, genre or category, as well as the default master song list for the current artist.<br />
         <h3>Toolbar</h3><br />
-        <span class="mif-shrink mif-2x fg-white" style="float:left;font-style:normal"></span>&nbsp;<span class="mif-enlarge mif-2x fg-white" style="font-style:normal"></span> 
-        <em><strong>Collapse/Restore Columns</strong></em>: Show or hide all columns that are not Title or Composer.<br /><br />
+        <span class="mif-more-horiz mif-2x fg-white" style="float:left;font-style:normal"></span> 
+        <em><strong>Hide/Show Columns</strong></em>: Select which columns to show.<br /><br />
+        <span class="mif-print mif-2x fg-white" style="float:left;font-style:normal"></span> 
+        <em><strong>Print List</strong></em>: Print all pages of the current song list.<br /><br />
+        <span class="mif-file-download mif-2x fg-white" style="float:left;font-style:normal"></span> 
+        <em><strong>Save List</strong></em>: Save the current song list as a CSV file.<br /><br />
         <span class="mif-menu mif-2x fg-white" style="font-style:normal"> </span> <strong><em>Navigation Panel</em></strong>: Opens the navigation panel.  A blinking Menu button indicates that there are Messages or Requests available.<br /><br />
         <span class="mif-arrow-left mif-2x fg-white" style="font-style:normal"> </span> <strong><em>Previous Page.</em></strong>: Navigate to the previous page.<br /><br />
-        <strong><em>Normal/Hi-C</em></strong>: Switch between the normal color scheme and the high contrast color scheme.<br /><br />
+        <strong><em>H/N/C</em></strong>: Switch between the Hi-Contrast, Neon and Classic color schemes.<br /><br />
         <strong><em>Tile/List</em></strong>: Switch between list and tiled display. <br /><br />
         <strong><em>Filter text box</em></strong>: Enter text to filter songs in the list.
         <h3>Columns</h3><br />       
@@ -25,22 +29,23 @@
         <span class="mif-plus fg-white" style="font-style:normal"></span> Increment Play Count for the song.<br /><br />
         <strong><em>Plays</em></strong>: Shows the current play count for the song.  Hovering over the number displays the last play date, if applicable.<br /><br />
         <strong><em>Title</em></strong>: The song title.  Clicking the link takes you to the lyrics view page for the song.<br /><br />
-        <strong><em>Artist</em></strong>: The song's artist.  Clicking the link takes you to the artists's song listing page.<br /><br />
-        <strong><em>Genre</em></strong>: The song's genre.  Clicking the link takes you to the genres song listing page..<br /><br />
-        <strong><em>Category</em></strong>: The song's category, if defined.  Clicking the link takes you to the categorys song listing page.<br />
+        <strong><em>Composer</em></strong>: The song's composer or original recorder.  Clicking the link takes you to the composer's song listing page.<br /><br />
+        <strong><em>Genre</em></strong>: The song's genre.  Clicking the link takes you to the genres song listing page.<br /><br />
+        <strong><em>Category</em></strong>: The song's category, if defined.  Clicking the link takes you to the categorys song listing page.<br /><br />
+        <strong><em>Added</em></strong>: The date the song was added to the database.<br />
     </p><br /><br />
 
     <script>
         var scheme = sessionStorage.getItem("colorscheme");
 
         if (scheme == "hic") {
-            $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.css');
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.min.css');
         }
         else if (scheme == "classic") {
-            $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.css');
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.min.css');
         }
         else if (scheme == "neon") {
-            $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.css');
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.min.css');
         }
     </script>
 </body>

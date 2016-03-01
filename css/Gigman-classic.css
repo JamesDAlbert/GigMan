@@ -1,5 +1,19 @@
+a {
+  color: #f1f1f1;
+}
+a:visited {
+  color: #f1f1f1;
+}
+a:hover {
+  text-decoration: underline;
+}
 .indexHeader {
   border-bottom: 1px solid #00bbbb;
+  background: #008080;
+  width: 100%;
+  position: fixed;
+  padding: 0;
+  border-collapse: collapse;
 }
 .indexHeader .greeting {
   margin-left: 140px;
@@ -58,6 +72,10 @@ hr {
   max-width: 420px;
   overflow: auto;
   height: 100%;
+  z-index: 2000;
+}
+#helpCharm {
+  z-index: 2100!important;
 }
 .gm-checkbox {
   display: none;
@@ -165,14 +183,14 @@ hr {
 .spinMinus {
   margin: 0;
   padding: 0;
-  width: 40px;
-  height: 40px!important;
+  width: 32pt;
+  height: 32pt !important;
   border: 0;
 }
 .spinPlus {
   padding: 0;
-  width: 40px;
-  height: 40px!important;
+  width: 32pt;
+  height: 32pt !important;
   border: 0;
 }
 .spinMinus:hover {
@@ -212,12 +230,12 @@ hr {
   display: inline-block;
   overflow: hidden;
   margin-top: 5px;
-  width: 40px;
-  height: 40px;
+  width: 32pt;
+  height: 32pt;
   vertical-align: middle;
   text-align: center;
   font-size: 16px;
-  line-height: 40px;
+  line-height: 32pt;
   cursor: pointer;
 }
 .keyPad.selected {
@@ -276,11 +294,12 @@ hr {
   border: 0!important;
 }
 .slide-switch {
-  border-color: #00b3b3 !important;
+  border-color: #1affff !important;
   background-color: #008080 !important;
   -moz-box-shadow: 0 -2px 4px -4px #80ffff;
   -webkit-box-shadow: 0 -2px 4px -4px #80ffff;
   box-shadow: 0 -2px 4px -4px #80ffff;
+  border-radius: 3px;
 }
 .slide-switch-marker {
   top: -2px;
@@ -374,6 +393,7 @@ input[type=text] {
   background-color: #f1f1f1 !important;
   color: #1d1d1d !important;
   font-size: 16px;
+  border: 1px solid #00bbbb;
 }
 [data-role="datepicker"] .button {
   margin: 0!important;
@@ -450,8 +470,8 @@ select:not[multiple] {
 }
 .square-button {
   margin: 5px!important;
-  width: 40px!important;
-  height: 40px!important;
+  width: 32pt !important;
+  height: 32pt !important;
   border: 1px solid transparent !important;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -931,7 +951,6 @@ a.paginate_button.current {
   position: static;
   float: left;
   overflow: visible;
-  margin-top: 55px!important;
   margin-left: 5px;
   width: 100%;
   table-layout: fixed;
@@ -1015,7 +1034,9 @@ a.paginate_button.current {
   border-radius: 0;
   background-color: #004d4d !important;
   text-align: center;
-  background-image: linear-gradient(to right, transparent 0%, transparent 50%, transparent 100%) !important;
+  background-image: linear-gradient(to right, #006060 0%, #006060 50%, #006060 100%) !important;
+  border-left: 1px solid #00bbbb;
+  border-right: 1px solid #00bbbb;
 }
 #sTranspose.ui-widget-content {
   background: #008080;
@@ -1051,7 +1072,9 @@ a.paginate_button.current {
   border-radius: 0;
   background-color: #004d4d !important;
   text-align: center;
-  background-image: linear-gradient(to right, transparent 0%, transparent 50%, transparent 100%) !important;
+  background-image: linear-gradient(to right, #006060 0%, #006060 50%, #006060 100%) !important;
+  border-left: 1px solid #00bbbb;
+  border-right: 1px solid #00bbbb;
 }
 #sChangeFontSize.ui-widget-content {
   background: #008080;
@@ -1098,6 +1121,7 @@ a.paginate_button.current {
   vertical-align: middle;
   font-size: 16px!important;
   line-height: 16px;
+  border: 0!important;
 }
 .eventTable td {
   border-bottom: 1px solid #00bbbb !important;
@@ -1130,14 +1154,14 @@ a.paginate_button.current {
   width: 18px;
   height: 18px;
   border: 1px solid #00bbbb;
-  color: #008080;
+  color: rgba(255, 0, 0, 0.7);
   vertical-align: middle;
   text-align: center;
   font-size: 16px;
   line-height: 16px;
 }
 .eventDeleteButton:visited {
-  color: #008080;
+  color: rgba(255, 0, 0, 0.7);
 }
 .gmEventDisabled {
   margin: 0;
@@ -1148,7 +1172,7 @@ a.paginate_button.current {
 }
 button {
   margin-right: 2px;
-  height: 40px!important;
+  height: 32pt !important;
   -moz-border-radius: 0!important;
   -webkit-border-radius: 0!important;
   border-radius: 0!important;
@@ -1325,7 +1349,7 @@ a[id*="subset_"] {
 }
 @media screen and (max-width: 640px) {
   div.dt-buttons {
-    text-align: left !important;
+    text-align: left!important;
   }
 }
 .prevSet:before {
@@ -1531,11 +1555,15 @@ a[id*="subset_"] {
   width: 15px;
 }
 ::-webkit-scrollbar-track:vertical {
-  background-image: linear-gradient(to right, transparent 0%, transparent 50%, transparent 100%) !important;
+  background-image: linear-gradient(to right, #006060 0%, #006060 50%, #006060 100%) !important;
+  border-left: 1px solid #00bbbb;
+  border-right: 1px solid #00bbbb;
 }
 /* the new scrollbar will have a flat appearance with the set background color */
 ::-webkit-scrollbar-track:horizontal {
-  background-image: linear-gradient(to right, transparent 0%, transparent 50%, transparent 100%) !important;
+  background-image: linear-gradient(to right, #006060 0%, #006060 50%, #006060 100%) !important;
+  border-left: 1px solid #00bbbb;
+  border-right: 1px solid #00bbbb;
 }
 /* the new scrollbar will have a flat appearance with the set background color */
 /* this will style the thumb, ignoring the track */

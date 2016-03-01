@@ -2,25 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
-    <link href="content/css/metro.css" rel="stylesheet"/>
+    <link href="Content/css/metro.min.css" rel="stylesheet"/>
     <link href="content/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <link href="content/css/metro-icons.css" rel="stylesheet"/>
-    <link id="gmWidgetStyle" href="css/messageWidget-neon.css" rel="stylesheet"/>
+    <link href="Content/css/metro-icons.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="Content/css/fixedHeader.dataTables.min.css" />
-    <link id="gmStyle" href="css/messagewidget-neon.css" rel="stylesheet"/>
-
+    <link id="gmrStyle" href="css/request-classic.min.css" rel="stylesheet"/>
+    <!--<link id="gmWidgetStyle" href="css/messageWidget-neon.min.css" rel="stylesheet"/>-->
     <script src="scripts/jquery.min.js"></script>
     <script src="scripts/jquery.widget.min.js"></script>
-    <script src="scripts/metro.js"></script>
-    <script runat="server" src="js/utilities.js"></script>
-    <script src="scripts/jlinq.js"></script>
-    <script runat="server"  src="js/datarequest.js"></script>
-    <script runat="server"  src="js/irequest.js"></script>
-    <script runat="server"  src="js/gmrmessages.js"></script>
+    <script src="scripts/metro.min.js"></script>
+    <script runat="server" src="js/utilities.min.js"></script>
+    <script src="scripts/jlinq.min.js"></script>
+    <script runat="server"  src="js/dataRequest.min.js"></script>
+    <script runat="server"  src="js/irequest.min.js"></script>
+    <script runat="server"  src="js/gmrmessages.min.js"></script>
     <script src="scripts/jquery.datatables.min.js"></script>
     <script src="Scripts/dataTables.fixedHeader.min.js"></script>
-    <script src="scripts/jQuery.html5.file.upload.js"></script>
-    
+    <script src="scripts/jQuery.html5.file.upload.min.js"></script>    
 </head>
 
 <body>
@@ -49,7 +47,7 @@
     <script>
         var t = getSession("colorscheme");
         t = t.substring(t.lastIndexOf("-"));
-        $("#gmWidgetStyle").prop("href", "css/messageWidget-" + t + ".min.css");
+        //$("#gmWidgetStyle").prop("href", "css/messageWidget-" + t + ".min.css");
     </script>
 </body>
 </html>

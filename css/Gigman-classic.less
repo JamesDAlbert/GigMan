@@ -60,8 +60,8 @@
 @bg-site: fade(#993cf3,75%);
 @cancel-color: fade(red,75%);
 
-@scrollbar-track-color: transparent;
-@scrollbar-track-color-contrast: transparent;
+@scrollbar-track-color: #006060;
+@scrollbar-track-color-contrast: #006060;
 @scrollbar-button-color: @thumb-color;
 @scrollbar-button-highlight: @thumb-color;
 @scrollbar-border-color: transparent;
@@ -133,9 +133,23 @@
 @header-margin:140px;
 @help-content-icon-color:white;
 @button-font-size:25px;
-
+@button-size:32pt;
+a {
+    color:@text-color;
+}
+a:visited {
+    color:@text-color;
+}
+a:hover {
+    text-decoration:underline;
+}
 .indexHeader {
     border-bottom:1px solid @border-color;
+    background:@background;
+    width:100%;
+    position:fixed;
+    padding:0;
+    border-collapse:collapse;
 }
 .indexHeader .greeting{
     margin-left:@header-margin;
@@ -213,8 +227,12 @@ hr
     max-width:420px;
     overflow:auto;
     height:100%;
+    z-index:2000;
 }
 
+#helpCharm {
+    z-index:2100!important;
+}
 .gm-checkbox
 {
     display: none;
@@ -372,16 +390,16 @@ hr
         {
             margin: 0;
             padding: 0;
-            width: 40px;
-            height: 40px!important;
+            width: @button-size;
+            height: @button-size!important;
             border: 0;
         }
 
         .spinPlus
         {
             padding: 0;
-            width: 40px;
-            height: 40px!important;
+            width: @button-size;
+            height: @button-size!important;
             border: 0;
         }
 
@@ -433,12 +451,12 @@ hr
             display: inline-block;
             overflow: hidden;
             margin-top: 5px;
-            width: 40px;
-            height: 40px;
+            width: @button-size;
+            height: @button-size;
             vertical-align: middle;
             text-align: center;
             font-size: 16px;
-            line-height: 40px;
+            line-height: @button-size;
             cursor: pointer;
         }
 
@@ -522,11 +540,12 @@ hr
 
         .slide-switch
         {
-            border-color: lighten(@background,10%)!important;
+            border-color: lighten(@background,30%)!important;
             background-color: @background!important;
             -moz-box-shadow: 0 -2px 4px -4px @slideswitch-selected-color;
             -webkit-box-shadow: 0 -2px 4px -4px @slideswitch-selected-color;
             box-shadow: 0 -2px 4px -4px @slideswitch-selected-color;
+            border-radius:@border-radius;
         }
 
         .slide-switch-marker
@@ -612,6 +631,7 @@ hr
             background-color: @bg-textbox!important;
             color: @fg-textbox!important;
             font-size: 16px;
+            border:1px solid @border-color;
         }
 
         [data-role="datepicker"] .button
@@ -723,8 +743,8 @@ hr
         .square-button
         {
             margin: 5px!important;
-            width: 40px!important;
-            height: 40px!important;
+            width: @button-size!important;
+            height: @button-size!important;
             border: 1px solid @button-border-color!important;
             -moz-border-radius: @border-radius;
             -webkit-border-radius: @border-radius;
@@ -1432,7 +1452,7 @@ hr
     position: static;
     float: left;
     overflow: visible;
-    margin-top: 55px!important;
+    //margin-top: 55px!important;
     margin-left: 5px;
     width: 100%;
     table-layout: fixed;
@@ -1648,6 +1668,7 @@ hr
         vertical-align: middle;
         font-size: 16px!important;
         line-height: 16px;
+        border:0!important;
     }
 
     .eventTable td
@@ -1692,7 +1713,7 @@ hr
         width: 18px;
         height: 18px;
         border: 1px solid @border-color;
-        color: @background;
+        color: @danger;
         vertical-align: middle;
         text-align: center;
         font-size: 16px;
@@ -1701,7 +1722,7 @@ hr
 
         .eventDeleteButton:visited
         {
-            color: @background;
+            color: @danger;
         }
 
     .gmEventDisabled
@@ -1721,7 +1742,7 @@ hr
     button
     {
         margin-right: 2px;
-        height: 40px!important;
+        height: @button-size!important;
         -moz-border-radius: 0!important;
         -webkit-border-radius: 0!important;
         border-radius: 0!important;
@@ -2003,7 +2024,7 @@ hr
 {
     div.dt-buttons
     {
-        text-align:left!important
+        text-align:left!important;
     }
 }
     .prevSet:before {
@@ -2300,6 +2321,8 @@ hr
     .vertTrack(@style) when (@style = "classic")
     {
         background-image: linear-gradient(to right, @scrollbar-track-color 0%, @scrollbar-track-color-contrast 50%, @scrollbar-track-color 100%)!important;
+        border-left:1px solid @border-color;
+        border-right:1px solid @border-color;
     }
 
     .vertTrack(@style) when (@style = "hic")
@@ -2311,6 +2334,8 @@ hr
     .horizTrack(@style) when not (@style = "hic")
     {
         background-image: linear-gradient(to bottom, @scrollbar-track-color 0%, @scrollbar-track-color-contrast 50%, @scrollbar-track-color 100%);
+        border-top:1px solid @border-color;
+        border-bottom:1px solid @border-color;
     }
 
     .horizTrack(@style) when (@style = "hic")

@@ -2,26 +2,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
-    <link href="content/css/metro.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="css/gmWidgets.css" />
-    <link href="content/css/metro-icons.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="Content/css/jquery-ui.css" />
-    <link id="gmStyle" href="css/gigman-neon.css" rel="stylesheet"/>
+    <link href="Content/css/metro.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/gmWidgets.min.css" />
+    <link href="Content/css/metro-icons.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="Content/css/jquery-ui.min.css" />
+    <link id="gmStyle" href="css/gigman-neon.min.css" rel="stylesheet"/>
 
-    <script src="scripts/jquery.js"></script>
+    <script src="scripts/jquery.min.js"></script>
     <script src="Scripts/jquery.widget.min.js"></script>
     <script src="scripts/jquery-ui.min.js"></script>
 
 
     <script src="scripts/metro.min.js"></script>
     <script src="scripts/jss.min.js"></script>
-    <script runat="server" src="js/datarequest.js"></script>
-    <script runat="server" src="js/gigman.js"></script>
-    <script runat="server" src="js/rgbcolor.js"></script>
-    <script runat="server" src="js/utilities.js"></script>
+    <script runat="server" src="js/dataRequest.min.js"></script>
+    <script runat="server" src="js/gigman.min.js"></script>
+    <script runat="server" src="js/rgbcolor.min.js"></script>
+    <script runat="server" src="js/utilities.min.js"></script>
 
 
-    <script runat="server" src="js/sitesettings.js"></script>
+    <script runat="server" src="js/sitesettings.min.js"></script>
     <style>
         body, html {
             height:455px;width:100%;padding:0;margin:0;background:none transparent
@@ -96,8 +96,6 @@
                 <span class="check"></span>
             </label></td>
             </tr>
-
-
             <tr><td class="charmLabel">Song List Page Length</td>
                 <td>
                     <div class="input-control select">
@@ -111,7 +109,6 @@
                     </div>
                 </td>
             </tr>
-
             <tr><td class="charmLabel">Set List Page Length</td>
                 <td>
                     <div class="input-control select">
@@ -125,24 +122,38 @@
                     </div>
                 </td>
             </tr>
-
         </table>
         <table class="settingsTable" style="visibility:hidden">
             <tr><td>Lists</td></tr>
             <tr><td><table id="listColors"></table></td></tr>
         </table>
+        <table class="settingsTable">
+            <tr><td class="charmLabelBold" colspan="2">Tiles</td></tr>
+            <tr>
+                <td class="charmLabel">Width:</td>
+                <td><input id="tileWidth" type="number" min="50" max="500" /></td>
+            </tr>
+            <tr>
+                <td class="charmLabel">Height:</td>
+                <td><input id="tileHeight" type="number" min="50" max="500" /></td>
+            </tr>
+            <tr>
+                <td class="charmLabel">Font Size:</td>
+                <td><input id="tileFontSize" type="number" min="10" max="30" /></td>
+            </tr>
+        </table><br /><br />
     </div>
         <script>
             var scheme = getSession("colorscheme");
 
             if (scheme == "hic") {
-                $('link[id="gmStyle"]').attr('href', 'css/gigman-hic.css');
+                $('link[id="gmStyle"]').attr('href', 'css/gigman-hic.min.css');
             }
             else if (scheme == "classic") {
-                $('link[id="gmStyle"]').attr('href', 'css/gigman-classic.css');
+                $('link[id="gmStyle"]').attr('href', 'css/gigman-classic.min.css');
             }
             else if (scheme == "neon") {
-                $('link[id="gmStyle"]').attr('href', 'css/gigman-neon.css');
+                $('link[id="gmStyle"]').attr('href', 'css/gigman-neon.min.css');
             }
     </script>
 </body>

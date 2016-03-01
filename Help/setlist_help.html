@@ -2,20 +2,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
-    <link rel="stylesheet" href="../Content/css/metro.css" />
+    <link rel="stylesheet" href="../Content/css/metro.min.css" />
     <link rel="stylesheet" href="../Content/css/metro-icons.min.css" />
-    <link id="gmStyle" rel="stylesheet" href="../css/gigman-neon.css" />
+    <link id="gmStyle" rel="stylesheet" href="../css/gigman-neon.min.css" />
     <script src="../Scripts/jquery-2.1.4.min.js"></script>
 </head>
 <body class="help">
     <label>Set Lists</label><br /><br />
-    Previously created and saved setlists can be navigated to and viewed on this page. <br /><br />
+    Previously created and saved setlists can be navigated to and viewed on this page. <br />
+    The number of entries per page can be set in the Site Settings panel.<br /><br />
     The following navigation controls are available:<br /><br />
     <div style="margin-left:20px">
         <span class="mif-arrow-left" style="font-style:normal" > </span> Get the previous set list (if more than one is defined).<br /><br />
         <span class="mif-arrow-right" style="font-style:normal" > </span> Get the next set list (if more than one is defined).<br /><br />
         <span class="mif-chevron-left" style="font-style:normal" > </span> Get the previous subset for the current setlist (if more than one is defined).<br /><br />
         <span class="mif-chevron-right" style="font-style:normal" > </span> Get the next subset for the current setlist (if more than one is defined).<br /><br />
+    </div>
+    The following list tools are available:<br /><br />
+    <div style="margin-left:20px">
+        <span class="mif-printer"> </span> Print the setlist.  The entire list will be printed, not just the current page.<br /><br />
+        <span class="mif-download"> </span> Export the setlist to a CSV file. These files can be opened in most spreadsheet applications, like Excel.  The file will usually be stored in your Downloads folder. <br /><br />
+        <span class="mif-more-horiz"> </span> Select which columns to show in the setlist.  This is handy if you have limited screen real-esatate on your device.<br /><br />
     </div>
     <i>Note that the setlist/subset navigation wraps. For instance, if you are viewing the last subset of a setlist, and click the next subset button, then the first subset will be shown.</i><br /><br />
     <span class="mif-pencil" style="font-style:normal" > </span> Open the setlist editor to create a new setlist, or modify an existing setlist.
@@ -24,13 +31,13 @@
         var scheme = sessionStorage.getItem("colorscheme");
 
         if (scheme == "hic") {
-            $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.css');
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.min.css');
         }
         else if (scheme == "classic") {
-            $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.css');
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.min.css');
         }
         else if (scheme == "neon") {
-            $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.css');
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.min.css');
         }
     </script>
 </body>

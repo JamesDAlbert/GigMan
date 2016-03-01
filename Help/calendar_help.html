@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
-    <link id="gmStyle" rel="stylesheet" href="../css/gigman-neon.css" />
-    <link rel="stylesheet" href="../Content/css/metro.css" />
-    <script src="../Scripts/jquery.js"></script>
+    <link id="gmStyle" rel="stylesheet" href="../css/gigman-neon.min.css" />
+    <link rel="stylesheet" href="../Content/css/metro.min.css" />
+    <script src="../Scripts/jquery.min.js"></script>
 </head>
 <body class="help">
     <label id="charmLabelBold">Calendar</label>
     <p>
-        This panel allows you to create calendar events, with varying levels of visibility.<br />If you have a GigMan Request membership, and have specified that the calendar 
+        This page allows you to create calendar events, with varying levels of visibility.<br />If you have a GigMan Request membership, and have specified that the calendar 
         should be shown, events marked as public will be visible to your fan-base on your GigMan Request page.
         There are three viewing levels:<br />
         <ul>
@@ -31,13 +31,13 @@
              $(".charmLabelBold").first().hide();
 
          if (scheme == "hic") {
-             $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.css');
+             $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.min.css');
          }
          else if (scheme == "classic") {
-             $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.css');
+             $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.min.css');
          }
          else if (scheme == "neon") {
-             $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.css');
+             $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.min.css');
          }
     </script>
 </body>

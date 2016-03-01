@@ -82,7 +82,7 @@ $(document).ready(function () {
         loadAd();
     })
     $(document).on("click", ".thumbnail", function () {
-        setMainImage($(this).data("mediaid"), $(this).data("mediatype"), $(this).data("name"));
+        setMainImage($(this).data("mediaid"),$(this).data("diskid"), $(this).data("mediatype"), $(this).data("name"));
         mainImage = $(this).data("mediaid");
         $(".thumbnail").removeClass(".selected");
         $(this).addClass(".selected");
@@ -121,9 +121,10 @@ $(document).ready(function () {
     loadAds();
 });
 
-function setMainImage(id, ext, name) {
-    $("#mainImage").attr("src", "uploads/" + name);
-    $("#mainImage").data("id", id);
+function setMainImage(mid, did, ext, name) {
+    $("#mainImage").attr("src", "uploads/adlist/" + did + ".png");
+    $("#mainImage").data("id", mid);
+    $("#mainImage").data("diskid", did);
     $("#mainImage").data("ext", ext);
     $("#mainImage").data("name",name);
 }
@@ -146,15 +147,15 @@ function loadMedia(ad)
                 case "png":
                     if (firstIdIdx == -1) firstIdIdx = i;
                     if (ad.Media[i].IsMain && !mainFilled) {
-                        setMainImage(ad.Media[i].WantAdMediaID, ext);
+                        setMainImage(ad.Media[i].WantAdMediaID, ad.Media[i].WantAdMediaDiskID, ext, ad.Media[i].Name);
                         mainFilled = true;
                         cls = "thumbnail selected";
                         mainImage = ad.Media[i].WantAdMediaID;
                     }
                     else cls = "thumbnail";
                     img += "<div class='thumbnailPanel'><img title='" + ad.Media[i].Name + "' data-name='" + ad.Media[i].Name + "' class='" + cls + "' data-mediatype='" + ext + "' data-mediaid='" + ad.Media[i].WantAdMediaID +
-                        "' data-diskid='" + ad.Media[i].WantAdMediaDiskID +"' src='uploads/" + ad.Media[i].WantAdMediaDiskID + "." + ext + "' alt='" + ad.Media[i].Name + "'/>";
-                    img += "<a href=# title='Delete Media' class='deleteMediaLink' data-type='" + ad.Media[i].Type + "' data-id='" + ad.Media[i].WantAdMediaID + "'>x</a>";
+                        "' data-diskid='" + ad.Media[i].WantAdMediaDiskID +"' src='uploads/thumbs/" + ad.Media[i].WantAdMediaDiskID + ".png" + "' alt='" + ad.Media[i].Name + "'/>";
+                    img += "<a href=# title='Delete Media' class='deleteMediaLink' data-type='" + ad.Media[i].Type + "' data-id='" + ad.Media[i].WantAdMediaID + "'></a>";
                     img += "</div>";
                     nImg++;
                     if ((nImg % 4) == 0)
@@ -164,17 +165,17 @@ function loadMedia(ad)
                 case "wave":
                 case "mp3":
                     nAud++;
-                    audio += "<tr><td><a href=# title='Delete Media' class='deleteAudioMediaLink' data-type='" + ad.Media[i].Type + "' data-id='" + ad.Media[i].WantAdMediaID + "'>x</a></td><td>" +
+                    audio += "<tr><td><a href=# title='Delete Media' class='deleteAudioMediaLink' data-type='" + ad.Media[i].Type + "' data-id='" + ad.Media[i].WantAdMediaID + "'></a></td><td>" +
                         "<a target=_NEW class='audioLink' href='uploads/" + ad.Media[i].WantAdMediaDiskID + "." + ext + "'>" + ad.Media[i].Name + "</a></td><td>" +
                         "<input id='" + ad.Media[i].WantAdMediaID + "_name' type='text' maxchars='50' data-oldname='" + ad.Media[i].Name + "' data-id='" + ad.Media[i].WantAdMediaID + "' value='" + ad.Media[i].Name + "'></input></td><td>" + 
                         "<button class='button renameButton' data-id='" + ad.Media[i].WantAdMediaID + "'>Rename</button></td></tr>";
                     break;
                 case "": // remote video
                     nVid++;
-                    video += "<table class='videoDiv'><tr><td><a href=# title='Delete Media' class='deleteAudioMediaLink' data-type='" + ad.Media[i].Type + "' data-id='" + ad.Media[i].WantAdMediaID + "'>x</a></td>" + 
+                    video += "<table class='videoDiv'><tr><td><a href=# title='Delete Media' class='deleteAudioMediaLink' data-type='" + ad.Media[i].Type + "' data-id='" + ad.Media[i].WantAdMediaID + "'></a></td>" + 
                         "<td><iframe class='waeVideo' src='" + "https://www.youtube.com/embed/" + ad.Media[i].Url + "' title='" + ad.Media[i].Name + "'></iframe></td></tr>" + 
-                        "<tr><td></td><td><input id='" + ad.Media[i].WantAdMediaID + "_name' type='text'maxchars='50' data-id='" + ad.Media[i].WantAdMediaID + "' data-oldname='" + ad.Media[i].Name + "' value='" + ad.Media[i].Name + "'></input> " +
-                        "<button class='renameButton' data-id='" + ad.Media[i].WantAdMediaID + "'>Rename</button></table></td></tr>";
+                        "<tr><td colspan='2'><input id='" + ad.Media[i].WantAdMediaID + "_name' type='text'maxchars='50' data-id='" + ad.Media[i].WantAdMediaID + "' data-oldname='" + ad.Media[i].Name + "' value='" + ad.Media[i].Name + "'></input> " +
+                        "<button class='button' data-id='" + ad.Media[i].WantAdMediaID + "'>Rename</button></table></td></tr>";
 
                     break;
             }
@@ -224,7 +225,7 @@ function loadAd()
     document.getElementById('adType').value = ad.AdType;
 
     loadMedia(ad);
-    $("#uploadFrame").prop("src", "GigManMedia.aspx?Action=Upload&WantAdID=" + $("#usersAds").val());   
+    $("#uploadFrame").prop("src", "GigManMedia.aspx?Action=Upload&WantAdID=" + $("#usersAds").val() + "&skin=" + getSession("colorscheme"));   
 }
 function loadAds()
 {

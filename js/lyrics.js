@@ -13,7 +13,7 @@ var dividerColor;
 var initialized = false;
 var notesChanged = false;
 $(document).ready(function () {
-    $("#FontSize").val(parseInt(localStorage.getItem("lyricFontSize") + "px"));
+    $("#FontSize").val(parseInt(getSession("lyricFontSize") + "px"));
     
     $("#sTranspose").slider({
         range: "min",
@@ -52,10 +52,10 @@ $(document).ready(function () {
     });
     if (!checkLoginStatus())
         window.location.href = "default.html";
-    showChords = getLocal("showChords") == "true";
-    showPopupChords = getLocal("showPopupChords") == "true";
-    superscriptChords = getLocal("superscriptChords") == "true";
-    showChordHints = getLocal("showChordHints") == "true";
+    showChords = getSession("showChords") == "true";
+    showPopupChords = getSession("showPopupChords") == "true";
+    superscriptChords = getSession("superscriptChords") == "true";
+    showChordHints = getSession("showChordHints") == "true";
     var scheme = getSession("colorscheme");
     if (scheme == "highcontrast")
         $("#colorScheme").prop("checked", true);
@@ -87,9 +87,6 @@ $(document).ready(function () {
             e.preventDefault();
         }
     });
-    $("#GoBack").click(function () {
-        window.history.back();
-    });
 
     $(".keyPad").click(function () {
         var keyStr = "";
@@ -111,13 +108,13 @@ $(document).ready(function () {
     });
     $("#ChordVisibility").click(function() {
         showChords = this.checked;
-        setLocal("showChords", showChords);
+        setSession("showChords", showChords);
         if (showChords)
             $("chordset").show();
         else $("chordset").hide();
     });
     $("#PopupChordHints").click(function() {
-        setLocal("showChordHints", this.checked);
+        setSession("showChordHints", this.checked);
         showChordHints = this.checked;
     });
     $("#PopupChordVisibility").click(function() {
@@ -132,7 +129,7 @@ $(document).ready(function () {
             $("#PopupChordHints").prop("disabled", false);
             showChordHints = false;
         }
-        setLocal("showPopupChords", showPopupChords);
+        setSession("showPopupChords", showPopupChords);
     });
     $(".notesButton").click(function () {
         $("#notesPanel").draggable();
@@ -154,7 +151,7 @@ $(document).ready(function () {
         else $("#SongInfo").hide();
     });
     $("#RightSliderVisibility").click(function () {
-        setLocal("rightSliders", this.checked);
+        setSession("rightSliders", this.checked);
         if (this.checked)
             $("#RightSliders").show();
         else $("#RightSliders").hide();
@@ -169,7 +166,15 @@ $(document).ready(function () {
     
    $("#FontSize").on("input", function (ev, ui) {
         sliderChange(ev, ui)
-    });
+   });
+
+   $("#collapseHeader").click(function () {
+       if (parseInt($("#lyricsHeader").css("height")) < 55)
+            $("#lyricsHeader").css("height", 55);
+       else $("#lyricsHeader").css("height", 20);
+       adjustChrome();
+   });
+    
        
     if (parms.id != null)
     {
@@ -179,12 +184,12 @@ $(document).ready(function () {
         song.Key = parseInt(song.Key);
         $("#sTranspose").css("height", (window.innerHeight - 50) / 2);
         $("#sChangeFontSize").css("height", (window.innerHeight - 100) / 2);
-        $("#FontSize").val(parseInt(getLocal("lyricFontSize")));
-        setFontSlider(parseInt(getLocal("lyricFontSize")),true);
+        $("#FontSize").val(parseInt(getSession("lyricFontSize")));
+        setFontSlider(parseInt(getSession("lyricFontSize")),true);
 
 
-        $(".lyricsDiv").css("font-size", getLocal("lyricFontSize"));
-        $("#lyricsDiv").css("font-size", getLocal("lyricFontSize"));
+        $(".lyricsDiv").css("font-size", getSession("lyricFontSize"));
+        $("#lyricsDiv").css("font-size", getSession("lyricFontSize"));
         setKeySlider(song.Key,true);
         init(song);
         initialized = true;
@@ -201,25 +206,36 @@ $(document).ready(function () {
         else $("chord").removeClass("clickableChord");
     }
     var curKey = song == null ? 0 : song.Key;
-    $("#lyricsDiv").css("margin-top", $("#lyricsHeader").css("height"));
-    $("#RightSliders").css("margin-top", $("#lyricsHeader").css("height"));
+    //$("#lyricsDiv").css("margin-top", $("#lyricsHeader").css("height"));
+    //$("#RightSliders").css("margin-top", $("#lyricsHeader").css("height"));
     $("#DataList").css("margin-top", $("#lyricsHeader").css("height"));
 
-
+    adjustChrome();
+   
+});
+function adjustChrome() {
     var hh = $("#lyricsHeader").height();
-
+    //$("#lyricsHeader").css({ "line-height": hh, "vertical-align": "top" });
+    if (hh < 55) hh = 15;
+    if (hh > 60) hh -= 35;
     var style = document.createElement('style');
     style.type = 'text/css';
-    style.innerHTML = '.listOffset { margin-top: ' + hh + 'px!important; } .tileOffset { margin-top:' + (hh + 12) + 'px!important}';
+    style.innerHTML = '.listOffset { margin-top: ' + hh + 'px!important; } .tileOffset { margin-top:' + (hh) + 'px!important}';
     document.getElementsByTagName('head')[0].appendChild(style);
     $("#sTranspose").addClass('tileOffset');
     $('#lyricsDiv').addClass('listOffset');
-});
+    hh = window.innerHeight - $("#lyricsHeader").height() - getScrollbarWidth() - 1;
+    $(".toolSliders").css("height", hh);
+    $("#sTranspose").css("height", (hh / 2) - 5);
+    $("#sChangeFontSize").css("height", (hh / 2) - 5);
+    $("#sChangeFontSize").css("top", -15);//hh / 2);
+}
+
 function setFontSlider(val, set) {
     $("#sChangeFontSize").find(".ui-slider-handle").text(val);
     if (set)
         $("#sChangeFontSize").slider("value", val);
-    setLocal("lyricFontSize", val);
+    setSession("lyricFontSize", val);
 }
 function setKeySlider(val, set) {
     $("#sTranspose").find(".ui-slider-handle").text(keyList[val]);
@@ -228,31 +244,32 @@ function setKeySlider(val, set) {
 }
 function adjustLyricsArea()
 {
-    var f = getLocal("lyricFont");
+    var f = getSession("lyricFont");
     setFontFaceSwitch(f);
-    if (getLocal("rightSliders") == "true") {
+    if (getSession("rightSliders") == "true") {
         $("#lyricsDiv").css("padding-left", "40px");
     }
     else $("#lyricsDiv").css("padding-left", "5px");
     jss.set("#lyricsDiv", { "margin-top": $(".pageHeader").css("height") + "!important" });
-    jss.set(".Verse", { "color": getLocal("verseColor") });
-    jss.set(".AlternateVerse", { "color": getLocal("alternateVerseColor") });
-    jss.set(".Bridge", { "color": getLocal("bridgeColor") });
-    jss.set(".Chorus", { "color": getLocal("chorusColor") });
-    jss.set(".Divider", { "background-color": getLocal("dividerColor") });
-    jss.set(".lyricsDiv", { "background-color": getLocal("lyricBackgroundColor") }, { "font-size": getLocal("lyricFontSize") + " !important" }, { "font-family": getLocal("lyricFont") });
-    jss.set(".LyricsWrapper", { "background-color": getLocal("lyricBackgroundColor") + " !important" });
-    jss.set(".LyricsBackground", { "background-color": getLocal("lyricBackgroundColor") + " !important" });
-    jss.set(".lyricsBlock", { "background-color": getLocal("lyricBackgroundColor") }, { "font-size": getLocal("lyricFontSize") + " !important" }, { "font-family": getLocal("lyricFont") });
-    jss.set(".embeddedChord", { "background-color": getLocal("embeddedChordBackgroundColor") });
-    jss.set(".chord", { "color": getLocal("chordColor") });
-    jss.set(".LyricsBackground", { "background-color": getLocal("lyricBackgroundColor") });
-    jss.set("toolSliders", { "background-color": getLocal("lyricBackgroundColor") });
+    jss.set(".Verse", { "color": getSession("verseColor") });
+    jss.set(".AlternateVerse", { "color": getSession("alternateVerseColor") });
+    jss.set(".Bridge", { "color": getSession("bridgeColor") });
+    jss.set(".Chorus", { "color": getSession("chorusColor") });
+    jss.set(".Divider", { "background-color": getSession("dividerColor") });
+    jss.set(".lyricsDiv", { "background-color": getSession("lyricBackgroundColor") }, { "font-size": getSession("lyricFontSize") + " !important" }, { "font-family": getSession("lyricFont") });
+    jss.set(".LyricsWrapper", { "background-color": getSession("lyricBackgroundColor") + " !important" });
+    jss.set(".LyricsBackground", { "background-color": getSession("lyricBackgroundColor") + " !important" });
+    jss.set(".lyricsBlock", { "background-color": getSession("lyricBackgroundColor") }, { "font-size": getSession("lyricFontSize") + " !important" }, { "font-family": getSession("lyricFont") });
+    jss.set(".embeddedChord", { "background-color": getSession("embeddedChordBackgroundColor") });
+    jss.set(".chord", { "color": getSession("chordColor") });
+    jss.set(".LyricsBackground", { "background-color": getSession("lyricBackgroundColor") });
+    jss.set("toolSliders", { "background-color": getSession("lyricBackgroundColor") });
 }
 
 function init(song) {
-    showChordHints = getLocal("showChordHints") == "true" ? true : false;
-    showChords = getLocal("showChords") == "true" ? true : false;
+    if (!song) song = songByID(getQueryParameters(document.location.search).id, getActiveArtistID());
+    showChordHints = getSession("showChordHints") == "true" ? true : false;
+    showChords = getSession("showChords") == "true" ? true : false;
     $("#ChordVisibility").prop("checked", showChords);
     $("#PopupChordHints").prop("checked", showChordHints);
     $("#PopupChordVisibility").prop("checked", showPopupChords);
@@ -270,17 +287,17 @@ function init(song) {
         $("#PopupChordHints").attr("disabled", false);
     }
 
-    document.getElementById("PopupChordVisibility").checked = getLocal("popupChords") == "true";
+    //document.getElementById("PopupChordVisibility").checked = getSession("popupChords") == "true";
 
     setKeySlider(song.key);
    
-    setFontSlider(parseInt(getLocal("lyricFontSize")));
-    document.getElementById("RightSliderVisibility").checked = getLocal("rightSliders") == "true";
-    if (getLocal("rightSliders") == "true")
+    setFontSlider(parseInt(getSession("lyricFontSize")));
+    //document.getElementById("RightSliderVisibility").checked = getSession("rightSliders") == "true";
+    if (getSession("rightSliders") == "true")
         $("#RightSliders").show();
     else $("#RightSliders").hide();
-    showChords = getLocal("showChords");
-    $("#lyricsDiv").css("font-family", getLocal("lyricFont"));
+    showChords = getSession("showChords");
+    $("#lyricsDiv").css("font-family", getSession("lyricFont"));
     var lastPlayed = new Date(song.LastPlayed);
     if (lastPlayed.getFullYear() < 2000)
         lastPlayed = "n/a";
@@ -298,7 +315,7 @@ function init(song) {
         $("#NotesTitle").text("Notes - " + song.Title);
         $("#Notes").text(song.Notes);
     }
-    var font = getLocal("lyricFont");
+    var font = getSession("lyricFont");
     if (font == '"Courier New", Courier, monospace')
         $("#Courier").prop("checked",true);
     else $("#Lucida").prop("checked",true);
@@ -311,7 +328,7 @@ function init(song) {
         $("#PlaySample").css("disabled",true);
     }
 
-    createColorPickers();
+    //createColorPickers();
     adjustLyricsArea();
 }
 
@@ -564,6 +581,6 @@ function transpose(value, slider) {
 function changeFontSize(value, slider) {
     if (!initialized)
         return;
-    setLocal("lyricFontSize", value + "px");
+    setSession("lyricFontSize", value + "px");
     $(".lyricsDiv").css("font-size", value + "px");
 }

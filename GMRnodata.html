@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="Content/css/metro.min.css" rel="stylesheet"/>
+    <link href="content/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="Content/css/metro-icons.min.css" rel="stylesheet"/>
+    <link id="gmrStyle" href="css/request-neon.min.css" rel="stylesheet"/>
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/jquery.widget.min.js"></script>
+    <script src="scripts/metro.min.js"></script>
+    <script src="js/utilities.min.js"></script>
+    <script src="scripts/jlinq.min.js"></script>
+    <script src="/gigman/js/dataRequest.min.js"></script>
+    <script src="scripts/jquery.datatables.min.js"></script>
+  
+</head>
+<body class="framed">
+    <div id="interface">
+        <p>
+            Oops - it looks like <span id="bandName" class="bandName" style="font-style:italic"></span> forgot to set up a list of songs for you.<br />
+            You may want to let them know - we're sure they will appreciate it!  
+        </p>
+    </div>
+    <script runat="server">
+        var artist = sessionStorage.getItem("artist");
+        if (artist)
+            artist = JSON.parse(artist).ArtistName;
+        else
+        {
+            artist = getiRequestName()
+        }
+        $("#bandName").text(artist);
+    </script>
+    <script>
+        $("#gmrStyle").prop("href", "css/request-" + getSession("colorscheme") + ".min.css");
+    </script>
+</body>
+</html>

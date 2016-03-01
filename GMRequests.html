@@ -2,35 +2,36 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
-    <link href="content/css/metro.css" rel="stylesheet"/>    
-    <link href="content/css/metro-responsive.css" rel="stylesheet"/>
-    <link href="content/css/metro-icons.css" rel="stylesheet"/>
-    <link href="Content/css/jquery-ui.css" rel="stylesheet"/>
-    <link id="gmWidgetStyle" rel="stylesheet" href="css/requestWidget-neon.min.css" />
+    <link href="Content/css/metro.min.css" rel="stylesheet"/>    
+    <link href="content/css/metro-responsive.min.css" rel="stylesheet"/>
+    <link href="Content/css/metro-icons.min.css" rel="stylesheet"/>
+    <link href="Content/css/jquery-ui.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="Content/css/fixedHeader.dataTables.min.css" />
-    <link id="gmStyle" rel="stylesheet" href="css/requestWidget-neon.min.css" />
+    <link id="gmrStyle" rel="stylesheet" href="css/request-classic.min.css" />
+    <!--<link id="gmWidgetStyle" rel="stylesheet" href="css/request-neon.min.css" />-->
 
     <script src="Scripts/jquery.min.js"></script>
     <script src="Scripts/jquery-ui.min.js"></script>
     <script src="scripts/jquery.datatables.min.js"></script>
     <script src="Scripts/dataTables.fixedHeader.min.js"></script>
     <script src="Scripts/jquery-ui-touch-punch.js"></script>
-    <script src="scripts/metro.js"></script>
-    <script src="Scripts/jlinq.js"></script>
+    <script src="scripts/metro.min.js"></script>
+    <script src="Scripts/jlinq.min.js"></script>
 
-    <script runat="server" src="js/dataRequest.js"></script>  
-    <script runat="server" src="js/utilities.js"></script>
+    <script runat="server" src="js/dataRequest.min.js"></script>  
+    <script runat="server" src="js/utilities.min.js"></script>
 
     <style>
         .request .disabled
         {
             opacity:.25;
         }
-        body, html {
-            width:100%;
-            height:100%;
-            padding:0;
-            margin:0;
+        .accordion *
+        {
+            -moz-box-shadow:none!important;
+            -webkit-box-shadow: 0!important;
+            box-shadow:none!important;
+            text-shadow:none
         }
     </style>
 
@@ -48,7 +49,8 @@
             </div>
         </div>
     </div>
-    <div id="request1" class="request">
+    <div id="reqPanel" style="display:none">
+        <div id="request1" class="request">
         <div class="requestHeader"><div class="requestTitle">Request #1</div>
                 <a class="vote voteLink downVote mif-thumbs-down"></a>
                 <a class="vote voteLink  upVote mif-thumbs-up"></a>&nbsp;
@@ -98,7 +100,10 @@
             <a class="removeRequest">X</a>
         </div>
     </div>
+        
     <span id="Message">Tap a song below to add it to your requests.</span>
+
+    </div>
     <div class="outerTableWrapper">
         <table id="SongList" class="order_columns stripe pretty SongList" style="overflow:auto">
             <thead>
@@ -124,12 +129,25 @@
        
         var curRequest = "";
         
-            $("#gmStyle").prop("href", "css/request-" + getSession("colorscheme") + ".min.css");
+            $("#gmrStyle").prop("href", "css/request-" + getSession("colorscheme") + ".min.css");
         
-        $(document).ready(function () {
+            $(document).ready(function () {
+                if (art.iRequestName == "info")
+                    return;
+                if (!art.RequestStatus) {
+                    if (art.OffAirMessage && art.OffAirMessage.trim() != "")
+                        $(".content").html(art.OffAirMessage);
+                    else $(".content").html(art.ArtistName + " is offline right now.  You can try their calendar or announcements pages to see whjen they will be back.");
+                    $("#reqPanel").hide();
+                    $(".frame").addClass("active");
+                    return;
+                }
+                else {
+                    $("#reqPanel").show();
+                }
             var t = getSession("colorscheme");
             t = t.substring(t.lastIndexOf("-"));
-            $("#gmWidgetStyle").prop("href", "css/requestWidget-" + t + ".min.css");
+            //$("#gmWidgetStyle").prop("href", "css/requestWidget-" + t + ".min.css");
 
             $(".request").click(function (e) {
                 e.stopPropagation();
@@ -178,10 +196,8 @@
             });
 
             if (sdta.length == 0) {
-                $("#otherCharm").data("charm").open();
-                document.getElementById("contentContainer").src = "nodata.html";
+                parent.showContent("#otherCharm","gmrnodata.html",true)
                 disableRequests = true;
-                $("#requestLink").css("text-decoration", "none");
             }
 
             songList = $('#SongList').DataTable({
@@ -198,7 +214,8 @@
                 "oLanguage":
                 {
                     "sSearch": "",
-                    searchPlaceholder: "Start typing..."
+                    searchPlaceholder: "Start typing...",
+                    "sEmptyTable":"There are no songs to show!"
                 },
                 "columnDefs": [
 
@@ -281,8 +298,9 @@
             if (counts) {
                 if (counts.Songs.length >= art.MaxiRequests) {
                     $("#submitButton").addClass("disabled").hide();
-                    $("#Message").text("You have made the maximum number of requests for the day.");
+                    $("#Message").text("You have made the maximum number of requests to " + art.ArtistName + " for today.");
                     $(".songLinkA").addClass("disabled");
+                    $(".outerTableWrapper").hide();
                 }
                 for (var i = 0; i < counts.Songs.length; i++) {
                     var s = jlinq.from(sdta).equals("ID", counts.Songs[i].SongID).select()[0];

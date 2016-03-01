@@ -8,8 +8,8 @@ $(document).ready(function () {
         ["tileBG","Tile BG",".myTile"],["tileFG","Tile FG",".myTile"]];
     var tbl = document.getElementById("siteColor");
     var tbl2 = document.getElementById("listColors");
-    $("#sChangeFontSize").val(parseInt(localStorage.getItem("fontSize"), 10));
-    $("#spChangeFontSize").val(parseInt(localStorage.getItem("fontSize"), 10));
+    $("#sChangeFontSize").val(parseInt(sessionStorage.getItem("fontSize"), 10));
+    $("#spChangeFontSize").val(parseInt(sessionStorage.getItem("fontSize"), 10));
     /*
     for (var i = a.length - 1; i > -1; i--) {
         var r;
@@ -31,45 +31,58 @@ $(document).ready(function () {
                 .val(item)
         );
     });
-    $("#SongListLength").val(getLocal("songListLength"));
-    $("#SetListLength").val(getLocal("setListLength"));
-    $("#SiteFonts").val(getLocal("font"));
-    $("#color").css({ "background-color": getLocal("color") });
-    $("#boldText").prop("checked", getLocal("weight"));
-    $("#italicText").prop("checked", getLocal("style"));
-    $("#ignoreArticles").prop("checked", getLocal("ignoreArticles"));
+    $("#SongListLength").val(getSession("songListLength"));
+    $("#SetListLength").val(getSession("setListLength"));
+    $("#SiteFonts option:contains(" + getSession("font") + ")").attr('selected', 'selected');
+    //$("#SiteFonts").text(getSession("font"));
+    $("#color").css({ "background-color": getSession("color") });
+    $("#boldText").prop("checked", getSession("weight"));
+    $("#italicText").prop("checked", getSession("style"));
+    $("#ignoreArticles").prop("checked", getSession("ignoreArticles"));
     $("#colorScheme").prop("checked", getSession("colorscheme") == "highcontrast");
 
     var compColor = calculateForegroundColor(rgbFnToHex($("body").css("background-color")))
     $(".settingsTable").css({ "border" : "1px solid " + compColor });
 
     $("#SongListLength").change(function () {
-        setLocal("songListLength", $("#SongListLength").val());
+        setSession("songListLength", $("#SongListLength").val());
     });
     $("#SetListLength").change(function () {
-        setLocal("setListLength", $("#SetListLength").val());
+        setSession("setListLength", $("#SetListLength").val());
     });    
 
     $("#SiteFonts").change(function (e) {
-        setLocal("font", $("#SiteFonts").val());
+        setSession("font", $("#SiteFonts").val());
         $("body").css("font-family", $("#SiteFonts").val());
     });
     $("#boldText").on("click", function () {
-        setLocal("weight", this.checked ? "bold" : "");
-        $("body").css("font-weight", getLocal("weight"));
+        setSession("weight", this.checked ? "bold" : "");
+        $("body").css("font-weight", getSession("weight"));
     });
     $("#italicText").on("click", function () {
-        setLocal("style", this.checked ? "italic" : "");
-        $("body").css("font-style", getLocal("style"));
+        setStyle("style", this.checked ? "italic" : "");
+        $("body").css("font-style", getStyle("style"));
     });
     $("#ignoreArticles").on("click", function () {
-        setLocal("ignoreArticles", this.checked);
+        setSession("ignoreArticles", this.checked);
     });
 
+    $("#tileFontSize").change(function () {
+        $(".myTile", parent.document).css("font-size", $(this).val() + "px");
+        setSession("tilefontsize", $(this).val() + "px");
+    });
+    $("#tileWidth").change(function () {
+        $(".myTile", parent.document).css("width", $(this).val() + "px");
+        setSession("tilewidth", $(this).val() + "px");
+    });
+    $("#tileHeight").change(function () {
+        $(".myTile", parent.document).css("height", $(this).val() + "px");
+        setSession("tileheight", $(this).val() + "px");
+    });
     $("#sChangeFontSize").slider({
         orientation: "horizontal",
         max: 28,
-        value: parseInt(getLocal("fontSize"),10),
+        value: parseInt(getSession("fontSize"),10),
         animate: "fast"
     });
     $("#sChangeFontSize").on("slide", function (ev, ui) {
@@ -81,7 +94,7 @@ $(document).ready(function () {
 });
 
 function changeFontSize(value, slider) {
-    setLocal("fontSize", value + "px");
+    setSession("fontSize", value + "px");
     $("#" + slider[0].id + " .marker").text(value);
     $("body").css("font-size", value + "px");
 }

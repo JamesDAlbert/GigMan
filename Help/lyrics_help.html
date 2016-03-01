@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
-    <link rel="stylesheet" href="../Content/css/metro.css" />
+    <link rel="stylesheet" href="../Content/css/metro.min.css" />
     <link rel="stylesheet" href="../Content/css/metro-icons.min.css" />
-    <link id="gmStyle" rel="stylesheet" href="../css/gigman-neon.css" />
-    <script src="Scripts/jquery.js"></script>
+    <link id="gmStyle" rel="stylesheet" href="../css/gigman-neon.min.css" />
+    <script src="../Scripts/jquery-2.1.4.min.js"></script>
 </head>
 <body class="help">
     <label>Lyrics Page Tools</label>
@@ -27,7 +27,7 @@
         <strong><em>Transpose</em></strong>: If chords have been saved for the song, tapping one of the transpose buttons will transpose the chords to the key tapped.  Alternately, 
             the top left-hand scrollbar on the lyrics page can be used to transpose.<br /><br />
         <strong><em>Font Size</em></strong>: Increases/decreases thew size of the font in the lyrics view.  Alternately, the bottom left-hand scrollbar on the lyrics page can be used to change the font size.<br /><br />
-        <strong><em>Font Face</em></strong>: Changes the font used in the lyrics view.  In order to ensure that chords align with lyrics, onl mono-spaced fonts are available.<br /><br />
+        <strong><em>Font Face</em></strong>: Changes the font used in the lyrics view.  In order to ensure that chords align with lyrics, only mono-spaced fonts are available.<br /><br />
         <strong><em>Display</em></strong>: Controls visibility of chords and left-hand sliders.<br />
         &nbsp;&nbsp;<strong><em>Chords</em></strong>: Shows or hides the chords in the lyrics view.<br />
         &nbsp;&nbsp;<strong><em>Charts</em></strong>: Determines if clicking a chord will show the tablature for it.<br />
@@ -45,13 +45,13 @@
         var scheme = sessionStorage.getItem("colorscheme");
 
         if (scheme == "hic") {
-            $('link[id="gmStyle"]').attr('href', 'css/gigman-hic.css');
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-hic.min.css');
         }
         else if (scheme == "classic") {
-            $('link[id="gmStyle"]').attr('href', 'css/gigman-classic.css');
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-classic.min.css');
         }
         else if (scheme == "neon") {
-            $('link[id="gmStyle"]').attr('href', 'css/gigman-neon.css');
+            $('link[id="gmStyle"]').attr('href', '../css/gigman-neon.min.css');
         }
     </script>
 </body>

@@ -5,35 +5,36 @@ var loggedIn;
 var scheme = getSession("colorscheme");
 
     if (scheme == "hic") {
-        $('link[id="gmStyle"]').attr('href', 'css/gigman-hic.css');
+        $('link[id="gmStyle"]').attr('href', 'css/gigman-hic.min.css');
     }
     else if (scheme == "classic")
     {
-        $('link[id="gmStyle"]').attr('href', 'css/gigman-classic.css');
+        $('link[id="gmStyle"]').attr('href', 'css/gigman-classic.min.css');
     }
     else if (scheme == "neon")
     {
-        $('link[id="gmStyle"]').attr('href', 'css/gigman-neon.css');
+        $('link[id="gmStyle"]').attr('href', 'css/gigman-neon.min.css');
     }
     else {
-        $('link[id="gmStyle"]').attr('href', 'css/gigman-neon.css');
+        $('link[id="gmStyle"]').attr('href', 'css/gigman-neon.min.css');
         setSession("colorscheme", "neon");
     }
 $(document).ready(function () {
     loggedIn = checkLoginStatus();
+
     if (!loggedIn && window.location.href.indexOf("default.html") < 0
         && window.location.href.toLowerCase().indexOf("ad.html")  < 0
         && window.location.href.toLowerCase().indexOf("ads.html") < 0
         && window.location.href.toLowerCase().indexOf("faq.html") < 0
-        && window.location.href.toLowerCase().indexOf(".html") < 0) {
+        && window.location.href.toLowerCase().indexOf(".html") > 0) {
         window.location.href = "default.html";
         return;
     }
     else {
         try
         {
-            $("body").css("font-size",getLocal("fontSize"));
-            $("html").css("font-size",getLocal("fontSize"));
+            $("body").css("font-size",getSession("fontSize"));
+            $("html").css("font-size",getSession("fontSize"));
         }
         finally
         {
@@ -42,8 +43,8 @@ $(document).ready(function () {
     }
 
     setColorSchemeSwitch(scheme);
-
-    $("#iRequestURL").text(iRequestLocation);
+    var art = JSON.parse(getSession("activeartist"));
+    if (art) $("#iRequestURL").text(iRequestLocation + art.iRequestName);
     if (checkLoginStatus())
         $("title").text("GigMan - " + getActiveArtistName());
     $("#ListType .slide-switch").css("width", "33px");
@@ -79,11 +80,12 @@ $(document).ready(function () {
         var b = document.getElementById($("#paletteWindow").data("source"));
         b.style.backgroundColor = this.style.backgroundColor;
         $("#paletteWindow").hide();
-        setLocal(b.id, this.style.backgroundColor);
+        setSession(b.id, this.style.backgroundColor);
         var attr = "color";
         if ($(b).data("element").toLowerCase().indexOf("background") > -1)
             attr = "background-color"
-        $($(b).data("element")).css(attr, getLocal(b.id));
+        $($(b).data("element")).css(attr, getSession(b.id));
+        if (window.parent.adjustLyricsArea) window.parent.adjustLyricsArea();
     })
     $(document).on("click", ".paletteButton", function (e) {
         $(".selectedPaletteButton").removeClass("selectedPaletteButton");
@@ -99,8 +101,8 @@ $(document).ready(function () {
         if ((parseInt(w.css("height"),10) + y) > window.innerHeight)
             y = (window.innerHeight - parseInt(w.css("height"),10));
         w.css("top", y - 20 + "px");
-        w.css("left", e.clientX + 130 + "px");
-        w.show();
+        w.css("left", e.clientX + "px");
+        w.show();       
     });
     $(document).on("click", "#Search", function () {
         var trm = $("#SearchTerm").val();
@@ -132,7 +134,7 @@ $(document).ready(function () {
             case "Credits":
                 page = "credits.html";
                 break;
-            case "SongList":
+            case "songList":
                 page = "list.html";
                 type = "song";
                 break;
@@ -205,12 +207,19 @@ $(document).ready(function () {
                     page = "";
                 else page = "calendar.html";
                 break;
+            case "Announcements":
+                if ($("#Announcements").hasClass("disabled"))
+                    page = "";
+                else page = "announcements.html";
+                break;
             case "Dashboard":
                 if ($("#Dashboard").hasClass("disabled"))
                     page = "";
                 else page = "dashboard.html";
                 break;
-           case "Logout":
+            case "Logout":
+                var ip = getClientIP(), userID = getUserID(), data = getSessionData(), userAgent = navigator.userAgent;
+                saveUserSession(userID, ip, data, userAgent);
                 clearSession();
                 window.location.href="default.html"
                 break;
@@ -233,6 +242,8 @@ $(document).ready(function () {
         if (page != "") parent.window.location = page + "?v=" + type + arg;
     }));
     $("#Logout").click(function () {
+        var ip = getClientIP(), userID = getUserID(), data = getSessionData(), userAgent = navigator.userAgent;
+        saveUserSession(userID, ip, data, userAgent);
         clearSession();
         window.location.href = "default.html"
     });
@@ -262,6 +273,7 @@ $(document).ready(function () {
             var charm = $("#navigationCharm").data("charm");
             charm.close();
             charm = $("#toolsCharm").data("charm");
+            $("#lyricToolsContainer").attr("src", "lyricsettings.html");
             if (charm.element.data("opened") === true) {
                 charm.close();
             } else {
@@ -307,6 +319,8 @@ $(document).ready(function () {
             var charm = $("#navigationCharm").data("charm");
             charm.close();
             charm = $("#setEditorCharm").data("charm");
+            $("#setEditorContainer").attr("src", "setlisteditor.html");
+
             if (charm.element.data("opened") === true) {
                 charm.close();
             } else {
@@ -436,7 +450,7 @@ $(document).ready(function () {
                  if (val < min)
                      val = min;
                  $("#" + tt).val(val).change();
-                 setLocal($("#" + tt).data("field"), val + "px");
+                 setSession($("#" + tt).data("field"), val + "px");
                  if ($("#" + tt).data("field") == "fontSize") {
                      jss.set("body", { "font-size": val + "px!important" });
                      jss.set(".SongList A", { "font-size": val + "px!important" });                    
@@ -445,7 +459,7 @@ $(document).ready(function () {
                      $("#sChangeFontSize").slider("value",val);
                      $("#lyricsDiv").css("font-size", val + "px!important");
                  }
-
+                 if (parent.adjustLyricsArea) parent.adjustLyricsArea();
              return false;
          });
          $(".spinPlus").on("mousedown touchstart", function () {
@@ -457,7 +471,7 @@ $(document).ready(function () {
                  if (val > max)
                      val = max;
                  $("#" + tt).val(val).change();
-                 setLocal($("#" + tt).data("field"), val + "px");
+                 setSession($("#" + tt).data("field"), val + "px");
                  if ($("#" + tt).data("field") == "fontSize") {
                      jss.set("body", { "font-size": val + "px" });
                      jss.set("SongList A", { "font-size": val + "px" });
@@ -466,6 +480,7 @@ $(document).ready(function () {
                      $("#sChangeFontSize").slider("value", val);
                      $("#lyricsDiv").css("font-size", val + "px!important");
                  }
+                 if (parent.adjustLyricsArea) parent.adjustLyricsArea();
              return false;
          });
          $(document).on("mouseup touchend", ".spinPlus, .spinMinus", function () {
@@ -492,18 +507,32 @@ $(document).ready(function () {
              e.preventDefault();
              var f = $(this).val();
              $("#Lucida").prop("checked", false);
-             setLocal("lyricFont", f);
+             setSession("lyricFont", f);
              $("#lyricsDiv").css("font-family", f);
              setFontFaceSwitch(f);
+             parent.init();
          });
          $(".pageHeader, .indexHeader").dblclick(function (e) {
              e.preventDefault();
              location.reload();
          });
+         $("#GoBack").click(function () {
+             window.history.back();
+         });
          if (loggedIn) {
              //modifyStyles();
          }
 });
+function getSessionData() {
+    var x = [];
+    for (var i = 0; i < sessionStorage.length; i++)
+    {
+        var y = {key:sessionStorage.key(i),data:getSession(sessionStorage.key(i))};
+        x.push(y);
+    }
+    return JSON.stringify(x);
+}
+
 function setEventVisibilitySwitch(sch) {
     $("#EventVisibility .slide-switch-label").removeClass("switch-selected");
     var ss = "css/gigman-";
@@ -515,7 +544,7 @@ function setEventVisibilitySwitch(sch) {
             $("#EventVisibility .slide-switch-selection").removeClass("slide-switch-middle");
             $("#EventVisibility .slide-switch-selection").addClass("slide-switch-left");
             $("#EventVisibility .slide-switch-label-left span").addClass("slide-switch-marker-current");
-            ss += "hic.css";
+            ss += "hic.min.css";
             $("#EventVisibility").data("evtvisibility", "0");
             break;
         case "1":
@@ -524,7 +553,7 @@ function setEventVisibilitySwitch(sch) {
             $("#EventVisibility .slide-switch-selection").addClass("slide-switch-middle");
             $("#EventVisibility .slide-switch-label-left").addClass("switch-selected");
             $("#EventVisibility .slide-switch-label-middle span").addClass("slide-switch-marker-current");
-            ss += "neon.css";
+            ss += "neon.min.css";
             $("#EventVisibility").data("evtvisibility", "1");
             break;
         case "2":
@@ -534,7 +563,7 @@ function setEventVisibilitySwitch(sch) {
             $("#EventVisibility .slide-switch-label-left").addClass("switch-selected");
             $("#EventVisibility .slide-switch-label-middle").addClass("switch-selected");
             $("#EventVisibility .slide-switch-label-right span").addClass("slide-switch-marker-current");
-            ss += "classic.css";
+            ss += "classic.min.css";
             $("#EventVisibility").data("evtvisibility", "2");
             break;
     }
@@ -557,7 +586,7 @@ function setFontFaceSwitch(f)
             $("#LyricFontFace").data("fontface", f);
             break;
     }
-    setLocal("lyricFont",f);// '"Courier New", Courier, monospace');
+    setSession("lyricFont",f);// '"Courier New", Courier, monospace');
     $("#lyricsDiv").css("font-family", f);//'"Courier New", Courier, monospace');
 }
 function setListTypeSwitch(sch) {
@@ -592,7 +621,7 @@ function setColorSchemeSwitch(sch) {
             $("#ColorScheme .slide-switch-selection").removeClass("slide-switch-middle");
             $("#ColorScheme .slide-switch-selection").addClass("slide-switch-left");
             $("#ColorScheme .slide-switch-label-left span").addClass("slide-switch-marker-current");
-            ss += "hic.css";
+            ss += "hic.min.css";
             $("#ColorScheme").data("scheme","hic");
             break;
         case "neon":
@@ -601,7 +630,7 @@ function setColorSchemeSwitch(sch) {
             $("#ColorScheme .slide-switch-selection").addClass("slide-switch-middle");
             $("#ColorScheme .slide-switch-label-left").addClass("switch-selected");
             $("#ColorScheme .slide-switch-label-middle span").addClass("slide-switch-marker-current");
-            ss += "neon.css";
+            ss += "neon.min.css";
             $("#ColorScheme").data("scheme","neon");
             break;
         case "classic":
@@ -611,16 +640,20 @@ function setColorSchemeSwitch(sch) {
             $("#ColorScheme .slide-switch-label-left").addClass("switch-selected");
             $("#ColorScheme .slide-switch-label-middle").addClass("switch-selected");
             $("#ColorScheme .slide-switch-label-right span").addClass("slide-switch-marker-current");
-            ss +="classic.css";
+            ss +="classic.min.css";
             $("#ColorScheme").data("scheme","classic");
             break;
     }
     $('link[id="gmStyle"]').attr('href', ss);
-    var ifr = $("iframe");
+    $("#gmStyle", parent.document.head).attr("href", ss);
+
+    var ifr = $("iframe").add($("iframe", parent.document));
     $(ifr).each(function (i,f) {
         var idoc = (f.contentDocument) ? f.contentDocument : f.contentWindow.document;
-        if (idoc.getElementById("gmStyle"))
+        if (idoc.getElementById("gmStyle")) {
+            if (f.id == "helpContainer") ss = iRequestURL + ss;
             idoc.getElementById("gmStyle").href = ss;
+        }
     });
     if (getSession("loggedinuser"))
         setSession("colorscheme", sch);
@@ -632,10 +665,24 @@ function login(username, password) {
         $("#loginError").text("There was an error logging in.  Please ensure that your user name and password are spelled correctly");
     }
     else {
-        window.location.href = "index.html";
+        var sess = getUserSession(getUserID());
+        setUserSession(sess);
         checkUIDefaults();
+        window.location.href = "index.html";
     }
 }
+function setUserSession(session)
+{
+    var sl = session.length;
+    if (sl < 2)
+        return;
+    var x = JSON.parse(session[session.length-1].Data);
+    for (var i = 0; i < x.length; i++)
+    {
+        setSession(x[i].key, x[i].data);
+    }
+}
+
 function fillEditor(song) {
     var frm = frames["editorContainer"];
     frm.popEd(song);
@@ -657,14 +704,14 @@ function sliderChange(ev, ui) {
 
     function fontSliderToInput(value, slider) {
         $('#FontSizeValue').val(value);
-        setLocal("font-size", value);
+        setSession("font-size", value);
     }
     function pcSliderToInput(value, slider) {
         $('#PlayCountValue').val(value);
         var table = $("#SongList").dataTable();
     }
     function dataSort(dta, type) {
-        var ignoreArticles = getLocal("ignoreArticles") == "true";
+        var ignoreArticles = getSession("ignoreArticles") == "true";
         dta = dta.sort(function (a, b) {
             var res = 0;
             if (type == "song") {
@@ -701,27 +748,25 @@ function sliderChange(ev, ui) {
 
     function getMasterSongList()
     {
-        var lst;
-        if (!check("songlist",true))
+        var lst = JSON.parse(getLocal("songlist"));
+        if (!lst || lst.length < 1)
             lst = songListAll(getActiveArtistID());
-        else lst = JSON.parse(getLocal("songlist"));
-        if (getLocal("ignoreArticles") === "true")
+
+        if (getSession("ignoreArticles") === "true")
         {
             lst = dataSort(lst, "song");
         }
         return lst.sort(function (a, b) { return (a.Title > b.Title) ? 1 : ((b.Title > a.Title) ? -1 : 0); });
     }
     function modifyStyles() {
-        jss.set("body", { "font-size": getLocal("fontSize") });
-        jss.set("html", { "font-size": getLocal("fontSize") });
-        jss.set("table.display tr.odd.myTableRowClass",{ "background-color": getLocal("listRowBG") });
-        jss.set("table.display tr.odd.myTableRowClass",{ "color": getLocal("listRowFG") });
-        jss.set("table.display tr.even.myTableRowClass",{ "background-color": getLocal("listAltRowBG") });
-        jss.set("table.display tr.even.myTableRowClass",{ "color": getLocal("listAltRowFG") });
-        //jss.set(".myTile",{ "background-color": getLocal("tileBG") + " !important" });
-        //jss.set(".myTile",{ "color": getLocal("tileFG") });
-        jss.set(".SongList.odd",{ "color": getLocal("listAltRowFG"), "background-color": getLocal("listAltRowBG") });
-        jss.set(".SongList.even",{ "color": getLocal("listRowFG"), "background-color": getLocal("listRowBG") });
+        jss.set("body", { "font-size": getSession("fontSize") });
+        jss.set("html", { "font-size": getSession("fontSize") });
+        jss.set("table.display tr.odd.myTableRowClass",{ "background-color": getSession("listRowBG") });
+        jss.set("table.display tr.odd.myTableRowClass",{ "color": getSession("listRowFG") });
+        jss.set("table.display tr.even.myTableRowClass",{ "background-color": getSession("listAltRowBG") });
+        jss.set("table.display tr.even.myTableRowClass",{ "color": getSession("listAltRowFG") });
+        jss.set(".SongList.odd",{ "color": getSession("listAltRowFG"), "background-color": getSession("listAltRowBG") });
+        jss.set(".SongList.even",{ "color": getSession("listRowFG"), "background-color": getSession("listRowBG") });
     }
     function check(key,local) {
         var r = [];
@@ -741,91 +786,91 @@ function sliderChange(ev, ui) {
         var ul = useLocalStorage;
         if (useRemote)
             useLocalStorage = false;
-        if (getLocal("lyricBackgroundColor") == null)
-            setLocal("lyricBackgroundColor", "black");
-        if (getLocal("embeddedChordBackgroundColor") == null)
-            setLocal("embeddedChordBackgroundColor", "black");
-        if (getLocal("lyricFont") == null)
-            setLocal("lyricFont", '"Courier New", Courier, monospace');
-        if (getLocal("showChords") == null)
-            setLocal("showChords", "true");
-        if (getLocal("showPopupChords") == null)
-            setLocal("showPopupChords", "true");
-        if (getLocal("rightSliders") == null)
-            setLocal("rightSliders", "false");
-        if (getLocal("lyricFontSize") == null || parseInt(getLocal("lyricFontSize")) < 12)
-            setLocal("lyricFontSize", "18px");
-        if (getLocal("dividerColor") == null)
-            setLocal("dividerColor", "#5090aa");
-        if (getLocal("verseColor") == null)
-            setLocal("verseColor", "lime");
-        if (getLocal("alternateVerseColor") == null)
-            setLocal("alternateVerseColor", "aqua");
-        if (getLocal("chorusColor") == null)
-            setLocal("chorusColor", "yellow");
-        if (getLocal("bridgeColor") == null)
-            setLocal("bridgeColor", "white");
-        if (getLocal("chordColor") == null)
-            setLocal("chordColor", "white");
-        if (getLocal("showChordHints") == null)
-            setLocal("showChordHints", "true");
-        if (getLocal("ignoreArticles") == null)
-            setLocal("ignoreArticles", "false");
-        if (getLocal("color") == null)
-            setLocal("color", "#ffff99");
-        if (getLocal("font") == null)
-            setLocal("font", "Arial");
-        if (getLocal("weight") == null)
-            setLocal("weight", "");
-        if (getLocal("style") == null)
-            setLocal("style", "");
-        if (getLocal("fontSize") == null)
-            setLocal("fontSize", "18px");
-        if (getLocal("tileBG") == null)
-            setLocal("tileBG", "teal");
-        if (getLocal("tileFG") == null)
-            setLocal("tileFG", "white");
+        if (getSession("lyricBackgroundColor") == null)
+            setSession("lyricBackgroundColor", "black");
+        if (getSession("embeddedChordBackgroundColor") == null)
+            setSession("embeddedChordBackgroundColor", "black");
+        if (getSession("lyricFont") == null)
+            setSession("lyricFont", '"Courier New", Courier, monospace');
+        if (getSession("showChords") == null)
+            setSession("showChords", "true");
+        if (getSession("showPopupChords") == null)
+            setSession("showPopupChords", "true");
+        if (getSession("rightSliders") == null)
+            setSession("rightSliders", "false");
+        if (getSession("lyricFontSize") == null || parseInt(getSession("lyricFontSize")) < 12)
+            setSession("lyricFontSize", "18px");
+        if (getSession("dividerColor") == null)
+            setSession("dividerColor", "#5090aa");
+        if (getSession("verseColor") == null)
+            setSession("verseColor", "lime");
+        if (getSession("alternateVerseColor") == null)
+            setSession("alternateVerseColor", "aqua");
+        if (getSession("chorusColor") == null)
+            setSession("chorusColor", "yellow");
+        if (getSession("bridgeColor") == null)
+            setSession("bridgeColor", "white");
+        if (getSession("chordColor") == null)
+            setSession("chordColor", "white");
+        if (getSession("showChordHints") == null)
+            setSession("showChordHints", "true");
+        if (getSession("ignoreArticles") == null)
+            setSession("ignoreArticles", "false");
+        if (getSession("color") == null)
+            setSession("color", "#ffff99");
+        if (getSession("font") == null)
+            setSession("font", "Arial");
+        if (getSession("weight") == null)
+            setSession("weight", "");
+        if (getSession("style") == null)
+            setSession("style", "");
+        if (getSession("fontSize") == null)
+            setSession("fontSize", "18px");
+        if (getSession("tileBG") == null)
+            setSession("tileBG", "teal");
+        if (getSession("tileFG") == null)
+            setSession("tileFG", "white");
 
-        if (getLocal("listRowBG") == null)
-            setLocal("listRowBG", "teal");
-        if (getLocal("listRowFG") == null)
-            setLocal("listRowFG", "white");
-        if (getLocal("listAltRowBG") == null)
-            setLocal("listAltRowBG", "black");
-        if (getLocal("listAltRowFG") == null)
-            setLocal("listAltRowFG", "white");
-        if (getLocal("tileBG") == null)
-            setLocal("tileBG", "teal");
-        if (getLocal("tileFG") == null)
-            setLocal("tileFG", "white");
+        if (getSession("listRowBG") == null)
+            setSession("listRowBG", "teal");
+        if (getSession("listRowFG") == null)
+            setSession("listRowFG", "white");
+        if (getSession("listAltRowBG") == null)
+            setSession("listAltRowBG", "black");
+        if (getSession("listAltRowFG") == null)
+            setSession("listAltRowFG", "white");
+        if (getSession("tileBG") == null)
+            setSession("tileBG", "teal");
+        if (getSession("tileFG") == null)
+            setSession("tileFG", "white");
 
-        if (getLocal("songListStyle") == null)
-            setLocal("songListStyle", "list");
-        if (getLocal("gListStyle") == null)
-            setLocal("gListStyle", "list");
-        if (getLocal("csListStyle") == null)
-            setLocal("csListStyle", "list");
-        if (getLocal("aListStyle") == null)
-            setLocal("aListStyle", "list");
-        if (getLocal("asListStyle") == null)
-            setLocal("asListStyle", "list");
-        if (getLocal("gsListStyle") == null)
-            setLocal("gsListStyle", "list");
-        if (getLocal("cListStyle") == null)
-            setLocal("cListStyle", "list");
-        if (getLocal("setListStyle") == null)
-            setLocal("setListStyle", "list");
-        if (getLocal("ignoreArticles") == null)
-            setLocal("ignoreArticles", "false");
-        if (getLocal("songListLength") == null)
-            setLocal("songListLength", "-1");
+        if (getSession("songListStyle") == null)
+            setSession("songListStyle", "list");
+        if (getSession("gListStyle") == null)
+            setSession("gListStyle", "list");
+        if (getSession("csListStyle") == null)
+            setSession("csListStyle", "list");
+        if (getSession("aListStyle") == null)
+            setSession("aListStyle", "list");
+        if (getSession("asListStyle") == null)
+            setSession("asListStyle", "list");
+        if (getSession("gsListStyle") == null)
+            setSession("gsListStyle", "list");
+        if (getSession("cListStyle") == null)
+            setSession("cListStyle", "list");
+        if (getSession("setListStyle") == null)
+            setSession("setListStyle", "list");
+        if (getSession("ignoreArticles") == null)
+            setSession("ignoreArticles", "false");
+        if (getSession("songListLength") == null)
+            setSession("songListLength", "-1");
         if (!check("tempolist",false) || useRemote)
         {
             setSession("tempolist",JSON.stringify(tempos()));
         }
         if (!check("genrelist",false) || useRemote)
         {
-            setLocal("genrelist",JSON.stringify(genres()));
+            setSession("genrelist",JSON.stringify(genres()));
         }
         if (!check("familiaritylist",false) || useRemote)
         {
@@ -858,8 +903,8 @@ function sliderChange(ev, ui) {
     }
 
     function createColorPicker(id, name, elet) {
-        $(elet).css("color", getLocal(id));
-        var bgc = getLocal(id);
+        $(elet).css("color", getSession(id));
+        var bgc = getSession(id);
         var b = document.createElement("button");
         b.className = "paletteButton";
         b.id = id;

@@ -6,11 +6,20 @@ ipAddress = getClientIP();
 $(document).ready(function () {
     setupDownloads();
     art = sessionStorage.getItem("artist");
-    $("#gmStyle").prop("href", "css/request-" + getSession("colorscheme") + ".css");
-    $("#gmWidgetStyle").prop("href", "css/messageWidget-" + getSession("colorscheme") + ".css");
-
     if (art)
         art = JSON.parse(art);
+    if (!art.RequestStatus)
+    {
+        if (art.OffAirMessage && art.OffAirMessage.trim() != "")
+            $("#message").html(art.OffAirMessage);
+        else $("#message").html(art.ArtistName + " is offline right now.  You can try their calendar or announcements pages to see whjen they will be back.");
+        $("#interface").hide();
+        return;
+    }
+    $("#gmStyle").prop("href", "css/request-" + getSession("colorscheme") + ".css");
+    //$("#gmWidgetStyle").prop("href", "css/messageWidget-" + getSession("colorscheme") + ".css");
+
+    
     var nMsg = checkRegistry(art.UserID, "imessages", art.MaxiMessages);
     if (nMsg == art.MaxiMessages) {
         $("#message").html(art.ArtistName + " thanks you for using GigMan Request!<br/>Please note that you can send this artist " + art.MaxiMessages + " messages in a 24 hour period.");
@@ -19,13 +28,16 @@ $(document).ready(function () {
     mbrs = artistMembers(art.ArtistID);
     getMessages();
     updateCountdown();
-    var html = "<tr class='row'><td class='member select'>&nbsp;All&nbsp;<label class='input-control checkbox'><input type='checkbox' data-target='-1' value='" + 0 + "'></input><span class='check'></span></label> " +
+    var op = 1;
+    if (mbrs.length < 1)
+        op = 0;
+    var html = "<tr class='row odd'><td class='member select'>&nbsp;All&nbsp;<label class='input-control checkbox'><input type='checkbox' data-target='-1' value='" + 0 + "'></input><span class='check'></span></label> " +
         "<td class='instrument select' colspan='2'><div>Leader&nbsp;<label class='input-control checkbox'><input type='checkbox' data-target='leader' value='" + 1 + "'></input><span class='check'></span></label>&nbsp;</div></td>" +
-        "<td></td></tr><tr><td colspan='3' style='text-align:center'><b>Or</b></td></tr>";
-
+        "<td></td></tr><tr class='row even'><td colspan='3' style='text-align:center'><span style='opacity:" + op + "'>Or</td></tr>";
+    
     for (var i = 0; i < mbrs.length; i++) {
         var cl = "";
-        if (!(i % 2)) cl = " even "; else cl = " odd ";
+        if (!(i % 2)) cl = " odd "; else cl = " even ";
         var inst = mbrs[i].ArtistRole, mbr = mbrs[i].User.FirstName + " " + mbrs[i].User.LastName;
         html += "<tr class='row " + cl + "'><td class='member'>" + mbr + "</td><td class='instrument'>" + inst + "</td>" +
         "<td class='select'><label class='input-control checkbox'><input type='checkbox' data-target='" + mbrs[i].User.UserID + "' value='" + (i + 2) + "'></input><span class='check'></span></label></td></tr>"
@@ -69,13 +81,15 @@ $(document).ready(function () {
 });
 function setupDownloads()
 {
-    $("#uploadDiv").prop("src", "uploader.aspx?ip=" + ipAddress + "&skin=" + $("#gmWidgetStyle").prop("href") + "&type=1");
+    $("#uploadDiv").prop("src", "uploader.aspx?ip=" + ipAddress + "&skin=" + $("#gmrStyle").prop("href") + "&type=1");
 }
 function getAttachment() {
     return attachment;
 }
 function updateCountdown() {
     // 140 is the max message length
+    if(!jQuery('#messageBody').val())
+        return;
     var remaining = 160 - jQuery('#messageBody').val().length;
     jQuery('#charsLeft').text(remaining + ' characters remaining.');
 }

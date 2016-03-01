@@ -3,39 +3,36 @@
 <head>
 <meta charset='utf-8' />
     <title>GigMan Calendar</title>
-<link href='content/css/fullcalendar.css' rel='stylesheet' />
+<link href='content/css/fullcalendar.min.css' rel='stylesheet' />
 
-<link rel="stylesheet" href="css/gmWidgets.css" />
+<link rel="stylesheet" href="css/gmWidgets.min.css" />
 <!--<link href='content/css/fullcalendar.print.css' rel='stylesheet' media='print' />-->
-<link rel="stylesheet" href="Content/css/metro.css" />
+<link rel="stylesheet" href="Content/css/metro.min.css" />
 <link rel="stylesheet" href="Content/css/metro-icons.min.css"/>
 <link rel="stylesheet" href="content/css/jquery.timepicker.min.css" />
-	<link href="content/css/jquery-ui.css" rel="stylesheet">
-<link id="gmStyle" href='css/gigman-neon.css' rel='stylesheet' />
+	<link href="content/css/jquery-ui.min.css" rel="stylesheet">
+<link id="gmStyle" href='css/gigman-neon.min.css' rel='stylesheet' />
 	<script src="scripts/jquery.min.js"></script>
 	<script src="scripts/jquery-ui.min.js"></script>    
 <script src="scripts/jquery.timepicker.min.js"></script>
 
 <script src='scripts/moment.min.js'></script>
 <script src='scripts/fullcalendar.min.js'></script>
-<script src="scripts/metro.js"></script>
-<script runat="server" src="js/dataRequest.js"></script>
-<script runat="server" src="js/utilities.js"></script>
+<script src="scripts/metro.min.js"></script>
+<script runat="server" src="js/dataRequest.min.js"></script>
+<script runat="server" src="js/utilities.min.js"></script>
 <script src="scripts/jss.min.js"></script>
-<script runat="server" src="js/gigman.js"></script>
-<script runat="server" src="js/calendar.js"></script>
+<script runat="server" src="js/gigman.min.js"></script>
+<script runat="server" src="js/calendar.min.js"></script>
     <script>
         var art = JSON.parse(getSession("activeartist"));
         if (!art.PremiumMember) {
             //window.location.href = "index.html";
         }
     </script>
-    <style>
-        
-    </style>
 </head>
 <body style="position:relative">
-    <div class="pageHeader">
+    <div class="indexHeader" style="top:0;z-index:2">
         <button id="OpenSidePanel" style="margin-top:-3px" class="square-button small-button buttonColor" title="Open side navigation panel."><span class="icon mif-menu mif-2x"></span></button>&nbsp;
         <button id="Logout"  style="margin-top:-3px" class="square-button small-button buttonColor" title="Log out."><span class="icon mif-exit mif-2x"></span></button>&nbsp;
         <button id="Home"  style="margin-top:-3px" class="square-button small-button buttonColor" title="Home."><span class="icon mif-home mif-2x"></span></button>

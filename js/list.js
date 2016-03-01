@@ -7,7 +7,7 @@ $(document).ready(function () {
     var parms = getQueryParameters(document.location.search);
     var paging = false;
     var sDom = "t";
-    var songListLength = parseInt(getLocal("songListLength"));
+    var songListLength = parseInt(getSession("songListLength"));
     if (songListLength > -1) {
         paging = true;
         sDom = "";
@@ -15,10 +15,19 @@ $(document).ready(function () {
     var songList = getMasterSongList();
     var table;
     var hideCols = !getSession("narrowtable");
-
     if (!$.fn.DataTable.isDataTable('#SongList')) {
         table = $('#SongList').dataTable({
-            buttons: [{ extend: "print", text:""},{ extend:"csvHtml5",text:""},{ extend:"colvis", text:""}],
+            buttons: [{ extend: "print", text: "" }, { extend: "csvHtml5", text: "" }, /*,
+                {
+                    text: "<span class='mif-alarm'></span>",
+                    className:"orderByDate",
+                    action: function (e, dt, node, config) {
+                        orderSongsByAddedDate();
+                    }
+                }*/],
+            "colVis": {
+                "buttonText": "<span class='mif-more-horiz'></span>"
+            },
             "aaData":songList,
             "bPaginate": paging,
             "paging": paging,
@@ -26,7 +35,7 @@ $(document).ready(function () {
             "sPaginationType": "simple_numbers",
             "iDisplayLength":songListLength,
             orderClasses: false,
-            "sDom": '<"toolbar"><"toLeft"f>Bt<"toLeft"f>',
+            "sDom": '<"toolbar"><"toLeft"f>BCt<"toLeft"f>',
             "bLengthChange":false,
             responsive: true,
             fixedHeader: { header: true },
@@ -50,11 +59,11 @@ $(document).ready(function () {
                     return "<span class='songCount' style='cursor:pointer' title='" + dt + "'>" + full.PlayCount + "</span>";
                 }
             },
-            { "aTargets":2, "mRender":function(value,type,full) {
+            { "aTargets":2,"sClass":"slTitle", "mRender":function(value,type,full) {
                 return "<a class='songLink' data-songid='" + full.ID +"'>" + full.Title + "</a>";
                 }
             },
-            {"aTargets":3, "mRender":function(value,type,full) {
+            {"aTargets":3, "sClass":"slArtist", "mRender":function(value,type,full) {
                 return "<a class='artistLink' data-artist='" + escape(encodeURI(reverseArticle(full.Artist))) + "'>" + full.Artist + "</a>";
                 }
             },
@@ -64,40 +73,32 @@ $(document).ready(function () {
             },
             {"aTargets":5, "visible":hideCols, "mRender":function(value,type,full) {
                 return "<a class='categoryLink' data-category='" + escape(encodeURI(full.Category)) + "'>" + full.Category + "</a>";
-                }},
+                }
+            },
+            {
+                "aTargets": 6, "visible": true, "mRender": function (value, type, full) {
+                    return "<span>" + full.AddedDate + "</span>";
+                }
+            },
+            {"aTargets":7, "visible":false, "mRender":function(value,type,full) {
+                return "<span>" + full.PlayCount + "</span>";
+                }
+            },
+
             ],         
         });       
     }
-
+    $(".orderByDate").prop("title", "Order songs by date added.");
+    $(".orderByDate").css({ "height": "30px", "width": "30px" });
+    $(".orderByDate span").css({ "margin-top": "-6px", "margin-left": "1px" });
     $("input[type=search]").attr("placeholder", "Enter Search term");
     $(".dataTables_filter input").css("float", "right").css("margin-right", "5px");
 
-    $("#GoBack").click(function () {
-        window.history.back();
-    });
     $("#SongList").hide();
     if (jQuery.isEmptyObject(parms))
         parms = { v: "song" };
-    var ls = getLocal(parms.v + "ListStyle");
+    var ls = getSession(parms.v + "ListStyle");
     //document.getElementById("ListStyle").checked = ls == "tile" ? false : true;
-
-    $(document).on("click", "#collapseButton", function () {
-        toggleColumnVisibility(0);
-        toggleColumnVisibility(1);
-        toggleColumnVisibility(4);
-        toggleColumnVisibility(5);
-        if (getSession("narrowtable")) {
-            removeSession("narrowtable");
-            $("#collapseButton span").removeClass("mif-enlarge");
-            $("#collapseButton span").addClass("mif-shrink");
-        }
-        else {
-            setSession("narrowtable", true);
-            $("td").css("width","50%");
-            $("#collapseButton span").removeClass("mif-shrink");
-            $("#collapseButton span").addClass("mif-enlarge");
-        }
-    });
     $(document).on("click", ".updateCountLink", function (e) {
         e.preventDefault();
         var count = songUpdateAccessDate($(this).data("songid").trim());
@@ -119,7 +120,7 @@ $(document).ready(function () {
         e.preventDefault();
         var type = $(this).val();
         setListTypeSwitch(type);
-        setLocal(parms.v + "ListStyle", type)
+        setSession(parms.v + "ListStyle", type)
         
         switch (parms.v)
         {
@@ -134,7 +135,7 @@ $(document).ready(function () {
             case "s": showSearchResults(parms.a); break;
         }
     });
-    var lt = getLocal(parms.v + "ListStyle");
+    var lt = getSession(parms.v + "ListStyle");
     setListTypeSwitch(lt);
     switch (parms.v)
     {
@@ -155,15 +156,17 @@ $(document).ready(function () {
     $("#DataList").css("margin-top", (hh+3)+"px");
     var style = document.createElement('style');
     style.type = 'text/css';
-    style.innerHTML = '.listOffset { margin-top: ' + hh + 'px!important; } .tileOffset { margin-top:' + (hh) + 'px!important}';
+    style.innerHTML = '.listOffset { margin-top: ' + hh + 'px!important; } .tileOffset { margin-top:' + (hh+10) + 'px!important}';
     document.getElementsByTagName('head')[0].appendChild(style);
     $("#SongTiles").addClass('tileOffset');
     $('#SongList_wrapper').addClass('listOffset');
     $(".buttons-print").prop("title","Print the songlist.");
     $(".buttons-csv").prop("title", "Export the songlist to a CSV file");
     $(".buttons-colvis").prop("title", "Hide/Show songlist columns.");
-    $(".dt-buttons").css("margin-top","8px");
+    $(".myTile").css({ "height": getSession("tileheight"), "width": getSession("tilewidth"), "font-size": getSession("tilefontsize") });
+
 });
+
 function getDate(dt) {
     if (!dt)
         return "n/a";
@@ -174,27 +177,40 @@ function getDate(dt) {
 
 function showCategories() {
     var dta = categories(getActiveArtistID());
-    if (getLocal("csListStyle") == "tile")
+    if (getSession("csListStyle") == "tile")
         tileData(dta, "category", "Categories (" + dta.length + ")");
     else listData(dta, "category", "Categories (" + dta.length + ")");
 }
+function filterColumn(col,val) { // 5
+    $("#SongList").DataTable().column(col).search(val, true, false).draw();
+}
+
 function showCategory(c)
 {
-    if (getLocal("cListStyle") == "tile") {
+    var cDat = c;
+    var ttl = c;
+
+    if (c.indexOf("/") > -1)
+    {
+        cDat = c.replace("/","|");
+        ttl = c.replace("/", " | ");
+    }
+    if (getSession("cListStyle") == "tile") {
         var dta = getSongList("", "", c);
         dta = jlinq.from(dta).sort("Name").select();
-        tileData(dta,"song","Category - " + c);
+        tileData(dta,"song","Category - " + ttl + " (" + dta.length + ")");
     }
     else {
         $("#DataList").hide();
         $("#SongTiles").hide();
-        $("#SongList").dataTable().fnFilter(
+        /*$("#SongList").dataTable().fnFilter(
             c,
             5,
-            true, true);
+            true, true);*/
+        filterColumn(5, cDat);
         $('#SongList').parents('div.dataTables_wrapper').first().show();
         $('#SongList').show();
-        $("#Title").html("Category - " + c);
+        $("#Title").html("Category - " + ttl + " (" + $("#SongList").dataTable().fnSettings().fnRecordsDisplay() + ")");
     }
 }
 
@@ -207,9 +223,10 @@ function showGenres() {
             return el.Genre == dta[i].ID
         }).length;
     }
-    if (getLocal("gsListStyle") == "tile")
-        tileData(dta, "genre", "Genres"); 
-    else listData(dta, "genre", "Genres");
+    dta = jlinq.from(dta).greater("Count",0).select()
+    if (getSession("gsListStyle") == "tile")
+        tileData(dta, "genre", "Genres (" + dta.length + ")"); 
+    else listData(dta, "genre", "Genres (" + dta.length + ")");
 }
 
 function showGenre(g)
@@ -219,7 +236,7 @@ function showGenre(g)
         gnr = genreNameFromID(g);
     
     var x;
-    if (getLocal("gListStyle") == "tile") {
+    if (getSession("gListStyle") == "tile") {
         var dta = getMasterSongList();
         dta = jLinq.from(dta)
         .equals("Genre", genreIDFromName(g))
@@ -235,13 +252,13 @@ function showGenre(g)
         $("#SongTiles").hide();
         $('#SongList').parents('div.dataTables_wrapper').first().show();
         $('#SongList').show();
-        $("#Title").html("Genre - " + gnr);
+        $("#Title").html("Genre - " + gnr + " (" + $("#SongList").dataTable().fnSettings().fnRecordsDisplay() + ")");
     }
 }
 function showUnplayed()
 {
     var x;
-    if (getLocal("oListStyle") == "tile") {
+    if (getSession("oListStyle") == "tile") {
         var dta = getMasterSongList();
         dta = jLinq.from(dta)
         .equals("PlayCount", "0")
@@ -256,19 +273,19 @@ function showUnplayed()
         $("#SongTiles").hide();
         $('#SongList').parents('div.dataTables_wrapper').first().show();
         $('#SongList').show();
+        $("#Title").html("Unplayed Songs (" + $("#SongList").dataTable().fnSettings().fnRecordsDisplay() + ")");
     }
-    $("#Title").html("Unplayed Songs");
 }
 function showArtists()
 {
     var dta = songArtists(getActiveArtistID());
-    if (getLocal("asListStyle") == "tile")
-        tileData(dta, "artist", "Composers");  
-    else listData(dta, "artist", "Composers");
+    if (getSession("asListStyle") == "tile")
+        tileData(dta, "artist", "Composers (" + dta.length + ")");  
+    else listData(dta, "artist", "Composers (" + dta.length + ")");
 }
 function showArtist(a)
 {
-    if (getLocal("aListStyle") == "tile") {
+    if (getSession("aListStyle") == "tile") {
         a = reverseArticle(a);
         var dta = getMasterSongList();
         dta = jLinq.from(dta)
@@ -285,12 +302,12 @@ function showArtist(a)
         $('#SongList').parents('div.dataTables_wrapper').first().show();
         $('#SongList').show();
         var nRec = $("#SongList").dataTable().fnSettings().fnRecordsDisplay();
-        $("#Title").html("Composer - " + a );
+        $("#Title").html("Composer - " + a + " (" + $("#SongList").dataTable().fnSettings().fnRecordsDisplay() + ")");
     }
 }
 function showSongs() {
     var dta = getMasterSongList();
-    if (getLocal("songListStyle") == "tile")
+    if (getSession("songListStyle") == "tile")
         tileData(dta, "song", "Master Song List");
     else {
         $('#SongList').parents('div.dataTables_wrapper').first().show();
@@ -298,7 +315,7 @@ function showSongs() {
         $("#SongTiles").hide();
         $("#DataList").hide();
     }
-    $("#Title").html("Master Song List");
+    $("#Title").html("Master Song List (" + $("#SongList").dataTable().fnSettings().fnRecordsDisplay() + ")");
 }
 
 function showSearchResults(term)
@@ -320,7 +337,7 @@ function showSearchResults(term)
         a.push(sngs[i]);
     }
     
-    if (getLocal("sListStyle") == "tile")
+    if (getSession("sListStyle") == "tile")
         tileData(a, "mixed", "Search Results - '" + term + "' (" + (sngs.length + arts.length) + ")");
     else listData(a,"mixed","Search Results - '" + term + "' (" + (sngs.length + arts.length) + ")");
 }
@@ -373,7 +390,7 @@ function listData(dta, type, ttl)
         r.className = rCls;
         var a = "<a class='" + typ + "Link' href='#' ";
         var nm = dta[i].Name;
-        if (nm == "") nm = "[None]";
+        if (nm == "") nm = "[No Category]";
         var cnt = "";
         if (dta[i].Count && ttl.indexOf("Search Results") != 0) {
             cnt = " (" + dta[i].Count + ")";

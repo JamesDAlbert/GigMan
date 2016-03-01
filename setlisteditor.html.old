@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+
+    <link href="content/css/metro.css" rel="stylesheet"/>
+
+    <link href="content/css/metro-icons.css" rel="stylesheet"/>
+    <link href="content/css/metro-responsive.css" rel="stylesheet"/>
+    <link href="content/css/metro-schemes.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="content/themes/default/style.min.css" />
+    <link rel="stylesheet" href="Content/css/fixedHeader.dataTables.min.css" />
+
+    <link id="gmStyle" href="css/gigman-neon.css" rel="stylesheet"/>
+
+    <script src="Scripts/jquery.js"></script>
+    <script src="Scripts/jquery-ui.min.js"></script>
+    <script src="scripts/metro.js"></script>
+
+    <script src="scripts/jss.min.js"></script>
+    <script runat="server" src="js/datarequest.js"></script>
+    <script runat="server" src="js/gigman.js"></script>
+    <script runat="server" src="js/rgbcolor.js"></script>
+    <script runat="server" src="js/utilities.js"></script>
+
+    <script src="Scripts/jlinq.js"></script>    
+    <script runat="server" src="js/setlisteditor.js"></script>
+    <script src="scripts/jstree.js"></script>
+    <script src="scripts/jquery.datatables.min.js"></script>
+    <script src="Scripts/dataTables.fixedHeader.min.js"></script>
+    <script src="Scripts/jquery.dataTables.rowReordering.js"></script>
+    <style>
+        
+        body, html {
+            height:100%;width:100%;padding:0;margin:0;background:none;
+        }
+
+    </style>
+</head>
+<body>
+    <div style="width:100%">
+        <div id="tableContainer" style="float:left;width:49%;max-width:49%;min-width:49%">
+            <table id="sSongList" class="order_columns stripe pretty SongList display nowrap" style="margin-top:-2px;width:100%;display:inline-block">
+                <thead>
+                    <tr>
+                        <th class="songCategory">ID</th>
+                        <th class="songTitle">Title</th>
+                        <th class="songArtist">Artist</th>
+                        <th></th>
+                        <!--<th class="songGenre">Genre </th>
+                        <th class="songCategory">Category </th>-->
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot></tfoot>
+            </table>
+        </div>
+        <div id="sets" class="SetList" style="width:50%;display:block"></div>
+
+    </div>
+</body>
+</html>

@@ -154,6 +154,9 @@ $(document).ready(function () {
 
     $(".charm").css("margin-top", $(".header").height());
 
+    $("#themeSwitch").click(function () {
+        alert("!");
+    });
     
 });
 function disableCalendarLink()

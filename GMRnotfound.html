@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link id="gmrStyle" href="css/Request-neon.min.css" rel="stylesheet"/>
+    <script src="scripts/jquery.min.js"></script>
+    <script src="js/dataRequest.min.js"></script>
+    <script src="js/utilities.min.js"></script>
+</head>
+<body class="framed">
+    <div id="interface">
+        <p>
+            <span id="bandName" style="font-weight:bold;font-style:italic"></span>? Nobody here by that name!<br />
+            Maybe they don't know about GigMan Request yet.  <br />
+            You should let them know!<br />  <br />          
+        </p>
+    </div>
+    <script>
+        if (!sessionStorage.getItem("band"))
+            $("#bandName").text(getiRequestName());
+        else $("#bandName").text(sessionStorage.getItem("band"));
+
+        $("#gmStyle").prop("href", getSession("colorscheme"));
+        
+    </script>
+</body>
+</html>

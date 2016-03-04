@@ -61,7 +61,7 @@ $(document).ready(function () {
         $("#colorScheme").prop("checked", true);
     adjustLyricsArea();
     $(document).click(function (e) {
-        if (e.target.parentElement.className == "songInfo")
+        if (e.target.parentElement.className.indexOf("songInfo") > -1)
             return;
         if ($("#SongInfo").is(":visible"))
         {
@@ -216,19 +216,17 @@ $(document).ready(function () {
 function adjustChrome() {
     var hh = $("#lyricsHeader").height();
     //$("#lyricsHeader").css({ "line-height": hh, "vertical-align": "top" });
-    if (hh < 55) hh = 15;
-    if (hh > 60) hh -= 35;
+    if (hh <= 55) hh = 0;
+    if (hh > 60) hh -= 55;
     var style = document.createElement('style');
     style.type = 'text/css';
     style.innerHTML = '.listOffset { margin-top: ' + hh + 'px!important; } .tileOffset { margin-top:' + (hh) + 'px!important}';
     document.getElementsByTagName('head')[0].appendChild(style);
-    $("#sTranspose").addClass('tileOffset');
-    $('#lyricsDiv').addClass('listOffset');
+    $("#lyricsWrapper").addClass("tileOffset");
     hh = window.innerHeight - $("#lyricsHeader").height() - getScrollbarWidth() - 1;
     $(".toolSliders").css("height", hh);
-    $("#sTranspose").css("height", (hh / 2) - 5);
-    $("#sChangeFontSize").css("height", (hh / 2) - 5);
-    $("#sChangeFontSize").css("top", -15);//hh / 2);
+    $("#sTranspose").css("height", (hh / 2) - 15);
+    $("#sChangeFontSize").css("height", (hh / 2) - 15);
 }
 
 function setFontSlider(val, set) {
@@ -302,10 +300,11 @@ function init(song) {
     if (lastPlayed.getFullYear() < 2000)
         lastPlayed = "n/a";
     else lastPlayed = pad(lastPlayed.getFullYear()) + "/" + pad(lastPlayed.getMonth()) + "/" + pad(lastPlayed.getDay() + 1);
+    var art = JSON.parse(getSession("activeartist"));
     $("#SongInfo").html("<table class='songInfo'><tr><td colspan='2' style='text-align:center'>" + song.Title + "<br/>" + "<a class='artistLink' data-artist='" + song.Artist + "'>" + song.Artist + "</a></td></tr>" + 
         "<tr><td>Key :&nbsp;</td><td>&nbsp;" + keyList[song.Key] + "</td></tr><tr><td>Last played :&nbsp;</td><td>&nbsp;" + lastPlayed + "</td></tr><tr><td>Genre :&nbsp;</td><td>&nbsp;" + genreNameFromID(song.Genre) + "</td></tr>" +
         "<tr><td>Category :&nbsp;</td><td>&nbsp;" + song.Category + "</td></tr><tr><td>Familiarity :&nbsp;</td><td>&nbsp;" + familiarityNameFromID(song.Familiarity) + "</td></tr><tr><td>Tempo :&nbsp;</td><td>&nbsp;" +
-        tempoNameFromID(song.Tempo) + "</td></tr></table>"
+        tempoNameFromID(song.Tempo) + "</td></tr><tr><td colspan='2' style='text-align:center!important;padding:5px'><label id='iRequestURL'>" + iRequestLocation + art.iRequestName + "</label>" + "</td></tr></table>"
         );
     // $("#SongKey").html("Key - " + keyList[song.Key]);
     $(".keyPad[data-key='" + (song.Key) + "']").addClass("selected");

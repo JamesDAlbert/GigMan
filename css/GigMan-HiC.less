@@ -139,35 +139,63 @@
 @help-content-icon-color:white;
 @button-font-size:25px;
 @button-size:32pt;
-a {
-    color:@text-color;
+
+@charm-width:420px;
+@palette-entry-size: 30px;
+@palette-button-width: 80px;
+@disabled-color: #dddddd;
+@song-info-width: 400px;
+@chord-viewer-width: 150px;
+@notes-panel-width: 400px;
+@tiny-button-size: 18px;
+@lyric-slider-width: 36px;
+@lyric-slider-height: 40%; //240px;
+@system-scrollbar-width: 15px;
+a
+{
+    color: @text-color;
 }
-a:visited {
-    color:@text-color;
+
+    a:visited
+    {
+        color: @text-color;
+    }
+
+    a:hover
+    {
+        text-decoration: underline;
+    }
+
+.indexHeader
+{
+    border-bottom: 1px solid @border-color;
+    background: @background;
+    width: 100%;
+    position: fixed;
+    padding: 0;
+    border-collapse: collapse;
 }
-a:hover {
-    text-decoration:underline;
-}
-.indexHeader {
-    border-bottom:1px solid @border-color;
-    background:@background;
-    width:100%;
-    position:fixed;
-    padding:0;
-    border-collapse:collapse;
-}
-.indexHeader .greeting{
-    margin-left:@header-margin;
-}.indexHeader .colorScheme{
-     margin-left:@header-margin;
- }
+
+    .indexHeader .greeting
+    {
+        margin-left: @header-margin;
+    }
+
+    .indexHeader .colorScheme
+    {
+        margin-left: @header-margin;
+    }
 // general
-.border-bottom {
-    border-bottom:1px solid @border-color;
+.border-bottom
+{
+    border-bottom: 1px solid @border-color;
 }
-label{
-    color:@text-color
+
+label
+{
+    color: @text-color;
 }
+
 body
 {
     background-color: @background;
@@ -197,8 +225,8 @@ body
     height: @logo-height!important;
     border: 0!important;
     background-image: @logo-image!important;
-    background-repeat:no-repeat;
-    margin-left:-10px;
+    background-repeat: no-repeat;
+    margin-right: 5px;
 }
 
 hr
@@ -228,16 +256,18 @@ hr
 .gm-charm
 {
     background-color: @background!important;
-    width:100%!important;
-    max-width:420px;
-    overflow:auto;
-    height:100%;
-    z-index:2000;
+    width: 100%!important;
+    max-width: @charm-width; // 420
+    overflow: hidden;
+    height: 100%;
+    z-index: 2000;
 }
 
-#helpCharm {
-    z-index:2100!important;
+#helpCharm
+{
+    z-index: 2100!important;
 }
+
 .gm-checkbox
 {
     display: none;
@@ -246,1211 +276,1257 @@ hr
 
     .gm-checkbox + label
     { // 18 x 18 size;position: relative;display: inline-block;padding: 9px;border: 1px solid @border-color;-moz-border-radius: @border-radius;-webkit-border-radius: @border-radius;border-radius: @border-radius;background-color: @text-color;
-      }
+    }
+
         .gm-checkbox + label:active, .gm-checkbox:checked + label:active
         {
         }
 
-        .gm-checkbox:checked + label
-        {
-            border: 1px solid @border-color;
-            background-color: @background;
-            color: @text-color;
-        }
+    .gm-checkbox:checked + label
+    {
+        border: 1px solid @border-color;
+        background-color: @background;
+        color: @text-color;
+    }
 
-            .gm-checkbox:checked + label:after
-            {
-                position: absolute;
-                top: -10px;
-                left: -2px;
-                color: @text-color;
-                content: '\2714';
-                font-size: 32px;
-            }
-
-        .help span[class*="mif-"]
-        {
-            color: @help-content-icon-color!important;
-        }
-
-        .help h3
-        {
-            font-weight: bold;
-            font-size: larger;
-        }
-
-        .buttonColor
-        {
-            border-color: @button-border-color!important;
-            background-color: @button-color!important;
-            color: @button-text-color!important;
-           // font-size:1.5rem!important;
-        }
-
-        .pageHeader
-        {
-            position: fixed;
-            top: 0;
-            z-index: 100;
-            width: 100%;
-            border-bottom: 1px solid @border-color;
-            background-color: @background;
-            color: white;
-            vertical-align: middle;
-            line-height: 50px;
-            opacity: 1;
-        }
-
-        .buttonColor span
-        {
-            color: @button-text-color;
-            text-shadow: 0px 0px 10px @button-color-glow;
-            font-size:@button-font-size;
-        }
-
-        .buttonColor:hover
-        {
-            text-shadow: 3px -1px 6px @button-color-glow;
-        }
-        // Controls
-        // support widgets
-        // color selector
-        .paletteWindow
+        .gm-checkbox:checked + label:after
         {
             position: absolute;
-            z-index: 2000;
-            display: none;
-            overflow: visible;
-            border: 1px solid @border-color;
-            background-color: @background!important;
-        }
-
-        .windowTitle
-        {
-            background-color: @button-color;
-            color: @button-text-color;
-        }
-
-        .paletteTable
-        {
-            padding: 0;
-            border-spacing: 0;
-            border-collapse: collapse;
-            table-layout: fixed;
-        }
-
-        .windowTitle span
-        {
-            font-size: 16px!important;
-        }
-
-        .paletteTitle
-        {
-            vertical-align: middle;
-            line-height: 16px;
-        }
-
-        .paletteEntry
-        {
-            margin: 0;
-            padding: 0;
-            width: 30px;
-            height: 30px;
-            border: 1px solid @background;
-        }
-
-            .paletteEntry:hover
-            {
-                border: 1px solid @border-color;
-                border-style: inset;
-            }
-
-        .paletteButton
-        {
-            width: 100%;
-            height: auto;
-            border: 2px solid transparent;
-        }
-
-        .selectedPaletteButton
-        {
-            width: 80px;
-            height: auto;
-            border: 2px solid @button-text-color;
-            font-style: italic;
-            font-size: 16px;
-        }
-
-        .paletteButton:hover
-        {
-            border: 1px solid @border-color;
-        }
-        // Spin input
-        .spinBox
-        {
-            font-size: 16px;
-        }
-
-        .spinMinus
-        {
-            margin: 0;
-            padding: 0;
-            width: @button-size;
-            height: @button-size!important;
-            border: 0;
-        }
-
-        .spinPlus
-        {
-            padding: 0;
-            width: @button-size;
-            height: @button-size!important;
-            border: 0;
-        }
-
-        .spinMinus:hover
-        {
-            border: 1px solid @border-color;
-        }
-
-        .spinPlus:hover
-        {
-            border: 1px solid @border-color;
-        }
-
-        .spinInput
-        {
-            margin: 0;
-            margin-top: -1px!important;
-            width: 50px;
-            height: 37px !important;
-            border: 1px solid @border-color;
-            -moz-border-radius: 0 !important;
-            -webkit-border-radius: 0 !important;
-            border-radius: 0 !important;
-            background-color: @bg-textbox!important;
-            background-image: 0!important;
-            color: @fg-textbox!important;
-            text-align: center;
-        }
-        // Transpose Keypad
-        #Transposer
-        {
-            float: left;
-            width: 130px;
-            background-color: @background;
-            font-family: "Segoe UI Light","Helvetica Neue","Segoe UI","Segoe WP",sans-serif;
-        }
-
-            #Transposer ul,
-            #Transposer li
-            {
-                position: relative;
-                margin: 0;
-                padding: 0;
-                list-style: none;
-            }
-
-        .keyPad
-        {
-            display: inline-block;
-            overflow: hidden;
-            margin-top: 5px;
-            width: @button-size;
-            height: @button-size;
-            vertical-align: middle;
-            text-align: center;
-            font-size: 16px;
-            line-height: @button-size;
-            cursor: pointer;
-        }
-
-            .keyPad.selected
-            {
-                background: @button-text-color linear-gradient(-45deg, rgba(0, 0, 0, 0.15) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, 0.15) 50%, rgba(0, 0, 0, 0.15) 75%, transparent 75%, transparent);
-                background-size: 20px 20px;
-                color: @background;
-                font-weight: bold;
-                font-size: 20px;
-            }
-
-            .keyPad.black
-            {
-                border: 1px @button-text-color solid;
-                background-color: @black-keypad-background;
-                color: @black-keypad-color;
-            }
-
-            .keyPad.white
-            {
-                border: 1px @button-text-color solid;
-                background-color: @white-keypad-background;
-                color: @white-keypad-color;
-            }
-
-            .keyPad:hover
-            {
-                text-shadow: 0 0 10px @button-color-glow;
-            }
-        // slide-switch
-        .slide-switch.check
-        {
-            background-color: @track-color-off!important;
-        }
-
-        .slide-switch-label
-        {
-            top: 1px;
-            left: 1px;
-        }
-
-        .slide-switch-label-left
-        {
-            -webkit-border-top-left-radius: @border-radius;
-            border-top-left-radius: @border-radius;
-        }
-
-        .slide-switch-label-right
-        {
-            -webkit-border-top-right-radius: @border-radius;
-            border-top-right-radius: @border-radius;
-        }
-
-        .slide-switch-selection
-        {
-            -moz-box-sizing: border-box!important;
-            -webkit-box-sizing: border-box!important;
-            box-sizing: border-box!important;
-            border: 1px solid @slide-switch-selected-border!important;
-            border-right: 1px solid darken(@slide-switch-selected-border,50%);
-            border-bottom: 1px solid darken(@slide-switch-selected-border,50%);
-            -moz-border-radius: @border-radius;
-            -webkit-border-radius: @border-radius;
-            border-radius: @border-radius;
-            background-color: @slideswitch-selected-color!important;
-        }
-
-            .slide-switch-selection:hover
-            {
-                -moz-box-shadow: 0 0 5px 5px @slideswitch-selected-color-glow!important;
-                -webkit-box-shadow: 0 0 5px 5px @slideswitch-selected-color-glow!important;
-                box-shadow: 0 0 5px 5px @slideswitch-selected-color-glow!important;
-            }
-
-
-        .slide-switch-label.switch-selected
-        {
-            border: 0!important;
-        }
-
-        .slide-switch
-        {
-            border-color: lighten(@background,30%)!important;
-            background-color: @background!important;
-            -moz-box-shadow: 0 -2px 4px -4px @slideswitch-selected-color;
-            -webkit-box-shadow: 0 -2px 4px -4px @slideswitch-selected-color;
-            box-shadow: 0 -2px 4px -4px @slideswitch-selected-color;
-            border-radius:@border-radius;
-        }
-
-        .slide-switch-marker
-        {
-            top: -2px;
-            margin-left: -3px;
-            width: 99%;
-            height: 99%;
-            color: @slide-switch-marker-color!important;
-            text-shadow: 0 0 3px @button-color-glow;
-            font-weight: normal;
-        }
-
-        .slide-switch-marker-current
-        {
-            z-index: 100!important;
-            color: @slide-switch-marker-current!important;
-            font-weight: bold;
-        }
-        // list anchors
-        .listLink
-        {
-            display: block;
-            width: 100%;
-            color: inherit;
-            cursor: pointer;
-
-            &:hover
-            {
-                text-decoration: underline;
-                text-shadow: 0px 5px 15px @button-color-glow!important;
-            }
-        }
-
-            .listLink:hover
-            {
-            }
-
-        .songLink
-        {
-            .listLink;
-        }
-
-        .artistLink
-        {
-            .listLink;
-        }
-
-        .categoryLink
-        {
-            .listLink;
-        }
-
-        .songLink:hover
-        {
-            .listLink;
-        }
-
-        .genreLink
-        {
-            .listLink;
-        }
-        // Form controls
-        input
-        {
-            -moz-border-radius: @border-radius;
-            -webkit-border-radius: @border-radius;
-            border-radius: @border-radius;
-        }
-
-        textarea
-        {
-            border: 1px solid @border-color!important;
-            -moz-border-radius: @border-radius;
-            -webkit-border-radius: @border-radius;
-            border-radius: @border-radius;
-            background-color: @bg-textbox;
-            color: @fg-textbox;
-        }
-
-        input[type=number], input[type=text]
-        {
-            background-color: @bg-textbox!important;
-            color: @fg-textbox!important;
-            font-size: 16px;
-        }
-
-        [data-role="datepicker"] .button
-        {
-            margin: 0!important;
-            border: 1px solid @border-color;
-            background: @button-color!important;
-            color: @button-text-color!important;
-        }
-
-            [data-role="datepicker"] .button span
-            {
-                color: @button-text-color;
-            }
-
-        .time.ui-timepicker-input
-        {
-            border: 0!important;
-            font-size: 16px!important;
-        }
-
-        input[type=checkbox]:checked + span
-        {
-            background-color: @track-color-on!important;
-        }
-
-        input[type=checkbox]:checked:before
-        {
-            background-color: @track-color-off!important;
-            -moz-box-shadow: 0px 0px 10px @checkbox-shadow-color;
-            -webkit-box-shadow: 0px 0px 10px @checkbox-shadow-color;
-            box-shadow: 0px 0px 10px @checkbox-shadow-color;
-        }
-
-        option
-        {
-            font-size: 16px;
-        }
-
-        select
-        {
-            -moz-border-radius: @border-radius;
-            -webkit-border-radius: @border-radius;
-            border-radius: @border-radius;
-            background-color:@background;
-            border:1px solid @border-color;
-            color:@text-color;
-        }
-
-        .input-control .selected
-        {
-            height: 35px!important;
-            font-size: 16px;
-        }
-
-        select:not[multiple]
-        {
-            height: 35px!important;
-            background-color: @bg-textbox;
-            color: @fg-textbox;
-            font-size: 16px;
-        }
-
-        .check:before
-        {
-            background-color: @switch-color!important;
-        }
-        // Metro Controls
-        .myModernInput.modern .label
-        {
+            top: -10px;
+            left: -2px;
             color: @text-color;
-            font-size: 16px !important;
-        }
-
-        .myModernInput span
-        {
-            color: @text-color;
-            font-size: 16px !important;
-        }
-
-        .myModernInput.modern .informer
-        {
-            color: @text-color!important;
-            font-size: 16px!important;
-        }
-
-        .myModernInput.modern input
-        {
-            background-color: @background!important;
-            color: @text-color!important;
-            font-size: 16px!important;
-        }
-        // buttons
-        .scrollButton
-        {
-            border: 1px solid @background;
-            vertical-align: middle;
-            line-height: 20px;
-        }
-
-            .scrollButton:hover
-            {
-                -moz-box-shadow: 0 0 15px 3px @button-shadow-color!important;
-                -webkit-box-shadow: 0 0 15px 3px @button-shadow-color!important;
-                box-shadow: 0 0 15px 3px @button-shadow-color!important;
-            }
-
-
-        .square-button
-        {
-            margin: 5px!important;
-            width: @button-size!important;
-            height: @button-size!important;
-            border: 1px solid @button-border-color!important;
-            -moz-border-radius: @border-radius;
-            -webkit-border-radius: @border-radius;
-            border-radius: @border-radius;
-        }
-
-            .square-button:hover
-            {
-                border: 1px solid @border-color!important;
-                -moz-box-shadow: 0 0 15px 5px @button-shadow-color!important;
-                -webkit-box-shadow: 0 0 15px 5px @button-shadow-color!important;
-                box-shadow: 0 0 15px 5px @button-shadow-color!important;
-            }
-        // Generic Lists
-        #joinRequests
-        {
-            background-color: @background;
-        }
-
-        #DataList
-        {
-            width: 100%!important;
-        }
-        #SongList_filter label {
-            margin-top:5px!important;
-        }
-        .buttons-columnVisibility
-        {
-            background:@button-color!important;
-            color:@button-text-color!important;
-        }
-        .dt-button-collection {
-            background:@background!important;
-        }
-        .dt-buttons .dt-button {
-            margin-top:5px!important;
-            background:@button-color!important;
-            color:@button-text-color!important;
-            font-size:@button-font-size;
-            padding:0!important;
-                border: 1px solid @button-border-color!important;
-            -moz-border-radius: @border-radius;
-            -webkit-border-radius: @border-radius;
-            border-radius: @border-radius;
-        }
-            .dt-buttons .dt-button:hover
-            {
-                border: 1px solid @border-color!important;
--moz-box-shadow: 0 0 15px 5px @button-shadow-color!important;
-                -webkit-box-shadow: 0 0 15px 5px @button-shadow-color!important;
-                box-shadow: 0 0 15px 5px @button-shadow-color!important;
-            }
-        .buttons-print span:before {
-            font-family:metro;
-            content:"\e605";
-            
-        }
-        .buttons-csv span:before {
-            font-family:metro;
-            content:"\e63d";
-        }
-        .buttons-colvis span:before {
-            font-family:metro;
-            content:"\e64d";
-        }
-
-        table#DataList > tbody > tr > td
-        {
-        }
-
-        #DataList tr:nth-child(odd) td A
-        {
-            color: @list-odd-color!important;
-        }
-
-        #DataList tr:nth-child(even) td A
-        {
-            color: @list-even-color!important;
-        }
-
-        .messageDelete span
-        {
-            color: @danger!important;
-        }
-        // Song Lists
-        .altListRow
-        {
-            background-color: lighten(@list-odd-backcolor,10%)!important;
-            color: @list-odd-color!important;
-        }
-
-        .listRow
-        {
-            background-color: @list-even-backcolor!important;
-            color: @list-even-color!important;
-        }
-
-        .altListRow td a
-        {
-            color: @list-odd-color!important;
-        }
-
-        .listRow td tr:nth-child(even) a
-        {
-            color: @list-even-color!important;
-        }
-
-        .SongList tr:nth-child(odd) a
-        {
-            color: @list-odd-color;
-        }
-
-        .SongList tr:nth-child(even) a
-        {
-            color: @list-even-color;
-        }
-
-        .SongList .odd a
-        {
-            color: @list-odd-color;
-            text-shadow: 0 0 18px @list-odd-color-shadow!important;
-        }
-
-        .SongList .odd span
-        {
-            color: @list-odd-color!important;
-        }
-
-        .SongList .even
-        {
-            border: 0;
-            background-color: @list-even-backcolor!important;
-            color: @list-even-color;
-        }
-
-            .SongList .even a
-            {
-                color: @list-even-color;
-                text-shadow: 0 0 12px @list-even-color-shadow!important;
-            }
-
-        .SongList .sorting_asc
-        {
-            background-color: @list-header-backcolor;
-            text-shadow: 0px 10px 15px @list-header-sort-glow;
-        }
-
-            .SongList .sorting_asc:nth-of-type(1)
-            {
-                background-color: @background;
-            }
-
-        .SongList .sorting_desc
-        {
-            background-color: @list-header-backcolor;
-            text-shadow: 0px -10px 15px @list-header-sort-glow;
-        }
-
-        .SongList .sorting
-        {
-            background-color: @list-header-backcolor!important;
-        }
-
-        .SongList .sorting_1
-        {
-            background-color: @background;
-        }
-
-        .SongList
-        {
-        }
-
-            .SongList th
-            {
-                border-top: 1px solid @border-color!important;
-                border-bottom: 1px solid @border-color!important;
-                background-color: @list-header-backcolor!important;
-                -moz-box-shadow: inset 0 20px 20px -20px @list-header-sort-glow, inset 0 -20px 20px -20px @list-header-sort-glow;
-                -webkit-box-shadow: inset 0 20px 20px -20px @list-header-sort-glow, inset 0 -20px 20px -20px @list-header-sort-glow;
-                box-shadow: inset 0 20px 20px -20px @list-header-sort-glow, inset 0 -20px 20px -20px @list-header-sort-glow;
-                color: @list-header-color!important;
-                font-size: 100%;
-            }
-
-            .SongList td
-            {
-                border: 0;
-            }
-
-            .SongList .odd
-            {
-                border: 0;
-                background-color: @list-odd-backcolor !important;
-            }
-
-            .SongList tr:nth-child(odd):hover td
-            {
-                -moz-box-shadow: inset 0 10px 10px -10px @list-odd-color-shadow, inset 0 -10px 20px -10px @list-odd-color-shadow;
-                -webkit-box-shadow: inset 0 10px 10px -10px @list-odd-color-shadow, inset 0 -10px 20px -10px @list-odd-color-shadow;
-                box-shadow: inset 0 10px 10px -10px @list-odd-color-shadow, inset 0 -10px 20px -10px @list-odd-color-shadow;
-                text-shadow: 0 0 18px @list-odd-color-shadow!important;
-            }
-
-            .SongList tr:nth-child(even):hover td
-            {
-                -moz-box-shadow: inset 0 10px 10px -10px @list-even-color-shadow, inset 0 -10px 20px -10px @list-even-color-shadow;
-                -webkit-box-shadow: inset 0 10px 10px -10px @list-even-color-shadow, inset 0 -10px 20px -10px @list-even-color-shadow;
-                box-shadow: inset 0 10px 10px -10px @list-even-color-shadow, inset 0 -10px 20px -10px @list-even-color-shadow;
-                text-shadow: 0 0 18px @list-even-color-shadow!important;
-            }
-
-        #SongList
-        {
-            border-bottom: 1px solid @list-header-color;
-        }
-
-        // Datatables
-        .dataTables_filter input
-        {
-            background-color: @bg-textbox!important;
-            color: @fg-textbox;
-        }
-
-        .dataTables_info
-        {
-            color: @button-text-color;
-        }
-        // toolbar justification
-        .toRight
-        {
-            float: right!important;
-        }
-
-        .toLeft
-        {
-            float: left!important;
-        }
-        // Paging buttons
-        a.paginate_button
-        {
-            margin-left: 5px!important;
-            padding: 10px!important;
-            -moz-border-radius: 0!important;
-            -webkit-border-radius: 0!important;
-            border-radius: 0!important;
-            background: 0!important;
-            background-color: @button-color!important;
-            color: @button-text-color!important;
-            font-weight: bold!important;
-            font-size: @button-font-size;
-        }
-
-        .dataTables_wrapper .dataTables_paginate .paginate_button
-        {
-            color: @button-text-color!important;
-        }
-
-            .dataTables_wrapper .dataTables_paginate .paginate_button:hover
-            {
-                color: @button-text-color!important;
-            }
-
-        a.paginate_button .disabled
-        {
-            background-color: @button-color!important;
-        }
-
-            a.paginate_button .disabled:hover
-            {
-                background-color: transparent!important;
-            }
-
-        a.paginate_button:hover
-        {
-            background-color: lighten(@button-color,25%)!important;
-            color: @button-text-color;
-            text-shadow: 0 0 15px @button-color-glow!important;
-        }
-
-        a.paginate_button .current:hover
-        {
-            background-color: @button-color!important;
-            color: @button-text-color!important;
-        }
-
-        a.paginate_button.current
-        {
-            background-color: @button-text-color!important;
-            color: @button-color!important;
-        }
-
-        .dataTables_paginate.paging_simple_numbers
-        {
-            margin-bottom: 5px;
-            width: 100%!important;
-        }
-        // List Tiles
-        #SongTiles a
-        {
-            color: inherit;
-        }
-
-        #SongTiles span
-        {
-            color: inherit;
-        }
-
-        .tileTitle
-        {
-            color: @background;
-        }
-
-            .tileTitle:hover
-            {
-                text-shadow: 0 5px 15px @button-color-glow;
-            }
-
-        @media screen and (max-width: 320px)
-        {
-            .myTile
-            {
-                width: 140px;
-                height: 80px;
-                border: 1px solid @border-color;
-                -moz-border-radius: @border-radius;
-                -webkit-border-radius: @border-radius;
-                border-radius: @border-radius;
-                font-size: 14px!important;
-            }
-        }
-
-        .myTile
-        {
-            border: 1px solid @border-color;
-            -moz-border-radius: @border-radius;
-            -webkit-border-radius: @border-radius;
-            border-radius: @border-radius;
-            font-size: 16px;
-        }
-
-            .myTile span
-            {
-                margin-top: 5px;
-            }
-
-            .myTile a
-            {
-                color: inherit!important;
-            }
-
-            .myTile.disabled
-            {
-                background-color: #303030;
-                color: #404040;
-            }
-
-        .tile-content
-        {
-            padding: 3px;
-            text-align: center;
-        }
-
-        .mif-songlist
-        {
-            width: 32px;
-            height: 32px;
-            background-image: url('../images/artist.png');
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        .t-a
-        {
-            background-color: @ta;
-            color: contrast(@ta)!important;
-        }
-
-        .t-b
-        {
-            background-color: @tb;
-            color: contrast(@tb)!important;
-        }
-
-        .t-c
-        {
-            background-color: @tc!important;
-            color: contrast(@tc);
-        }
-
-        .t-d
-        {
-            background-color: @td!important;
-            color: contrast(@td)!important;
-        }
-
-        .t-e
-        {
-            background-color: @te!important;
-            color: contrast(@te)!important;
-        }
-
-        .t-f
-        {
-            background-color: @tf!important;
-            color: contrast(@tf)!important;
-        }
-
-
-        .t-g
-        {
-            background-color: @tg!important;
-            color: contrast(@tg)!important;
-        }
-
-        .t-h
-        {
-            background-color: @th!important;
-            color: contrast(@th)!important;
-        }
-
-
-        .t-i
-        {
-            background-color: @ti!important;
-            color: contrast(@ti)!important;
-        }
-
-        .t-j
-        {
-            background-color: @tj!important;
-            color: contrast(@tj)!important;
-        }
-
-
-        .t-k
-        {
-            background-color: @tk!important;
-            color: contrast(@tk)!important;
-        }
-
-        .t-l
-        {
-            background-color: @tl!important;
-            color: contrast(@tl)!important;
-        }
-
-        .t-m
-        {
-            background-color: @tm!important;
-            color: contrast(@tm)!important;
-        }
-
-
-        .t-n
-        {
-            background-color: @tn!important;
-            color: contrast(@tn)!important;
-        }
-
-
-        .t-o
-        {
-            background-color: @to!important;
-            color: contrast(@to)!important;
-        }
-
-        .t-p
-        {
-            background-color: @tp!important;
-            color: contrast(@tp)!important;
-        }
-
-        .t-q
-        {
-            background-color: @tq!important;
-            color: contrast(@tq)!important;
-        }
-
-        .t-r
-        {
-            background-color: @tr!important;
-            color: contrast(@tr)!important;
-        }
-
-        .t-s
-        {
-            background-color: @ts!important;
-            color: contrast(@ts)!important;
-        }
-
-        .t-t
-        {
-            background-color: @tt!important;
-            color: contrast(@tt)!important;
-        }
-
-        .t-u
-        {
-            background-color: @tu!important;
-            color: contrast(@tu)!important;
-        }
-
-        .t-v
-        {
-            background-color: @tv!important;
-            color: contrast(@tv)!important;
-        }
-
-        .t-w
-        {
-            background-color: @tw!important;
-            color: contrast(@tw)!important;
-        }
-
-        .t-x
-        {
-            background-color: @tx!important;
-            color: contrast(@tx)!important;
-        }
-
-        .t-y
-        {
-            background-color: @ty!important;
-            color: contrast(@ty)!important;
-        }
-
-        .t-z
-        {
-            background-color: @tz!important;
-            color: contrast(@tz)!important;
-        }
-
-        .t-nn
-        {
-            background-color: @tnn!important;
-            color: contrast(@tnn)!important;
-        }
-
-            .t-nn.tileTitle
-            {
-                color: @background!important;
-            }
-
-            .t-nn .artistTitle
-            {
-                color: @background!important;
-            }
-        // Nav Tiles
-        .bg-song
-        {
-            background-color: @bg-song!important;
-            color: contrast(@bg-song);
-        }
-
-        .bg-resynch
-        {
-            background: @bg-resynch!important;
-            color: contrast(@bg-resynch);
-        }
-
-        .bg-info
-        {
-            background: @bg-info!important;
-            color: contrast(@background);
-        }
-
-        .bg-settings
-        {
-            background: @bg-settings!important;
-            color: contrast(@bg-settings);
-        }
-
-        .bg-random
-        {
-            background: @bg-random!important;
-            color: contrast(@bg-random);
-        }
-
-        .bg-lookup
-        {
-            background: @bg-lookup!important;
-            color: contrast(@bg-lookup);
-        }
-
-
-        .bg-edit
-        {
-            background: @bg-edit!important;
-            color: contrast(@bg-edit);
-        }
-
-        .bg-user
-        {
-            background: @bg-user!important;
-            color: contrast(@bg-user);
-        }
-
-
-        .bg-logout
-        {
-            background: @bg-logout!important;
-            color: contrast(@bg-logout)!important;
-        }
-        // Charm Nav tiles
-        .charmNav .tile-content
-        {
-            vertical-align: middle;
-            text-align: center;
-            font-size: 12px!important;
-            line-height: 18px;
-        }
-
-        .charmNav .icon
-        {
-            margin-top: 3px;
-            font-size: 20px!important;
-        }
-        // Lyrics View
-        #SongInfo
-        {
-            position: absolute;
-            z-index: 2001;
-            display: none;
-            margin-left: 0;
-            padding: 0;
-            min-width: 400px;
-            border: 1px solid @border-color;
-            border-collapse: collapse;
-            background-color: @background;
-            font-weight: bold;
-            font-size: 16px;
-            cursor: move;
-        }
-
-            #SongInfo table tr:first-child
-            {
-                border-bottom: 1px solid @border-color;
-            }
-
-                #SongInfo table tr:first-child td
-                {
-                    padding-bottom: 0;
-                }
-
-            #SongInfo table tr:not(:first-child) td:nth-child(even)
-            {
-                text-align: left!important;
-            }
-
-            #SongInfo table tr:not(:first-child) td:nth-child(odd)
-            {
-                text-align: right!important;
-            }
-
-        #Title
-        {
-            color: @text-color;
-            text-shadow: 0px 0px 15px @button-color-glow;
-            font-size:16px;
-        }
-
-        .songInfo td
-        {
-            padding: 0;
-        }
-
-        .songInfo
-        {
-            width: 100%;
-            color: @button-text-color;
-            text-shadow: 0 0 15px @button-color-glow;
-        }
-
-            .songInfo:visited
-            {
-                color: @button-text-color;
-            }
-        // Chord Charts
-        .clickableChord
-        {
-            text-decoration: underline;
-            cursor: pointer;
-        }
-
-        .embeddedChord
-        {
-            background: transparent;
-        }
-
-        .chordViewer
-        {
-            position: absolute;
-            top: 100px;
-            left: 100px;
-            z-index: 3999;
-            display: none;
-            width: 150px;
-            border: 1px solid @border-color;
-            background-color: @chord-background;
-            color: @chord-color!important;
-        }
-        // Lyrics blocks
+            content: '\2714';
+            font-size: 32px;
+        }
+
+.help span[class*="mif-"]
+{
+    color: @help-content-icon-color!important;
+}
+
+.help h3
+{
+    font-weight: bold;
+    font-size: larger;
+}
+
+.buttonColor
+{
+    border-color: @button-border-color!important;
+    background-color: @button-color!important;
+    color: @button-text-color!important;
+    // font-size:1.5rem!important;
+}
+
+.pageHeader
+{
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    border-bottom: 1px solid @border-color;
+    background-color: @background;
+    color: white;
+    vertical-align: middle;
+    line-height: 50px;
+    opacity: 1;
+}
+
+.buttonColor span
+{
+    color: @button-text-color;
+    text-shadow: 0px 0px 10px @button-color-glow;
+    font-size: @button-font-size;
+}
+
+.buttonColor:hover
+{
+    text-shadow: 3px -1px 6px @button-color-glow;
+}
+// Controls
+// support widgets
+// color selector
+.paletteWindow
+{
+    position: absolute;
+    z-index: 2000;
+    display: none;
+    overflow: visible;
+    border: 1px solid @border-color;
+    background-color: @background!important;
+}
+
+.windowTitle
+{
+    background-color: @button-color;
+    color: @button-text-color;
+}
+
+.paletteTable
+{
+    padding: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.windowTitle span
+{
+    font-size: 16px!important;
+}
+
+.paletteTitle
+{
+    vertical-align: middle;
+    line-height: 16px;
+}
+// palette 'paint-chip'
+.paletteEntry
+{
+    margin: 0;
+    padding: 0;
+    width: @palette-entry-size; // 30
+    height: @palette-entry-size;
+    border: 1px solid @background;
+}
+
+    .paletteEntry:hover
+    {
+        border: 1px solid @border-color;
+        border-style: inset;
+    }
+
+// button to select current attribute to be affected by palette entry selection
+.paletteButton
+{
+    width: 100%;
+    height: auto;
+    border: 2px solid transparent;
+}
+
+.selectedPaletteButton
+{
+    width: @palette-button-width;
+    height: auto;
+    border: 2px solid @button-text-color;
+    font-style: italic;
+    font-size: 16px;
+}
+
+.paletteButton:hover
+{
+    border: 1px solid @border-color;
+}
+// Spin input
+.spinBox
+{
+    font-size: 16px;
+    height: @button-size;
+}
+
+.spinMinus
+{
+    margin: 0;
+    padding: 0;
+    width: @button-size;
+    height: @button-size!important;
+    border: 0;
+}
+
+.spinPlus
+{
+    padding: 0;
+    width: @button-size;
+    height: @button-size!important;
+    border: 0;
+}
+
+.spinMinus:hover
+{
+    border: 1px solid @border-color;
+}
+
+.spinPlus:hover
+{
+    border: 1px solid @border-color;
+}
+
+.spinInput
+{
+    margin: 0;
+    margin-top: 3px!important;
+    width: @button-size;
+    height: @button-size !important;
+    border: 1px solid @border-color;
+    -moz-border-radius: 0 !important;
+    -webkit-border-radius: 0 !important;
+    border-radius: 0 !important;
+    background-color: @bg-textbox!important;
+    background-image: 0!important;
+    color: @fg-textbox!important;
+    text-align: center;
+}
+// Transpose Keypad
+#Transposer
+{
+    float: left;
+    width: 100%;
+    background-color: @background;
+    font-family: "Segoe UI Light","Helvetica Neue","Segoe UI","Segoe WP",sans-serif;
+}
+
+    #Transposer ul,
+    #Transposer li
+    {
+        position: relative;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+.keyPad
+{
+    display: inline-block;
+    overflow: hidden;
+    margin-top: 5px;
+    width: 15%!important; //@button-size;
+    height: @button-size;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 16px;
+    line-height: @button-size;
+    cursor: pointer;
+}
+
+    .keyPad.selected
+    {
+        background: @button-text-color linear-gradient(-45deg, rgba(0, 0, 0, 0.15) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, 0.15) 50%, rgba(0, 0, 0, 0.15) 75%, transparent 75%, transparent);
+        background-size: 20px 20px;
+        color: @background;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    .keyPad.black
+    {
+        border: 1px @button-text-color solid;
+        background-color: @black-keypad-background;
+        color: @black-keypad-color;
+    }
+
+    .keyPad.white
+    {
+        border: 1px @button-text-color solid;
+        background-color: @white-keypad-background;
+        color: @white-keypad-color;
+    }
+
+    .keyPad:hover
+    {
+        text-shadow: 0 0 10px @button-color-glow;
+    }
+// slide-switch
+
+.slide-switch.check
+{
+    background-color: @track-color-off!important;
+}
+
+.slide-switch-label
+{
+    top: 1px;
+    left: 1px;
+}
+
+.slide-switch-label-left
+{
+    -webkit-border-top-left-radius: @border-radius;
+    border-top-left-radius: @border-radius;
+}
+
+.slide-switch-label-right
+{
+    -webkit-border-top-right-radius: @border-radius;
+    border-top-right-radius: @border-radius;
+}
+
+.slide-switch-selection
+{
+    -moz-box-sizing: border-box!important;
+    -webkit-box-sizing: border-box!important;
+    box-sizing: border-box!important;
+    border: 1px solid @slide-switch-selected-border!important;
+    border-right: 1px solid darken(@slide-switch-selected-border,50%);
+    border-bottom: 1px solid darken(@slide-switch-selected-border,50%);
+    -moz-border-radius: @border-radius;
+    -webkit-border-radius: @border-radius;
+    border-radius: @border-radius;
+    background-color: @slideswitch-selected-color!important;
+}
+
+    .slide-switch-selection:hover
+    {
+        -moz-box-shadow: 0 0 5px 5px @slideswitch-selected-color-glow!important;
+        -webkit-box-shadow: 0 0 5px 5px @slideswitch-selected-color-glow!important;
+        box-shadow: 0 0 5px 5px @slideswitch-selected-color-glow!important;
+    }
+
+
+.slide-switch-label.switch-selected
+{
+    border: 0!important;
+}
+
+.slide-switch
+{
+    border-color: @border-color!important;
+    background-color: lighten(@background,5%)!important;
+    -moz-box-shadow: 0 -2px 4px -4px @slideswitch-selected-color;
+    -webkit-box-shadow: 0 -2px 4px -4px @slideswitch-selected-color;
+    box-shadow: 0 -2px 4px -4px @slideswitch-selected-color;
+    -moz-border-radius: @border-radius;
+    -webkit-border-radius: @border-radius;
+    border-radius: @border-radius;
+}
+
+.slide-switch-marker
+{
+    top: -2px;
+    margin-left: -3px;
+    width: 99%;
+    height: 99%;
+    color: @slide-switch-marker-color!important;
+    text-shadow: 0 0 3px @button-color-glow;
+    font-weight: normal;
+}
+
+.slide-switch-marker-current
+{
+    z-index: 100!important;
+    color: @slide-switch-marker-current!important;
+    font-weight: bold;
+}
+// list anchors
+.listLink
+{
+    display: block;
+    width: 100%;
+    color: inherit;
+    cursor: pointer;
+
+    &:hover
+    {
+        text-decoration: underline;
+        text-shadow: 0px 5px 15px @button-color-glow!important;
+    }
+}
+
+    .listLink:hover
+    {
+    }
+
+.songLink
+{
+    .listLink;
+}
+
+.artistLink
+{
+    .listLink;
+}
+
+.categoryLink
+{
+    .listLink;
+}
+
+.songLink:hover
+{
+    .listLink;
+}
+
+.genreLink
+{
+    .listLink;
+}
+// Form controls
+input
+{
+    -moz-border-radius: @border-radius;
+    -webkit-border-radius: @border-radius;
+    border-radius: @border-radius;
+}
+
+textarea
+{
+    border: 1px solid @border-color!important;
+    -moz-border-radius: @border-radius;
+    -webkit-border-radius: @border-radius;
+    border-radius: @border-radius;
+    background-color: @bg-textbox;
+    color: @fg-textbox;
+}
+
+input[type=number], input[type=text]
+{
+    background-color: @bg-textbox!important;
+    color: @fg-textbox!important;
+    font-size: 16px;
+    border: 1px solid @border-color!important;
+}
+
+input[type=number]
+{
+    border: 1px solid @border-color!important;
+}
+
+[data-role="datepicker"] .button
+{
+    margin: 0!important;
+    border: 1px solid @border-color;
+    background: @button-color!important;
+    color: @button-text-color!important;
+}
+
+    [data-role="datepicker"] .button span
+    {
+        color: @button-text-color;
+    }
+
+.time.ui-timepicker-input
+{
+    border: 0!important;
+    font-size: 16px!important;
+    border: 1px solid @border-color!important;
+}
+
+input[type=checkbox]:checked + span
+{
+    background-color: @track-color-on!important;
+}
+
+input[type=checkbox]:checked:before
+{
+    background-color: @track-color-off!important;
+    -moz-box-shadow: 0px 0px 10px @checkbox-shadow-color;
+    -webkit-box-shadow: 0px 0px 10px @checkbox-shadow-color;
+    box-shadow: 0px 0px 10px @checkbox-shadow-color;
+}
+
+option
+{
+    font-size: 16px;
+}
+
+select
+{
+    -moz-border-radius: @border-radius;
+    -webkit-border-radius: @border-radius;
+    border-radius: @border-radius;
+    background-color: @background;
+    border: 1px solid @border-color!important;
+    color: @text-color;
+}
+
+.input-control .selected
+{
+    height: 35px!important;
+    font-size: 16px;
+}
+
+select:not[multiple]
+{
+    height: 35px!important;
+    background-color: @bg-textbox;
+    color: @fg-textbox;
+    font-size: 16px;
+}
+
+.check:before
+{
+    background-color: @switch-color!important;
+}
+
+.check[disabled='true']:before
+{
+    background-color: @disabled-color!important;
+}
+// Metro Controls
+.myModernInput.modern .label
+{
+    color: @text-color;
+    font-size: 16px !important;
+}
+
+.myModernInput span
+{
+    color: @text-color;
+    font-size: 16px !important;
+}
+
+.myModernInput.modern .informer
+{
+    color: @text-color!important;
+    font-size: 16px!important;
+}
+
+.myModernInput.modern input
+{
+    background-color: @background!important;
+    color: @text-color!important;
+    font-size: 16px!important;
+    border-bottom: 2px solid @border-color!important;
+}
+
+::-webkit-input-placeholder
+{ /* Chrome/Opera/Safari */
+    color: lighten(@background,10%);
+}
+
+::-moz-placeholder
+{ /* Firefox 19+ */
+    color: lighten(@background,10%);
+}
+
+:-ms-input-placeholder
+{ /* IE 10+ */
+    color: lighten(@background,10%);
+}
+
+:-moz-placeholder
+{ /* Firefox 18- */
+    color: lighten(@background,10%);
+}
+// buttons
+.scrollButton
+{
+    border: 1px solid @background;
+    vertical-align: middle;
+    line-height: 20px;
+}
+
+    .scrollButton:hover
+    {
+        -moz-box-shadow: 0 0 15px 3px @button-shadow-color!important;
+        -webkit-box-shadow: 0 0 15px 3px @button-shadow-color!important;
+        box-shadow: 0 0 15px 3px @button-shadow-color!important;
+    }
+
+
+.square-button
+{
+    margin: 5px!important;
+    width: @button-size!important;
+    height: @button-size!important;
+    border: 1px solid @button-border-color!important;
+    -moz-border-radius: @border-radius;
+    -webkit-border-radius: @border-radius;
+    border-radius: @border-radius;
+}
+
+    .square-button:hover
+    {
+        border: 1px solid @border-color!important;
+        -moz-box-shadow: 0 0 15px 5px @button-shadow-color!important;
+        -webkit-box-shadow: 0 0 15px 5px @button-shadow-color!important;
+        box-shadow: 0 0 15px 5px @button-shadow-color!important;
+    }
+// Generic Lists
+#joinRequests
+{
+    background-color: @background;
+}
+
+#DataList
+{
+    width: 100%!important;
+}
+
+#SongList_filter label
+{
+    margin-top: 5px!important;
+}
+
+.buttons-columnVisibility
+{
+    background: @button-color!important;
+    color: @button-text-color!important;
+}
+
+.dt-button-collection
+{
+    background: @background!important;
+}
+
+.dt-buttons .dt-button
+{
+    margin-top: 12px!important;
+    background: @button-color!important;
+    color: @button-text-color!important;
+    font-size: @button-font-size;
+    padding: 0!important;
+    border: 1px solid @button-border-color!important;
+    -moz-border-radius: @border-radius;
+    -webkit-border-radius: @border-radius;
+    border-radius: @border-radius;
+}
+
+    .dt-buttons .dt-button:hover
+    {
+        border: 1px solid @border-color!important;
+        -moz-box-shadow: 0 0 15px 5px @button-shadow-color!important;
+        -webkit-box-shadow: 0 0 15px 5px @button-shadow-color!important;
+        box-shadow: 0 0 15px 5px @button-shadow-color!important;
+    }
+
+.buttons-print span:before
+{
+    font-family: metro;
+    content: "\e605";
+}
+
+.buttons-csv span:before
+{
+    font-family: metro;
+    content: "\e63d";
+}
+
+.buttons-colvis span:before
+{
+    font-family: metro;
+    content: "\e64d";
+}
+
+table#DataList > tbody > tr > td
+{
+}
+
+#DataList tr:nth-child(odd) td A
+{
+    color: @list-odd-color!important;
+}
+
+#DataList tr:nth-child(even) td A
+{
+    color: @list-even-color!important;
+}
+
+.messageDelete span
+{
+    color: @danger!important;
+}
+// Song Lists
+.altListRow
+{
+    background-color: lighten(@list-odd-backcolor,10%)!important;
+    color: @list-odd-color!important;
+}
+
+.listRow
+{
+    background-color: @list-even-backcolor!important;
+    color: @list-even-color!important;
+}
+
+.altListRow td a
+{
+    color: @list-odd-color!important;
+}
+
+.listRow td tr:nth-child(even) a
+{
+    color: @list-even-color!important;
+}
+
+.SongList tr:nth-child(odd) a
+{
+    color: @list-odd-color;
+}
+
+.SongList tr:nth-child(even) a
+{
+    color: @list-even-color;
+}
+
+.SongList .odd a
+{
+    color: @list-odd-color;
+    text-shadow: 0 0 18px @list-odd-color-shadow!important;
+}
+
+.SongList .odd span
+{
+    color: @list-odd-color!important;
+}
+
+.SongList .even
+{
+    border: 0;
+    background-color: @list-even-backcolor!important;
+    color: @list-even-color;
+}
+
+    .SongList .even a
+    {
+        color: @list-even-color;
+        text-shadow: 0 0 12px @list-even-color-shadow!important;
+    }
+
+.SongList .sorting_asc
+{
+    background-color: @list-header-backcolor;
+    text-shadow: 0px 10px 15px @list-header-sort-glow;
+}
+
+    .SongList .sorting_asc:nth-of-type(1)
+    {
+        background-color: @background;
+    }
+
+.SongList .sorting_desc
+{
+    background-color: @list-header-backcolor;
+    text-shadow: 0px -10px 15px @list-header-sort-glow;
+}
+
+.SongList .sorting
+{
+    background-color: @list-header-backcolor!important;
+}
+
+.SongList .sorting_1
+{
+    background-color: @background;
+}
+
+.SongList
+{
+}
+
+    .SongList th
+    {
+        border-top: 1px solid @border-color!important;
+        border-bottom: 1px solid @border-color!important;
+        background-color: @list-header-backcolor!important;
+        -moz-box-shadow: inset 0 20px 20px -20px @list-header-sort-glow, inset 0 -20px 20px -20px @list-header-sort-glow;
+        -webkit-box-shadow: inset 0 20px 20px -20px @list-header-sort-glow, inset 0 -20px 20px -20px @list-header-sort-glow;
+        box-shadow: inset 0 20px 20px -20px @list-header-sort-glow, inset 0 -20px 20px -20px @list-header-sort-glow;
+        color: @list-header-color!important;
+        font-size: 100%;
+    }
+
+    .SongList td
+    {
+        border: 0;
+    }
+
+    .SongList .odd
+    {
+        border: 0;
+        background-color: @list-odd-backcolor !important;
+    }
+
+    .SongList tr:nth-child(odd):hover td
+    {
+        -moz-box-shadow: inset 0 10px 10px -10px @list-odd-color-shadow, inset 0 -10px 20px -10px @list-odd-color-shadow;
+        -webkit-box-shadow: inset 0 10px 10px -10px @list-odd-color-shadow, inset 0 -10px 20px -10px @list-odd-color-shadow;
+        box-shadow: inset 0 10px 10px -10px @list-odd-color-shadow, inset 0 -10px 20px -10px @list-odd-color-shadow;
+        text-shadow: 0 0 18px @list-odd-color-shadow!important;
+    }
+
+    .SongList tr:nth-child(even):hover td
+    {
+        -moz-box-shadow: inset 0 10px 10px -10px @list-even-color-shadow, inset 0 -10px 20px -10px @list-even-color-shadow;
+        -webkit-box-shadow: inset 0 10px 10px -10px @list-even-color-shadow, inset 0 -10px 20px -10px @list-even-color-shadow;
+        box-shadow: inset 0 10px 10px -10px @list-even-color-shadow, inset 0 -10px 20px -10px @list-even-color-shadow;
+        text-shadow: 0 0 18px @list-even-color-shadow!important;
+    }
+
+#SongList
+{
+    border-bottom: 1px solid @list-header-color;
+}
+
+// Datatables
+.dataTables_filter input
+{
+    background-color: @bg-textbox!important;
+    color: @fg-textbox;
+}
+
+.dataTables_info
+{
+    color: @button-text-color;
+}
+// toolbar justification
+.toRight
+{
+    float: right!important;
+}
+
+.toLeft
+{
+    float: left!important;
+}
+// Paging buttons
+a.paginate_button
+{
+    margin-left: 5px!important;
+    padding: 10px!important;
+    -moz-border-radius: 0!important;
+    -webkit-border-radius: 0!important;
+    border-radius: 0!important;
+    background: 0!important;
+    background-color: @button-color!important;
+    color: @button-text-color!important;
+    font-weight: bold!important;
+    font-size: @button-font-size;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button
+{
+    color: @button-text-color!important;
+    border: 1px solid @border-color!important;
+}
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button:hover
+    {
+        color: @button-text-color!important;
+    }
+
+a.paginate_button .disabled
+{
+    background-color: @button-color!important;
+}
+
+    a.paginate_button .disabled:hover
+    {
+        background-color: transparent!important;
+    }
+
+a.paginate_button:hover
+{
+    background-color: lighten(@button-color,25%)!important;
+    color: @button-text-color;
+    text-shadow: 0 0 15px @button-color-glow!important;
+}
+
+a.paginate_button .current:hover
+{
+    background-color: @button-color!important;
+    color: @button-text-color!important;
+}
+
+a.paginate_button.current
+{
+    background-color: @button-text-color!important;
+    color: @button-color!important;
+}
+
+.dataTables_paginate.paging_simple_numbers
+{
+    margin-bottom: 5px;
+    width: 100%!important;
+}
+// List Tiles
+#SongTiles a
+{
+    color: inherit;
+}
+
+#SongTiles span
+{
+    color: inherit;
+}
+
+.tileTitle
+{
+    color: @background;
+}
+
+    .tileTitle:hover
+    {
+        text-shadow: 0 5px 15px @button-color-glow;
+    }
+
+@media screen and (max-width: 320px)
+{
+    .myTile
+    {
+        width: 140px;
+        height: 80px;
+        border: 1px solid @border-color;
+        -moz-border-radius: @border-radius;
+        -webkit-border-radius: @border-radius;
+        border-radius: @border-radius;
+        font-size: 14px!important;
+    }
+}
+
+.myTile
+{
+    border: 1px solid @border-color;
+    -moz-border-radius: @border-radius;
+    -webkit-border-radius: @border-radius;
+    border-radius: @border-radius;
+    font-size: 16px;
+}
+
+    .myTile span
+    {
+        margin-top: 5px;
+    }
+
+    .myTile a
+    {
+        color: inherit!important;
+    }
+
+    .myTile.disabled
+    {
+        background-color: #303030;
+        color: #404040;
+    }
+
+.tile-content
+{
+    padding: 3px;
+    text-align: center;
+}
+
+.t-a
+{
+    background-color: @ta;
+    color: contrast(@ta)!important;
+}
+
+.t-b
+{
+    background-color: @tb;
+    color: contrast(@tb)!important;
+}
+
+.t-c
+{
+    background-color: @tc!important;
+    color: contrast(@tc);
+}
+
+.t-d
+{
+    background-color: @td!important;
+    color: contrast(@td)!important;
+}
+
+.t-e
+{
+    background-color: @te!important;
+    color: contrast(@te)!important;
+}
+
+.t-f
+{
+    background-color: @tf!important;
+    color: contrast(@tf)!important;
+}
+
+
+.t-g
+{
+    background-color: @tg!important;
+    color: contrast(@tg)!important;
+}
+
+.t-h
+{
+    background-color: @th!important;
+    color: contrast(@th)!important;
+}
+
+
+.t-i
+{
+    background-color: @ti!important;
+    color: contrast(@ti)!important;
+}
+
+.t-j
+{
+    background-color: @tj!important;
+    color: contrast(@tj)!important;
+}
+
+
+.t-k
+{
+    background-color: @tk!important;
+    color: contrast(@tk)!important;
+}
+
+.t-l
+{
+    background-color: @tl!important;
+    color: contrast(@tl)!important;
+}
+
+.t-m
+{
+    background-color: @tm!important;
+    color: contrast(@tm)!important;
+}
+
+
+.t-n
+{
+    background-color: @tn!important;
+    color: contrast(@tn)!important;
+}
+
+
+.t-o
+{
+    background-color: @to!important;
+    color: contrast(@to)!important;
+}
+
+.t-p
+{
+    background-color: @tp!important;
+    color: contrast(@tp)!important;
+}
+
+.t-q
+{
+    background-color: @tq!important;
+    color: contrast(@tq)!important;
+}
+
+.t-r
+{
+    background-color: @tr!important;
+    color: contrast(@tr)!important;
+}
+
+.t-s
+{
+    background-color: @ts!important;
+    color: contrast(@ts)!important;
+}
+
+.t-t
+{
+    background-color: @tt!important;
+    color: contrast(@tt)!important;
+}
+
+.t-u
+{
+    background-color: @tu!important;
+    color: contrast(@tu)!important;
+}
+
+.t-v
+{
+    background-color: @tv!important;
+    color: contrast(@tv)!important;
+}
+
+.t-w
+{
+    background-color: @tw!important;
+    color: contrast(@tw)!important;
+}
+
+.t-x
+{
+    background-color: @tx!important;
+    color: contrast(@tx)!important;
+}
+
+.t-y
+{
+    background-color: @ty!important;
+    color: contrast(@ty)!important;
+}
+
+.t-z
+{
+    background-color: @tz!important;
+    color: contrast(@tz)!important;
+}
+
+.t-nn
+{
+    background-color: @tnn!important;
+    color: contrast(@tnn)!important;
+}
+
+    .t-nn.tileTitle
+    {
+        color: @background!important;
+    }
+
+    .t-nn .artistTitle
+    {
+        color: @background!important;
+    }
+// Nav Tiles
+.bg-song
+{
+    background-color: @bg-song!important;
+    color: contrast(@bg-song);
+}
+
+.bg-resynch
+{
+    background: @bg-resynch!important;
+    color: contrast(@bg-resynch);
+}
+
+.bg-info
+{
+    background: @bg-info!important;
+    color: contrast(@background);
+}
+
+.bg-settings
+{
+    background: @bg-settings!important;
+    color: contrast(@bg-settings);
+}
+
+.bg-random
+{
+    background: @bg-random!important;
+    color: contrast(@bg-random);
+}
+
+.bg-lookup
+{
+    background: @bg-lookup!important;
+    color: contrast(@bg-lookup);
+}
+
+
+.bg-edit
+{
+    background: @bg-edit!important;
+    color: contrast(@bg-edit);
+}
+
+.bg-user
+{
+    background: @bg-user!important;
+    color: contrast(@bg-user);
+}
+
+
+.bg-logout
+{
+    background: @bg-logout!important;
+    color: contrast(@bg-logout)!important;
+}
+// Charm Nav tiles
+.charmNav .tile-content
+{
+    vertical-align: middle;
+    text-align: center;
+    font-size: 12px!important;
+    line-height: 18px;
+}
+
+.charmNav .icon
+{
+    margin-top: 3px;
+    font-size: 20px!important;
+}
+// Lyrics View
+#SongInfo
+{
+    position: absolute;
+    z-index: 2001;
+    display: none;
+    margin-left: 0;
+    padding: 0;
+    min-width: @song-info-width; //400px;
+    border: 1px solid @border-color;
+    border-collapse: collapse;
+    background-color: @background;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: move;
+    left: @lyric-slider-width;
+    top: 55px;
+}
+
+    #SongInfo table tr:first-child
+    {
+        border-bottom: 1px solid @border-color;
+    }
+
+        #SongInfo table tr:first-child td
+        {
+            padding-bottom: 0;
+        }
+
+    #SongInfo table tr:not(:first-child) td:nth-child(even)
+    {
+        text-align: left!important;
+    }
+
+    #SongInfo table tr:not(:first-child) td:nth-child(odd)
+    {
+        text-align: right!important;
+    }
+
+#Title
+{
+    color: @text-color;
+    text-shadow: 0px 0px 15px @button-color-glow;
+    font-size: 16px;
+}
+
+.songInfo td
+{
+    padding: 0;
+}
+
+.songInfo
+{
+    width: 100%;
+    color: @button-text-color;
+    text-shadow: 0 0 15px @button-color-glow;
+}
+
+    .songInfo:visited
+    {
+        color: @button-text-color;
+    }
+// Chord Charts
+.clickableChord
+{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.embeddedChord
+{
+    background: transparent;
+}
+
+.chordViewer
+{
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    z-index: 3999;
+    display: none;
+    width: @chord-viewer-width; //150px;
+    border: 1px solid @border-color;
+    background-color: @chord-background;
+    color: @chord-color!important;
+}
+// Lyrics blocks
 .lyricsDiv
 {
     position: static;
@@ -1462,973 +1538,1076 @@ hr
     table-layout: fixed;
     -ms-word-break: break-word;
     word-break: break-word; //-ms-word-break: break-word;
-    }
-    .lyricsBlock
-    {
-        font-size: inherit;
-        font-family: inherit;
-    }
+}
 
-    .lyricsDiv details summary:focus
-    {
-        outline: none;
-    }
+.lyricsBlock
+{
+    font-size: inherit;
+    font-family: inherit;
+}
 
-    .lyricsDiv summary::-webkit-details-marker
-    {
-        font-size: 0%;
-    }
-    // Song Notes
-    #notesPanel
-    {
-        position: absolute;
-        z-index: 2001;
-        display: none;
-        padding: 0;
-        width: 400px!important;
-        border: 1px solid @border-color;
-        background-color: @bg-textbox;
-        color: @fg-textbox;
-        text-align: center;
-    }
+.lyricsDiv details summary:focus
+{
+    outline: none;
+}
 
-        #notesPanel div
-        {
-            background-color: @button-color;
-            color: @button-text-color;
-        }
+.lyricsDiv summary::-webkit-details-marker
+{
+    font-size: 0%;
+}
+// Song Notes
+#notesPanel
+{
+    position: absolute;
+    z-index: 2001;
+    display: none;
+    padding: 0;
+    width: @notes-panel-width; //400px!important;
+    border: 1px solid @border-color;
+    background-color: @bg-textbox;
+    color: @fg-textbox;
+    text-align: center;
+    left: 0;
+    top: 0;
+}
 
-        #notesPanel textarea
-        {
-            background-color: @bg-textbox;
-            color: @fg-textbox;
-        }
-
-    .closeNotesPanel
+    #notesPanel div
     {
-        @background-color: transparent;
-        float: right;
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        margin-top: 1px;
-        margin-right: 5px;
-        width: 18px!important;
-        height: 18px!important;
-        border: 1px solid @border-color;
-        color: @button-text-color!important;
-        vertical-align: middle;
-        text-align: center;
-        font-size: 12px;
-        font-family: 'Arial';
-        line-height: 12px!important;
-    }
-
-        .closeNotesPanel:before
-        {
-            content: 'x';
-        }
-
-        .closeNotesPanel:hover
-        {
-            border: 1px solid lighten(@button-text-color,10%);
-            background-color: @cancel-color!important;
-            color: @background!important;
-        }
-    // adjustmentr controls
-    #FontSize
-    {
-        color: @background;
-    }
-    // sliders
-    .slider.large .marker
-    {
-        padding-top: 3px;
-        text-align: center;
-    }
-
-    .slider .slider-hint
-    {
-        margin-bottom: -10px;
-        background-color: @background;
+        background-color: @button-color;
         color: @button-text-color;
     }
 
-    #sTranspose
+    #notesPanel textarea
     {
-        margin-top: 10px;
-        margin-left: 1px;
-        width: 36px;
-        height: 240px;
-        border: 1px solid @scrollbar-border-color;
+        background-color: @bg-textbox;
+        color: @fg-textbox;
+    }
+
+.closeNotesPanel
+{
+    @background-color: transparent;
+    float: right;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-top: 1px;
+    margin-right: 5px;
+    width: @tiny-button-size; //18px!important;
+    height: @tiny-button-size!important; //18px!important;
+    border: 1px solid @border-color;
+    color: @button-text-color!important;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 12px;
+    font-family: 'Arial';
+    line-height: 12px!important;
+}
+
+    .closeNotesPanel:before
+    {
+        content: 'x';
+    }
+
+    .closeNotesPanel:hover
+    {
+        border: 1px solid lighten(@button-text-color,10%);
+        background-color: @cancel-color!important;
+        color: @background!important;
+    }
+// adjustmentr controls
+#FontSize
+{
+    color: @background;
+}
+// sliders
+.slider.large .marker
+{
+    padding-top: 3px;
+    text-align: center;
+}
+
+.slider .slider-hint
+{
+    margin-bottom: -10px;
+    background-color: @background;
+    color: @button-text-color;
+}
+
+#sTranspose
+{
+    margin-top: 10px;
+    margin-left: 1px;
+    width: @lyric-slider-width; //36px;
+    height: @lyric-slider-height; //240px;
+    border: 1px solid @scrollbar-border-color;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    background-color: @track-color-on!important;
+    text-align: center;
+    .vertTrack(@style);
+}
+
+    #sTranspose.ui-widget-content
+    {
+        background: @button-color;
+    }
+
+    #sTranspose.ui-slider-vertical .ui-slider-range
+    {
         -moz-border-radius: 0;
         -webkit-border-radius: 0;
         border-radius: 0;
-        background-color: @track-color-on!important;
-        text-align: center;
-        .vertTrack(@style);
     }
 
-        #sTranspose.ui-widget-content
-        {
-            background: @button-color;
-        }
-
-        #sTranspose.ui-slider-vertical .ui-slider-range
-        {
-            -moz-border-radius: 0;
-            -webkit-border-radius: 0;
-            border-radius: 0;
-        }
-
-        #sTranspose.ui-slider-vertical .ui-widget-header
-        {
-            background: fade(@track-color-off,50%);
-        }
-
-        #sTranspose .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default
-        {
-            background: transparent;
-        }
-
-    #RightSliders
+    #sTranspose.ui-slider-vertical .ui-widget-header
     {
-        position: fixed;
-        float: left;
-        margin: 0!important;
-        padding: 0;
-        width: 34px;
+        background: fade(@track-color-off,50%);
     }
 
-    #sChangeFontSize
-    {
-        margin-top: 25px;
-        margin-left: 1px;
-        width: 36px;
-        height: 240px;
-        border: 1px solid @scrollbar-border-color;
-        -moz-border-radius: 0;
-        -webkit-border-radius: 0;
-        border-radius: 0;
-        background-color: @track-color-on!important;
-        text-align: center;
-        .vertTrack(@style);
-    }
-
-        #sChangeFontSize.ui-widget-content
-        {
-            background: @button-color;
-        }
-
-        #sChangeFontSize.ui-slider-vertical .ui-slider-range
-        {
-            -moz-border-radius: 0;
-            -webkit-border-radius: 0;
-            border-radius: 0;
-        }
-
-        #sChangeFontSize.ui-slider-vertical .ui-widget-header
-        {
-            background: fade(@track-color-off,50%);
-        }
-    // #sChangeFontSize
-    .largeSlider.ui-slider-vertical .ui-slider-handle
-    {
-        margin-left: 5px;
-        width: 34px;
-        border: 0!important;
-        color:lighten(@text-color,50%);
-        -moz-border-radius: 0!important;
-        -webkit-border-radius: 0!important;
-        border-radius: 0!important;
-        background-color: @thumb-color!important;
-        font-size: 16px;
-        .vThumbStyle(@style);
-    }
-
-    #sChangeFontSize .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default
+    #sTranspose .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default
     {
         background: transparent;
     }
-    // Settings panel
-    .settingsTable
+
+#RightSliders
+{
+    position: fixed;
+    float: left;
+    margin: 0!important;
+    padding: 0;
+    width: @lyric-slider-width; //34px;
+}
+
+#sChangeFontSize
+{
+    margin-top: 25px;
+    margin-left: 1px;
+    width: @lyric-slider-width;
+    height: @lyric-slider-height;
+    border: 1px solid @scrollbar-border-color;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    background-color: @track-color-on!important;
+    text-align: center;
+    .vertTrack(@style);
+}
+
+    #sChangeFontSize.ui-widget-content
     {
-        margin-top: 5px;
-        padding: 4px;
-        width: 100%;
-        border: 1px solid @border-color;
-        border-spacing: 0;
-        border-collapse: collapse;
+        background: @button-color;
     }
 
-        .settingsTable TD
-        {
-            padding: 5px;
-        }
-    // Calendar
-    /* CALENDAR */
-    .eventTitleTD
+    #sChangeFontSize.ui-slider-vertical .ui-slider-range
     {
-        vertical-align: middle;
-        font-size: 16px!important;
-        line-height: 16px;
-        border:0!important;
+        -moz-border-radius: 0;
+        -webkit-border-radius: 0;
+        border-radius: 0;
     }
 
-    .eventTable td
+    #sChangeFontSize.ui-slider-vertical .ui-widget-header
     {
-        border-bottom: 1px solid @border-color!important;
+        background: fade(@track-color-off,50%);
     }
+// #sChangeFontSize
+.largeSlider.ui-slider-vertical .ui-slider-handle
+{
+    margin-left: 5px;
+    width: @lyric-slider-width;
+    border: 0!important;
+    color: lighten(@text-color,50%);
+    -moz-border-radius: 0!important;
+    -webkit-border-radius: 0!important;
+    border-radius: 0!important;
+    background-color: @thumb-color!important;
+    font-size: 16px;
+    .vThumbStyle(@style);
+}
 
-    #calendarTitle
+#sChangeFontSize .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default
+{
+    background: transparent;
+}
+// Settings panel
+.settingsTable
+{
+    margin-top: 5px;
+    padding: 4px;
+    width: 100%;
+    border: 1px solid @border-color;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+    .settingsTable TD
     {
-        color: @text-color;
-        text-shadow: 0 0 15px @button-color-glow;
+        padding: 5px;
     }
+// Calendar
+/* CALENDAR */
+.eventTitleTD
+{
+    vertical-align: middle;
+    font-size: 16px!important;
+    line-height: 16px;
+    border: 0!important;
+}
 
-    .gmEvent
-    {
-        display: block;
-        overflow: hidden;
-        margin: 0;
-        padding: 0;
-        border: 0;
-        color: @calendar-text-color!important;
-        -ms-text-overflow: ellipsis;
-        -o-text-overflow: ellipsis;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        font-size: smaller;
-    }
-
-        .gmEvent:visited
-        {
-            color: @calendar-text-color!important;
-        }
-
-    .eventDeleteTD
-    {
-        width: 18px;
-    }
-
-    .eventDeleteButton
-    {
-        float: right;
-        width: 18px;
-        height: 18px;
-        border: 1px solid @border-color;
-        color: @danger;
-        vertical-align: middle;
-        text-align: center;
-        font-size: 16px;
-        line-height: 16px;
-    }
-
-        .eventDeleteButton:visited
-        {
-            color: @danger;
-        }
-
-    .gmEventDisabled
-    {
-        margin: 0;
-        padding: 0;
-        border: 0;
-        background-color: transparent;
-        font-size: smaller;
-    }
-
-        .gmEventDisabled:hover
-        {
-        }
-
-
-    button
-    {
-        margin-right: 2px;
-        height: @button-size!important;
-        -moz-border-radius: 0!important;
-        -webkit-border-radius: 0!important;
-        border-radius: 0!important;
-        background-image: none;
-        background-repeat: no-repeat;
-        -moz-box-shadow: 0!important;
-        -webkit-box-shadow: 0!important;
-        box-shadow: 0!important;
-    }
-
-        button:hover
-        {
-            border: 1px solid darken(@button-text-color,50%)!important;
-        }
-
-    .fc-view-container
-    {
-        margin-top: 10px;
-    }
-
-    .fc-toolbar
-    {
-        margin-top: 65px;
-        margin-bottom: 0;
-        height: 30px!important;
-        line-height: 16px;
-    }
-
-    .fc-center h2
-    {
-        margin-top: -13px;
-        margin-bottom: 5px!important;
-        padding-top: 5px;
-        color: @text-color;
-        text-shadow: 0 0 15px @button-color-glow;
-    }
-
-    #calendar a:hover
-    {
-        background-color: @event-hover-color !important;
-        color: @event-hover-text-color!important;
-    }
-
-    #calendar table
-    {
-        border-collapse: collapse;
-    }
-
-        #calendar table td
-        {
-            border: 1px solid @border-color;
-        }
-
-    #calendar th
-    {
-    }
-
-    .fc-body td.fc-today
-    {
-        background-color: @today-background!important;
-        color: contrast(@today-background)!important;
-    }
-
-    #calendar .fc-header
-    {
-        border: 1px solid @border-color;
-    }
-
-    #calendar .fc-day-number
-    {
-        border-right: 1px solid @border-color;
-        border-left: 1px solid @border-color;
-        background: linear-gradient(to bottom, @calendar-day-g1 0%, @calendar-day-g2 100%)!important;
-        color: @calendar-day-color;
-    }
-
-    td .fc-day-number.fc-today
-    {
-    }
-
-    .calendar .today a
-    {
-        background-color: @button-text-color!important;
-        color: @button-color!important;
-    }
-
-    .calendar-grid
-    {
-        border: 1px solid @border-color;
-    }
-
-    .calendar-header a
-    {
-        color: @button-text-color!important;
-    }
-
-        .calendar-header a:hover
-        {
-            color: @button-color!important;
-        }
-
-    #calendar .fc-event-container
-    {
-        border-right: 1px solid @border-color;
-        border-left: 1px solid @border-color;
-    }
-
-    #calendar TD
-    {
-    }
-
-    #calendar .fc-widget-content
-    {
-        border-top: 1px solid @border-color;
-    }
-
-    .fc-day-number.fc-other-month
-    {
-        opacity: .81;
-    }
-
-    .fc-widget-header
-    {
-        border-bottom: 1px solid @background!important;
-        background-color: @calendar-header-background;
-        color: @calendar-header-color;
-    }
-
-    .fc-event-container
-    {
-    }
-
-    .week-days
+    .eventTitleTD:hover
     {
         background-color: @button-color!important;
         color: @button-text-color;
     }
 
-    .day-of-week
+.eventTable td
+{
+    border-bottom: 1px solid @border-color!important;
+}
+
+#calendarTitle
+{
+    color: @text-color;
+    text-shadow: 0 0 15px @button-color-glow;
+}
+
+.gmEvent
+{
+    //display: block;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: smaller;
+    color: @text-color!important;
+    background-color: transparent!important;
+}
+
+    .gmEvent:hover
     {
-        margin: 0!important;
+        background-color: transparent!important;
     }
 
-    .calendar-row
+    .gmEvent:visited
     {
-        margin: 0!important;
+        color: @text-color!important;
     }
 
-    .empty
+.eventDeleteTD
+{
+    width: @tiny-button-size;
+}
+
+.gmEventDisabled
+{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+    font-size: smaller;
+}
+
+    .gmEventDisabled:hover
     {
-        margin: 0!important;
     }
 
-    .day
+
+button
+{
+    margin-right: 2px;
+    height: @button-size!important;
+    -moz-border-radius: 0!important;
+    -webkit-border-radius: 0!important;
+    border-radius: 0!important;
+    background-image: none;
+    background-repeat: no-repeat;
+    -moz-box-shadow: 0!important;
+    -webkit-box-shadow: 0!important;
+    box-shadow: 0!important;
+}
+
+    button:hover
     {
-        margin: 0!important;
-        border: 1px solid @border-color!important;
+        border: 1px solid darken(@button-text-color,50%)!important;
     }
 
-        .day a
-        {
-            color: @button-text-color;
-        }
+.fc-view-container
+{
+    margin-top: 10px;
+}
 
-    .fc-more
+.fc-toolbar
+{
+    margin-top: 65px;
+    margin-bottom: 0;
+    height: 30px!important;
+    line-height: 16px;
+}
+
+.fc-center h2
+{
+    margin-top: -13px;
+    margin-bottom: 5px!important;
+    padding-top: 5px;
+    color: @text-color;
+    text-shadow: 0 0 15px @button-color-glow;
+}
+
+#calendar a:hover
+{
+    background-color: @event-hover-color !important;
+    color: @event-hover-text-color!important;
+}
+
+#calendar table
+{
+    border-collapse: collapse;
+}
+
+    #calendar table td
     {
-        color: white!important;
+        border: 1px solid @border-color;
     }
 
-        .fc-more:hover
-        {
-            background-color: transparent!important;
-        }
+#calendar th
+{
+}
 
-    .fc .fc-button-group > *
+.fc-body td.fc-today
+{
+    background-color: @today-background!important;
+    color: contrast(@today-background)!important;
+}
+
+#calendar .fc-header
+{
+    border: 1px solid @border-color;
+}
+
+#calendar .fc-day-number
+{
+    border-right: 1px solid @border-color;
+    border-left: 1px solid @border-color;
+    background: linear-gradient(to bottom, @calendar-day-g1 0%, @calendar-day-g2 100%)!important;
+    color: @calendar-day-color;
+}
+
+td .fc-day-number.fc-today
+{
+}
+
+.calendar .today a
+{
+    background-color: @button-text-color!important;
+    color: @button-color!important;
+}
+
+.calendar-grid
+{
+    border: 1px solid @border-color;
+}
+
+.calendar-header a
+{
+    color: @button-text-color!important;
+}
+
+    .calendar-header a:hover
     {
-        background-color: @button-color;
+        color: @button-color!important;
+    }
+
+#calendar .fc-event-container
+{
+    border-right: 1px solid @border-color;
+    border-left: 1px solid @border-color;
+}
+
+#calendar TD
+{
+}
+
+#calendar .fc-widget-content
+{
+    border-top: 1px solid @border-color;
+}
+
+.fc-day-number.fc-other-month
+{
+    opacity: .81;
+}
+
+.fc-widget-header
+{
+    border-bottom: 1px solid @background!important;
+    background-color: @calendar-header-background;
+    color: @calendar-header-color;
+}
+
+.fc-event-container
+{
+}
+
+.week-days
+{
+    background-color: @button-color!important;
+    color: @button-text-color;
+}
+
+.day-of-week
+{
+    margin: 0!important;
+}
+
+.calendar-row
+{
+    margin: 0!important;
+}
+
+.empty
+{
+    margin: 0!important;
+}
+
+.day
+{
+    margin: 0!important;
+    border: 1px solid @border-color!important;
+}
+
+    .day a
+    {
         color: @button-text-color;
+    }
+
+.fc-more
+{
+    color: white!important;
+}
+
+    .fc-more:hover
+    {
+        background-color: transparent!important;
+    }
+
+.fc .fc-button-group > *
+{
+    background-color: @button-color;
+    color: @button-text-color;
+    font-size: 16px;
+}
+
+    .fc .fc-button-group > *:hover
+    {
+        text-shadow: 0 0 15px @button-color-glow;
+    }
+
+.fc-button
+{
+    margin-bottom: 6px!important;
+    margin-right: 15px!important;
+}
+
+    .fc-button:hover
+    {
+        -moz-box-shadow: 0 0 15px 3px @button-shadow-color!important;
+        -webkit-box-shadow: 0 0 15px 3px @button-shadow-color!important;
+        box-shadow: 0 0 15px 3px @button-shadow-color!important;
+    }
+
+// Setlist Editor
+.jstree-anchor
+{
+    color: @button-text-color!important;
+}
+
+.jstree-icon.jstree-ocl
+{
+    color: @text-color!important;
+}
+
+.jstree-icon.jstree-themeicon.jstree-themeicon-custom
+{
+    color: @text-color!important;
+}
+
+.jstree-anchor:hover
+{
+    background-color: @tree-hover-background;
+    color: @tree-hover-color;
+}
+
+a[id*="set_"]
+{
+    color: @set-color!important;
+    font-style: normal;
+}
+
+    a[id*="set_"]:hover
+    {
+        background-color: @tree-hover-background!important;
+        color: @tree-hover-color!important;
+    }
+
+a[id*="subset_"]
+{
+    color: @subset-color!important;
+    font-style: italic;
+}
+
+.SetList .root
+{
+    color: @setlist-root-color!important;
+    font-weight: bold;
+    font-style: italic;
+}
+
+[id*="song_"]
+{
+    color: @subset-song-color!important;
+    font-weight: normal;
+}
+
+    [id*="song_"]:hover
+    {
+        background-color: @tree-hover-background!important;
+        color: @tree-hover-color!important;
+        font-weight: normal;
+    }
+
+.jstree-clicked
+{
+    color: @background!important;
+}
+
+.treeArtist
+{
+    color: @tree-song-artist-color;
+    font-style: italic;
+}
+
+.jstree-anchor:hover i
+{
+    color: @tree-hover-color;
+}
+
+.jstree-contextmenu > li > a
+{
+    color: @background!important;
+    font-size: smaller;
+}
+
+.toggleColumn:hover
+{
+    text-decoration: underline;
+}
+
+.SetList
+{
+    float: left;
+    overflow: visible;
+    margin-left: 10px;
+    width: 49%;
+    font-size: 18px;
+}
+
+@media screen and (max-width: 640px)
+{
+    div.dt-buttons
+    {
+        //text-align: left!important;
+    }
+}
+
+.prevSet:before
+{
+    font-family: metro;
+    content: "\ea40";
+}
+
+.nextSet
+{
+    margin-right: 30px!important;
+}
+
+    .nextSet:before
+    {
+        font-family: metro;
+        content: "\ea3c";
+    }
+
+.prevSubset:before
+{
+    font-family: metro;
+    content: "\e648";
+}
+
+.nextSubset:before
+{
+    font-family: metro;
+    content: "\e649";
+}
+
+// Charms
+[data-role="charm"][data-position*="left"]
+{
+    border-right: 1px @border-color solid !important;
+}
+
+[data-role="charm"][data-position*="right"]
+{
+    border-left: 1px @border-color solid !important;
+}
+
+[data-role="charm"]
+{
+    background-color: @background;
+    -moz-box-shadow: 12px 0 15px -4px @border-color-glow, -12px 0 8px -4px fade(@border-color-glow,50%);
+    -webkit-box-shadow: 12px 0 15px -4px @border-color-glow, -12px 0 8px -4px fade(@border-color-glow,50%);
+    box-shadow: 12px 0 15px -4px @border-color-glow, -12px 0 8px -4px fade(@border-color-glow,50%);
+    color: @button-color;
+    font-size: 16px!important;
+    min-width: @charm-width;
+    overflow: hidden!important;
+}
+
+.charm-closer
+{
+    display: none;
+}
+// charm contents
+.charm input[type=number]
+{
+    border: 1px solid @border-color!important;
+    background-color: @background;
+    color: @button-text-color;
+    border: 1px solid @border-color!important;
+}
+
+.charm textarea
+{
+    font-size: 16px;
+}
+
+.charm input
+{
+    margin-bottom: 3px;
+    font-size: 16px;
+}
+
+    .charm input[type=text]
+    {
+        background-color: @background;
+        color: @button-text-color;
+    }
+
+.charmContent
+{
+    font-size: 16px;
+}
+
+    .charmContent input[type=text]
+    {
+        border: 0!important;
+        background-color: @background;
+        color: @button-text-color;
+        font-size: 16px !important;
+    }
+
+    .charmContent select
+    {
         font-size: 16px;
     }
 
-        .fc .fc-button-group > *:hover
-        {
-            text-shadow: 0 0 15px @button-color-glow;
-        }
+.charmTitle
+{
+    color: @charm-text-color!important;
+    text-shadow: 0 0 15px @button-color-glow!important;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.help label:nth-child(1)
+{
+    .charmTitle;
+}
+
+// charm text and input
+.charmLabel
+{
+    color: @charm-text-color;
+    font-size: 16px;
+}
+
+.charmLabelBold
+{
+    color: @charm-text-color;
+    font-weight: bold;
+    font-size: 20px;
+}
+// Iframe for charm
+.panelContainer
+{
+    width: 100%;
+    height: 100%;
+    border: 0;
+    overflow: auto!important;
+}
+// Accordions
+.accordion
+{
+    display: block;
+    font-size: 16px!important;
+}
+
+    .accordion > .frame > .content
+    {
+        background-color: @background!important;
+    }
+
+    .accordion > .frame > .heading
+    {
+        border: 0!important;
+        background-color: @background!important;
+    }
+
+    .accordion > .content
+    {
+        background-color: @background;
+    }
+
+.frame .heading
+{
+    color: @charm-text-color!important;
+    font-size: 16px!important;
+}
+
+.frame .active
+{
+    z-index: 1000;
+}
+// iRequest
+
+.dataTable .sorting_asc
+{
+    background-color: @button-color;
+}
+
+#requestList
+{
+    margin-top: 5px;
+}
+
+    #requestList thead th
+    {
+        background-color: @button-color;
+        color: @button-text-color!important;
+        border-bottom: 3px solid @border-color;
+    }
+
+.greenRow
+{
+    background-color: !important;
+    -moz-box-shadow: inset 0px 0px 50px 0px @green-row;
+    -webkit-box-shadow: inset 0px 0px 50px 0px @green-row;
+    box-shadow: inset 0px 0px 50px 0px @green-row;
+    color: @green-row!important;
+    text-shadow: 0 0 5px @background;
+    font-weight: bold;
+}
+
+    .greenRow td
+    {
+        color: inherit;
+        background: transparent;
+    }
+
+    .greenRow TD
+    {
+        color: inherit!important;
+    }
+
+    .greenRow a, .greenRow a:visited
+    {
+        color: inherit!important;
+    }
+
+.yellowRow
+{
+    background-color: transparent!important;
+    -moz-box-shadow: inset 0px 0px 70px 0px @yellow-row;
+    -webkit-box-shadow: inset 0px 0px 70px 0px @yellow-row;
+    box-shadow: inset 0px 0px 70px 0px @yellow-row;
+    color: @yellow-row!important;
+    text-shadow: 0 0 5px @background;
+}
+
+    .yellowRow TD
+    {
+        color: inherit!important;
+    }
+
+    .yellowRow a, .yellowRow a:visited
+    {
+        color: inherit!important;
+    }
+
+.redRow
+{
+    background-color: @background!important;
+    -webkit-box-shadow: inset 0px 0px 70px 0p x@red-row;
+    -moz-box-shadow: inset 0px 0px 70px 0p x@red-row;
+    box-shadow: inset 0px 0px 70px 0p x@red-row;
+    color: @red-row!important;
+    text-shadow: 0 0 5px @background;
+    font-weight: bold;
+}
+
+    .redRow td
+    {
+        color: inherit!important;
+    }
+
+    .redRow a, .redRow a:visited
+    {
+        color: inherit!important;
+    }
+
+.dataTables_empty
+{
+    background-color: @button-color;
+    color: @button-text-color!important;
+}
+
+#requestList .dataTables_empty
+{
+    background-color: @button-color!important;
+    color: @button-text-color!important;
+}
+
+#messageList TD
+{
+    padding-left: 3px;
+    color: white;
+}
+
+.messageDate th, .requestHeader th
+{
+    height: 65px;
+    border-bottom: 3px solid @border-color!important;
+}
+
+.messageHeading
+{
+    background-color: lighten(@background,10%);
+    color: @text-color!important;
+}
+
+.messageDate
+{
+    background-color: @button-color!important;
+    color: @button-text-color!important;
+    font-style: italic;
+}
+
+.messageData
+{
+    border-bottom: 1px solid @border-color;
+    background-color: @background;
+    color: contrast(@background);
+}
+
+.messageDelete
+{
+    margin-left: 3px;
+    padding: 3px;
+}
+// System
+/* Scrollbars */
+::-webkit-scrollbar
+{
+    margin-right: -10px;
+    width: @system-scrollbar-width;
+}
+
+.vertTrack(@style) when (@style = "neon")
+{
+    background-image: linear-gradient(to right, @scrollbar-track-color 0%, @scrollbar-track-color-contrast 50%, @scrollbar-track-color 100%)!important;
+}
+
+.vertTrack(@style) when (@style = "classic")
+{
+    background-image: linear-gradient(to right, @scrollbar-track-color 0%, @scrollbar-track-color-contrast 50%, @scrollbar-track-color 100%)!important;
+}
+
+.vertTrack(@style) when (@style = "hic")
+{
+    background-color: @track-color-on;
+    background-image: none!important;
+}
+
+.horizTrack(@style) when not (@style = "hic")
+{
+    background-image: linear-gradient(to bottom, @scrollbar-track-color 0%, @scrollbar-track-color-contrast 50%, @scrollbar-track-color 100%);
+}
+
+.horizTrack(@style) when (@style = "hic")
+{
+    background-color: @track-color-on;
+    background-image: none!important;
+}
+
+::-webkit-scrollbar-track:vertical
+{
+    .vertTrack(@style);
+}
+/* the new scrollbar will have a flat appearance with the set background color */
+::-webkit-scrollbar-track:horizontal
+{
+    .vertTrack(@style);
+}
+/* the new scrollbar will have a flat appearance with the set background color */
+.hThumbStyle (@style) when (@style = "classic")
+{
+    background-image: linear-gradient(to left, transparent 50%, rgba(255,255,255,.5) 50%);
+    background-size: 2px 100%;
+}
+
+.hThumbStyle (@style) when (@style = "hic")
+{
+    background-image: linear-gradient(to left, fade(@midc,50%) 50%, rgba(255,255,255,.5) 50%);
+    background-size: 2px 100%;
+}
+
+.hThumbStyle (@style) when (@style = "neon")
+{
+    background-image: linear-gradient(to bottom, darken(@thumb-color,50%), rgba(255,255,255,.5) 50%, darken(@thumb-color,50%));
+    background-size: 2px 100%;
+}
+/* this will style the thumb, ignoring the track */
+::-webkit-scrollbar-thumb:horizontal
+{
+    border: 1px solid @thumb-border-color;
+    background-color: @thumb-color;
+    .hThumbStyle(@style);
+}
+
+.vThumbStyle (@style) when (@style = "classic")
+{
+    background-image: linear-gradient(transparent 50%, rgba(255,255,255,.5) 50%)!important;
+    background-size: 100% 2px!important;
+}
+
+.vThumbStyle (@style) when (@style = "hic")
+{
+    background-image: linear-gradient(@background 33%, @midc 66%)!important;
+    background-size: 100% 3px!important;
+    color: @hic!important;
+    font-size: 16px;
+}
+
+.vThumbStyle (@style) when (@style = "neon")
+{
+    background-image: linear-gradient(to left, darken(@thumb-color,50%), rgba(255,255,255,.5) 50%, darken(@thumb-color,50%))!important;
+    background-size: 100% 2px!important;
+}
+
+::-webkit-scrollbar-thumb:vertical
+{
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid @thumb-border-color;
+    background-color: @thumb-color!important;
+    .vThumbStyle(@style);
+}
+
+.scrollButton(@style) when (@style="classic")
+{
+    background-color: @scrollbar-button-color;
+    background-image: none;
+}
+
+.scrollButton(@style) when (@style="neon")
+{
+    background-image: radial-gradient(circle, @scrollbar-button-highlight,@scrollbar-button-color);
+}
+/* this will style the thumb, ignoring the track */
+::-webkit-scrollbar-button
+{
+    border: 1px solid @scrollbar-border-color;
+    color: white;
+    .scrollButton(@style);
+}
+/* optionally, you can style the top and the bottom buttons (left and right for horizontal bars) */
+::-webkit-scrollbar-corner
+{
+    background-color: @background;
+}
+
+.eventDeleteButton
+{
+    float: right;
+    width: @tiny-button-size;
+    height: @tiny-button-size;
+    border: 1px solid @border-color;
+    color: @danger;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 16px;
+    line-height: 16px;
+    background-color: @button-color;
+}
 
     .eventDeleteButton:hover
     {
         background-color: @danger!important;
         color: contrast(@danger)!important;
     }
-    // Setlist Editor
-    .jstree-anchor
+
+    .eventDeleteButton:visited
     {
-        color: @button-text-color!important;
+        color: @danger;
     }
-
-        .jstree-anchor:hover
-        {
-            background-color: @tree-hover-background;
-            color: @tree-hover-color;
-        }
-
-    a[id*="set_"]
-    {
-        color: @set-color!important;
-        font-style: normal;
-    }
-
-        a[id*="set_"]:hover
-        {
-            background-color: @tree-hover-background!important;
-            color: @tree-hover-color!important;
-        }
-
-    a[id*="subset_"]
-    {
-        color: @subset-color!important;
-        font-style: italic;
-    }
-
-    .SetList .root
-    {
-        color: @setlist-root-color!important;
-        font-weight: bold;
-        font-style: italic;
-    }
-
-    [id*="song_"]
-    {
-        color: @subset-song-color!important;
-        font-weight: normal;
-    }
-
-        [id*="song_"]:hover
-        {
-            background-color: @tree-hover-background!important;
-            color: @tree-hover-color!important;
-            font-weight: normal;
-        }
-
-    .jstree-clicked
-    {
-        color: @background!important;
-    }
-
-    .treeArtist
-    {
-        color: @tree-song-artist-color;
-        font-style: italic;
-    }
-
-    .jstree-anchor:hover i
-    {
-        color: @tree-hover-color;
-    }
-
-    .jstree-contextmenu > li > a
-    {
-        color: @background!important;
-        font-size: smaller;
-    }
-
-    .toggleColumn:hover
-    {
-        text-decoration: underline;
-    }
-
-    .SetList
-    {
-        float: left;
-        overflow: visible;
-        margin-left: 10px;
-        width: 49%;
-        font-size: 18px;
-    }
-
+.ColVis_Button.ColVis_MasterButton
+{
+    height: 29px!important;
+    width: 28px;
+    margin-top: 12px;
+    -moz-border-radius: 3px!important;
+    -webkit-border-radius: 3px!important;
+    border-radius: 3px!important;
+    background: @button-color!important;
+    border: 1px solid @button-border-color;
+    color: @button-text-color;
+}
+.ColVis_Button.ColVis_MasterButton:hover {
+            border: 1px solid @border-color!important;
+        -moz-box-shadow: 0 0 15px 5px @button-shadow-color!important;
+        -webkit-box-shadow: 0 0 15px 5px @button-shadow-color!important;
+        box-shadow: 0 0 15px 5px @button-shadow-color!important;
+}
+.dt-buttons {
+    display:inline-block;
+}    
+.ColVis_collection li {
+    background:@button-color!important;
+}
+.ColVis_Button.ColVis_MasterButton span{
+    color:@button-text-color!important;
+}
+.ColVis_collection input[type=checkbox] + span
+{
+    color:@button-text-color;
+    background-color:@button-color!important;
+}
 @media screen and (max-width: 640px)
 {
-    div.dt-buttons
-    {
-        text-align:left!important;
+    .ColVis_Button.ColVis_MasterButton {
+        margin-top:-1!important;
     }
 }
-    .prevSet:before {
-        font-family:metro;
-        content:"\ea40";
-    }
-    .nextSet {
-        margin-right:30px!important;
-    }
-    .nextSet:before {
-        font-family:metro;
-        content:"\ea3c";
-    }
-    .prevSubset:before {
-        font-family:metro;
-        content:"\e648";
-    }
-    .nextSubset:before {
-        font-family:metro;
-        content:"\e649";
-    }
-
-    .setlist_menu
-    {
-        font-size: 16px;
-    }
-
-        .setlist_menu i
-        {
-            width: 1px!important;
-        }
-    // Charms
-    [data-role="charm"][data-position*="left"]
-    {
-        border-right: 1px @border-color solid !important;
-    }
-
-    [data-role="charm"][data-position*="right"]
-    {
-        border-left: 1px @border-color solid !important;
-    }
-
-    [data-role="charm"]
-    {
-        background-color: @background;
-        -moz-box-shadow: 12px 0 15px -4px @border-color-glow, -12px 0 8px -4px fade(@border-color-glow,50%);
-        -webkit-box-shadow: 12px 0 15px -4px @border-color-glow, -12px 0 8px -4px fade(@border-color-glow,50%);
-        box-shadow: 12px 0 15px -4px @border-color-glow, -12px 0 8px -4px fade(@border-color-glow,50%);
-        color: @button-color;
-        font-size: 16px!important;
-        min-width:360px;
-    }
-
-    .charm-closer
-    {
-        display: none;
-    }
-    // charm contents
-    .charm input[type=number]
-    {
-        border: 1px solid @border-color!important;
-        background-color: @background;
-        color: @button-text-color;
-    }
-
-    .charm textarea
-    {
-        font-size: 16px;
-    }
-
-    .charm input
-    {
-        margin-bottom: 3px;
-        font-size: 16px;
-    }
-
-        .charm input[type=text]
-        {
-            background-color: @background;
-            color: @button-text-color;
-        }
-
-    .charmContent
-    {
-        font-size: 16px;
-    }
-
-        .charmContent input[type=text]
-        {
-            border: 0!important;
-            background-color: @background;
-            color: @button-text-color;
-            font-size: 16px !important;
-        }
-
-        .charmContent select
-        {
-            font-size: 16px;
-        }
-
-    .charmTitle
-    {
-        color: @charm-text-color!important;
-        text-shadow: 0 0 15px @button-color-glow!important;
-        font-weight: bold;
-        font-size: larger;
-    }
-
-    .help label:nth-child(1)
-    {
-        .charmTitle;
-    }
-
-    .nav-charm
-    {
-        width: 420px!important;
-    }
-    // charm text and input
-    .charmLabel
-    {
-        color: @charm-text-color;
-        font-size: 16px;
-    }
-
-    .charmLabelBold
-    {
-        color: @charm-text-color;
-        font-weight: bold;
-        font-size: 20px;
-    }
-    // Iframe for charm
-    .panelContainer
-    {
-        overflow: auto;
-        width: 100%;
-        height: 100%;
-        border: 0;
-    }
-    // Accordions
-    .accordion
-    {
-        display: block;
-        font-size: 16px!important;
-    }
-
-        .accordion > .frame > .content
-        {
-            background-color: @background!important;
-        }
-
-        .accordion > .frame > .heading
-        {
-            border: 0!important;
-            background-color: @background!important;
-        }
-
-        .accordion > .content
-        {
-            background-color: @background;
-        }
-
-    .frame .heading
-    {
-        color: @charm-text-color!important;
-        font-size: 16px!important;
-    }
-
-    .frame .active
-    {
-        z-index: 1000;
-    }
-    // iRequest
-    #requestList
-    {
-        margin-top: 5px;
-    }
-
-        #requestList thead th
-        {
-            background-color: @button-color;
-            color: @button-text-color!important;
-        }
-
-    .greenRow
-    {
-        background-color: @green-row!important;
-        color: @green-row-color!important;
-    }
-
-        .greenRow TD
-        {
-            color: inherit!important;
-        }
-
-        .greenRow a, .greenRow a:visited
-        {
-            color: inherit!important;
-        }
-
-    .yellowRow
-    {
-        background-color: @yellow-row!important;
-        color: @yellow-row-color!important;
-    }
-
-        .yellowRow TD
-        {
-            color: inherit!important;
-        }
-
-        .yellowRow a, .yellowRow a:visited
-        {
-            color: inherit!important;
-        }
-
-    .redRow
-    {
-        background-color: @red-row!important;
-        color: @red-row-color!important;
-    }
-
-        .redRow td
-        {
-            color: inherit!important;
-        }
-
-        .redRow a, .redRow a:visited
-        {
-            color: inherit!important;
-        }
-
-    .dataTables_empty
-    {
-        background-color: @button-color;
-        color: @button-text-color!important;
-    }
-
-    #requestList .dataTables_empty
-    {
-        background-color: @button-color!important;
-        color: @button-text-color!important;
-    }
-
-    #messageList TD
-    {
-        padding-left: 3px;
-        color: white;
-    }
-
-    .messageDate th, .requestHeader th
-    {
-        height: 65px;
-        border-bottom: 3px solid @midc;
-    }
-
-    .messageHeading
-    {
-        background-color: @lomidc;
-        color: contrast(@lomidc);
-    }
-
-    .messageDate
-    {
-        background-color: @button-color!important;
-        color: @button-text-color!important;
-        font-style: italic;
-    }
-
-    .messageData
-    {
-        border-bottom: 1px solid @border-color;
-        background-color: @background;
-        color: contrast(@background);
-    }
-
-    .messageDelete
-    {
-        margin-left: 3px;
-        padding: 3px;
-    }
-    // System
-    /* Scrollbars */
-    ::-webkit-scrollbar
-    {
-        margin-right: -10px;
-        width: 15px;
-    }
-
-    .vertTrack(@style) when (@style = "neon")
-    {
-        background-image: linear-gradient(to right, @scrollbar-track-color 0%, @scrollbar-track-color-contrast 50%, @scrollbar-track-color 100%)!important;
-    }
-
-    .vertTrack(@style) when (@style = "classic")
-    {
-        background-image: linear-gradient(to right, @scrollbar-track-color 0%, @scrollbar-track-color-contrast 50%, @scrollbar-track-color 100%)!important;
-    }
-
-    .vertTrack(@style) when (@style = "hic")
-    {
-        background-color: @track-color-on;
-        background-image: none!important;
-    }
-
-    .horizTrack(@style) when not (@style = "hic")
-    {
-        background-image: linear-gradient(to bottom, @scrollbar-track-color 0%, @scrollbar-track-color-contrast 50%, @scrollbar-track-color 100%);
-    }
-
-    .horizTrack(@style) when (@style = "hic")
-    {
-        background-color: @track-color-on;
-        background-image: none!important;
-    }
-
-    ::-webkit-scrollbar-track:vertical
-    {
-        .vertTrack(@style);
-    }
-    /* the new scrollbar will have a flat appearance with the set background color */
-    ::-webkit-scrollbar-track:horizontal
-    {
-        .vertTrack(@style);
-    }
-    /* the new scrollbar will have a flat appearance with the set background color */
-    .hThumbStyle (@style) when (@style = "classic")
-    {
-        background-image: linear-gradient(to left, transparent 50%, rgba(255,255,255,.5) 50%);
-        background-size: 2px 100%;
-    }
-
-    .hThumbStyle (@style) when (@style = "hic")
-    {
-        background-image: linear-gradient(to left, fade(@midc,50%) 50%, rgba(255,255,255,.5) 50%);
-        background-size: 2px 100%;
-    }
-
-    .hThumbStyle (@style) when (@style = "neon")
-    {
-        background-image: linear-gradient(to bottom, darken(@thumb-color,50%), rgba(255,255,255,.5) 50%, darken(@thumb-color,50%));
-        background-size: 2px 100%;
-    }
-    /* this will style the thumb, ignoring the track */
-    ::-webkit-scrollbar-thumb:horizontal
-    {
-        border: 1px solid @thumb-border-color;
-        background-color: @thumb-color;
-        .hThumbStyle(@style);
-    }
-
-    .vThumbStyle (@style) when (@style = "classic")
-    {
-        background-image: linear-gradient(transparent 50%, rgba(255,255,255,.5) 50%)!important;
-        background-size: 100% 2px!important;
-    }
-
-    .vThumbStyle (@style) when (@style = "hic")
-    {
-        background-image: linear-gradient(@background 33%, @midc 66%)!important;
-        background-size: 100% 3px!important;
-        color: @hic!important;
-        font-size: 16px;
-    }
-
-    .vThumbStyle (@style) when (@style = "neon")
-    {
-        background-image: linear-gradient(to left, darken(@thumb-color,50%), rgba(255,255,255,.5) 50%, darken(@thumb-color,50%))!important;
-        background-size: 100% 2px!important;
-    }
-
-    ::-webkit-scrollbar-thumb:vertical
-    {
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        border: 1px solid @thumb-border-color;
-        background-color: @thumb-color!important;
-        .vThumbStyle(@style);
-    }
-
-    .scrollButton(@style) when (@style="classic")
-    {
-        background-color: @scrollbar-button-color;
-        background-image: none;
-    }
-
-    .scrollButton(@style) when (@style="neon")
-    {
-        background-image: radial-gradient(circle, @scrollbar-button-highlight,@scrollbar-button-color);
-    }
-    /* this will style the thumb, ignoring the track */
-    ::-webkit-scrollbar-button
-    {
-        border: 1px solid @scrollbar-border-color;
-        color: white;
-        .scrollButton(@style);
-    }
-    /* optionally, you can style the top and the bottom buttons (left and right for horizontal bars) */
-    ::-webkit-scrollbar-corner
-    {
-        background-color: @background;
-    }
-

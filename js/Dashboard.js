@@ -81,7 +81,8 @@ $(document).ready(function () {
         var t = $(this).val();
         setRequestLoadTypeSwitch(t);
     });
-    $("#reqchart").css("width", parseInt($("#chartAccordion").css("width")) - 10 + "px");
+    $("#reqchart").css("width", "1000px");//parseInt($("#chartAccordion").css("width")) - 10 + "px");
+    
     if (isPremium()) {
         getRequests();
         getMessages();
@@ -155,8 +156,6 @@ function getStats() {
     $("#trafficMsgLo").text(formatDate(mn.Date).replace("00:00", "") + " (" + mn.Count + ")");
 
     graph(req);
-
-
 }
 function graph(dta) {
     
@@ -169,18 +168,18 @@ function graph(dta) {
         mlabels.push(formatDate(dta.MessageTraffic[i].Date).replace("00:00", ""));
         mdat.push(dta.MessageTraffic[i].Count)
     }
-
+    var lbls = mlabels.length > rlabels.length ? mlabels : rlabels;
     var data = {
-        labels: rlabels,
+        labels: lbls,
         datasets: [
             {
                 label: "Request Traffic",
                 fillColor: "transparent",
                 strokeColor: "lime",
                 pointColor: "rgb(255,0,255,255)",
-                pointStrokeColor: "#ffffff",
-                pointHighlightFill: "#ffffff",
-                pointHighlightStroke: "rgba(220,220,220,1)",
+                pointStrokeColor: "lime",
+                pointHighlightFill: "lime",
+                pointHighlightStroke: "lime",
                 data: rdat
             },
             {
@@ -188,9 +187,9 @@ function graph(dta) {
                 fillColor: "transparent",
                 strokeColor: "red",
                 pointColor: "rgb(255,0,255,255)",
-                pointStrokeColor: "#ffffff",
-                pointHighlightFill: "#ffffff",
-                pointHighlightStroke: "rgba(220,220,220,1)",
+                pointStrokeColor: "red",
+                pointHighlightFill: "red",
+                pointHighlightStroke: "red",
                 data: mdat
             }
         ]

@@ -43,12 +43,13 @@ body {
 }
 #logo {
   display: inline-block;
-  width: 181px !important;
+  width: 98px !important;
   height: 110px !important;
   border: 0!important;
   background-image: url(../images/logo-neon.png) !important;
   background-repeat: no-repeat;
-  margin-left: -10px;
+  margin-right: 5px;
+  cursor: pointer;
 }
 hr {
   background-color: #8000ff;
@@ -443,7 +444,7 @@ select:not[multiple] {
   height: 35px!important;
   background-color: #000000;
   color: #33ccff;
-  font-size: 16px;
+  font-size: 100%;
 }
 .check:before {
   background-color: #ff00ff !important;
@@ -1085,7 +1086,7 @@ a.paginate_button.current {
   width: 36px;
 }
 #sChangeFontSize {
-  margin-top: 25px;
+  margin-top: 15px;
   margin-left: 1px;
   width: 36px;
   height: 40%;

@@ -64,7 +64,7 @@ function initDataTables() {
     $("#SongTiles").hide();
     $('#SongList').parents('div.dataTables_wrapper').first().show();
     $('#SongList').show();
-    var plen = parseInt(getSession("setListLength"));
+    var plen = parseInt(getSession("setlistlength"));
     var sDom = "BCtp";
     if (plen == -1) sDom = "BCt";
     if (!setTbl) {

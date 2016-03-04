@@ -47,8 +47,12 @@
         <div class="accordion" data-role="accordion" data-close-any="false" style="margin-bottom:5px"> <!-- accordion tiles -->
             <div class="frame active">
                 <div class="heading bg-transparent">Navigation</div> 
+
                 <div class="content gm-bg">
+
+
                     <div class="tile-group" style="margin-left:0;padding-top:0;margin-top:-5px;">
+                        <label id="iRequestURL" style="margin-left:5px;font-size:16px"></label><br />
                     <div style="overflow:hidden;width:100%;">
                         <div class="input-control text" style="display:inline">               
                             <input type="text" style="width:232px;margin-left:5px" placeholder="Search text..." id="SearchTerm"/>
@@ -153,7 +157,7 @@
         </label> Enable GigMan Data Feeds<br />
         <div class="accordion" data-role="accordion" data-close-any="true" style="margin-top:5px" id="requestAccordion"> <!-- accordion iRequest -->
             <div class="frame">
-                <div class="heading bg-transparent">GigMan Request <span id="warning" class="warning" style="display:none;color:red">Offline</span></div>
+                <div class="heading bg-transparent">GigMan Request <span id="warning" class="offline warning" style="display:none;color:red">Offline</span></div>
                 <div class="content bg-transparent" style="background-color:black">            
                   <div class="tile-container" style="margin-top:-13px">              
                     <div class="" id="Div3" style="width:100%;">
@@ -187,7 +191,7 @@
         <hr style="background-color:gray"/>
         <div class="accordion" data-role="accordion" data-close-any="true" style="margin-top:5px;" id="messageAccordion"> <!-- accordion iMessage -->
             <div class="frame">
-                <div class="heading bg-transparent">GigMan Message <span id="Span1" class="warning" style="display:none;color:red">Offline</span></div>
+                <div class="heading bg-transparent">GigMan Message <span id="Span1" class="offline warning" style="display:none;color:red">Offline</span></div>
                 <div class="content bg-transparent">            
                   <div class="tile-container" style="margin-top:-10px;">              
                     <div class="" id="Div4" style="width:100%;">

@@ -48,7 +48,7 @@ body {
   border: 0!important;
   background-image: url(../images/logo-hic.jpg) !important;
   background-repeat: no-repeat;
-  margin-left: -10px;
+  margin-right: 5px;
 }
 hr {
   background-color: #878787;
@@ -70,7 +70,7 @@ hr {
   background-color: #1d1d1d !important;
   width: 100%!important;
   max-width: 420px;
-  overflow: auto;
+  overflow: hidden;
   height: 100%;
   z-index: 2000;
 }
@@ -179,6 +179,7 @@ hr {
 }
 .spinBox {
   font-size: 16px;
+  height: 32pt;
 }
 .spinMinus {
   margin: 0;
@@ -201,9 +202,9 @@ hr {
 }
 .spinInput {
   margin: 0;
-  margin-top: -1px !important;
-  width: 50px;
-  height: 37px !important;
+  margin-top: 3px!important;
+  width: 32pt;
+  height: 32pt !important;
   border: 1px solid #878787;
   -moz-border-radius: 0 !important;
   -webkit-border-radius: 0 !important;
@@ -215,7 +216,7 @@ hr {
 }
 #Transposer {
   float: left;
-  width: 130px;
+  width: 100%;
   background-color: #1d1d1d;
   font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
 }
@@ -230,7 +231,7 @@ hr {
   display: inline-block;
   overflow: hidden;
   margin-top: 5px;
-  width: 32pt;
+  width: 15%!important;
   height: 32pt;
   vertical-align: middle;
   text-align: center;
@@ -294,11 +295,13 @@ hr {
   border: 0!important;
 }
 .slide-switch {
-  border-color: #6a6a6a !important;
-  background-color: #1d1d1d !important;
+  border-color: #878787 !important;
+  background-color: #2a2a2a !important;
   -moz-box-shadow: 0 -2px 4px -4px #f1f1f1;
   -webkit-box-shadow: 0 -2px 4px -4px #f1f1f1;
   box-shadow: 0 -2px 4px -4px #f1f1f1;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
   border-radius: 0;
 }
 .slide-switch-marker {
@@ -393,6 +396,10 @@ input[type=text] {
   background-color: #f1f1f1 !important;
   color: #1d1d1d !important;
   font-size: 16px;
+  border: 1px solid #878787 !important;
+}
+input[type=number] {
+  border: 1px solid #878787 !important;
 }
 [data-role="datepicker"] .button {
   margin: 0!important;
@@ -406,6 +413,7 @@ input[type=text] {
 .time.ui-timepicker-input {
   border: 0!important;
   font-size: 16px!important;
+  border: 1px solid #878787 !important;
 }
 input[type=checkbox]:checked + span {
   background-color: #878787 !important;
@@ -424,7 +432,7 @@ select {
   -webkit-border-radius: 0;
   border-radius: 0;
   background-color: #1d1d1d;
-  border: 1px solid #878787;
+  border: 1px solid #878787 !important;
   color: #f1f1f1;
 }
 .input-control .selected {
@@ -439,6 +447,9 @@ select:not[multiple] {
 }
 .check:before {
   background-color: #f1f1f1 !important;
+}
+.check[disabled='true']:before {
+  background-color: #dddddd !important;
 }
 .myModernInput.modern .label {
   color: #f1f1f1;
@@ -456,6 +467,23 @@ select:not[multiple] {
   background-color: #1d1d1d !important;
   color: #f1f1f1 !important;
   font-size: 16px!important;
+  border-bottom: 2px solid #878787 !important;
+}
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: #373737;
+}
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #373737;
+}
+:-ms-input-placeholder {
+  /* IE 10+ */
+  color: #373737;
+}
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: #373737;
 }
 .scrollButton {
   border: 1px solid #1d1d1d;
@@ -499,7 +527,7 @@ select:not[multiple] {
   background: #1d1d1d !important;
 }
 .dt-buttons .dt-button {
-  margin-top: 5px!important;
+  margin-top: 12px!important;
   background: #f1f1f1 !important;
   color: #000000 !important;
   font-size: 25px;
@@ -648,6 +676,7 @@ a.paginate_button {
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button {
   color: #000000 !important;
+  border: 1px solid #878787 !important;
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
   color: #000000 !important;
@@ -718,13 +747,6 @@ a.paginate_button.current {
 .tile-content {
   padding: 3px;
   text-align: center;
-}
-.mif-songlist {
-  width: 32px;
-  height: 32px;
-  background-image: url('../images/artist.png');
-  background-position: center;
-  background-repeat: no-repeat;
 }
 .t-a {
   background-color: #525252;
@@ -899,6 +921,8 @@ a.paginate_button.current {
   font-weight: bold;
   font-size: 16px;
   cursor: move;
+  left: 36px;
+  top: 55px;
 }
 #SongInfo table tr:first-child {
   border-bottom: 1px solid #878787;
@@ -971,11 +995,13 @@ a.paginate_button.current {
   z-index: 2001;
   display: none;
   padding: 0;
-  width: 400px!important;
+  width: 400px;
   border: 1px solid #878787;
   background-color: #f1f1f1;
   color: #1d1d1d;
   text-align: center;
+  left: 0;
+  top: 0;
 }
 #notesPanel div {
   background-color: #f1f1f1;
@@ -992,8 +1018,8 @@ a.paginate_button.current {
   box-sizing: border-box;
   margin-top: 1px;
   margin-right: 5px;
-  width: 18px!important;
-  height: 18px!important;
+  width: 18px;
+  height: 18px !important;
   border: 1px solid #878787;
   color: #000000 !important;
   vertical-align: middle;
@@ -1026,7 +1052,7 @@ a.paginate_button.current {
   margin-top: 10px;
   margin-left: 1px;
   width: 36px;
-  height: 240px;
+  height: 40%;
   border: 1px solid #525252;
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
@@ -1057,13 +1083,13 @@ a.paginate_button.current {
   float: left;
   margin: 0!important;
   padding: 0;
-  width: 34px;
+  width: 36px;
 }
 #sChangeFontSize {
   margin-top: 25px;
   margin-left: 1px;
   width: 36px;
-  height: 240px;
+  height: 40%;
   border: 1px solid #525252;
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
@@ -1086,7 +1112,7 @@ a.paginate_button.current {
 }
 .largeSlider.ui-slider-vertical .ui-slider-handle {
   margin-left: 5px;
-  width: 34px;
+  width: 36px;
   border: 0!important;
   color: #ffffff;
   -moz-border-radius: 0!important;
@@ -1121,6 +1147,10 @@ a.paginate_button.current {
   line-height: 16px;
   border: 0!important;
 }
+.eventTitleTD:hover {
+  background-color: #f1f1f1 !important;
+  color: #000000;
+}
 .eventTable td {
   border-bottom: 1px solid #878787 !important;
 }
@@ -1129,37 +1159,26 @@ a.paginate_button.current {
   text-shadow: 0 0 15px transparent;
 }
 .gmEvent {
-  display: block;
   overflow: hidden;
   margin: 0;
   padding: 0;
   border: 0;
-  color: #f1f1f1 !important;
   -ms-text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: smaller;
+  color: #f1f1f1 !important;
+  background-color: transparent!important;
+}
+.gmEvent:hover {
+  background-color: transparent!important;
 }
 .gmEvent:visited {
   color: #f1f1f1 !important;
 }
 .eventDeleteTD {
   width: 18px;
-}
-.eventDeleteButton {
-  float: right;
-  width: 18px;
-  height: 18px;
-  border: 1px solid #878787;
-  color: #ffffff;
-  vertical-align: middle;
-  text-align: center;
-  font-size: 16px;
-  line-height: 16px;
-}
-.eventDeleteButton:visited {
-  color: #ffffff;
 }
 .gmEventDisabled {
   margin: 0;
@@ -1284,12 +1303,23 @@ button:hover {
 .fc .fc-button-group > *:hover {
   text-shadow: 0 0 15px transparent;
 }
-.eventDeleteButton:hover {
-  background-color: #ffffff !important;
-  color: #000000 !important;
+.fc-button {
+  margin-bottom: 6px!important;
+  margin-right: 15px!important;
+}
+.fc-button:hover {
+  -moz-box-shadow: 0 0 15px 3px transparent !important;
+  -webkit-box-shadow: 0 0 15px 3px transparent !important;
+  box-shadow: 0 0 15px 3px transparent !important;
 }
 .jstree-anchor {
   color: #000000 !important;
+}
+.jstree-icon.jstree-ocl {
+  color: #f1f1f1 !important;
+}
+.jstree-icon.jstree-themeicon.jstree-themeicon-custom {
+  color: #f1f1f1 !important;
 }
 .jstree-anchor:hover {
   background-color: #f1f1f1;
@@ -1345,11 +1375,6 @@ a[id*="subset_"] {
   width: 49%;
   font-size: 18px;
 }
-@media screen and (max-width: 640px) {
-  div.dt-buttons {
-    text-align: left!important;
-  }
-}
 .prevSet:before {
   font-family: metro;
   content: "\ea40";
@@ -1369,12 +1394,6 @@ a[id*="subset_"] {
   font-family: metro;
   content: "\e649";
 }
-.setlist_menu {
-  font-size: 16px;
-}
-.setlist_menu i {
-  width: 1px!important;
-}
 [data-role="charm"][data-position*="left"] {
   border-right: 1px #878787 solid !important;
 }
@@ -1388,15 +1407,16 @@ a[id*="subset_"] {
   box-shadow: 12px 0 15px -4px transparent, -12px 0 8px -4px rgba(0, 0, 0, 0.5);
   color: #f1f1f1;
   font-size: 16px!important;
-  min-width: 360px;
+  min-width: 420px;
+  overflow: hidden!important;
 }
 .charm-closer {
   display: none;
 }
 .charm input[type=number] {
-  border: 1px solid #878787 !important;
   background-color: #1d1d1d;
   color: #000000;
+  border: 1px solid #878787 !important;
 }
 .charm textarea {
   font-size: 16px;
@@ -1433,9 +1453,6 @@ a[id*="subset_"] {
   font-weight: bold;
   font-size: larger;
 }
-.nav-charm {
-  width: 420px!important;
-}
 .charmLabel {
   color: #f1f1f1;
   font-size: 16px;
@@ -1446,10 +1463,10 @@ a[id*="subset_"] {
   font-size: 20px;
 }
 .panelContainer {
-  overflow: auto;
   width: 100%;
   height: 100%;
   border: 0;
+  overflow: auto!important;
 }
 .accordion {
   display: block;
@@ -1472,16 +1489,29 @@ a[id*="subset_"] {
 .frame .active {
   z-index: 1000;
 }
+.dataTable .sorting_asc {
+  background-color: #f1f1f1;
+}
 #requestList {
   margin-top: 5px;
 }
 #requestList thead th {
   background-color: #f1f1f1;
   color: #000000 !important;
+  border-bottom: 3px solid #878787;
 }
 .greenRow {
-  background-color: #00ff00 !important;
-  color: #1d1d1d !important;
+  background-color: !important;
+  -moz-box-shadow: inset 0px 0px 50px 0px #00ff00;
+  -webkit-box-shadow: inset 0px 0px 50px 0px #00ff00;
+  box-shadow: inset 0px 0px 50px 0px #00ff00;
+  color: #00ff00 !important;
+  text-shadow: 0 0 5px #1d1d1d;
+  font-weight: bold;
+}
+.greenRow td {
+  color: inherit;
+  background: transparent;
 }
 .greenRow TD {
   color: inherit!important;
@@ -1491,8 +1521,12 @@ a[id*="subset_"] {
   color: inherit!important;
 }
 .yellowRow {
-  background-color: #ffff00 !important;
-  color: #1d1d1d !important;
+  background-color: transparent!important;
+  -moz-box-shadow: inset 0px 0px 70px 0px #ffff00;
+  -webkit-box-shadow: inset 0px 0px 70px 0px #ffff00;
+  box-shadow: inset 0px 0px 70px 0px #ffff00;
+  color: #ffff00 !important;
+  text-shadow: 0 0 5px #1d1d1d;
 }
 .yellowRow TD {
   color: inherit!important;
@@ -1502,8 +1536,13 @@ a[id*="subset_"] {
   color: inherit!important;
 }
 .redRow {
-  background-color: #ff0000 !important;
-  color: #1d1d1d !important;
+  background-color: #1d1d1d !important;
+  -webkit-box-shadow: inset 0px 0px 70px 0p x #ff0000;
+  -moz-box-shadow: inset 0px 0px 70px 0p x #ff0000;
+  box-shadow: inset 0px 0px 70px 0p x #ff0000;
+  color: #ff0000 !important;
+  text-shadow: 0 0 5px #1d1d1d;
+  font-weight: bold;
 }
 .redRow td {
   color: inherit!important;
@@ -1527,11 +1566,11 @@ a[id*="subset_"] {
 .messageDate th,
 .requestHeader th {
   height: 65px;
-  border-bottom: 3px solid #878787;
+  border-bottom: 3px solid #878787 !important;
 }
 .messageHeading {
-  background-color: #525252;
-  color: #ffffff;
+  background-color: #373737;
+  color: #f1f1f1 !important;
 }
 .messageDate {
   background-color: #f1f1f1 !important;
@@ -1588,4 +1627,58 @@ a[id*="subset_"] {
 /* optionally, you can style the top and the bottom buttons (left and right for horizontal bars) */
 ::-webkit-scrollbar-corner {
   background-color: #1d1d1d;
+}
+.eventDeleteButton {
+  float: right;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #878787;
+  color: #ffffff;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 16px;
+  line-height: 16px;
+  background-color: #f1f1f1;
+}
+.eventDeleteButton:hover {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+.eventDeleteButton:visited {
+  color: #ffffff;
+}
+.ColVis_Button.ColVis_MasterButton {
+  height: 29px!important;
+  width: 28px;
+  margin-top: 12px;
+  -moz-border-radius: 3px!important;
+  -webkit-border-radius: 3px!important;
+  border-radius: 3px!important;
+  background: #f1f1f1 !important;
+  border: 1px solid #1d1d1d;
+  color: #000000;
+}
+.ColVis_Button.ColVis_MasterButton:hover {
+  border: 1px solid #878787 !important;
+  -moz-box-shadow: 0 0 15px 5px transparent !important;
+  -webkit-box-shadow: 0 0 15px 5px transparent !important;
+  box-shadow: 0 0 15px 5px transparent !important;
+}
+.dt-buttons {
+  display: inline-block;
+}
+.ColVis_collection li {
+  background: #f1f1f1 !important;
+}
+.ColVis_Button.ColVis_MasterButton span {
+  color: #000000 !important;
+}
+.ColVis_collection input[type=checkbox] + span {
+  color: #000000;
+  background-color: #f1f1f1 !important;
+}
+@media screen and (max-width: 640px) {
+  .ColVis_Button.ColVis_MasterButton {
+    margin-top: -1 !important;
+  }
 }

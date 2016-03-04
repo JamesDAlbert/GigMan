@@ -16,13 +16,20 @@
     <script runat="server" src="js/gigman.min.js"></script>
     <script runat="server" src="js/index.min.js"></script>
     <style>
+        .js #fouc {
+            display:none;
+        }
         .navigationPanel {
             margin-left:0;
             margin-top:90px;
         }
     </style>
+    <script>
+        document.documentElement.className = "js";
+    </script>
 </head>
 <body class="gm-bg" style="display:block !important">
+    <div id="fouc">
     <div class="indexHeader" style="display:block;width:100%;overflow:hidden;height:110px;line-height:110px;vertical-align:middle;z-index:2000">
         <div id="logo"></div>
         <div id="greetings" class="greeting" style="display:inline-block;position:absolute;margin-top:-40px;margin-left:5px">Welcome <label id="userName"></label></div>
@@ -189,6 +196,9 @@
         <iframe id="helpContainer" class="panelContainer" src="help/help.html" style="overflow-y:auto"></iframe>
     </div>
     <!-- end help -->
-
+</div>
+    <script>
+        document.getElementById("fouc").style.display = "block";
+    </script>
 </body>
 </html>

@@ -82,6 +82,7 @@
             $("#whoElse").prop("href", iRequestURL + "info");
             $("#logo").stop().animate({ height: "45px" });
             if (band) {
+                $("title").html(band.ArtistName);
                 if (band.iRequestName == "info") {
                     showContent("#whosCharm", "whosongigman.html", false);
                     return;
@@ -126,7 +127,7 @@
         });
 
         function setColorSchemeSwitch() {
-            var sch = getSession("colorscheme");
+            var sch = getSession("gmrcolorscheme");
             if (sch == "classic")
                 sch = "neon";
             else if (sch == "neon")
@@ -170,7 +171,7 @@
         function loadNew(art) {
             window.location = iRequestURL + art;
         }
-        var scheme = getSession("colorscheme");
+        var scheme = getSession("gmrcolorscheme");
 
         if (scheme == "classic") {
             $('link[id="gmrStyle"]').attr('href', 'css/request-classic.min.css');
@@ -178,7 +179,7 @@
         }
         else if (scheme == "neon") {
             $('link[id="gmrStyle"]').attr('href', 'css/request-neon.css');
-            $(".myCharm").find("gmrStyle").attr('href', 'css/request-neon.min.css');
+            $(".myCharm").find("gmrStyle").attr('href', 'css/request-classic.min.css');
         }
         else {
             $('link[id="gmrStyle"]').attr('href', 'css/request-classic.css');

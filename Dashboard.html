@@ -14,7 +14,7 @@
     <script src="Scripts/jlinq.min.js"></script>
     <script runat="server" src="js/utilities.min.js"></script>
     <script runat="server" src="js/gigman.min.js"></script>
-    <script src="js/dashboard.min.js"></script>
+    <script src="js/dashboard.js"></script>
     <script src="Scripts/chart.min.js"></script>
     <style>
         .rqContent{
@@ -162,7 +162,7 @@
         <div id="chartAccordion" class="accordion" data-role="accordion" style="width:100%;">
             <div class="frame" style="width:100%;">
             <div class="heading">Graphs</div>
-                <div class="content" style="width:100%;">
+                <div class="content" style="width:100%;max-width:1000px">
                     <canvas id="reqchart"></canvas>
                     <div id="legend" class="legend">
                         <ul style="list-style-type:none">

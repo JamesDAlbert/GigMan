@@ -711,7 +711,7 @@ function sliderChange(ev, ui) {
         var table = $("#SongList").dataTable();
     }
     function dataSort(dta, type) {
-        var ignoreArticles = getSession("ignoreArticles") == "true";
+        var ignoreArticles = getSession("ignorearticles") == "true";
         dta = dta.sort(function (a, b) {
             var res = 0;
             if (type == "song") {
@@ -724,6 +724,16 @@ function sliderChange(ev, ui) {
                     }
                     if (a.Title.toLowerCase().indexOf("an ") == 0) {
                         a.Title = a.Title.substring(3) + ",An";
+                    }
+                    // composers
+                    if (a.Artist.toLowerCase().indexOf("the ") == 0) {
+                        a.Artist = a.Artist.substring(4) + ",The";
+                    }
+                    if (a.Artist.toLowerCase().indexOf("a ") == 0) {
+                        a.Artist = a.Artist.substring(2) + ",A";
+                    }
+                    if (a.Artist.toLowerCase().indexOf("an ") == 0) {
+                        a.Artist = a.Artist.substring(3) + ",An";
                     }
                 }
                 return (a.Title > b.Title) ? 1 : ((b.Title > a.Title) ? -1 : 0);
@@ -752,7 +762,7 @@ function sliderChange(ev, ui) {
         if (!lst || lst.length < 1)
             lst = songListAll(getActiveArtistID());
 
-        if (getSession("ignoreArticles") === "true")
+        if (getSession("ignorearticles") === "true")
         {
             lst = dataSort(lst, "song");
         }
@@ -814,8 +824,6 @@ function sliderChange(ev, ui) {
             setSession("chordColor", "white");
         if (getSession("showChordHints") == null)
             setSession("showChordHints", "true");
-        if (getSession("ignoreArticles") == null)
-            setSession("ignoreArticles", "false");
         if (getSession("color") == null)
             setSession("color", "#ffff99");
         if (getSession("font") == null)
@@ -860,8 +868,8 @@ function sliderChange(ev, ui) {
             setSession("cListStyle", "list");
         if (getSession("setListStyle") == null)
             setSession("setListStyle", "list");
-        if (getSession("ignoreArticles") == null)
-            setSession("ignoreArticles", "false");
+        if (getSession("ignorearticles") == null)
+            setSession("ignorearticles", "false");
         if (getSession("songListLength") == null)
             setSession("songListLength", "-1");
         if (!check("tempolist",false) || useRemote)

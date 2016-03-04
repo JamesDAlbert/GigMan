@@ -15,18 +15,6 @@
     If you are an audience member, GigMan Request allows you to ask those folks on the stage to play your favorite songs from their repertoire.<br /><br />
     You can make requests, each of which can be an up-vote (<span class="mif-thumbs-up"></span>) or, if available, a down-vote (<span class="mif-thumbs-down"></span>). <br /><br />
     Requests are tallied in real-time and delivered to the artists' wireless devices.
-    <script>
-        var scheme = getSession("colorscheme");
-
-        if (scheme == "classic") {
-            $('link[id="gmrStyle"]').attr('href', 'css/request-classic.min.css');
-        }
-        else if (scheme == "neon") {
-            $('link[id="gmrStyle"]').attr('href', 'css/request-neon.min.css');
-        }
-        else {
-            $('link[id="gmrStyle"]').attr('href', 'css/request-classic.min.css');
-        }
-    </script>
+<script>var scheme = getSession("gmrcolorscheme"); if (!scheme) scheme = "classic";if (scheme == "classic") {$('link[id="gmrStyle"]').attr('href', 'css/request-classic.min.css');}else if (scheme == "neon") {$('link[id="gmrStyle"]').attr('href', 'css/request-classic.min.css');}else {$('link[id="gmrStyle"]').attr('href', 'css/request-classic.min.css');}</script>
 </body>
 </html>

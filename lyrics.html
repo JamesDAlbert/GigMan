@@ -25,7 +25,7 @@
     <script runat="server" src="js/gigman.min.js"></script>
     <script runat="server" src="js/rgbcolor.min.js"></script>
     <script runat="server" src="js/utilities.min.js"></script>
-    <script runat="server" src="js/lyrics.min.js"></script>    
+    <script runat="server" src="js/lyrics.js"></script>    
     <script runat="server" src="js/chordHints.min.js"></script>
     <style>
         
@@ -61,14 +61,14 @@
     <div id="SongInfo"></div>   
     
     <!-- lyrics area -->  <br /><br />
-    <div id="lyricsWrapper" style="width:100%;display:block">     
+    <div id="lyricsWrapper" style="width:100%;display:block;">     
         <div id="RightSliders">       
             <div style="width:34px;height:50vh;" class="toolSliders">
                 <div id="sTranspose" class="transpose largeSlider" title="Transpose"></div>
                 <div id="sChangeFontSize" class="fontSize largeSlider" title="Font size"></div>
             </div>
-        </div> 
-        <div id="lyricsDiv" class="lyricsDiv LyricsBackground"></div> 
+        </div>
+        <div id="lyricsDiv" class="lyricsDiv LyricsBackground" style="margin-top:3px;padding-top:10px"></div>
         <div style="clear:both"></div> 
     </div> 
     <!-- end lrics area -->

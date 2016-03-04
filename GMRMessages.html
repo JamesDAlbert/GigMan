@@ -1,53 +1,44 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title></title>
-    <link href="Content/css/metro.min.css" rel="stylesheet"/>
-    <link href="content/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <title>GigMan Messaging</title>
     <link href="Content/css/metro-icons.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="Content/css/fixedHeader.dataTables.min.css" />
     <link id="gmrStyle" href="css/request-classic.min.css" rel="stylesheet"/>
-    <!--<link id="gmWidgetStyle" href="css/messageWidget-neon.min.css" rel="stylesheet"/>-->
+    <link rel="stylesheet" href="Content/css/jquery-ui.min.css" />
     <script src="scripts/jquery.min.js"></script>
     <script src="scripts/jquery.widget.min.js"></script>
-    <script src="scripts/metro.min.js"></script>
+    <script src="Scripts/jquery-ui.min.js"></script>
     <script runat="server" src="js/utilities.min.js"></script>
     <script src="scripts/jlinq.min.js"></script>
     <script runat="server"  src="js/dataRequest.min.js"></script>
     <script runat="server"  src="js/irequest.min.js"></script>
     <script runat="server"  src="js/gmrmessages.min.js"></script>
-    <script src="scripts/jquery.datatables.min.js"></script>
-    <script src="Scripts/dataTables.fixedHeader.min.js"></script>
-    <script src="scripts/jQuery.html5.file.upload.min.js"></script>    
 </head>
 
-<body>
+<body style="padding:0;">
     <label id="message"></label>
-    <div id="interface">        
-        <label>Your Message Topic</label><br /><br />
+    <div id="interface" style="margin:0">        
+        <br /><label>Your Message Topic</label><br />
         <select id="messages">
         </select><br /><br />
-        <input type="text" maxlength="160" id="messageBody" placeholder="Your message here (160 characters max)" style="width:100%" /> <br /><br />
-        <label>Add A Photo!</label>
-        <iframe id="uploadDiv" class="uploadDiv" src="" style="border:0!important;overflow:visible">
-            
-        </iframe>
-
-        <span id="messageMessage" style="color:red"></span>
+        <input type="text" maxlength="160" id="messageBody" placeholder="Your message here (160 characters max)" style="width:99%" /> <br /><br />
+        <div id="uploaderAccordion">
+            <label><span style="margin-left:20px">Add a photo!</span></label>
+                <div class="content" style="padding:0;">
+                    <iframe id="uploadFrame" class="uploadDiv" src="uploader.aspx" style="border:0!important;overflow:visible"></iframe>
+                </div>
+        </div>
+        
+        <span id="messageMessage" style="color:red"></span><br />
         <div class="ctls">
             <button class="button" id="submitButton"><span class="mif-mail"> Send!</span></button>&nbsp;
-            <div id="photo" style="float:right"><img id="pImg" /></div>
-        </div><br class="br"/><br class="br" /><br class="br"/>
+            <div id="photo" style="float:right"></div>
+        </div><br class="br"/>
 
-        <label>Send To</label><br /><br />
         <table id="members" class="members" style="font-size:16px">
+            <tr><td colspan="2" style="vertical-align:bottom">Send To:</td><td colspan="2" style="vertical-align:bottom"><img id="pImg" /></td></tr>
         </table>
     </div>
     <br /><br />
-    <script>
-        var t = getSession("colorscheme");
-        t = t.substring(t.lastIndexOf("-"));
-        //$("#gmWidgetStyle").prop("href", "css/messageWidget-" + t + ".min.css");
-    </script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
-    <link id="gmrStyle" href="css/Request-neon.min.css" rel="stylesheet"/>
+    <link id="gmrStyle" href="css/request-classic.min.css" rel="stylesheet"/>
     <script src="scripts/jquery.min.js"></script>
     <script src="js/dataRequest.min.js"></script>
     <script src="js/utilities.min.js"></script>
@@ -15,13 +15,6 @@
             You should let them know!<br />  <br />          
         </p>
     </div>
-    <script>
-        if (!sessionStorage.getItem("band"))
-            $("#bandName").text(getiRequestName());
-        else $("#bandName").text(sessionStorage.getItem("band"));
-
-        $("#gmStyle").prop("href", getSession("colorscheme"));
-        
-    </script>
+    <script>if (!sessionStorage.getItem("band")) $("#bandName").text(getiRequestName());else $("#bandName").text(sessionStorage.getItem("band"));$("#gmStyle").prop("href", getSession("colorscheme"));</script>
 </body>
 </html>

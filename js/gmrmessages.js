@@ -5,6 +5,10 @@ var attachment = "";
 ipAddress = getClientIP();
 $(document).ready(function () {
     setupDownloads();
+    $("#uploaderAccordion").accordion({
+        active: false,
+        collapsible: true,
+    });
     art = sessionStorage.getItem("artist");
     if (art)
         art = JSON.parse(art);
@@ -16,8 +20,8 @@ $(document).ready(function () {
         $("#interface").hide();
         return;
     }
-    $("#gmStyle").prop("href", "css/request-" + getSession("colorscheme") + ".css");
-    //$("#gmWidgetStyle").prop("href", "css/messageWidget-" + getSession("colorscheme") + ".css");
+    $("#gmStyle").prop("href", "css/request-" + getSession("gmrcolorscheme") + ".css");
+    //$("#gmWidgetStyle").prop("href", "css/messageWidget-" + getSession("gmrcolorscheme") + ".css");
 
     
     var nMsg = checkRegistry(art.UserID, "imessages", art.MaxiMessages);
@@ -31,21 +35,25 @@ $(document).ready(function () {
     var op = 1;
     if (mbrs.length < 1)
         op = 0;
-    var html = "<tr class='row odd'><td class='member select'>&nbsp;All&nbsp;<label class='input-control checkbox'><input type='checkbox' data-target='-1' value='" + 0 + "'></input><span class='check'></span></label> " +
-        "<td class='instrument select' colspan='2'><div>Leader&nbsp;<label class='input-control checkbox'><input type='checkbox' data-target='leader' value='" + 1 + "'></input><span class='check'></span></label>&nbsp;</div></td>" +
-        "<td></td></tr><tr class='row even'><td colspan='3' style='text-align:center'><span style='opacity:" + op + "'>Or</td></tr>";
+    var html = "<tr class='row odd'><td class='instrument select' style='vertical-align:middle'>&nbsp;All&nbsp;<input type='checkbox' class='cb' style='float:right' data-target='-1' value='" + 0 + "'></input> " +
+        "<td class='instrument select' colspan='2'>Leader&nbsp;</td><td><input style='float:right' class='cb' type='checkbox' data-target='leader' value='" + 1 + "'></input></td>" +
+        "</tr><tr class='row even'><td colspan='3' style='text-align:center'><span style='opacity:" + op + "'>Or</td></tr>";
     
     for (var i = 0; i < mbrs.length; i++) {
         var cl = "";
         if (!(i % 2)) cl = " odd "; else cl = " even ";
         var inst = mbrs[i].ArtistRole, mbr = mbrs[i].User.FirstName + " " + mbrs[i].User.LastName;
         html += "<tr class='row " + cl + "'><td class='member'>" + mbr + "</td><td class='instrument'>" + inst + "</td>" +
-        "<td class='select'><label class='input-control checkbox'><input type='checkbox' data-target='" + mbrs[i].User.UserID + "' value='" + (i + 2) + "'></input><span class='check'></span></label></td></tr>"
+        "<td class='select'><input type='checkbox' class='cb' data-target='" + mbrs[i].User.UserID + "' value='" + (i + 2) + "'></input><span class='check'></span></td></tr>"
     }
     $("#members").html($("#members").html() + html);
     $('.fileSelect').click(function () {
         $('input[type=file]').trigger('click');
     });
+    $(document).on("click", ".cb", function () {
+        $("#messageMessage").text("");
+    });
+    
 
     $('input[type=file]').change(function () {
         $('input[type=text]').val($(this).val());
@@ -68,7 +76,7 @@ $(document).ready(function () {
         var mssg = $("#messageBody").val();
         var heading = $("#messages").val();
         var attachment = getAttachment();
-        var a = iRequestMessageCreate(tgt, mssg, art.ArtistID, attachment, heading, ipAddress);
+        var a = iRequestMessageCreate(tgt, strip(mssg), art.ArtistID, attachment, heading, ipAddress);
         addRegistry(art.UserID, "imessages", 1);
         $("#message").text("Thanks from " + art.ArtistName + " for using GigMan Request!");
         $("#interface").hide();
@@ -95,6 +103,8 @@ function updateCountdown() {
 }
 function getMessages() {
     var mssgs = iMessages();
+    $("#messages").html("");
+    $("#messages").append("<option value='0' disabled>Pick a greeting.</option>");
     for (var i = 0; i < mssgs.length; i++) {
         var o = "<option value='" + mssgs[i].ID + "' data-type='" + mssgs[i].Type + "'>" + mssgs[i].Message + "</option>";
         $("#messages").append(o);
@@ -136,10 +146,16 @@ function getTarget() {
     return val;
 }
 function fileUploaded(v) {
-    attachment = v.value;
-    if (attachment) {
-        $("#photo").html("<img id='pImg' src='uploads/" + attachment + "' alt='Your photo thumbnail' />");
-        $("#pImg").animate({ width: 100 });
+    if (v) {
+        attachment = v.value;
+        if (attachment) {
+            $("#photo").html("<img id='pImg' src='uploads/" + attachment + "' alt='Your photo thumbnail' />");
+            $("#pImg").animate({ width: 100 });
+        }
     }
+    $("#uploaderAccordion").accordion({
+        collapsible: true,
+        active:false
+    });
 }
 

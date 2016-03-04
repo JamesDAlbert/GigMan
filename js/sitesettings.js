@@ -32,13 +32,13 @@ $(document).ready(function () {
         );
     });
     $("#SongListLength").val(getSession("songListLength"));
-    $("#SetListLength").val(getSession("setListLength"));
+    $("#SetListLength").val(getSession("setlistlength"));
     $("#SiteFonts option:contains(" + getSession("font") + ")").attr('selected', 'selected');
     //$("#SiteFonts").text(getSession("font"));
     $("#color").css({ "background-color": getSession("color") });
     $("#boldText").prop("checked", getSession("weight"));
     $("#italicText").prop("checked", getSession("style"));
-    $("#ignoreArticles").prop("checked", getSession("ignoreArticles"));
+    $("#ignoreArticles").prop("checked", getSession("ignorearticles"));
     $("#colorScheme").prop("checked", getSession("colorscheme") == "highcontrast");
 
     var compColor = calculateForegroundColor(rgbFnToHex($("body").css("background-color")))
@@ -48,7 +48,7 @@ $(document).ready(function () {
         setSession("songListLength", $("#SongListLength").val());
     });
     $("#SetListLength").change(function () {
-        setSession("setListLength", $("#SetListLength").val());
+        setSession("setlistlength", $("#SetListLength").val());
     });    
 
     $("#SiteFonts").change(function (e) {
@@ -64,7 +64,7 @@ $(document).ready(function () {
         $("body").css("font-style", getStyle("style"));
     });
     $("#ignoreArticles").on("click", function () {
-        setSession("ignoreArticles", this.checked);
+        setSession("ignorearticles", this.checked);
     });
 
     $("#tileFontSize").change(function () {

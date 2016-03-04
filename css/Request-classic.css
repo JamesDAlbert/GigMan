@@ -202,8 +202,7 @@ input[type=submit] {
 input {
   background-color: #ffffff !important;
   color: #45619d;
-  border-color: #aaaaaa !important;
-  border-width: 1px;
+  border: 1px solid #aaaaaa !important;
   margin-right: 5px!important;
 }
 input:focus {
@@ -566,6 +565,9 @@ html {
   font-size: 16px;
   font-weight: normal;
 }
+html {
+  padding: 0;
+}
 .members {
   width: 100%;
   font-size: larger;
@@ -603,6 +605,9 @@ html {
   background-color: #000080;
 }
 .uploadDiv {
+  border: 1px solid #aaaaaa;
+}
+.uploadFrame {
   overflow: visible;
   display: table-cell;
   vertical-align: top;
@@ -620,4 +625,54 @@ table {
 }
 #artName {
   color: #ffffff !important;
+}
+.accordion * {
+  -moz-box-shadow: none!important;
+  -webkit-box-shadow: 0!important;
+  box-shadow: none!important;
+  text-shadow: none;
+}
+button {
+  height: 22px;
+}
+button:hover {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+input[type=checkbox] {
+  width: 20px;
+  height: 20px;
+}
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default {
+  background-image: none!important;
+  background: 0!important;
+  border: 0 !important;
+}
+.ui-accordion .ui-accordion-icons {
+  padding: 0;
+  padding-left: 15px;
+}
+.ui-accordion-header-icon.ui-icon.ui-icon-triangle-1-e,
+.ui-accordion-header-icon.ui-icon.ui-icon-triangle-1-e {
+  background-color: #ffffff !important;
+  margin-right: 5px!important;
+  color: #ffffff !important;
+}
+.ui-accordion-header-icon.ui-icon.ui-icon-triangle-1-e,
+.ui-accordion-header-icon.ui-icon.ui-icon-triangle-1-s {
+  background-color: white!important;
+  margin-right: 5px!important;
+  color: #ffffff !important;
+}
+.ui-accordion-header {
+  background: #ffffff;
+  color: #45619d;
+  display: block;
+  outline: none;
+}
+.ui-widget-content {
+  border: 1px solid #aaaaaa !important;
 }

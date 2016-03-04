@@ -1,9 +1,10 @@
 ﻿"use strict";
 var artistList, art, isAdmin = false;
+var rates;
 $(document).ready(function () {
     getArtistList();
-    var rates = getRates();
-   
+    rates = getRates();
+    $(".payment").show();
     if (rates)
     {
         $("#GMMonth").text("$" + jlinq.from(rates).equals("Name", "GigManMonthlyRate").select()[0].Value);
@@ -81,8 +82,24 @@ $(document).ready(function () {
         e.preventDefault();
     });
     $("#Checkout").click(function () {
-        //if ($("#PremiumMonthPayButton").prop("checked"))
+        // makepayment(UserID, ArtistID, GigManPaymentPeriod, GigManPaymentAmount, RequestPaymentPeriod, RequestPaymentAmount, PaymentRecord)
+        /*
 
+        Need to have already received a successful payment notice from PayPal before getting to this point
+
+        */
+        var gmpp = 0, gmpa = 0,gmrpp = 0, gmrpa = 0;
+        if ($("#PremiumMonthPayButton").prop("checked"))
+        { gmpp = 1; gmpa = jlinq.from(rates).equals("Name", "GigManMonthlyRate").select()[0].Value; }
+        else if ($("#PremiumYearPayButton").prop("checked"))
+        { gmpp = 2; gmpa = jlinq.from(rates).equals("Name", "GigManYearlyRate").select()[0].Value; }
+
+        if ($("#iRequestMonthPayButton").prop("checked"))
+        { gmpp = 1; gmpa = jlinq.from(rates).equals("Name", "iRequestMonthlyRate").select()[0].Value; }
+        else if ($("#iRequestYearPayButton").prop("checked"))
+        { gmrpp = 2; gmrpa = jlinq.from(rates).equals("Name", "iRequestYearlyRate").select()[0].Value; }
+
+        makePayment(getUserID(), getActiveArtistID(), gmpp, gmpa, gmrpp, gmrpa, "All Paid Up");
     });
     $(".gm-checkbox.payment").click(function () {
         var p = calcPrice().toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2 });

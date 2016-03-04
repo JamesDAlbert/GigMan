@@ -29,7 +29,7 @@ $(document).ready(function () {
         }
         else stopTimer();
     });
-    var art = getSession("activeartist");
+    var art = JSON.parse(getSession("activeartist"));
     if (art.RequestStatus)
     {
         $(".warning").hide();

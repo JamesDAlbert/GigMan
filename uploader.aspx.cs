@@ -10,7 +10,7 @@ public partial class uploader : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        skin.Href = Request.QueryString["skin"] == null ? "" : Request.QueryString["skin"];
+        //skin.Href = Request.QueryString["skin"] == null ? "" : Request.QueryString["skin"];
         if (IsPostBack && FileUpload1.HasFile)
         {
             if (FileUpload1.PostedFile.FileName.Length > 0)
@@ -45,7 +45,7 @@ public partial class uploader : System.Web.UI.Page
                         System.IO.File.Delete(savedname.Value);
                     Label1.Text = "Not an allowed file type";
                     
-                    ctls.Attributes["style"] = "display:none;position:absolute;top:0";
+                    ctls.Attributes["style"] = "display:none;";
                 }
             }
         }
@@ -81,10 +81,11 @@ public partial class uploader : System.Web.UI.Page
                 }
                 h = (int)((100.0 / (double)w) * h);
                 w = 100;
-                photo.Attributes["style"] = "display:inline-block";
+                photo.Attributes["style"] = "display:inline-block;margin-left:5px;margin-top:5px;";
+                //uploadArea.Attributes["style"] = "line-height:" + h + "px;vertical-align:top";
                 photo.InnerHtml = "<img src='uploads/" + savedname.Value + "' width='" + w + "' height='" + h + "'></img>";
                 FileUpload1.Attributes["style"] = "display:none";
-                ctls.Attributes["style"] = "display:inline-block;position:absolute;top:0";
+                ctls.Attributes["style"] = "display:inline-block;margin-top:10px;";
                 accepted.Attributes["style"] = "display:none";
             }
             catch (Exception ex)

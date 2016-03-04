@@ -1,7 +1,7 @@
 ﻿@style: "neon";
 @brightener: #550055;
 @logo-image: url(../images/logo-neon.png);
-@logo-width: 181px;
+@logo-width: 98px;
 @charm-width: 420px;
 @palette-entry-size: 30px;
 @palette-button-width: 80px;
@@ -225,7 +225,8 @@ body
     border: 0!important;
     background-image: @logo-image!important;
     background-repeat: no-repeat;
-    margin-left: -10px;
+    margin-right: 5px;
+    cursor:pointer;
 }
 
 hr
@@ -738,7 +739,7 @@ select:not[multiple]
     height: 35px!important;
     background-color: @bg-textbox;
     color: @fg-textbox;
-    font-size: 16px;
+    font-size: 100%;
 }
 
 .check:before
@@ -1680,7 +1681,7 @@ a.paginate_button.current
 
 #sChangeFontSize
 {
-    margin-top: 25px;
+    margin-top: 15px;
     margin-left: 1px;
     width: @lyric-slider-width;
     height: @lyric-slider-height;

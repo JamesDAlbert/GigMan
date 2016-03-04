@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>GigMan Request - Tutorial</title>
-    <link id="gmrStyle" rel="stylesheet" href="css/request-neon.min.css" />
+    <link id="gmrStyle" rel="stylesheet" href="css/request-classic.min.css" />
     <link rel="stylesheet" href="Content/css/metro-icons.min.css" />
     <link rel="stylesheet" href="Content/css/metro.min.css" />
     <script src="Scripts/jquery-2.1.4.min.js"></script>
@@ -35,21 +35,6 @@
         <li>Click the <span class="mif-checkmark"></span> Done! button.</li>
     </ul>
     Like the requests, messages are sent to the servers and then pushed to the performer in near real time.
-    <script>
-        $(document).ready(function () {
-            var band = document.referrer.substring(document.referrer.lastIndexOf("/")+1);
-            band = band.replace("#", "");
-            var artistMap = null;
-            if (band.indexOf(".html") < 0) {
-                band = decodeURI(band.substring(band.lastIndexOf("/") + 1));
-                artistMap = artistByiRequestName(band);
-                $(".nReq").text(artistMap.MaxiRequests);
-                $(".nMsg").text(artistMap.MaxiMessages);
-            }
-        });
-    </script>
-    <script>
-        $("#gmrStyle").prop("href", "css/request-" + getSession("colorscheme") + ".min.css");
-    </script>
+    <script>$(document).ready(function () {var band = document.referrer.substring(document.referrer.lastIndexOf("/")+1);band = band.replace("#", "");var artistMap = null;if (band.indexOf(".html") < 0) {band = decodeURI(band.substring(band.lastIndexOf("/") + 1));artistMap = artistByiRequestName(band);$(".nReq").text(artistMap.MaxiRequests);$(".nMsg").text(artistMap.MaxiMessages);}});$("#gmrStyle").prop("href", "css/request-" + getSession("gmrcolorscheme") + ".min.css");    </script>
 </body>
 </html>
